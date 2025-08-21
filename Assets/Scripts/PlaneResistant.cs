@@ -30,11 +30,6 @@ public class PlaneResistant : MonoBehaviour
         {
             return;
         }
-
-        if (velocity.magnitude > 10)
-        {
-            print("High speed");
-        }
         
         
         float energy = MathF.Pow(velocity.magnitude, 2) * _rigidbody.mass / 2 * ForcePart;
@@ -45,7 +40,15 @@ public class PlaneResistant : MonoBehaviour
         {
             forceVector *= -1;
         }
-        print(resistanceFactor);
-        _rigidbody.AddForceAtPosition(forceVector * MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart), energy), transform.position);
+        
+        var finalForce = forceVector * MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart), energy);
+
+        if (finalForce.magnitude > 100)
+        {
+            print(finalForce.magnitude);
+        }
+        
+        Debug.DrawLine(transform.position, transform.position + finalForce.normalized, Color.red, 0.1f);
+        _rigidbody.AddForceAtPosition(finalForce, transform.position);
     }
 }

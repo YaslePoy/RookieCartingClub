@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 public class UserControl : MonoBehaviour
 {
     private InputAction _forceAction;
+    private InputAction _rotateAction;
     private Rigidbody _rigidbody;
 
     public float Angle;
@@ -16,6 +17,7 @@ public class UserControl : MonoBehaviour
     void Start()
     {
         _forceAction = InputSystem.actions.FindAction("Move");
+        _rotateAction = InputSystem.actions.FindAction("Jump");
         _rigidbody = GetComponent<Rigidbody>();
     }
 
@@ -25,7 +27,6 @@ public class UserControl : MonoBehaviour
         var movement = _forceAction.ReadValue<Vector2>();
         if ( movement.y != 0)
         {
-            Debug.Log($"Adding force: {movement}");
             _rigidbody.AddForce(transform.forward * (movement.y * 100));
         }
 
@@ -39,6 +40,11 @@ public class UserControl : MonoBehaviour
             {
                 Angle -= MathF.Min(MathF.Abs(Angle), Sensetivity * 2 * Time.deltaTime) * MathF.Sign(Angle);
             }
+        }
+
+        if (_rotateAction.WasPressedThisFrame())
+        {
+            _rigidbody.AddForce(transform.right * 10000, ForceMode.Force);
         }
     }
 }
