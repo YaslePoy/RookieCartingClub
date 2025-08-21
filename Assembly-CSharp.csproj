@@ -49,7 +49,8 @@
     <Compile Include="Assets/Scripts/PlaneResistant.cs" />
     <Compile Include="Assets/Scripts/VelocityProvider.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
-    <Compile Include="Assets/Scripts/ForceTest.cs" />
+    <Compile Include="Assets/Scripts/ControlRotating.cs" />
+    <Compile Include="Assets/Scripts/UserControl.cs" />
     <None Include="Assets/Resources/BillingMode.json" />
     <Reference Include="UnityEngine">
       <HintPath>/home/micial/Unity/Hub/Editor/6000.1.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
