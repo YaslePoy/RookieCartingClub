@@ -17,10 +17,10 @@ public class ForceTest : MonoBehaviour
     void Update()
     {
         var movement = _forceAction.ReadValue<Vector2>();
-        if ( movement.sqrMagnitude != 0)
+        if ( movement.y != 0)
         {
             Debug.Log($"Adding force: {movement}");
-            _rigidbody.AddForce(new Vector3(movement.x, 0, movement.y) * 1000);
+            _rigidbody.AddForce(transform.forward * (movement.y * 1000));
         }
     }
 }

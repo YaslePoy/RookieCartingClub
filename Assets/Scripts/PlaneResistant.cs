@@ -10,19 +10,22 @@ public class PlaneResistant : MonoBehaviour
     public float MaxResistance;
     public float Friction;
     private Rigidbody _rigidbody;
-
+    private VelocityProvider _velocity;
     public float ForcePart;
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _rigidbody = GetComponentInParent<Rigidbody>();
+        _velocity = GetComponent<VelocityProvider>();
         Debug.Log($"Plane of {name}: {Normal}");
     }
 
     // Update is called once per frame
     void Update()
     {
-        var velocity = _rigidbody.linearVelocity;
+        var velocity = _velocity.Velocity;
         if (velocity.sqrMagnitude == 0)
         {
             return;
@@ -34,7 +37,7 @@ public class PlaneResistant : MonoBehaviour
         }
         
         
-        float energy = MathF.Pow(_rigidbody.linearVelocity.magnitude, 2) * _rigidbody.mass / 2 * ForcePart;
+        float energy = MathF.Pow(velocity.magnitude, 2) * _rigidbody.mass / 2 * ForcePart;
         
         var resistanceFactor = Vector3.Dot(velocity.normalized,  Normal);
         var forceVector = Normal;
@@ -43,6 +46,6 @@ public class PlaneResistant : MonoBehaviour
             forceVector *= -1;
         }
         print(resistanceFactor);
-        _rigidbody.AddForce(forceVector * MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart), energy), ForceMode.Force);
+        _rigidbody.AddForceAtPosition(forceVector * MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart), energy), transform.position);
     }
 }
