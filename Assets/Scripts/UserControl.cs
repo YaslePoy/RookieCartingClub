@@ -8,7 +8,7 @@ public class UserControl : MonoBehaviour
     private InputAction _forceAction;
     private InputAction _rotateAction;
     private Rigidbody _rigidbody;
-
+    public bool AutoCenter = true;
     public float Angle;
     public float MaxAngle;
     public float Sensetivity;
@@ -27,6 +27,8 @@ public class UserControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!AutoCenter)
+            return;
         var movement = _forceAction.ReadValue<Vector2>();
         
         Engine = 0;
@@ -67,7 +69,7 @@ public class UserControl : MonoBehaviour
         }
         else
         {
-            if (Angle != 0)
+            if (Angle != 0 && AutoCenter)
             {
                 Angle -= MathF.Min(MathF.Abs(Angle), Sensetivity * 2 * Time.deltaTime) * MathF.Sign(Angle);
             }
