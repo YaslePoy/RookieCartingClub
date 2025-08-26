@@ -2997,6 +2997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ed4af4791b52c738ffcb4bca1f2406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AutoCenter: 0
   Angle: 0
   MaxAngle: 20
   Sensetivity: 25
