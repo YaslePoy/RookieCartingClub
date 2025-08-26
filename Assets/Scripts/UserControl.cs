@@ -12,7 +12,10 @@ public class UserControl : MonoBehaviour
     public float Angle;
     public float MaxAngle;
     public float Sensetivity;
-    
+
+    public float Engine;
+
+    public float Breaks;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,14 +28,42 @@ public class UserControl : MonoBehaviour
     void Update()
     {
         var movement = _forceAction.ReadValue<Vector2>();
+        
+        Engine = 0;
+        Breaks = 0;
+        
         if ( movement.y != 0)
         {
-            _rigidbody.AddForce(transform.forward * (movement.y * 100));
+            Engine = 0;
+            Breaks = 0;
+            if (movement.y > 0)
+            {
+                Engine = movement.y;
+            }
+            else
+            {
+                Breaks = -movement.y;
+            }
+            // _rigidbody.AddForce(transform.forward * (movement.y * 100));
         }
 
+        if (_rotateAction.WasPressedThisFrame())
+        {
+            // _rigidbody.AddForce(transform.right * 10000, ForceMode.Force);
+            print("Rotate Pressed");
+        }
+        
         if (movement.x != 0)
         {
-            Angle = MathF.Min(MaxAngle, Math.Abs(Angle + movement.x * Sensetivity *  Time.deltaTime)) * (MathF.Sign(Angle) == 0 ? movement.x : MathF.Sign(Angle));
+            var angleCandidate = Angle + movement.x * Sensetivity * Time.deltaTime;
+            if (Mathf.Abs(angleCandidate) < MaxAngle)
+            {
+                Angle = angleCandidate;
+            }
+            else
+            {
+                Angle = MaxAngle * MathF.Sign(angleCandidate);
+            }
         }
         else
         {
@@ -42,9 +73,6 @@ public class UserControl : MonoBehaviour
             }
         }
 
-        if (_rotateAction.WasPressedThisFrame())
-        {
-            _rigidbody.AddForce(transform.right * 10000, ForceMode.Force);
-        }
+
     }
 }

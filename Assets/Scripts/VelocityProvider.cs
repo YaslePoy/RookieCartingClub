@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class VelocityProvider : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Vector3 Velocity => _velocity;
     private Vector3 _velocity;
     private Vector3 _lastPosition;
@@ -12,8 +11,7 @@ public class VelocityProvider : MonoBehaviour
         _lastPosition = transform.position;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         var currentPosition = transform.position;
         _velocity =  (currentPosition - _lastPosition) / Time.deltaTime;
