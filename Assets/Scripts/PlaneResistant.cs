@@ -45,7 +45,7 @@ public class PlaneResistant : MonoBehaviour
             forceVector *= -1;
         }
         
-        var finalForce = forceVector * (MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart), energy) * K);
+        var finalForce = forceVector * MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K, MaxResistance);
 
         if (finalForce.magnitude > 10)
         {

@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 4908603483761444350}
-  MaxResistance: 50
+  MaxResistance: 500
   Friction: 5
   ForcePart: 0.25
   K: 1
@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 4747995486186934778}
-  MaxResistance: 15
+  MaxResistance: 150
   Friction: 5
-  ForcePart: 0.25
+  ForcePart: 0.5
   K: 0
