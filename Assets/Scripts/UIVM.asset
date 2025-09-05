@@ -13,3 +13,7 @@ MonoBehaviour:
   m_Name: UIVM
   m_EditorClassIdentifier: Assembly-CSharp::UIVM
   Speed: 10
+  SpeedKmh: 0
+  SpeedKmhString: 
+  LapTime: 00:00:00.00
+  Delta: 0.00

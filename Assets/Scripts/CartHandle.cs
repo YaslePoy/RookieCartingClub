@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class CartHandle : MonoBehaviour
 {
-    public List<TimeSpan> Laps = new List<TimeSpan>();
-
-    private double _lapStart = -1;
+    public List<List<double>> Laps = new();
+    public List<double> FastestLaps;
+    public double LapStart = -1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,18 +23,38 @@ public class CartHandle : MonoBehaviour
 
     public void PushCheckPoint(CheckPoint checkPoint)
     {
+            var now = Time.timeAsDouble;
+        
         if (checkPoint.Index == 0)
         {
-            var now = Time.timeAsDouble;
 
-            if (_lapStart > 0)
+            if (Laps.Count > 0)
             {
-                Laps.Add(TimeSpan.FromSeconds(now - _lapStart));
+                Laps.Last().Add(now - LapStart);
                 print($"Lap time {Laps.Last():g}");
             }
 
-            _lapStart = now;
-            print($"Lap start: {TimeSpan.FromSeconds(_lapStart):g}");
+            LapStart = now;
+            print($"Lap start: {TimeSpan.FromSeconds(LapStart):g}");
+            var times = new List<double>();
+            Laps.Add(times);
+
+            if (Laps.Count > 1)
+            {
+                FastestLaps = Laps.OrderBy(i => i.Last()).First(list => list.Count != 0);
+            }
+            
+            
+        }
+        else
+        {
+            if (Laps.Count > 0 && Laps.Last()?.Count != checkPoint.Index - 1)
+            {
+                print("Invalid lap");
+                Laps.Remove(Laps.Last());
+            }
+            
+            Laps.Last().Add(now - LapStart);
         }
     }
 }

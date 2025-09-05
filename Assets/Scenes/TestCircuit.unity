@@ -13894,6 +13894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VelocityProvider: {fileID: 5524586914570371345}
   Uivm: {fileID: 11400000, guid: 64978fc667d3870b793aeab05c35fe05, type: 2}
+  Cart: {fileID: 5524586914570371347}
 --- !u!43 &188967233
 Mesh:
   m_ObjectHideFlags: 0
@@ -166151,6 +166152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa924f93197a54818ade8ae1cda5d2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartHandle
+  FastestLaps: []
+  LapStart: -1
 --- !u!1001 &5657787953397975640
 PrefabInstance:
   m_ObjectHideFlags: 0

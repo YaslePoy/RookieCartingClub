@@ -18,6 +18,6 @@ public class CheckPoint : MonoBehaviour
             return;
         
         other.GetComponent<CartHandle>().PushCheckPoint(this);
-        print($"Colliding {Index}");
+        //print($"Colliding {Index}");
     }
 }
