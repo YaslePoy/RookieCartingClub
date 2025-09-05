@@ -49,7 +49,7 @@ public class PlaneResistant : MonoBehaviour
 
         if (finalForce.magnitude > 10)
         {
-            print($"{name} : {finalForce.magnitude} resistance");
+            //print($"{name} : {finalForce.magnitude} resistance");
         }
         
         Debug.DrawLine(transform.position, transform.position + finalForce.normalized, Color.red, 0.1f);

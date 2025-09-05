@@ -52,9 +52,11 @@
     <Compile Include="Assets/Scripts/PlaneResistant.cs" />
     <Compile Include="Assets/Scripts/Engine.cs" />
     <Compile Include="Assets/Scripts/VelocityProvider.cs" />
+    <Compile Include="Assets/Scripts/CheckPoint.cs" />
     <Compile Include="Assets/Scripts/InputServer.cs" />
     <Compile Include="Assets/TutorialInfo/Scripts/Readme.cs" />
     <Compile Include="Assets/Scripts/EngineWheel.cs" />
+    <Compile Include="Assets/Scripts/CartHandle.cs" />
     <Compile Include="Assets/Scripts/ControlRotating.cs" />
     <Compile Include="Assets/Scripts/UserControl.cs" />
     <Compile Include="Assets/Scripts/BreaksHandle.cs" />

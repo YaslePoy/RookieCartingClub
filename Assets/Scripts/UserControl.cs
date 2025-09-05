@@ -57,7 +57,12 @@ public class UserControl : MonoBehaviour
         
         if (movement.x != 0)
         {
-            var angleCandidate = Angle + movement.x * Sensetivity * Time.deltaTime;
+            var delta = movement.x * Sensetivity * Time.deltaTime;
+            if (MathF.Sign(delta) != MathF.Sign(Angle))
+            {
+                delta *= 2f;
+            }
+            var angleCandidate = Angle + delta;
             if (Mathf.Abs(angleCandidate) < MaxAngle)
             {
                 Angle = angleCandidate;
