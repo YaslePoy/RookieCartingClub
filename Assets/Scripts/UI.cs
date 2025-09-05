@@ -18,10 +18,18 @@ public class UI : MonoBehaviour
          Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.LapStart):g}";
          if (Cart.FastestLaps.Count != 0)
          {
-             var sector = Cart.Laps.Last().Last();
-             var delta = sector - Cart.FastestLaps[Cart.Laps.Last().Count - 1];
-             var formated = Math.Round(delta, 2).ToString();
-             Uivm.Delta = formated;
+             try
+             {
+                 var sector = Cart.Laps.Last().Last();
+                 var delta = sector - Cart.FastestLaps[Cart.Laps.Last().Count - 1];
+                 var formated = Math.Round(delta, 2).ToString();
+                 Uivm.Delta = formated;
+             }
+             catch 
+             {
+                 
+             }
+             
          }
      }
 }

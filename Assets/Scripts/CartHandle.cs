@@ -10,7 +10,7 @@ public class CartHandle : MonoBehaviour
     public List<List<double>> Laps = new();
     public List<double> FastestLaps;
     public double LapStart = -1;
-
+    private List<List<double>> _invalidLaps = new();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,7 +31,7 @@ public class CartHandle : MonoBehaviour
             if (Laps.Count > 0)
             {
                 Laps.Last().Add(now - LapStart);
-                print($"Lap time {Laps.Last():g}");
+                print($"Lap time {TimeSpan.FromSeconds(Laps.Last().Last()):g}");
             }
 
             LapStart = now;
@@ -41,7 +41,7 @@ public class CartHandle : MonoBehaviour
 
             if (Laps.Count > 1)
             {
-                FastestLaps = Laps.OrderBy(i => i.Last()).First(list => list.Count != 0);
+                FastestLaps = Laps.OrderBy(i => i.Last()).First(list => list.Count != 0 && !_invalidLaps.Contains(list));
             }
             
             
@@ -51,10 +51,13 @@ public class CartHandle : MonoBehaviour
             if (Laps.Count > 0 && Laps.Last()?.Count != checkPoint.Index - 1)
             {
                 print("Invalid lap");
-                Laps.Remove(Laps.Last());
+                _invalidLaps.Add(Laps.Last());
             }
-            
-            Laps.Last().Add(now - LapStart);
+
+            if (Laps.Count > 0)
+            {
+                Laps.Last().Add(now - LapStart);
+            }
         }
     }
 }
