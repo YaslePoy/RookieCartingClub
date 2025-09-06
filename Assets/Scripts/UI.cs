@@ -20,7 +20,7 @@ public class UI : MonoBehaviour
          {
              try
              {
-                 var sector = Cart.Laps.Last().Last();
+                 var sector = Time.timeAsDouble - Cart.LapStart;
                  var delta = sector - Cart.FastestLaps[Cart.Laps.Last().Count - 1];
                  var formated = Math.Round(delta, 2).ToString();
                  Uivm.Delta = formated;
