@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 6931837836084575867}
   MaxResistance: 500
-  Friction: 5
+  Friction: 10
   ForcePart: 0.25
   K: 1
 --- !u!114 &5835206526241152682
