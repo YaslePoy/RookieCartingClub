@@ -35,7 +35,6 @@ public class CartHandle : MonoBehaviour
             }
 
             LapStart = now;
-            print($"Lap start: {TimeSpan.FromSeconds(LapStart):g}");
             var times = new List<double>();
             Laps.Add(times);
 
@@ -51,6 +50,10 @@ public class CartHandle : MonoBehaviour
             if (Laps.Count > 0 && Laps.Last()?.Count != checkPoint.Index - 1)
             {
                 print("Invalid lap");
+                while (Laps.Last()?.Count != checkPoint.Index - 1)
+                {
+                    Laps.Last().Add(0);
+                }
                 _invalidLaps.Add(Laps.Last());
             }
 
