@@ -50,7 +50,7 @@ public class CartHandle : MonoBehaviour
             if (Laps.Count > 0 && Laps.Last()?.Count != checkPoint.Index - 1)
             {
                 print("Invalid lap");
-                while (Laps.Last()?.Count != checkPoint.Index - 1)
+                while (Laps.Last()?.Count < checkPoint.Index - 1)
                 {
                     Laps.Last().Add(0);
                 }
