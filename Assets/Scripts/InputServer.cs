@@ -7,7 +7,6 @@ using UnityEngine;
 public class InputServer : MonoBehaviour
 {
     private UserControl _control;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
         _control = GetComponent<UserControl>();

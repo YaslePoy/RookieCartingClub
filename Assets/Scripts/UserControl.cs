@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class UserControl : NetworkBehaviour
 {
+    public Transform CameraPosition;
     private InputAction _forceAction;
     private InputAction _rotateAction;
     private Rigidbody _rigidbody;
@@ -24,6 +25,14 @@ public class UserControl : NetworkBehaviour
         _forceAction = InputSystem.actions.FindAction("Move");
         _rotateAction = InputSystem.actions.FindAction("Jump");
         _rigidbody = GetComponent<Rigidbody>();
+
+        if (IsClient && IsOwner)
+        {
+            var cam = GameObject.Find("Camera");
+            cam.transform.parent = this.transform;
+            cam.transform.localPosition = CameraPosition.localPosition;
+            cam.transform.localRotation = CameraPosition.localRotation;
+        }
     }
 
     // Update is called once per frame
