@@ -13,6 +13,6 @@ public class BreaksHandle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        BreakResistant.K = _control.Breaks;
+        BreakResistant.K = _control.Breaks.Value;
     }
 }

@@ -24,7 +24,7 @@ public class InputServer : MonoBehaviour
             if (msg.StartsWith("angle: "))
             {
                 var angle = float.Parse(msg[7..], CultureInfo.InvariantCulture);
-                _control.Angle = angle / 2;
+                _control.Angle.Value = angle / 2;
             }
             else if (msg.StartsWith("gas: "))
             {
@@ -33,11 +33,11 @@ public class InputServer : MonoBehaviour
                 {
                     print(rate);
                 }
-                _control.Engine =  (float)(rate / 100.0);
+                _control.Engine.Value =  (float)(rate / 100.0);
             }else if (msg.StartsWith("break: "))
             {
                 var rate = int.Parse(msg[7..]);
-                _control.Breaks = (float)(rate / 100.0);
+                _control.Breaks.Value = (float)(rate / 100.0);
             }
         }
     }

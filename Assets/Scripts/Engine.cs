@@ -26,6 +26,6 @@ public class Engine : MonoBehaviour
         }
         
         var rate =  currentSpeed / MaxSpeed;
-        _currentForce = AnimationCurve.Evaluate(rate) * _control.Engine * MaxForce;
+        _currentForce = AnimationCurve.Evaluate(rate) * _control.Engine.Value * MaxForce;
     }
 }

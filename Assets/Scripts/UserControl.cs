@@ -1,21 +1,23 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
-public class UserControl : MonoBehaviour
+public class UserControl : NetworkBehaviour
 {
     private InputAction _forceAction;
     private InputAction _rotateAction;
     private Rigidbody _rigidbody;
     public bool AutoCenter = true;
-    public float Angle;
+    
+    public NetworkVariable<float> Angle = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     public float MaxAngle;
     public float Sensetivity;
 
-    public float Engine;
+    public NetworkVariable<float> Engine = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    public float Breaks;
+    public NetworkVariable<float> Breaks = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,20 +33,20 @@ public class UserControl : MonoBehaviour
             return;
         var movement = _forceAction.ReadValue<Vector2>();
         
-        Engine = 0;
-        Breaks = 0;
+        Engine.Value = 0;
+        Breaks.Value = 0;
         
         if ( movement.y != 0)
         {
-            Engine = 0;
-            Breaks = 0;
+            Engine.Value = 0;
+            Breaks.Value = 0;
             if (movement.y > 0)
             {
-                Engine = movement.y;
+                Engine.Value = movement.y;
             }
             else
             {
-                Breaks = -movement.y;
+                Breaks.Value = -movement.y;
             }
             // _rigidbody.AddForce(transform.forward * (movement.y * 100));
         }
@@ -58,25 +60,25 @@ public class UserControl : MonoBehaviour
         if (movement.x != 0)
         {
             var delta = movement.x * Sensetivity * Time.deltaTime;
-            if (MathF.Sign(delta) != MathF.Sign(Angle))
+            if (MathF.Sign(delta) != MathF.Sign(Angle.Value))
             {
                 delta *= 3.5f;
             }
-            var angleCandidate = Angle + delta;
+            var angleCandidate = Angle.Value + delta;
             if (Mathf.Abs(angleCandidate) < MaxAngle)
             {
-                Angle = angleCandidate;
+                Angle.Value = angleCandidate;
             }
             else
             {
-                Angle = MaxAngle * MathF.Sign(angleCandidate);
+                Angle.Value = MaxAngle * MathF.Sign(angleCandidate);
             }
         }
         else
         {
-            if (Angle != 0 && AutoCenter)
+            if (Angle.Value != 0 && AutoCenter)
             {
-                Angle -= MathF.Min(MathF.Abs(Angle), Sensetivity * 2 * Time.deltaTime) * MathF.Sign(Angle);
+                Angle.Value -= MathF.Min(MathF.Abs(Angle.Value), Sensetivity * 2 * Time.deltaTime) * MathF.Sign(Angle.Value);
             }
         }
 
