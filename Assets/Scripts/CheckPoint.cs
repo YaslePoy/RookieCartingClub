@@ -10,6 +10,7 @@ public class CheckPoint : MonoBehaviour
     void Start()
     {
         Collider = gameObject.GetComponent<Collider>();
+        
     }
 
     public void OnTriggerEnter(Collider other)

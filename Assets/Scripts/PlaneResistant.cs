@@ -1,5 +1,6 @@
 using System;
 using Unity.Mathematics;
+using Unity.Netcode;
 using UnityEngine;
 using Plane = System.Numerics.Plane;
 
@@ -17,6 +18,7 @@ public class PlaneResistant : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         _rigidbody = GetComponentInParent<Rigidbody>();
         _velocity = GetComponent<VelocityProvider>();
         if (_velocity == null)
