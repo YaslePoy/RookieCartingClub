@@ -38,6 +38,11 @@ public class UserControl : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+        
         if (!AutoCenter)
             return;
         var movement = _forceAction.ReadValue<Vector2>();
