@@ -6,9 +6,14 @@ using UnityEngine.UIElements;
 public class UI : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public VelocityProvider VelocityProvider;
+    private NetworkVelocityProvider VelocityProvider;
     public UIVM Uivm;
     public CartHandle Cart;
+
+    private void Start()
+    {
+        VelocityProvider = Cart.gameObject.GetComponent<NetworkVelocityProvider>();
+    }
 
     void Update()
     {

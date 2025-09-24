@@ -3,13 +3,13 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class UserControl : NetworkBehaviour
 {
     public Transform CameraPosition;
     private InputAction _forceAction;
     private InputAction _rotateAction;
-    private Rigidbody _rigidbody;
     public bool AutoCenter = true;
     
     public NetworkVariable<float> Angle = new (0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -24,7 +24,7 @@ public class UserControl : NetworkBehaviour
     {
         _forceAction = InputSystem.actions.FindAction("Move");
         _rotateAction = InputSystem.actions.FindAction("Jump");
-        _rigidbody = GetComponent<Rigidbody>();
+        GetComponent<Rigidbody>();
 
         if (IsClient && IsOwner)
         {
@@ -32,6 +32,12 @@ public class UserControl : NetworkBehaviour
             cam.transform.parent = this.transform;
             cam.transform.localPosition = CameraPosition.localPosition;
             cam.transform.localRotation = CameraPosition.localRotation;
+            
+            var go = GameObject.Find("UI");
+            go.GetComponent<UIDocument>().enabled = true;
+            var ui = go.GetComponent<UI>();
+            ui.enabled = true;
+            ui.Cart = GetComponent<CartHandle>();
         }
     }
 

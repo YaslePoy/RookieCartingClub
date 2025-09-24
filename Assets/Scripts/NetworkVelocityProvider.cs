@@ -1,19 +1,25 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class VelocityProvider : MonoBehaviour
+public class NetworkVelocityProvider : NetworkBehaviour
 {
-    public Vector3 Velocity => _velocity;
-    private Vector3 _velocity;
+    public Vector3 Velocity => _velocity.Value;
+
+    public NetworkVariable<Vector3> _velocity = new(Vector3.zero, NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Server);
+
     private Vector3 _lastPosition;
 
     void Start()
     {
-        _velocity = Vector3.zero;
         _lastPosition = transform.position;
     }
 
     void FixedUpdate()
     {
+        if (!IsServer)
+            return;
+        
         var currentPosition = transform.position;
         var newVel = (currentPosition - _lastPosition) / Time.fixedDeltaTime;
         if (name.Contains("cart"))
@@ -21,7 +27,7 @@ public class VelocityProvider : MonoBehaviour
             print($"speed: {newVel.magnitude}");
         }
 
-        _velocity = newVel;
+        _velocity.Value = newVel;
         _lastPosition = currentPosition;
     }
 }
