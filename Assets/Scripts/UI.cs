@@ -34,5 +34,7 @@ public class UI : MonoBehaviour
             {
             }
         }
+
+        Uivm.Lap = Cart.Laps.Count;
     }
 }
