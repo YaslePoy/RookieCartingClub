@@ -49,6 +49,7 @@
     <Compile Include="Assets/Scripts/UIVM.cs" />
     <Compile Include="Assets/Scripts/NetworkStart.cs" />
     <Compile Include="Assets/NewScriptableObjectScript.cs" />
+    <Compile Include="Assets/Scripts/RaceControl.cs" />
     <Compile Include="Assets/PBR_Grass_Textures/Scripts/CameraFreeflight.cs" />
     <Compile Include="Assets/Scripts/PlaneResistant.cs" />
     <Compile Include="Assets/Scripts/EngineWheel.cs" />

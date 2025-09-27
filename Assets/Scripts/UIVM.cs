@@ -15,6 +15,7 @@ public class UIVM : ScriptableObject
     public string LapTime;
     public string Delta;
     public int Lap;
+    public string SessionTime;
     public void UpdateSpeedKmh()
     {
         SpeedKmh = (int)MathF.Round(Speed * 3.6f);

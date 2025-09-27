@@ -1,33 +1,47 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 0%; width: 30%; justify-content: flex-end; align-self: flex-start; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0);">
-        <ui:Label text="Время круга" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
-            <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);">
+    <ui:VisualElement style="flex-grow: 1; flex-wrap: nowrap; flex-direction: row;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-start; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; min-width: 0%; min-height: auto;">
+            <ui:Label text="Время круга" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
+                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="LapTime" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Label>
+                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="Delta" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                <ui:Label text="Круг" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);" />
+                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="Lap" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:Label text="Скорость" name="Label" style="-unity-text-align: upper-center; font-size: 30px; background-color: rgb(159, 159, 159); right: auto; align-self: flex-start; align-content: flex-start; width: 268px; height: 49px;" />
+            <ui:Slider label="0" value="0" high-value="130" language-direction="Inherit" focusable="false" enabled="true" name="SpeedInd" direction="Horizontal" inverted="false" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="align-self: stretch; bottom: auto; top: auto; left: auto; flex-direction: row; font-size: 30px; background-color: rgb(159, 159, 159); width: 268px; height: 49px;">
                 <Bindings>
-                    <ui:DataBinding property="text" data-source-path="LapTime" binding-mode="ToTarget" />
+                    <ui:DataBinding property="label" data-source-path="SpeedKmhString" binding-mode="ToTarget" />
+                    <ui:DataBinding property="value" data-source-path="SpeedKmh" binding-mode="ToTarget" />
                 </Bindings>
-            </ui:Label>
-            <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
-                <Bindings>
-                    <ui:DataBinding property="text" data-source-path="Delta" binding-mode="ToTarget" />
-                </Bindings>
-            </ui:Label>
+            </ui:Slider>
         </ui:VisualElement>
-        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-            <ui:Label text="Круг" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);" />
-            <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
-                <Bindings>
-                    <ui:DataBinding property="text" data-source-path="Lap" binding-mode="ToTarget" />
-                </Bindings>
-            </ui:Label>
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-start; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: wrap-reverse;">
+            <ui:Label text="Время сесии" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
+                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px;">
+                    <Bindings>
+                        <ui:DataBinding property="text" data-source-path="SessionTime" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Label>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row;" />
+            <ui:VisualElement style="flex-grow: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement style="flex-grow: 1;" />
-        <ui:Label text="Скорость" name="Label" style="-unity-text-align: upper-center; font-size: 30px; background-color: rgb(159, 159, 159); right: auto; align-self: flex-start; align-content: flex-start; width: 268px; height: 49px;" />
-        <ui:Slider label="0" value="0" high-value="130" language-direction="Inherit" focusable="false" enabled="true" name="SpeedInd" direction="Horizontal" inverted="false" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="align-self: stretch; bottom: auto; top: auto; left: auto; flex-direction: row; font-size: 30px; background-color: rgb(159, 159, 159); width: 268px; height: 49px;">
-            <Bindings>
-                <ui:DataBinding property="label" data-source-path="SpeedKmhString" binding-mode="ToTarget" />
-                <ui:DataBinding property="value" data-source-path="SpeedKmh" binding-mode="ToTarget" />
-            </Bindings>
-        </ui:Slider>
     </ui:VisualElement>
 </ui:UXML>
