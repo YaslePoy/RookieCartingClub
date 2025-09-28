@@ -1250,7 +1250,7 @@ MonoBehaviour:
   Angle:
     m_InternalValue: 0
   MaxAngle: 25
-  Sensetivity: 30
+  Sensetivity: 50
   Engine:
     m_InternalValue: 0
   Breaks:
