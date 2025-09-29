@@ -7,19 +7,6 @@ public class NetworkStart : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        var manager = GetComponent<NetworkManager>();
-        switch (Mode)
-        {
-            case NetworkMode.Server:
-                manager.StartServer();
-                break;
-            case NetworkMode.Client:
-                manager.StartClient();
-                break;
-            case NetworkMode.Host:
-                manager.StartHost();
-                break;
-        }
     }
 }
 
