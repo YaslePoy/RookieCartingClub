@@ -10,10 +10,11 @@ public class TrackPlacement : NetworkBehaviour
     {
         if (this.IsServer)
         {
-            var transform = GameObject.Find($"Start_{CurrentSpawn++}");
+            var collection = GameObject.Find("Starts").GetComponentsInChildren<Transform>()[1..];
+            var transform = collection[CurrentSpawn++ % collection.Length];
             print($"Spawning on {CurrentSpawn}");
-            this.transform.position =  transform.transform.position;
-            this.transform.rotation = transform.transform.rotation;
+            this.transform.position =  transform.position;
+            this.transform.rotation = transform.rotation;
             this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EngineWheel : MonoBehaviour
@@ -16,5 +17,10 @@ public class EngineWheel : MonoBehaviour
     void FixedUpdate()
     {
         _rigidbody.AddForceAtPosition(transform.forward * (Part * _engine.CurrentForce),  transform.position);
+    }
+
+    private void OnTransformParentChanged()
+    {
+        Destroy(this);
     }
 }

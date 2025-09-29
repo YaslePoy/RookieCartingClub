@@ -16,10 +16,6 @@ public class VelocityProvider : MonoBehaviour
     {
         var currentPosition = transform.position;
         var newVel = (currentPosition - _lastPosition) / Time.fixedDeltaTime;
-        if (name.Contains("cart"))
-        {
-            print($"speed: {newVel.magnitude}");
-        }
 
         _velocity = newVel;
         _lastPosition = currentPosition;

@@ -10,10 +10,13 @@ public class CartHandle : MonoBehaviour
     public List<List<double>> Laps = new();
     public List<double> FastestLaps;
     public double LapStart = -1;
-    private List<List<double>> _invalidLaps = new();
+    private HashSet<List<double>> _invalidLaps = new();
+
+    private int checkCount = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
     }
 
     // Update is called once per frame
@@ -35,19 +38,29 @@ public class CartHandle : MonoBehaviour
             }
 
             LapStart = now;
+            
+            
             var times = new List<double>();
-            Laps.Add(times);
-
-            if (Laps.Count > 1)
+            
+            if (Laps.Count > 0 && Laps.Last().Count != checkCount)
             {
-                FastestLaps = Laps.OrderBy(i => i.Last()).First(list => list.Count != 0 && !_invalidLaps.Contains(list));
+                _invalidLaps.Add(Laps.Last());
             }
             
+            Laps.Add(times);
+            
+            
+            if (Laps.Count > 1)
+            {
+                
+                FastestLaps = Laps.OrderBy(i => i.Last()).First(list => list.Count != 0 && !_invalidLaps.Contains(list));
+            }
+
             
         }
         else
         {
-            if (Laps.Count > 0 && Laps.Last()?.Count != checkPoint.Index - 1)
+        if (Laps.Count > 0 && Laps.Last()?.Count != checkPoint.Index - 1)   
             {
                 print("Invalid lap");
                 while (Laps.Last()?.Count < checkPoint.Index - 1)
@@ -64,7 +77,7 @@ public class CartHandle : MonoBehaviour
         }
     }
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(CartHandle))]
 public class CartHandleEditor : Editor
 {
@@ -91,3 +104,4 @@ public class CartHandleEditor : Editor
         
     }
 }
+#endif
