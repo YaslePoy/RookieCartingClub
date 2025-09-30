@@ -372,8 +372,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 5549277827958826433}
-  MaxResistance: 500
-  Friction: 10
+  MaxResistance: 600
+  Friction: 17
   ForcePart: 0.25
   K: 1
 --- !u!114 &6310163582882432241
@@ -516,8 +516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 3639754507362840614}
-  MaxResistance: 150
-  Friction: 5
+  MaxResistance: 300
+  Friction: 10
   ForcePart: 0.5
   K: 0
 --- !u!1 &3663897719288342429
@@ -685,8 +685,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 4908603483761444350}
-  MaxResistance: 500
-  Friction: 10
+  MaxResistance: 600
+  Friction: 17
   ForcePart: 0.25
   K: 1
 --- !u!114 &8419154592835790127
@@ -932,8 +932,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 4747995486186934778}
-  MaxResistance: 150
-  Friction: 5
+  MaxResistance: 300
+  Friction: 10
   ForcePart: 0.5
   K: 0
 --- !u!1 &7744226967987070145
@@ -1010,8 +1010,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 6931837836084575867}
-  MaxResistance: 500
-  Friction: 10
+  MaxResistance: 600
+  Friction: 17
   ForcePart: 0.25
   K: 1
 --- !u!114 &5835206526241152682
@@ -1130,6 +1130,7 @@ GameObject:
   - component: {fileID: 4705595913853680996}
   - component: {fileID: 1911891491611862517}
   - component: {fileID: -98193382640058352}
+  - component: {fileID: 2816519027716094941}
   m_Layer: 0
   m_Name: cart
   m_TagString: Cart
@@ -1219,7 +1220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2886783942
+  GlobalObjectIdHash: 2898089809
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1272,7 +1273,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: -0.00060272217
-      value: 0.74993896
+      value: 0.7667389
       inSlope: 2
       outSlope: 2
       tangentMode: 0
@@ -1280,8 +1281,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.33493394
-      value: 1.0002209
+      time: 0.4516713
+      value: 0.98551905
       inSlope: -0.0076689622
       outSlope: -0.0076689622
       tangentMode: 0
@@ -1431,6 +1432,18 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   _velocity:
     m_InternalValue: {x: 0, y: 0, z: 0}
+--- !u!114 &2816519027716094941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280289031576691925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f627c036e7462435089687409d3af8c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Restart
 --- !u!1 &8406167649143193068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,8 +1520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 3376389006583876107}
-  MaxResistance: 500
-  Friction: 10
+  MaxResistance: 600
+  Friction: 17
   ForcePart: 0.25
   K: 1
 --- !u!114 &4011543894156894916
