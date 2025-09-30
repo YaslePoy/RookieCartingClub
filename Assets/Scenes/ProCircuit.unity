@@ -19879,6 +19879,7 @@ GameObject:
   - component: {fileID: 188497161}
   - component: {fileID: 188497163}
   - component: {fileID: 188497164}
+  - component: {fileID: 188497165}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -19951,6 +19952,25 @@ MultiplayerRolesData:
     m_RolesMask: 1
   - m_Object: {fileID: 188497163}
     m_RolesMask: 1
+  - m_Object: {fileID: 188497165}
+    m_RolesMask: 1
+--- !u!114 &188497165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 188497160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24bd837b47e219af8c45c0262206018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapHandle
+  mapTexture: {fileID: 2800000, guid: 3430010f95b78f3ba87df68e8b67f80f, type: 3}
+  Uivm: {fileID: 11400000, guid: 64978fc667d3870b793aeab05c35fe05, type: 2}
+  TrackHeight: 165.4736
+  TrackWidth: 236.998
+  MapHeight: 400
 --- !u!43 &189680729
 Mesh:
   m_ObjectHideFlags: 0
@@ -46724,6 +46744,32 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!1 &432168584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 662123710766029800, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
+  m_PrefabInstance: {fileID: 833293480981720647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &432168588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432168584}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 236.99799, y: 1.0000017, z: 165.4736}
+  m_Center: {x: 11.229248, y: 0.000000029802322, z: -31.633575}
 --- !u!114 &432417635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141515,6 +141561,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1491944548460194299, guid: fac29fdcb77ee4db7aa28ebf7994377f, type: 3}
   m_PrefabInstance: {fileID: 1445178410}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1445577778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1445577779}
+  m_Layer: 0
+  m_Name: TrackOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1445577779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1445577778}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 129.74, y: 0, z: -114.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1446574605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211908,6 +211985,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8777903028937762952, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
       insertIndex: -1
       addedObject: {fileID: 833293480981720650}
+    - targetCorrespondingSourceObject: {fileID: 662123710766029800, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 432168588}
   m_SourcePrefab: {fileID: 100100000, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
 --- !u!4 &833293480981720648 stripped
 Transform:
@@ -230018,3 +230098,4 @@ SceneRoots:
   - {fileID: 1203735202}
   - {fileID: 1153451811}
   - {fileID: 1935293578}
+  - {fileID: 1445577779}

@@ -16,6 +16,14 @@ public class UIVM : ScriptableObject
     public string Delta;
     public int Lap;
     public string SessionTime;
+
+    public Texture2D Map;
+    public int MapWidth;
+    public int MapHeight;
+
+    public int PlayerX;
+    public int PlayerY;
+    public Color LapIndicator;
     public void UpdateSpeedKmh()
     {
         SpeedKmh = (int)MathF.Round(Speed * 3.6f);
