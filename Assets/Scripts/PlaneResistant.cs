@@ -32,14 +32,16 @@ public class PlaneResistant : MonoBehaviour
     void FixedUpdate()
     {
         var velocity = _velocity.Velocity;
+        
+        
         if (velocity.sqrMagnitude == 0)
         {
             return;
         }
+
         
-        
-        float energy = MathF.Pow(velocity.magnitude, 2) * _rigidbody.mass / 2 * ForcePart;
-        
+        float energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
+        float stopForce = energy / 0.1f;
         var resistanceFactor = Vector3.Dot(velocity.normalized,  Normal);
         var forceVector = Normal;
         if (resistanceFactor > 0)
@@ -47,12 +49,12 @@ public class PlaneResistant : MonoBehaviour
             forceVector *= -1;
         }
         
-        var finalForce = forceVector * MathF.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K, MaxResistance);
-
-        if (finalForce.magnitude > 10)
+        var finalForce = forceVector * Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K, MaxResistance, stopForce);
+        if (K != 0)
         {
-            //print($"{name} : {finalForce.magnitude} resistance");
+            print($"{name} : {resistanceFactor:F1} resistance, {finalForce} force, {velocity} [{velocity.magnitude}] velocity, {stopForce:F1} stopForce");
         }
+        
         
         Debug.DrawLine(transform.position, transform.position + finalForce.normalized, Color.red, 0.1f);
         Debug.DrawLine(transform.position, transform.position + velocity.normalized, Color.black, 0.1f);

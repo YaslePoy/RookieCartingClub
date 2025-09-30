@@ -53,7 +53,7 @@ public class CartHandle : MonoBehaviour
             if (Laps.Count > 1)
             {
                 
-                FastestLaps = Laps.OrderBy(i => i.Last()).First(list => list.Count != 0 && !_invalidLaps.Contains(list));
+                FastestLaps = Laps.OrderBy(i => i.LastOrDefault()).First(list => list.Count != 0 && !_invalidLaps.Contains(list));
             }
 
             
