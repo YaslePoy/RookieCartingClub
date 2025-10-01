@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3853996337
+  GlobalObjectIdHash: 2567542920
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 896564287
+  GlobalObjectIdHash: 1491427289
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1050,7 +1050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 3105266133
+  GlobalObjectIdHash: 1395857632
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1131,6 +1131,8 @@ GameObject:
   - component: {fileID: 1911891491611862517}
   - component: {fileID: -98193382640058352}
   - component: {fileID: 2816519027716094941}
+  - component: {fileID: 8382071404288949100}
+  - component: {fileID: 431820076659782233}
   m_Layer: 0
   m_Name: cart
   m_TagString: Cart
@@ -1247,11 +1249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   CameraPosition: {fileID: 7385225801888495128}
-  AutoCenter: 1
   Angle:
     m_InternalValue: 0
-  MaxAngle: 25
-  Sensetivity: 50
   Engine:
     m_InternalValue: 0
   Breaks:
@@ -1322,7 +1321,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8280289031576691925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 374f50923008f480198b761d1d30d0f9, type: 3}
   m_Name: 
@@ -1444,6 +1443,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f627c036e7462435089687409d3af8c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Restart
+--- !u!1652712579 &8382071404288949100
+MultiplayerRolesData:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280289031576691925}
+  m_GameObjectRolesMask: 3
+  m_ComponentsRolesMasks:
+  - m_Object: {fileID: 3430498824963694238}
+    m_RolesMask: 1
+  - m_Object: {fileID: 431820076659782233}
+    m_RolesMask: 1
+--- !u!114 &431820076659782233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280289031576691925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d366a96bcc8735129020bbc2972979e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyboradInput
+  MaxAngle: 25
+  Sensetivity: 40
 --- !u!1 &8406167649143193068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 770607968
+  GlobalObjectIdHash: 3575762337
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

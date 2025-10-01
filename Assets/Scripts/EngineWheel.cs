@@ -16,7 +16,9 @@ public class EngineWheel : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        _rigidbody.AddForceAtPosition(transform.forward * (Part * _engine.CurrentForce),  transform.position);
+        _rigidbody.AddForce(transform.forward * (Part * _engine.CurrentForce));
+        print($"Wheel force: {_engine.CurrentForce}");
+        
     }
 
     private void OnTransformParentChanged()

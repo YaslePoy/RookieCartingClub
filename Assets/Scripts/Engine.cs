@@ -25,7 +25,9 @@ public class Engine : MonoBehaviour
             return;
         }
         
+        print($"Raw: {_control.Engine.Value} Rewrite: {_control.CurrentEngine}");
+        
         var rate =  currentSpeed / MaxSpeed;
-        _currentForce = AnimationCurve.Evaluate(rate) * _control.Engine.Value * MaxForce;
+        _currentForce = AnimationCurve.Evaluate(rate) * _control.CurrentEngine * MaxForce;
     }
 }

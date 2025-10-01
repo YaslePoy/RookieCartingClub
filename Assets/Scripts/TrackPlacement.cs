@@ -15,7 +15,6 @@ public class TrackPlacement : NetworkBehaviour
             print($"Spawning on {CurrentSpawn}");
             this.transform.position =  transform.position;
             this.transform.rotation = transform.rotation;
-            this.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         }
     }
 }

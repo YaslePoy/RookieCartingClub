@@ -66,6 +66,7 @@
     <Compile Include="Assets/Scripts/MapHandle.cs" />
     <Compile Include="Assets/Scripts/Restart.cs" />
     <Compile Include="Assets/Scripts/NetworkVelocityProvider.cs" />
+    <Compile Include="Assets/Scripts/KeyboradInput.cs" />
     <Compile Include="Assets/Scripts/AutoConnect.cs" />
     <Compile Include="Assets/Scripts/UserControl.cs" />
     <None Include="Assets/UI.uxml" />

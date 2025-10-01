@@ -25,7 +25,7 @@ public class PlaneResistant : MonoBehaviour
         {
             _velocity = GetComponentInParent<VelocityProvider>();
         }
-        Debug.Log($"Plane of {name}: {Normal}");
+        // Debug.Log($"Plane of {name}: {Normal}");
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class PlaneResistant : MonoBehaviour
         var finalForce = forceVector * Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K, MaxResistance, stopForce);
         if (K != 0)
         {
-            print($"{name} : {resistanceFactor:F1} resistance, {finalForce} force, {velocity} [{velocity.magnitude}] velocity, {stopForce:F1} stopForce");
+            // print($"{name} : {resistanceFactor:F1} resistance, {finalForce} force, {velocity} [{velocity.magnitude}] velocity, {stopForce:F1} stopForce");
         }
         
         

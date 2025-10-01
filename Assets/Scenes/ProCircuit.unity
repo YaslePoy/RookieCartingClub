@@ -46744,32 +46744,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &432168584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 662123710766029800, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
-  m_PrefabInstance: {fileID: 833293480981720647}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &432168588
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 432168584}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 236.99799, y: 1.0000017, z: 165.4736}
-  m_Center: {x: 11.229248, y: 0.000000029802322, z: -31.633575}
 --- !u!114 &432417635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118117,9 +118091,9 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
+    Address: 95.105.78.72
     Port: 7777
-    ServerListenAddress: 127.0.0.1
+    ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
@@ -211985,9 +211959,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8777903028937762952, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
       insertIndex: -1
       addedObject: {fileID: 833293480981720650}
-    - targetCorrespondingSourceObject: {fileID: 662123710766029800, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 432168588}
   m_SourcePrefab: {fileID: 100100000, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
 --- !u!4 &833293480981720648 stripped
 Transform:
