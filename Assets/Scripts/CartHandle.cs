@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using JetBrains.Annotations;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class CartHandle : MonoBehaviour
+public class CartHandle : NetworkBehaviour
 {
     public List<TrackLap> Laps = new();
 
@@ -43,6 +44,13 @@ public class CartHandle : MonoBehaviour
         {
             currentLap.SetupSegmentTime(now, checkPoint.Index);
         }
+    }
+
+    [Rpc(SendTo.Server)]
+    public void TransferToPitRpc()
+    {
+        Debug.Log("TransferToPit");
+        GetComponent<TrackPlacement>().Start();
     }
 }
 

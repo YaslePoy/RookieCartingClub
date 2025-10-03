@@ -13,6 +13,8 @@ public class UIVM : ScriptableObject
     public int SpeedKmh;
     public string SpeedKmhString;
     public string LapTime;
+    public string LastLapTime;
+    public string FastestLapTime;
     public string Delta;
     public int Lap;
     public string SessionTime;
@@ -23,7 +25,8 @@ public class UIVM : ScriptableObject
 
     public int PlayerX;
     public int PlayerY;
-    public Color LapIndicator;
+    public Color LapIndicator = Color.white;
+    public Visibility ShowMenu = Visibility.Hidden;
     public void UpdateSpeedKmh()
     {
         SpeedKmh = (int)MathF.Round(Speed * 3.6f);

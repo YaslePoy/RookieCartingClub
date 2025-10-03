@@ -1,65 +1,77 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; flex-wrap: nowrap; flex-direction: row;">
-        <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-start; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; min-width: 0%; min-height: auto;">
-            <ui:Label text="Время круга" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
-                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);">
-                    <Bindings>
-                        <ui:DataBinding property="text" data-source-path="LapTime" binding-mode="ToTarget" />
-                    </Bindings>
-                </ui:Label>
-                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
-                    <Bindings>
-                        <ui:DataBinding property="text" data-source-path="Delta" binding-mode="ToTarget" />
-                    </Bindings>
-                </ui:Label>
-            </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                <ui:Label text="Круг" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);" />
-                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
-                    <Bindings>
-                        <ui:DataBinding property="text" data-source-path="Lap" binding-mode="ToTarget" />
-                    </Bindings>
-                </ui:Label>
-            </ui:VisualElement>
-            <ui:VisualElement data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; background-image: none; background-repeat: no-repeat no-repeat; background-position-x: left 0; background-position-y: center; -unity-background-scale-mode: scale-and-crop; background-size: 100% 400px; width: 300px; height: 400px; min-width: 300px; min-height: 400px; max-width: 300px; max-height: 400px;">
-                <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Import/self_point.png?fileID=2800000&amp;guid=a332c52f07c5e1e0993610518f309db2&amp;type=3#self_point&quot;); background-repeat: no-repeat no-repeat; background-position-x: center; background-position-y: center; -unity-background-scale-mode: scale-and-crop; background-size: 100% 100%; width: 7px; height: 7px; position: absolute; -unity-slice-type: sliced; top: 0; left: 0%; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; margin-top: 29px; margin-right: 0%; min-width: 7px; min-height: 7px; max-width: 7px; max-height: 7px; margin-left: 59px;">
-                    <Bindings>
-                        <ui:DataBinding property="style.marginTop" data-source-path="PlayerY" binding-mode="ToTarget" />
-                        <ui:DataBinding property="style.marginLeft" data-source-path="PlayerX" binding-mode="ToTarget" />
-                    </Bindings>
-                </ui:VisualElement>
-                <Bindings>
-                    <ui:DataBinding property="style.backgroundImage" data-source-path="Map" binding-mode="ToTarget" />
-                    <ui:DataBinding property="style.minWidth" data-source-path="MapWidth" binding-mode="ToTarget" />
-                    <ui:DataBinding property="style.maxWidth" data-source-path="MapWidth" binding-mode="ToTarget" />
-                    <ui:DataBinding property="style.width" data-source-path="MapWidth" binding-mode="ToTarget" />
-                    <ui:DataBinding property="style.height" data-source-path="MapHeight" binding-mode="ToTarget" />
-                    <ui:DataBinding property="style.minHeight" data-source-path="MapHeight" binding-mode="ToTarget" />
-                    <ui:DataBinding property="style.maxHeight" data-source-path="MapHeight" binding-mode="ToTarget" />
-                </Bindings>
-            </ui:VisualElement>
-            <ui:Label text="Скорость" name="Label" style="-unity-text-align: upper-center; font-size: 30px; background-color: rgb(159, 159, 159); right: auto; align-self: flex-start; align-content: flex-start; width: 268px; height: 49px;" />
-            <ui:Slider label="0" value="0" high-value="130" language-direction="Inherit" focusable="false" enabled="true" name="SpeedInd" direction="Horizontal" inverted="false" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="align-self: stretch; bottom: auto; top: auto; left: auto; flex-direction: row; font-size: 30px; background-color: rgb(159, 159, 159); width: 268px; height: 49px;">
-                <Bindings>
-                    <ui:DataBinding property="label" data-source-path="SpeedKmhString" binding-mode="ToTarget" />
-                    <ui:DataBinding property="value" data-source-path="SpeedKmh" binding-mode="ToTarget" />
-                </Bindings>
-            </ui:Slider>
-        </ui:VisualElement>
-        <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; align-self: stretch; align-items: flex-end; justify-content: center;">
-            <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-end; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: wrap-reverse;">
-                <ui:Label text="Время сесии" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement name="RaceUI" style="flex-grow: 1; flex-wrap: nowrap; flex-direction: row;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-start; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; min-width: 0%; min-height: auto;">
+                <ui:Label text="Время круга" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
-                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px;">
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
                         <Bindings>
-                            <ui:DataBinding property="text" data-source-path="SessionTime" binding-mode="ToTarget" />
+                            <ui:DataBinding property="text" data-source-path="LapTime" binding-mode="ToTarget" />
+                            <ui:DataBinding property="style.backgroundColor" data-source-path="LapIndicator" binding-mode="ToTarget" />
+                        </Bindings>
+                    </ui:Label>
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="Delta" binding-mode="ToTarget" />
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
-                <ui:VisualElement style="flex-grow: 1; flex-direction: row;" />
-                <ui:VisualElement style="flex-grow: 1;" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label text="Круг" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);" />
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="Lap" binding-mode="ToTarget" />
+                        </Bindings>
+                    </ui:Label>
+                </ui:VisualElement>
+                <ui:VisualElement data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; background-image: none; background-repeat: no-repeat no-repeat; background-position-x: left 0; background-position-y: center; -unity-background-scale-mode: scale-and-crop; background-size: 100% 400px; width: 300px; height: 400px; min-width: 300px; min-height: 400px; max-width: 300px; max-height: 400px; margin-bottom: 30px;">
+                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Import/self_point.png?fileID=2800000&amp;guid=a332c52f07c5e1e0993610518f309db2&amp;type=3#self_point&quot;); background-repeat: no-repeat no-repeat; background-position-x: center; background-position-y: center; -unity-background-scale-mode: scale-and-crop; background-size: 100% 100%; width: 7px; height: 7px; position: absolute; -unity-slice-type: sliced; top: 0; left: 0%; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; margin-top: 29px; margin-right: 0%; min-width: 7px; min-height: 7px; max-width: 7px; max-height: 7px; margin-left: 59px;">
+                        <Bindings>
+                            <ui:DataBinding property="style.marginTop" data-source-path="PlayerY" binding-mode="ToTarget" />
+                            <ui:DataBinding property="style.marginLeft" data-source-path="PlayerX" binding-mode="ToTarget" />
+                        </Bindings>
+                    </ui:VisualElement>
+                    <Bindings>
+                        <ui:DataBinding property="style.backgroundImage" data-source-path="Map" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.minWidth" data-source-path="MapWidth" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.maxWidth" data-source-path="MapWidth" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.width" data-source-path="MapWidth" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.height" data-source-path="MapHeight" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.minHeight" data-source-path="MapHeight" binding-mode="ToTarget" />
+                        <ui:DataBinding property="style.maxHeight" data-source-path="MapHeight" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:VisualElement>
+                <ui:Label text="Скорость" name="Label" style="-unity-text-align: upper-center; font-size: 30px; background-color: rgb(159, 159, 159); right: auto; align-self: flex-start; align-content: flex-start; width: 268px; height: 49px;" />
+                <ui:Slider label="0" value="0" high-value="130" language-direction="Inherit" focusable="false" enabled="true" name="SpeedInd" direction="Horizontal" inverted="false" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="align-self: stretch; bottom: auto; top: auto; left: auto; flex-direction: row; font-size: 30px; background-color: rgb(159, 159, 159); width: 268px; height: 49px;">
+                    <Bindings>
+                        <ui:DataBinding property="label" data-source-path="SpeedKmhString" binding-mode="ToTarget" />
+                        <ui:DataBinding property="value" data-source-path="SpeedKmh" binding-mode="ToTarget" />
+                    </Bindings>
+                </ui:Slider>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; align-self: stretch; align-items: flex-end; justify-content: center;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-end; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: wrap-reverse;">
+                    <ui:Label text="Время сесии" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
+                        <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px;">
+                            <Bindings>
+                                <ui:DataBinding property="text" data-source-path="SessionTime" binding-mode="ToTarget" />
+                            </Bindings>
+                        </ui:Label>
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;" />
+                    <ui:VisualElement style="flex-grow: 1;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement enabled="true" name="Menu" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.33); opacity: 1; display: flex; visibility: visible;">
+        <ui:VisualElement tabindex="0" enabled="true" name="VisualElement" style="flex-grow: 1; position: absolute; bottom: 0; right: 40%; left: 40%; top: 0; align-self: center; justify-content: center; background-color: rgba(0, 0, 0, 0);">
+            <ui:Button text="Назад" name="back" style="margin-bottom: 9px;" />
+            <ui:Button text="В питы" name="pit" style="margin-bottom: 9px;" />
+        </ui:VisualElement>
+        <Bindings>
+            <ui:DataBinding property="style.visibility" data-source-path="ShowMenu" binding-mode="ToTarget" />
+        </Bindings>
     </ui:VisualElement>
 </ui:UXML>
