@@ -1,82 +1,52 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DefaultNamespace;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class CartHandle : MonoBehaviour
 {
-    public List<List<double>> Laps = new();
-    public List<double> FastestLaps;
+    public List<TrackLap> Laps = new();
+
+    [CanBeNull]
+    public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
+
     public double LapStart = -1;
-    private HashSet<List<double>> _invalidLaps = new();
-    public List<double> LastLap => Laps.Last();
-    private int checkCount = 0;
+    private readonly HashSet<TrackLap> _invalidLaps = new();
+    public TrackLap LastLap => Laps.Last();
+
+    private int checkCount;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        print($"Segments count: {checkCount}");
+        Laps.Add(new TrackLap(checkCount, Time.timeAsDouble));
     }
 
     public void PushCheckPoint(CheckPoint checkPoint)
     {
-            var now = Time.timeAsDouble;
-        
+        var now = Time.timeAsDouble;
+
+        var currentLap = LastLap;
+
+
         if (checkPoint.Index == 0)
         {
-
-            if (Laps.Count > 0)
-            {
-                LastLap.Add(now - LapStart);
-                print($"Lap time {TimeSpan.FromSeconds(Laps.Last().Last()):g}");
-            }
-
-            LapStart = now;
-            
-            
-            var times = new List<double>();
-            
-            if (Laps.Count > 0 && LastLap.Count != checkCount)
-            {
-                _invalidLaps.Add(LastLap);
-            }
-            
-            Laps.Add(times);
-            
-            
-            if (Laps.Count > 1)
-            {
-                
-                FastestLaps = Laps.OrderBy(i => i.LastOrDefault()).First(list => list.Count != 0 && !_invalidLaps.Contains(list));
-            }
-
-            
+            Laps.Add(new TrackLap(checkCount, Time.timeAsDouble));
         }
         else
         {
-        if (Laps.Count > 0 && LastLap?.Count != checkPoint.Index - 1)   
-            {
-                print("Invalid lap");
-                while (LastLap?.Count < checkPoint.Index - 2)
-                {
-                    LastLap.Add(0);
-                }
-                _invalidLaps.Add(LastLap);
-            }
-
-            if (Laps.Count > 0)
-            {
-                LastLap.Add(now - LapStart);
-            }
+            currentLap.SetupSegmentTime(now, checkPoint.Index);
         }
     }
 }
+
+
 #if UNITY_EDITOR
 [CustomEditor(typeof(CartHandle))]
 public class CartHandleEditor : Editor
@@ -101,7 +71,6 @@ public class CartHandleEditor : Editor
                 go.GetComponent<MeshRenderer>().enabled = false;
             }
         }
-        
     }
 }
 #endif

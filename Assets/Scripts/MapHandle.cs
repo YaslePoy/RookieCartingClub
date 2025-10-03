@@ -37,6 +37,7 @@ public class MapHandle : MonoBehaviour
         {
             return;
         }
+        
         var delta = Cart.transform.position - origin.position;
         delta.x /= -TrackWidth;
         delta.z /= TrackHeight;

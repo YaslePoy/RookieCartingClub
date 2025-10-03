@@ -21,12 +21,11 @@ public class UI : MonoBehaviour
         Uivm.Speed = velocity;
         Uivm.UpdateSpeedKmh();
         Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.LapStart):g}";
-        if (Cart.FastestLaps.Count != 0)
+        if (Cart.FastestLaps is not null)
         {
             try
             {
-                var sector = Time.timeAsDouble - Cart.LapStart;
-                var delta = sector - Cart.FastestLaps[Cart.Laps.Last().Count - 1];
+                var delta = Cart.LastLap.Delta(Cart.FastestLaps);
                 var formated = $"{Math.Round(delta, 2):N2}";
                 Uivm.Delta = formated;
             }
