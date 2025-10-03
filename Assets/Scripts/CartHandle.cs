@@ -14,11 +14,7 @@ public class CartHandle : NetworkBehaviour
 
     [CanBeNull]
     public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
-
-    public double LapStart = -1;
-    private readonly HashSet<TrackLap> _invalidLaps = new();
-    public TrackLap LastLap => Laps.Last();
-
+    public TrackLap CurrentLap => Laps.Last();
     private int checkCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,7 +29,7 @@ public class CartHandle : NetworkBehaviour
     {
         var now = Time.timeAsDouble;
 
-        var currentLap = LastLap;
+        var currentLap = CurrentLap;
 
 
         if (checkPoint.Index == 0)

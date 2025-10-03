@@ -24,6 +24,24 @@
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
+                <ui:VisualElement style="flex-grow: 1; flex-direction: column;">
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row; height: 4px; align-self: auto; align-content: auto; align-items: flex-start; min-height: 4px; max-height: 50px;">
+                        <ui:Label text="ПОСЛ." data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" name="Label" style="font-size: 32px; width: 106px; height: 45px; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(255, 255, 255);" />
+                        <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                            <Bindings>
+                                <ui:DataBinding property="text" data-source-path="LastLapTime" binding-mode="ToTarget" />
+                            </Bindings>
+                        </ui:Label>
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; flex-direction: row; max-height: 50px;">
+                        <ui:Label text="БЫСТ." data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" name="Label" style="font-size: 32px; width: 106px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);" />
+                        <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                            <Bindings>
+                                <ui:DataBinding property="text" data-source-path="FastestLapTime" binding-mode="ToTarget" />
+                            </Bindings>
+                        </ui:Label>
+                    </ui:VisualElement>
+                </ui:VisualElement>
                 <ui:VisualElement data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; background-image: none; background-repeat: no-repeat no-repeat; background-position-x: left 0; background-position-y: center; -unity-background-scale-mode: scale-and-crop; background-size: 100% 400px; width: 300px; height: 400px; min-width: 300px; min-height: 400px; max-width: 300px; max-height: 400px; margin-bottom: 30px;">
                     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Import/self_point.png?fileID=2800000&amp;guid=a332c52f07c5e1e0993610518f309db2&amp;type=3#self_point&quot;); background-repeat: no-repeat no-repeat; background-position-x: center; background-position-y: center; -unity-background-scale-mode: scale-and-crop; background-size: 100% 100%; width: 7px; height: 7px; position: absolute; -unity-slice-type: sliced; top: 0; left: 0%; -unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0; margin-top: 29px; margin-right: 0%; min-width: 7px; min-height: 7px; max-width: 7px; max-height: 7px; margin-left: 59px;">
                         <Bindings>

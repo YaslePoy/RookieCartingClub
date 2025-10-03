@@ -43,6 +43,7 @@ namespace DefaultNamespace
             {
                 Debug.LogWarning("Lap invalidated!");
             }
+            
             _isValid = false;
 
             if (segmentIndex > _lastSegmentIndex)
@@ -53,7 +54,7 @@ namespace DefaultNamespace
                 }
             }
 
-            _lastSegmentIndex = segmentIndex;
+            _lastSegmentIndex = segmentIndex + 1;
         }
     }
 }

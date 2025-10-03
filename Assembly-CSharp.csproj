@@ -918,11 +918,11 @@
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Toolchain.Macos-arm64-Linux-x86_64">
       <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Toolchain.Macos-arm64-Linux-x86_64.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Advertisements">
+      <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rendering.LightTransport.Editor">
       <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Rendering.LightTransport.Editor.dll</HintPath>

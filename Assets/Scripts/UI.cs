@@ -36,12 +36,24 @@ public class UI : MonoBehaviour
         var velocity = VelocityProvider.Velocity.magnitude;
         Uivm.Speed = velocity;
         Uivm.UpdateSpeedKmh();
-        Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.LastLap.LapStart):g}";
+        Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.CurrentLap.LapStart):g}";
+        var fastestTime = 0.0;
+        if (Cart.FastestLaps is not null)
+        {
+            fastestTime = Cart.FastestLaps.TotalLapTime;
+        }
+        Uivm.FastestLapTime = $"{TimeSpan.FromSeconds(fastestTime):g}";
+        var lastTime = 0.0;
+        if (Cart.Laps.Count > 1)
+        {
+            lastTime = Cart.Laps[^2].TotalLapTime;
+        }
+        Uivm.LastLapTime = $"{TimeSpan.FromSeconds(lastTime):g}";
         if (Cart.FastestLaps is not null)
         {
             try
             {
-                var delta = Cart.LastLap.Delta(Cart.FastestLaps);
+                var delta = Cart.CurrentLap.Delta(Cart.FastestLaps);
                 var formated = $"{Math.Round(delta, 2):N2}";
                 Uivm.Delta = formated;
             }
@@ -50,7 +62,9 @@ public class UI : MonoBehaviour
             }
         }
 
-        if (Cart.LastLap.IsValid)
+        
+        
+        if (Cart.CurrentLap.IsValid)
         {
             Uivm.LapIndicator = Color.white;
         }
