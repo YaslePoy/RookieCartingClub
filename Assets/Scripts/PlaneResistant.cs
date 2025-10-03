@@ -60,4 +60,9 @@ public class PlaneResistant : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + velocity.normalized, Color.black, 0.1f);
         _rigidbody.AddForceAtPosition(finalForce, transform.position);
     }
+    
+    private void OnTransformParentChanged()
+    {
+        Destroy(gameObject);
+    }
 }

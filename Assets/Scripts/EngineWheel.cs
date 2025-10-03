@@ -17,12 +17,5 @@ public class EngineWheel : MonoBehaviour
     void FixedUpdate()
     {
         _rigidbody.AddForce(transform.forward * (Part * _engine.CurrentForce));
-        print($"Wheel force: {_engine.CurrentForce}");
-        
-    }
-
-    private void OnTransformParentChanged()
-    {
-        Destroy(this);
     }
 }
