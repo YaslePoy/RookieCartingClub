@@ -24,7 +24,13 @@ public class MapHandle : MonoBehaviour
     {
         if (Cart is null)
         {
-            Cart = GameObject.FindGameObjectsWithTag("Cart").First(go => go.GetComponent<TrackPlacement>().IsOwner);
+            var carts = GameObject.FindGameObjectsWithTag("Cart");
+            if (!carts.Any())
+            {
+                return;
+            }
+            
+            Cart = carts.First(go => go.GetComponent<TrackPlacement>().IsOwner);
         }
 
         if (Cart is null)
