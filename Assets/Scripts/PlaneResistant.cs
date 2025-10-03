@@ -39,6 +39,11 @@ public class PlaneResistant : MonoBehaviour
             return;
         }
 
+
+        if (name.Contains("RR"))
+        {
+            print($"Speed: {velocity.magnitude}");
+        }
         
         float energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
         float stopForce = energy / 0.1f;

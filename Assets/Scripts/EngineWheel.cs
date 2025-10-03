@@ -7,6 +7,7 @@ public class EngineWheel : MonoBehaviour
     public float Part;
     private Engine _engine;
     private Rigidbody _rigidbody;
+    public PlaneResistant EngineResistant;
     void Start()
     {
         _engine = GetComponentInParent<Engine>();
@@ -17,5 +18,9 @@ public class EngineWheel : MonoBehaviour
     void FixedUpdate()
     {
         _rigidbody.AddForce(transform.forward * (Part * _engine.CurrentForce));
+        if (_engine.CurrentForce == 0)
+        {
+            EngineResistant.K = 1;
+        }
     }
 }
