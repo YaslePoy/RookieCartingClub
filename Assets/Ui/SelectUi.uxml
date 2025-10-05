@@ -1,20 +1,22 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; align-self: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0;">
-        <ui:VisualElement name="VisualElement" style="flex-grow: 1; right: 0; left: 0; top: 0; bottom: 0; position: absolute; -unity-text-align: upper-left; justify-content: center; flex-direction: column; align-self: center; align-items: center; width: 1000px; min-width: 1000px; max-width: 1000px; background-color: rgb(255, 0, 0);">
-            <ui:TextField label="Ваш никнейм" name="NicknameFIeld" placeholder-text="Он будет виден другим игрокам" style="width: 60%; justify-content: space-around; align-content: flex-start; font-size: 15px; margin-bottom: 29px;" />
-            <ui:VisualElement name="CardsHolder" style="flex-grow: 1; flex-direction: row; margin-top: 0; min-width: 100%; min-height: 34px; max-height: 66%; justify-content: space-between; align-items: stretch; align-self: flex-end; align-content: center; width: 100%; max-width: 100%;">
-                <ui:VisualElement name="MapCard" style="flex-grow: 1; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; align-self: stretch; align-items: center; width: 500px; background-color: rgba(0, 0, 0, 0.5); min-width: 500px; max-width: 500px;">
-                    <ui:Label text="Roolie track" style="font-size: 17px;" />
-                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Import/rookie_sheme.png?fileID=2800000&amp;guid=83fbcff8cd98156feb32aacf1fa373b1&amp;type=3#rookie_sheme&quot;); -unity-background-scale-mode: scale-to-fit; height: 293px; min-height: auto; max-height: none; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; width: 400px;" />
-                    <ui:Button text="Одиночная практика" name="RoolieSP" style="width: 33%;" />
-                    <ui:Button text="Сетевая игра" name="RookieMP" style="width: 33%;" />
+    <ui:VisualElement style="flex-grow: 1; align-self: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgb(255, 255, 255);">
+        <ui:VisualElement name="CentralColumn" style="flex-grow: 1; position: absolute; left: 20%; right: 20%; top: 0; bottom: 0; background-color: rgba(255, 255, 255, 0); justify-content: center;">
+            <ui:TextField label="Введите ваш никнейм" placeholder-text="он будет виден всем игрокам" name="NickTF" style="margin-right: 20%; margin-left: 20%; margin-bottom: 10px;" />
+            <ui:VisualElement name="CardsHolder" style="flex-grow: 1; height: auto; max-height: 50%; flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; background-color: rgba(255, 255, 255, 0);">
+                    <ui:Label text="Rookie track" />
+                    <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: url(&quot;project://database/Assets/Import/rookie_sheme.png?fileID=2800000&amp;guid=83fbcff8cd98156feb32aacf1fa373b1&amp;type=3#rookie_sheme&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                    <ui:Label text="13 поворотов 512 метров" />
                 </ui:VisualElement>
-                <ui:VisualElement name="MapCard" style="flex-grow: 1; margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; align-self: stretch; align-items: center; width: 499px;">
-                    <ui:Label text="Roolie track" style="font-size: 17px;" />
-                    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Import/pro_sheme.png?fileID=2800000&amp;guid=3430010f95b78f3ba87df68e8b67f80f&amp;type=3#pro_sheme&quot;); -unity-background-scale-mode: scale-to-fit; height: 293px; min-height: auto; max-height: none; margin-top: 10px; margin-right: 10px; margin-bottom: 10px; margin-left: 10px; width: 400px;" />
-                    <ui:Button text="Одиночная практика" name="RoolieSP" style="width: 33%;" />
-                    <ui:Button text="Сетевая игра" name="RookieMP" style="width: 33%;" />
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
+                    <ui:Label text="Pro track" />
+                    <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: url(&quot;project://database/Assets/Import/pro_sheme.png?fileID=2800000&amp;guid=3430010f95b78f3ba87df68e8b67f80f&amp;type=3#pro_sheme&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;" />
+                    <ui:Label text="16 поворотов 938 метров" />
                 </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="Mods" style="flex-grow: 1; max-height: 4%; flex-direction: row; justify-content: center; margin-top: 33px; margin-right: 33px; margin-bottom: 33px; margin-left: 33px; visibility: hidden;">
+                <ui:Button text="Одиночная игра" />
+                <ui:Button text="Мультиплеер" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

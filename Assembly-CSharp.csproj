@@ -52,6 +52,7 @@
     <Compile Include="Assets/Scripts/RaceControl.cs" />
     <Compile Include="Assets/PBR_Grass_Textures/Scripts/CameraFreeflight.cs" />
     <Compile Include="Assets/Scripts/PlaneResistant.cs" />
+    <Compile Include="Assets/Scripts/SelectorUIHandler.cs" />
     <Compile Include="Assets/Scripts/EngineWheel.cs" />
     <Compile Include="Assets/Scripts/CartHandle.cs" />
     <Compile Include="Assets/Scripts/ControlRotating.cs" />
@@ -1171,14 +1172,14 @@
     <Reference Include="Unity.VisualEffectGraph.Runtime">
       <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.VisualEffectGraph.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Mathematics">
-      <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+    <Reference Include="Unity.Purchasing.SecurityCore">
+      <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Purchasing.SecurityCore.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.Tools.NetworkProfiler.Editor">
       <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Multiplayer.Tools.NetworkProfiler.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Purchasing.SecurityCore">
-      <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Purchasing.SecurityCore.dll</HintPath>
+    <Reference Include="Unity.Mathematics">
+      <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Multiplayer.PlayMode.Configurations.Editor">
       <HintPath>/home/micial/projects/unity/RookieCartingClub/Library/ScriptAssemblies/Unity.Multiplayer.PlayMode.Configurations.Editor.dll</HintPath>
