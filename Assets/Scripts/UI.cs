@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UI : MonoBehaviour
@@ -15,6 +17,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
+        Uivm.ShowMenu = Visibility.Hidden;
         VelocityProvider = Cart.gameObject.GetComponent<NetworkVelocityProvider>();
         MenuAction = InputSystem.actions.FindAction("Cancel");
         Document = GetComponent<UIDocument>();
@@ -28,6 +31,12 @@ public class UI : MonoBehaviour
         {
             Cart.TransferToPitRpc();
             SwitchMenu();
+        };
+        Document.rootVisualElement.Q<Button>("quit").clicked += () =>
+        {
+            NetworkManager.Singleton.Shutdown();
+            Destroy(GameObject.Find("Network"));
+            SceneManager.LoadScene("SelectorScene");
         };
     }
 

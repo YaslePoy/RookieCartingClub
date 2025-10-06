@@ -15,10 +15,12 @@ public class CheckPoint : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Cart")
+        if (!other.CompareTag("Cart collider"))
             return;
         
-        other.GetComponent<CartHandle>().PushCheckPoint(this);
+        var parent = other.transform.parent.gameObject;
+
+        parent.GetComponent<CartHandle>().PushCheckPoint(this);
         //print($"Colliding {Index}");
     }
 }

@@ -87,6 +87,7 @@
         <ui:VisualElement tabindex="0" enabled="true" name="VisualElement" style="flex-grow: 1; position: absolute; bottom: 0; right: 40%; left: 40%; top: 0; align-self: center; justify-content: center; background-color: rgba(0, 0, 0, 0);">
             <ui:Button text="Назад" name="back" style="margin-bottom: 9px;" />
             <ui:Button text="В питы" name="pit" style="margin-bottom: 9px;" />
+            <ui:Button text="Покинуть сессию" name="quit" style="margin-bottom: 9px;" />
         </ui:VisualElement>
         <Bindings>
             <ui:DataBinding property="style.visibility" data-source-path="ShowMenu" binding-mode="ToTarget" />

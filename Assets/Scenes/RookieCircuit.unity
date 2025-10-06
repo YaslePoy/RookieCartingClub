@@ -34127,12 +34127,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427286513}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.82, y: 0, z: -76.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2143376628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &427433521
 Mesh:
@@ -92496,6 +92496,7 @@ GameObject:
   - component: {fileID: 1203735204}
   - component: {fileID: 1203735206}
   - component: {fileID: 1203735207}
+  - component: {fileID: 1203735208}
   m_Layer: 0
   m_Name: Network
   m_TagString: Untagged
@@ -92525,9 +92526,9 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
-    Port: 7777
-    ServerListenAddress: 127.0.0.1
+    Address: 95.105.78.72
+    Port: 7776
+    ServerListenAddress: 0.0.0.0
   DebugSimulator:
     PacketDelayMS: 0
     PacketJitterMS: 0
@@ -92629,6 +92630,8 @@ MultiplayerRolesData:
     m_RolesMask: 2
   - m_Object: {fileID: 1203735204}
     m_RolesMask: 1
+  - m_Object: {fileID: 1203735207}
+    m_RolesMask: 2
 --- !u!114 &1203735207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92641,6 +92644,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4ba4d81097eb4569aeb2ea4bf3fe922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AutoConnect
+--- !u!114 &1203735208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203735199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 431bb785941b3526a81d32aac62ac45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClientSceneSetup
 --- !u!1 &1205634367
 GameObject:
   m_ObjectHideFlags: 0
@@ -162837,6 +162852,7 @@ Transform:
   - {fileID: 214410792}
   - {fileID: 400355521}
   - {fileID: 1006605309}
+  - {fileID: 427286514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2143759761
@@ -167764,4 +167780,3 @@ SceneRoots:
   - {fileID: 1686231603}
   - {fileID: 2084752176}
   - {fileID: 1203735202}
-  - {fileID: 427286514}
