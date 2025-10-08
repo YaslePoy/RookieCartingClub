@@ -1,8 +1,9 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class KeyboradInput : MonoBehaviour
+public class KeyboradInput : NetworkBehaviour
 {
     private InputAction _forceAction;
     private InputAction _rotateAction;
@@ -10,9 +11,15 @@ public class KeyboradInput : MonoBehaviour
     public float Sensetivity;
     
     private UserControl _userControl;
+    
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
         _userControl = GetComponent<UserControl>();
         _forceAction = InputSystem.actions.FindAction("Move");
         _rotateAction = InputSystem.actions.FindAction("Jump");
@@ -21,6 +28,11 @@ public class KeyboradInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner)
+        {
+            return;
+        }
+        
         var movement = _forceAction.ReadValue<Vector2>();
         
         _userControl.Engine.Value = 0;

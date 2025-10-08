@@ -588,8 +588,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 3639754507362840614}
-  MaxResistance: 300
-  Friction: 10
+  MaxResistance: 400
+  Friction: 12
   ForcePart: 0.5
   K: 0
 --- !u!1 &3663897719288342429
@@ -693,6 +693,7 @@ GameObject:
   - component: {fileID: 271012942615901449}
   - component: {fileID: 1819324971962325393}
   - component: {fileID: 7647621483966027825}
+  - component: {fileID: 2163933431919253189}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -876,6 +877,17 @@ MonoBehaviour:
   Camera: {fileID: 0}
   CartHandle: {fileID: 5347045640215740288}
   NickSetup: 0
+--- !u!1652712579 &2163933431919253189
+MultiplayerRolesData:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4852569705744261549}
+  m_GameObjectRolesMask: 3
+  m_ComponentsRolesMasks:
+  - m_Object: {fileID: 7647621483966027825}
+    m_RolesMask: 1
 --- !u!1 &5716488977367228228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1250,8 +1262,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NormalTransform: {fileID: 4747995486186934778}
-  MaxResistance: 300
-  Friction: 10
+  MaxResistance: 400
+  Friction: 12
   ForcePart: 0.5
   K: 0
 --- !u!1 &7744226967987070145
@@ -1518,7 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2886783942
+  GlobalObjectIdHash: 2898089809
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1798,6 +1810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d366a96bcc8735129020bbc2972979e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyboradInput
+  ShowTopMostFoldoutHeaderGroup: 1
   MaxAngle: 25
   Sensetivity: 40
 --- !u!1 &8406167649143193068

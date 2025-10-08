@@ -9,20 +9,28 @@ public class ServerConfigLoader : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+#if !UNITY_EDITOR
         if (!File.Exists("config.json"))
         {
             print("No config file found");
             Application.Quit();
         }
-        
-        var config = JsonUtility.FromJson<ServerConfig>(File.ReadAllText("config.json"));
+        var path = "config.json";
+
+#else
+        var path = "/home/micial/projects/unity/build/server/config.json";
+
+#endif
+
+
+        var config = JsonUtility.FromJson<ServerConfig>(File.ReadAllText(path));
 
         SessionSetup.RequestedSession = new ServerSession
         {
             Port = config.Port,
             SessionTimetable = config.SessionTimetable
         };
-        
+
         SceneManager.LoadScene(config.TrackId);
     }
 }
