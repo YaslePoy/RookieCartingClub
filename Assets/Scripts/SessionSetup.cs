@@ -5,7 +5,8 @@ namespace DefaultNamespace
 {
     public static class SessionSetup
     {
-        public static ISession ReqeustedSession;
+        public static ISession RequestedSession;
+        public static string Nickname;
     }
 
     public interface ISession

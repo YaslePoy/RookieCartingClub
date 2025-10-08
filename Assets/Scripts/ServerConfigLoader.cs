@@ -17,7 +17,7 @@ public class ServerConfigLoader : MonoBehaviour
         
         var config = JsonUtility.FromJson<ServerConfig>(File.ReadAllText("config.json"));
 
-        SessionSetup.ReqeustedSession = new ServerSession
+        SessionSetup.RequestedSession = new ServerSession
         {
             Port = config.Port,
             SessionTimetable = config.SessionTimetable

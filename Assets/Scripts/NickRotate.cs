@@ -1,9 +1,13 @@
+using TMPro;
+using Unity.Collections;
 using UnityEngine;
 
 public class NickRotate : MonoBehaviour
 {
     public GameObject Camera;
     private RectTransform rectTransform;
+    public CartHandle CartHandle;
+    public bool NickSetup = false;
     public void Start()
     {
         Camera = GameObject.Find("Camera");
@@ -15,5 +19,14 @@ public class NickRotate : MonoBehaviour
         var angle = Quaternion.LookRotation(transform.position - Camera.transform.position);
         print(angle.eulerAngles);
         rectTransform.rotation = angle;
+
+        if (!NickSetup)
+        {
+            if (!string.IsNullOrEmpty(CartHandle.Nickname.Value.Value))
+            {
+                NickSetup = true;
+                GetComponent<TMP_Text>().text = CartHandle.Nickname.Value.Value;
+            }
+        }
     }
 }

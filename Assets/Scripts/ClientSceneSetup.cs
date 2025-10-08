@@ -12,7 +12,7 @@ public class ClientSceneSetup : MonoBehaviour
     {
         var networkManager = GetComponent<NetworkManager>();
         var transport = GetComponent<UnityTransport>();
-        var setup = SessionSetup.ReqeustedSession;
+        var setup = SessionSetup.RequestedSession;
         print($"Loading {SceneManager.GetActiveScene().name}");
         switch (setup)
         {

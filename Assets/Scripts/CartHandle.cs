@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using JetBrains.Annotations;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -17,14 +18,20 @@ public class CartHandle : NetworkBehaviour
     public TrackLap CurrentLap => Laps.Last();
     private int checkCount;
 
+    public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<uint> PlayerId = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
         print($"Segments count: {checkCount}");
         Laps.Add(new TrackLap(checkCount, Time.timeAsDouble));
-    }
 
+        if (IsClient && IsOwner)
+        {
+            Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
+        }
+    }
     public void PushCheckPoint(CheckPoint checkPoint)
     {
         var now = Time.timeAsDouble;

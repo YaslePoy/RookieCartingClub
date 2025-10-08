@@ -8,9 +8,10 @@ namespace DefaultNamespace
 {
     public class SelectorUIHandler : MonoBehaviour
     {
-        private UIDocument  _document;
+        private UIDocument _document;
         private string trackId = string.Empty;
-        private TextField NickTF; 
+        private TextField NickTF;
+
         private void Start()
         {
             _document = gameObject.GetComponent<UIDocument>();
@@ -23,27 +24,35 @@ namespace DefaultNamespace
                 });
                 track.RegisterCallback<MouseLeaveEvent>(_ =>
                 {
-                    if (trackId== track.name)
+                    if (trackId == track.name)
                     {
                         return;
                     }
-                    track.style.backgroundColor = new Color { r = 0f, g = 0f, b = 0f, a = 0f};
+
+                    track.style.backgroundColor = new Color { r = 0f, g = 0f, b = 0f, a = 0f };
                 });
-                
+
                 track.RegisterCallback<MouseDownEvent>(_ =>
                 {
-                    foreach (var t in tracks)    
+                    foreach (var t in tracks)
                     {
-                        t.style.backgroundColor = new Color { r = 0f, g = 0f, b = 0f, a = 0f};
+                        t.style.backgroundColor = new Color { r = 0f, g = 0f, b = 0f, a = 0f };
                     }
+
                     track.style.backgroundColor = new Color(0f, 0f, 0f, 0.3f);
                     trackId = track.name;
-                    _document.rootVisualElement.Q<VisualElement>("Mods").style.visibility = Visibility.Visible;
+                    UpdateGoingGame();
                 });
             }
-            
-            NickTF = _document.rootVisualElement.Q<TextField>("NickTF");
 
+            NickTF = _document.rootVisualElement.Q<TextField>("NickTF");
+            NickTF.RegisterCallback<ChangeEvent<string>>(evt =>
+            {
+                NickTF.value = evt.newValue;
+                SessionSetup.Nickname = evt.newValue;
+                UpdateGoingGame();
+                
+            });
             _document.rootVisualElement.Q<Button>("MPButton").clicked += () =>
             {
                 var networkSession = new NetworkSession { Ip = "95.105.78.72" };
@@ -56,16 +65,29 @@ namespace DefaultNamespace
                         networkSession.Port = 7776;
                         break;
                 }
-                
-                SessionSetup.ReqeustedSession = networkSession;
+
+                SessionSetup.RequestedSession = networkSession;
                 SceneManager.LoadScene($"Scenes/{trackId}");
             };
 
             _document.rootVisualElement.Q<Button>("SPButton").clicked += () =>
             {
-                SessionSetup.ReqeustedSession = new LocalSession();
+                SessionSetup.RequestedSession = new LocalSession();
                 SceneManager.LoadScene($"Scenes/{trackId}");
             };
+        }
+
+        private void UpdateGoingGame()
+        {
+            var buttons = _document.rootVisualElement.Q<VisualElement>("Mods");
+            if (string.IsNullOrWhiteSpace(NickTF.value) || string.IsNullOrWhiteSpace(trackId))
+            {
+                buttons.style.visibility = Visibility.Hidden;
+            }
+            else
+            {
+                buttons.style.visibility = Visibility.Visible;
+            }
         }
     }
 }
