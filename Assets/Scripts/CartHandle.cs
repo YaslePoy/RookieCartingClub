@@ -31,6 +31,11 @@ public class CartHandle : NetworkBehaviour
         {
             Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
         }
+
+        if (IsServer)
+        {
+            RaceControl.Singleton.racers.Add(this);
+        }
     }
     public void PushCheckPoint(CheckPoint checkPoint)
     {

@@ -17,7 +17,6 @@ public class NickRotate : MonoBehaviour
     void Update()
     {
         var angle = Quaternion.LookRotation(transform.position - Camera.transform.position);
-        print(angle.eulerAngles);
         rectTransform.rotation = angle;
 
         if (!NickSetup)

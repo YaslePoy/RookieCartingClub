@@ -18,6 +18,7 @@ public class UIVM : ScriptableObject
     public string Delta;
     public int Lap;
     public string SessionTime;
+    public string SessionName;
 
     public Texture2D Map;
     public int MapWidth;

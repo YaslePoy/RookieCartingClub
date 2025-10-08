@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -7,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class ClientSceneSetup : MonoBehaviour
 {
+    public RaceControl RaceControl;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,12 +31,31 @@ public class ClientSceneSetup : MonoBehaviour
             case ServerSession serverConfig:
                 transport.ConnectionData.Port =  serverConfig.Port;
                 networkManager.StartServer();
-                
                 print($"Server started on port {transport.ConnectionData.Port}");
-                
+                RaceControl.racePeriods = ParseConfiguration(serverConfig.SessionTimetable);
                 break;
         }
     }
-    
-    
+
+    public Queue<IRacePeriod> ParseConfiguration(string configuration)
+    {
+        var queue = new Queue<IRacePeriod>();
+        var parts = configuration.Split(' ');
+        foreach (var part in parts)
+        {
+            var type = part.Split(':')[0];
+
+            switch (type)
+            {
+                case "PRE":
+                    queue.Enqueue(new PrePeriod {Duration = Convert.ToDouble(part.Split(':')[1])});
+                    break;
+                case "RACE":
+                    queue.Enqueue(new RacePeriod{Duration = Convert.ToDouble(part.Split(':')[1])});
+                    break;
+            }
+        }
+        
+        return queue;
+    }
 }

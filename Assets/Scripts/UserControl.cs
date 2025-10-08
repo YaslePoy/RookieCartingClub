@@ -1,4 +1,3 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class UserControl : NetworkBehaviour
 {
-    public Guid Id = Guid.NewGuid();
     public Transform CameraPosition;
 
     public NetworkVariable<float> Angle = new(0, NetworkVariableReadPermission.Everyone,
@@ -19,10 +17,10 @@ public class UserControl : NetworkBehaviour
     public NetworkVariable<float> Breaks = new(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
 
-    public float CurrentAngle => Angle.Value;
-    public float CurrentEngine => Engine.Value;
-
-    public float CurrentBreaks => Breaks.Value;
+    public bool AllowControl = true;
+    public float CurrentAngle => AllowControl ? Angle.Value : 0;
+    public float CurrentEngine => AllowControl ? Engine.Value : 0;
+    public float CurrentBreaks => AllowControl ? Breaks.Value : 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
