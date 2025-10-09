@@ -121,14 +121,14 @@ public class MapHandle : MonoBehaviour
     private void SetupPositions()
     {
         var positions = RaceControl.Singleton.racers.Where(i => i.IsOwner == false).ToList();
-        for (var index = 1; index < positions.Count; index++)
+        for (var index = 0; index < positions.Count; index++)
         {
             var position = positions[index];
             var delta = position.transform.position - origin.position;
             delta.x /= -TrackWidth;
             delta.z /= TrackHeight;
 
-            var point = _mapVE[index];
+            var point = _mapVE[index + 1];
             point.style.marginLeft = new StyleLength(Length.Pixels(delta.x * Uivm.MapWidth));
             point.style.marginTop = new StyleLength(Length.Pixels(delta.z * Uivm.MapHeight));
         }

@@ -26,7 +26,7 @@ public class UserControl : NetworkBehaviour
     void Start()
     {
         GetComponent<Rigidbody>();
-
+        AllowControl = true;
         if (IsClient && IsOwner)
         {
             var cam = GameObject.Find("Camera");

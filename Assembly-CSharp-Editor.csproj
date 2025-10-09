@@ -43,13 +43,13 @@
   <ItemGroup>
     <None Include="Assets/MobileDependencyResolver/Editor/mobile-dependency-resolver.txt" />
     <Reference Include="UnityEngine">
-      <HintPath>/Applications/Unity/Hub/Editor/6000.2.6f2/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
+      <HintPath>/home/micial/Unity/Hub/Editor/6000.2.6f2/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>/Applications/Unity/Hub/Editor/6000.2.6f2/Unity.app/Contents/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>/home/micial/Unity/Hub/Editor/6000.2.6f2/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/Applications/Unity/Hub/Editor/6000.2.6f2/Unity.app/Contents/Managed/UnityEngine/UnityEditor.dll</HintPath>
+      <HintPath>/home/micial/Unity/Hub/Editor/6000.2.6f2/Editor/Data/Managed/UnityEngine/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
