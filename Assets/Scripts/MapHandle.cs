@@ -46,6 +46,8 @@ public class MapHandle : MonoBehaviour
         }
 
         MoveSelf();
+        MoveEnemyPoints();
+        
         print(RaceControl.Singleton.racers.Count.ToString());
     }
 
