@@ -16,6 +16,7 @@ public class RaceControl : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Queue<IRacePeriod> racePeriods = new();
     public UIVM Uivm;
+
     public void Start()
     {
         Singleton = this;
@@ -24,9 +25,6 @@ public class RaceControl : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        // racers = racers.OrderByDescending(c => c.Laps.Count).ThenByDescending(i => i.Laps.Last().TotalLapTime).ToList();
-        // var delta = SessionTime * 60 - (int)Time.time;
-        // delta = delta > 0 ? delta : 0;
 
         if (IsServer)
         {
@@ -37,10 +35,11 @@ public class RaceControl : NetworkBehaviour
 
                 period.Start(this);
             }
-            
-            SessionTime.Value = PeriodEnd.Value - Time.timeAsDouble ;
+
+            SessionTime.Value = PeriodEnd.Value - Time.timeAsDouble;
         }
-        else if (IsClient)
+        
+        if (IsClient)
         {
             var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
             var viewTime = beforeEnd.ToString(@"mm\:ss");
@@ -87,6 +86,27 @@ public class RacePeriod : IRacePeriod
         }
 
         raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
+        raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+    }
+}
+
+partial class PracticePeriod : IRacePeriod
+{
+    public double Duration;
+
+    public void Start(RaceControl raceControl)
+    {
+        TrackPlacement.CurrentSpawn = 0;
+        foreach (var racer in raceControl.racers)
+        {
+            racer.GetComponent<TrackPlacement>().PlaceInPits();
+            racer.GetComponent<UserControl>().AllowControl = true;
+            var rigidbody = racer.GetComponent<Rigidbody>();
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+        }
+
+        raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
     }
 }

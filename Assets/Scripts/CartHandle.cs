@@ -15,11 +15,16 @@ public class CartHandle : NetworkBehaviour
 
     [CanBeNull]
     public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
+
     public TrackLap CurrentLap => Laps.Last();
     private int checkCount;
 
-    public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
-    public NetworkVariable<uint> PlayerId = new(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""),
+        NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
+    public NetworkVariable<uint> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
+        NetworkVariableWritePermission.Owner);
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,11 +37,9 @@ public class CartHandle : NetworkBehaviour
             Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
         }
 
-        if (IsServer)
-        {
-            RaceControl.Singleton.racers.Add(this);
-        }
+        RaceControl.Singleton.racers.Add(this);
     }
+
     public void PushCheckPoint(CheckPoint checkPoint)
     {
         var now = Time.timeAsDouble;
@@ -59,6 +62,11 @@ public class CartHandle : NetworkBehaviour
     {
         Debug.Log("TransferToPit");
         GetComponent<TrackPlacement>().Start();
+    }
+
+    public void OnDestroy()
+    {
+        RaceControl.Singleton.racers.Remove(this);
     }
 }
 

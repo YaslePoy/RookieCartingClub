@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -19,10 +20,18 @@ public class TrackPlacement : NetworkBehaviour
             .GetComponentsInChildren<Transform>()[1..];
         var transform = collection[CurrentSpawn++ % collection.Length];
         print($"Spawning on {CurrentSpawn}");
-        this.transform.position = transform.position;
-        this.transform.rotation = transform.rotation;
+        this.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        GetComponent<Rigidbody>().freezeRotation = true;
+
+        StartCoroutine(ResetRotation());
     }
 
+    IEnumerator ResetRotation()
+    {
+        yield return null;
+        GetComponent<Rigidbody>().freezeRotation = false;
+    }
+    
     public void PlaceOnTrack()
     {
         if (!IsServer) return;
@@ -30,7 +39,9 @@ public class TrackPlacement : NetworkBehaviour
         var collection = GameObject.Find("Starts").GetComponentsInChildren<Transform>()[1..];
         var transform = collection[CurrentSpawn++ % collection.Length];
         print($"Spawning on {CurrentSpawn}");
-        this.transform.position = transform.position;
-        this.transform.rotation = transform.rotation;
+        this.transform.SetPositionAndRotation(transform.position, transform.rotation);
+        GetComponent<Rigidbody>().freezeRotation = true;
+
+        StartCoroutine(ResetRotation());
     }
 }

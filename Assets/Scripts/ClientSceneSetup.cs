@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 public class ClientSceneSetup : MonoBehaviour
 {
     public RaceControl RaceControl;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +22,8 @@ public class ClientSceneSetup : MonoBehaviour
         {
             case LocalSession:
                 transport.ConnectionData.Address = "127.0.0.1";
+                RaceControl.racePeriods =
+                    new Queue<IRacePeriod>(new IRacePeriod[] { new PracticePeriod { Duration = 1 * 60 } });
                 networkManager.StartHost();
                 break;
             case NetworkSession networkSession:
@@ -29,7 +32,7 @@ public class ClientSceneSetup : MonoBehaviour
                 networkManager.StartClient();
                 break;
             case ServerSession serverConfig:
-                transport.ConnectionData.Port =  serverConfig.Port;
+                transport.ConnectionData.Port = serverConfig.Port;
                 networkManager.StartServer();
                 print($"Server started on port {transport.ConnectionData.Port}");
                 RaceControl.racePeriods = ParseConfiguration(serverConfig.SessionTimetable);
@@ -48,14 +51,17 @@ public class ClientSceneSetup : MonoBehaviour
             switch (type)
             {
                 case "PRE":
-                    queue.Enqueue(new PrePeriod {Duration = Convert.ToDouble(part.Split(':')[1])});
+                    queue.Enqueue(new PrePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
                     break;
                 case "RACE":
-                    queue.Enqueue(new RacePeriod{Duration = Convert.ToDouble(part.Split(':')[1])});
+                    queue.Enqueue(new RacePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
+                    break;
+                case "PRACTICE":
+                    queue.Enqueue(new PracticePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
                     break;
             }
         }
-        
+
         return queue;
     }
 }
