@@ -3,7 +3,7 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class KeyboradInput : NetworkBehaviour
+public class KeyboardInput : NetworkBehaviour
 {
     private InputAction _forceAction;
     private InputAction _rotateAction;

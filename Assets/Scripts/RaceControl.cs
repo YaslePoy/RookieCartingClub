@@ -71,6 +71,14 @@ public class PrePeriod : IRacePeriod
 
         raceControl.PeriodName.Value = new FixedString32Bytes("Подготовка");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+
+        CartHandle.NewCartConnected = handle =>
+        {
+            handle.GetComponent<TrackPlacement>().PlaceOnTrack();
+            handle.GetComponent<UserControl>().AllowControl = false;
+            handle.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            handle.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        };
     }
 }
 
@@ -87,10 +95,18 @@ public class RacePeriod : IRacePeriod
 
         raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+        
+        CartHandle.NewCartConnected = handle =>
+        {
+            handle.GetComponent<TrackPlacement>().PlaceOnTrack();
+            handle.GetComponent<UserControl>().AllowControl = false;
+            handle.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            handle.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        };
     }
 }
 
-partial class PracticePeriod : IRacePeriod
+public class PracticePeriod : IRacePeriod
 {
     public double Duration;
 
@@ -108,5 +124,14 @@ partial class PracticePeriod : IRacePeriod
 
         raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+
+        CartHandle.NewCartConnected = handle =>
+        {
+            handle.GetComponent<TrackPlacement>().PlaceInPits();
+            handle.GetComponent<UserControl>().AllowControl = true;
+            var rigidbody = handle.GetComponent<Rigidbody>();
+            rigidbody.linearVelocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+        };
     }
 }

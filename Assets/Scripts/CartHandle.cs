@@ -12,7 +12,7 @@ using UnityEngine;
 public class CartHandle : NetworkBehaviour
 {
     public List<TrackLap> Laps = new();
-
+    public static Action<CartHandle> NewCartConnected;
     [CanBeNull]
     public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
 
@@ -38,6 +38,8 @@ public class CartHandle : NetworkBehaviour
         }
 
         RaceControl.Singleton.racers.Add(this);
+        
+        NewCartConnected?.Invoke(this);
     }
 
     public void PushCheckPoint(CheckPoint checkPoint)
