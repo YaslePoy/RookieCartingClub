@@ -23,7 +23,7 @@ public class ClientSceneSetup : MonoBehaviour
             case LocalSession:
                 transport.ConnectionData.Address = "127.0.0.1";
                 RaceControl.racePeriods =
-                    new Queue<IRacePeriod>(new IRacePeriod[] { new PracticePeriod { Duration = 1 * 60 } });
+                    new Queue<IRacePeriod>(new IRacePeriod[] { new PracticePeriod { Duration = 10 * 60 } });
                 networkManager.StartHost();
                 break;
             case NetworkSession networkSession:
