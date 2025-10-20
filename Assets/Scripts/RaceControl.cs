@@ -23,7 +23,7 @@ public class RaceControl : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
         if (IsServer)
@@ -52,12 +52,13 @@ public class RaceControl : NetworkBehaviour
 public interface IRacePeriod
 {
     void Start(RaceControl raceControl);
+    void Update(RaceControl raceControl);
 }
 
 public class PrePeriod : IRacePeriod
 {
     public double Duration;
-
+    private int UntilUnfreeze = 100;
     public void Start(RaceControl raceControl)
     {
         TrackPlacement.CurrentSpawn = 0;
@@ -79,6 +80,11 @@ public class PrePeriod : IRacePeriod
             handle.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             handle.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         };
+    }
+
+    public void Update(RaceControl raceControl)
+    {
+        
     }
 }
 
@@ -103,6 +109,11 @@ public class RacePeriod : IRacePeriod
             handle.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             handle.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         };
+    }
+
+    public void Update(RaceControl raceControl)
+    {
+        
     }
 }
 
@@ -133,5 +144,10 @@ public class PracticePeriod : IRacePeriod
             rigidbody.linearVelocity = Vector3.zero;
             rigidbody.angularVelocity = Vector3.zero;
         };
+    }
+
+    public void Update(RaceControl raceControl)
+    {
+        
     }
 }

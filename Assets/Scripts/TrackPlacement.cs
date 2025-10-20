@@ -20,18 +20,13 @@ public class TrackPlacement : NetworkBehaviour
             .GetComponentsInChildren<Transform>()[1..];
         var transform = collection[CurrentSpawn++ % collection.Length];
         print($"Spawning on {CurrentSpawn}");
-        this.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        GetComponent<Rigidbody>().freezeRotation = true;
-
-        StartCoroutine(ResetRotation());
+        var rb = GetComponent<Rigidbody>();
+        rb.Move(transform.position, transform.rotation);
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 
-    IEnumerator ResetRotation()
-    {
-        yield return null;
-        GetComponent<Rigidbody>().freezeRotation = false;
-    }
-    
+
     public void PlaceOnTrack()
     {
         if (!IsServer) return;
@@ -39,9 +34,9 @@ public class TrackPlacement : NetworkBehaviour
         var collection = GameObject.Find("Starts").GetComponentsInChildren<Transform>()[1..];
         var transform = collection[CurrentSpawn++ % collection.Length];
         print($"Spawning on {CurrentSpawn}");
-        this.transform.SetPositionAndRotation(transform.position, transform.rotation);
-        GetComponent<Rigidbody>().freezeRotation = true;
-
-        StartCoroutine(ResetRotation());
+        var rb = GetComponent<Rigidbody>();
+        rb.Move(transform.position, transform.rotation);
+        rb.angularVelocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 }

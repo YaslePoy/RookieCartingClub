@@ -25,7 +25,20 @@ MonoBehaviour:
     m_InitialScene: {fileID: 102900000, guid: 5195c7de1d791447691ba06d08dfc58a, type: 3}
   m_EditorInstances: []
   m_LocalInstances: []
-  m_RemoteInstances: []
+  m_RemoteInstances:
+  - Name: Instance
+    <CorrespondingNodeId>k__BackingField: 
+    m_Nodes: []
+    m_BuildProfile: {fileID: 11400000, guid: a9bab42d909ee9e9696b64f2c8fb3973, type: 2}
+    advancedConfiguration:
+      m_Identifier: LinuxServer
+      m_FleetRegion: North America
+      m_InstanceAmountOfCores: 1
+      m_InstanceAmountOfMemoryMB: 800
+      m_InstanceCpuFrequencyMHz: 750
+      m_StreamLogsToMainEditor: 0
+      m_LogsColor: {r: 0.3643, g: 0.866, b: 0.513, a: 1}
+      m_Arguments: -port $$port$$ -queryport $$query_port$$ -logFile $$log_dir$$/Engine.log
   m_OverridePort: 0
   m_Port: 0
   m_MainEditorInstanceObsolete:
