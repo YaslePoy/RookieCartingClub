@@ -105,14 +105,30 @@ public class CartHandleEditor : Editor
 
 public class TrackPositions : NetworkVariableBase
 {
-    public List<int> Positions = new();
+    private List<int> _positions = new();
+
+    public List<int> Positions
+    {
+        get => _positions;
+        set
+        {
+            if (!_positions.SequenceEqual(value))
+            {
+                SetDirty(true);
+            }
+            
+            _positions = value;
+        }
+    }
 
     public override void WriteDelta(FastBufferWriter writer)
     {
+        WriteField(writer);
     }
 
     public override void WriteField(FastBufferWriter writer)
     {
+        writer.TryBeginWrite((Positions.Count + 1) * 4);
         writer.WriteValue(Positions.Count);
         foreach (var t in Positions)
         {
@@ -122,16 +138,17 @@ public class TrackPositions : NetworkVariableBase
 
     public override void ReadField(FastBufferReader reader)
     {
-        reader.ReadValue(out int count);
+        reader.ReadValueSafe(out int count);
         Positions = new List<int>(count);
         for (int i = 0; i < count; i++)
         {
-            reader.ReadValue(out count);
+            reader.ReadValueSafe(out count);
             Positions.Add(count);
         }
     }
 
     public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
     {
+        ReadField(reader);
     }
 }

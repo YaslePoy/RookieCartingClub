@@ -13,6 +13,7 @@ public class RaceControl : NetworkBehaviour
     public NetworkVariable<double> SessionTime = new();
     public NetworkVariable<double> PeriodEnd = new();
     public NetworkVariable<FixedString32Bytes> PeriodName = new();
+    public NetworkVariable<PeriodType> PeriodType = new();
     public TrackPositions TrackPositions = new();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Queue<IRacePeriod> racePeriods = new();
@@ -41,15 +42,44 @@ public class RaceControl : NetworkBehaviour
             SessionTime.Value = PeriodEnd.Value - Time.timeAsDouble;
             CurrentRacePeriod.Update(this);
         }
+        
+    }
 
+    private void Update()
+    {
         if (IsClient)
         {
             var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
             var viewTime = beforeEnd.ToString(@"mm\:ss");
             Uivm.SessionTime = viewTime;
             Uivm.SessionName = PeriodName.Value.Value;
+            
+            UpdatePositions();
+            
         }
     }
+
+    private void UpdatePositions()
+    {
+        var sb = new StringBuilder(256);
+        for (int i = 0; i < TrackPositions.Positions.Count; i++)
+        {
+            var pos = i + 1;
+            var nickname = racers.Find(c => c.PlayerId.Value == TrackPositions.Positions[i]).Nickname.Value;
+            sb.AppendLine($"{pos, 2} | {nickname, -20}");
+        }
+        
+        Uivm.Positions = sb.ToString();
+    }
+}
+
+public enum PeriodType
+{
+    Practice,
+    Race,
+    PreRace,
+    Qualification,
+    Finish
 }
 
 public interface IRacePeriod
@@ -75,7 +105,7 @@ public class PrePeriod : IRacePeriod
 
         raceControl.PeriodName.Value = new FixedString32Bytes("Подготовка");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
-
+        raceControl.PeriodType.Value = PeriodType.PreRace;
         CartHandle.NewCartConnected = handle =>
         {
             handle.GetComponent<TrackPlacement>().PlaceOnTrack();
@@ -100,7 +130,8 @@ public class RacePeriod : IRacePeriod
         {
             racer.GetComponent<UserControl>().AllowControl = true;
         }
-
+        
+        raceControl.PeriodType.Value = PeriodType.Race;
         raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
 
@@ -138,6 +169,7 @@ public class PracticePeriod : IRacePeriod
             rigidbody.angularVelocity = Vector3.zero;
         }
 
+        raceControl.PeriodType.Value = PeriodType.Practice;
         raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
 
@@ -153,6 +185,10 @@ public class PracticePeriod : IRacePeriod
 
     public void Update(RaceControl raceControl)
     {
+        var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
+            .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
+        raceControl.racers = racersOrder;
+        raceControl.TrackPositions.Positions =  racersOrder.Select(i => i.PlayerId.Value).ToList();
     }
 }
 
@@ -162,6 +198,7 @@ public class FinishPeriod : IRacePeriod
 
     public void Start(RaceControl raceControl)
     {
+        raceControl.PeriodType.Value = PeriodType.Finish;
         raceControl.PeriodName.Value = new FixedString32Bytes("Финиш");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
     }
