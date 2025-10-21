@@ -13,6 +13,7 @@ public class CartHandle : NetworkBehaviour
 {
     public List<TrackLap> Laps = new();
     public static Action<CartHandle> NewCartConnected;
+
     [CanBeNull]
     public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
 
@@ -22,7 +23,7 @@ public class CartHandle : NetworkBehaviour
     public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""),
         NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
-    public NetworkVariable<uint> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
+    public NetworkVariable<int> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -35,10 +36,11 @@ public class CartHandle : NetworkBehaviour
         if (IsClient && IsOwner)
         {
             Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
+            PlayerId.Value = SessionSetup.Id;
         }
 
         RaceControl.Singleton.racers.Add(this);
-        
+
         NewCartConnected?.Invoke(this);
     }
 
@@ -100,3 +102,36 @@ public class CartHandleEditor : Editor
     }
 }
 #endif
+
+public class TrackPositions : NetworkVariableBase
+{
+    public List<int> Positions = new();
+
+    public override void WriteDelta(FastBufferWriter writer)
+    {
+    }
+
+    public override void WriteField(FastBufferWriter writer)
+    {
+        writer.WriteValue(Positions.Count);
+        foreach (var t in Positions)
+        {
+            writer.WriteValue(t);
+        }
+    }
+
+    public override void ReadField(FastBufferReader reader)
+    {
+        reader.ReadValue(out int count);
+        Positions = new List<int>(count);
+        for (int i = 0; i < count; i++)
+        {
+            reader.ReadValue(out count);
+            Positions.Add(count);
+        }
+    }
+
+    public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
+    {
+    }
+}

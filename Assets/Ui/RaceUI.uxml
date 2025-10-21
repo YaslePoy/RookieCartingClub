@@ -67,23 +67,20 @@
                     </Bindings>
                 </ui:Slider>
             </ui:VisualElement>
-            <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; align-self: stretch; align-items: flex-end; justify-content: center;">
-                <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-end; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; flex-wrap: wrap-reverse;">
+            <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; align-self: stretch; align-items: flex-end; justify-content: space-between;">
+                <ui:VisualElement style="flex-grow: 1;">
                     <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 200px; height: 45px; background-color: rgb(255, 255, 255);">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="SessionName" binding-mode="ToTarget" />
                         </Bindings>
                     </ui:Label>
-                    <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
-                        <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 200px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px;">
-                            <Bindings>
-                                <ui:DataBinding property="text" data-source-path="SessionTime" binding-mode="ToTarget" />
-                            </Bindings>
-                        </ui:Label>
-                    </ui:VisualElement>
-                    <ui:VisualElement style="flex-grow: 1; flex-direction: row;" />
-                    <ui:VisualElement style="flex-grow: 1;" />
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 200px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px;">
+                        <Bindings>
+                            <ui:DataBinding property="text" data-source-path="SessionTime" binding-mode="ToTarget" />
+                        </Bindings>
+                    </ui:Label>
                 </ui:VisualElement>
+                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="margin-left: 0; width: 50%; height: 33%; font-size: 20px; background-color: rgba(0, 0, 0, 0.14); color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

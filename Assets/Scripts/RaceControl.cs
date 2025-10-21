@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -12,9 +13,10 @@ public class RaceControl : NetworkBehaviour
     public NetworkVariable<double> SessionTime = new();
     public NetworkVariable<double> PeriodEnd = new();
     public NetworkVariable<FixedString32Bytes> PeriodName = new();
-
+    public TrackPositions TrackPositions = new();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Queue<IRacePeriod> racePeriods = new();
+    public IRacePeriod CurrentRacePeriod;
     public UIVM Uivm;
 
     public void Start()
@@ -25,7 +27,6 @@ public class RaceControl : NetworkBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (IsServer)
         {
             if (Time.timeAsDouble > PeriodEnd.Value)
@@ -34,11 +35,13 @@ public class RaceControl : NetworkBehaviour
                 racePeriods.Enqueue(period);
 
                 period.Start(this);
+                CurrentRacePeriod = period;
             }
 
             SessionTime.Value = PeriodEnd.Value - Time.timeAsDouble;
+            CurrentRacePeriod.Update(this);
         }
-        
+
         if (IsClient)
         {
             var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
@@ -58,7 +61,7 @@ public interface IRacePeriod
 public class PrePeriod : IRacePeriod
 {
     public double Duration;
-    private int UntilUnfreeze = 100;
+
     public void Start(RaceControl raceControl)
     {
         TrackPlacement.CurrentSpawn = 0;
@@ -84,7 +87,6 @@ public class PrePeriod : IRacePeriod
 
     public void Update(RaceControl raceControl)
     {
-        
     }
 }
 
@@ -101,7 +103,7 @@ public class RacePeriod : IRacePeriod
 
         raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
-        
+
         CartHandle.NewCartConnected = handle =>
         {
             handle.GetComponent<TrackPlacement>().PlaceOnTrack();
@@ -113,7 +115,10 @@ public class RacePeriod : IRacePeriod
 
     public void Update(RaceControl raceControl)
     {
-        
+        var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
+            .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
+        raceControl.racers = racersOrder;
+        raceControl.TrackPositions.Positions =  racersOrder.Select(i => i.PlayerId.Value).ToList();
     }
 }
 
@@ -148,6 +153,20 @@ public class PracticePeriod : IRacePeriod
 
     public void Update(RaceControl raceControl)
     {
-        
+    }
+}
+
+public class FinishPeriod : IRacePeriod
+{
+    public double Duration;
+
+    public void Start(RaceControl raceControl)
+    {
+        raceControl.PeriodName.Value = new FixedString32Bytes("Финиш");
+        raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+    }
+
+    public void Update(RaceControl raceControl)
+    {
     }
 }

@@ -28,6 +28,7 @@ public class UIVM : ScriptableObject
     public int PlayerY;
     public Color LapIndicator = Color.white;
     public Visibility ShowMenu = Visibility.Hidden;
+    public string Positions;
     public void UpdateSpeedKmh()
     {
         SpeedKmh = (int)MathF.Round(Speed * 3.6f);
