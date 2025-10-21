@@ -1,0 +1,16 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/Import/Manrope-Medium.ttf?fileID=12800000&amp;guid=c824965482ba0440d95df186b7151eb9&amp;type=3#Manrope-Medium&quot;); align-self: auto; justify-content: center; font-size: 27px;">
+        <ui:VisualElement style="flex-grow: 1; left: 576px; right: 576px; position: absolute; top: 306px; bottom: auto;">
+            <ui:Label text="Авторизация" style="-unity-text-align: upper-center; font-size: 35px;" />
+            <ui:Label text="Добро пожаловать в Rookie Carting Club" style="-unity-text-align: upper-center;" />
+            <ui:Label text="Почта" />
+            <ui:TextField placeholder-text="your@email.rcc" name="email" />
+            <ui:Label text="Пароль" />
+            <ui:TextField placeholder-text="!@#$%*[;" password="true" name="password" />
+            <ui:VisualElement style="flex-grow: 1; align-self: center; width: 100%; justify-content: flex-end; align-items: center; margin-top: 16px; margin-right: 16px; margin-bottom: 16px; margin-left: 16px;">
+                <ui:Button text="Войти" name="auth" style="width: 50%;" />
+            </ui:VisualElement>
+            <ui:Button text="Зарегестрироваться" name="reg" style="border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); background-color: rgba(188, 188, 188, 0); -unity-text-align: middle-right; white-space: nowrap;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

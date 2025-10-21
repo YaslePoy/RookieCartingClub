@@ -1,24 +1,24 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1;">
+    <ui:VisualElement style="flex-grow: 1; -unity-font-definition: url(&quot;project://database/Assets/Import/Inter-VariableFont_opsz,wght.ttf?fileID=12800000&amp;guid=5d3f62bcfeec34937bec6fc0d09ac6b9&amp;type=3#Inter-VariableFont_opsz,wght&quot;);">
         <ui:VisualElement name="RaceUI" style="flex-grow: 1; flex-wrap: nowrap; flex-direction: row;">
             <ui:VisualElement name="VisualElement" style="flex-grow: 1; bottom: 0; right: auto; left: 0; height: 100%; width: 30%; justify-content: flex-end; align-self: flex-start; align-content: flex-start; -unity-text-align: upper-left; align-items: flex-start; background-color: rgba(0, 0, 0, 0); flex-direction: column; min-width: 0%; min-height: auto;">
                 <ui:Label text="Время круга" style="font-size: 32px; width: 202px; height: 45px; background-color: rgb(255, 255, 255);" />
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; min-width: auto; height: 0; max-height: 50px;">
-                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 216px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="LapTime" binding-mode="ToTarget" />
                             <ui:DataBinding property="style.backgroundColor" data-source-path="LapIndicator" binding-mode="ToTarget" />
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="Delta" binding-mode="ToTarget" />
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
                 <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-                    <ui:Label text="Круг" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255);" />
-                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255);">
+                    <ui:Label text="Круг" style="font-size: 32px; width: 216px; height: 45px; background-color: rgb(255, 255, 255);" />
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 116px; height: 45px; background-color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="Lap" binding-mode="ToTarget" />
                         </Bindings>
@@ -27,7 +27,7 @@
                 <ui:VisualElement style="flex-grow: 1; flex-direction: column;">
                     <ui:VisualElement style="flex-grow: 1; flex-direction: row; height: 4px; align-self: auto; align-content: auto; align-items: flex-start; min-height: 4px; max-height: 50px;">
                         <ui:Label text="ПОСЛ." data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" name="Label" style="font-size: 32px; width: 106px; height: 45px; -unity-background-image-tint-color: rgb(255, 255, 255); background-color: rgb(255, 255, 255);" />
-                        <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                        <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 216px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                             <Bindings>
                                 <ui:DataBinding property="text" data-source-path="LastLapTime" binding-mode="ToTarget" />
                             </Bindings>
@@ -35,7 +35,7 @@
                     </ui:VisualElement>
                     <ui:VisualElement style="flex-grow: 1; flex-direction: row; max-height: 50px;">
                         <ui:Label text="БЫСТ." data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" name="Label" style="font-size: 32px; width: 106px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);" />
-                        <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 188px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                        <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 216px; height: 45px; background-color: rgb(255, 255, 255); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                             <Bindings>
                                 <ui:DataBinding property="text" data-source-path="FastestLapTime" binding-mode="ToTarget" />
                             </Bindings>
@@ -69,18 +69,18 @@
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: nowrap; align-self: stretch; align-items: flex-end; justify-content: space-between;">
                 <ui:VisualElement style="flex-grow: 1;">
-                    <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 200px; height: 45px; background-color: rgb(255, 255, 255);">
+                    <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 216px; height: 45px; background-color: rgb(255, 255, 255);">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="SessionName" binding-mode="ToTarget" />
                         </Bindings>
                     </ui:Label>
-                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 200px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px;">
+                    <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="font-size: 32px; width: 216px; height: 45px; background-color: rgb(255, 255, 255); margin-right: 2px; -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                         <Bindings>
                             <ui:DataBinding property="text" data-source-path="SessionTime" binding-mode="ToTarget" />
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
-                <ui:Label text="Label" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="margin-left: 0; width: 50%; height: 33%; font-size: 20px; background-color: rgba(0, 0, 0, 0.14); color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px;">
+                <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="margin-left: 0; width: 50%; height: 33%; font-size: 20px; background-color: rgba(0, 0, 0, 0.14); color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                     <Bindings>
                         <ui:DataBinding property="text" data-source-path="Positions" binding-mode="ToTarget" />
                     </Bindings>
@@ -88,7 +88,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement enabled="true" name="Menu" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.61); opacity: 1; display: flex; visibility: visible;">
+    <ui:VisualElement enabled="true" name="Menu" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.61); opacity: 1; display: flex; visibility: visible; -unity-font-definition: url(&quot;project://database/Assets/Import/Manrope-Medium.ttf?fileID=12800000&amp;guid=c824965482ba0440d95df186b7151eb9&amp;type=3#Manrope-Medium&quot;);">
         <ui:VisualElement tabindex="0" enabled="true" name="VisualElement" style="flex-grow: 1; position: absolute; bottom: 0; right: 40%; left: 40%; top: 0; align-self: center; justify-content: center; background-color: rgba(0, 0, 0, 0);">
             <ui:Button text="Назад" name="back" style="margin-bottom: 9px;" />
             <ui:Button text="В питы" name="pit" style="margin-bottom: 9px;" />
