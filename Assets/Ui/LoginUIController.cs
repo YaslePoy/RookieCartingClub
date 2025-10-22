@@ -38,7 +38,14 @@ public class LoginUIController : MonoBehaviour
         };
         _ui.rootVisualElement.Q<Button>("reg").clicked += () =>
         {
-            
+            _ui.rootVisualElement.Q<VisualElement>("AuthForm").style.visibility = Visibility.Hidden;
+            _ui.rootVisualElement.Q<VisualElement>("RegForm").style.visibility = Visibility.Visible;
+        };
+        
+        _ui.rootVisualElement.Q<Button>("GoAuth").clicked += () =>
+        {
+            _ui.rootVisualElement.Q<VisualElement>("AuthForm").style.visibility = Visibility.Visible;
+            _ui.rootVisualElement.Q<VisualElement>("RegForm").style.visibility = Visibility.Hidden;
         };
     }
 
