@@ -27,7 +27,7 @@ public class LoginUIController : MonoBehaviour
 
             var client = new HttpClient();
             var auth = new AuthRequest { email = _email.value, password = _password.value };
-            client.PostAsync("http://localhost:5110/api/auth",
+            client.PostAsync("http://rcc.micialware.ru/api/auth",
                 new StringContent(JsonUtility.ToJson(auth), Encoding.UTF8, "application/json")).ContinueWith(i =>
             {
                 var response = i.Result;

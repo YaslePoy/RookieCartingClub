@@ -80,7 +80,7 @@
                         </Bindings>
                     </ui:Label>
                 </ui:VisualElement>
-                <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="margin-left: 0; width: 50%; height: 33%; font-size: 20px; background-color: rgba(0, 0, 0, 0.31); color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
+                <ui:Label data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="margin-left: 0; width: 50%; height: 33%; font-size: 20px; background-color: rgba(0, 0, 0, 0.72); color: rgb(255, 255, 255); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; -unity-font-definition: url(&quot;project://database/Assets/Import/JetBrainsMonoNerdFont-Regular.ttf?fileID=12800000&amp;guid=1e7d2ed6d576148a0b3bc4a0963919d0&amp;type=3#JetBrainsMonoNerdFont-Regular&quot;);">
                     <Bindings>
                         <ui:DataBinding property="text" data-source-path="Positions" binding-mode="ToTarget" />
                     </Bindings>

@@ -206,5 +206,6 @@ public class FinishPeriod : IRacePeriod
 
     public void Update(RaceControl raceControl)
     {
+        
     }
 }
