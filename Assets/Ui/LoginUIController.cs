@@ -37,6 +37,7 @@ public class LoginUIController : MonoBehaviour
                     User = JsonUtility.FromJson<User>(user);
                     SessionSetup.Nickname = User.username;
                     SessionSetup.Id = User.id;
+                    Authed = true;
                 });
             });
         };
