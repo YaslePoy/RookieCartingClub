@@ -10,11 +10,11 @@ namespace DefaultNamespace
     {
         private UIDocument _document;
         private string trackId = string.Empty;
-        private TextField NickTF;
 
         private void Start()
         {
             _document = gameObject.GetComponent<UIDocument>();
+            _document.rootVisualElement.Q<Label>("NickName").text = SessionSetup.Nickname;
             var tracks = _document.rootVisualElement.Q<VisualElement>("CardsHolder").Children().ToList();
             foreach (var track in tracks)
             {
@@ -44,15 +44,7 @@ namespace DefaultNamespace
                     UpdateGoingGame();
                 });
             }
-
-            NickTF = _document.rootVisualElement.Q<TextField>("NickTF");
-            NickTF.RegisterCallback<ChangeEvent<string>>(evt =>
-            {
-                NickTF.value = evt.newValue;
-                SessionSetup.Nickname = evt.newValue;
-                UpdateGoingGame();
-                
-            });
+            
             _document.rootVisualElement.Q<Button>("MPButton").clicked += () =>
             {
                 var networkSession = new NetworkSession { Ip = "95.105.78.72" };
@@ -80,7 +72,7 @@ namespace DefaultNamespace
         private void UpdateGoingGame()
         {
             var buttons = _document.rootVisualElement.Q<VisualElement>("Mods");
-            if (string.IsNullOrWhiteSpace(NickTF.value) || string.IsNullOrWhiteSpace(trackId))
+            if (string.IsNullOrWhiteSpace(LoginUIController.User.username) || string.IsNullOrWhiteSpace(trackId))
             {
                 buttons.style.visibility = Visibility.Hidden;
             }

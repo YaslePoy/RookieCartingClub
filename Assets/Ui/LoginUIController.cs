@@ -1,4 +1,6 @@
 using System.Net.Http;
+using System.Text;
+using DefaultNamespace;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +11,7 @@ public class LoginUIController : MonoBehaviour
     public static User User { get; private set; }
     private UIDocument _ui;
     private TextField _email;
-
+    public bool Authed = false;
     private TextField _password;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,14 +27,16 @@ public class LoginUIController : MonoBehaviour
 
             var client = new HttpClient();
             var auth = new AuthRequest { email = _email.value, password = _password.value };
-            client.PostAsync("rcc.micialware.ru/auth", new StringContent(JsonUtility.ToJson(auth))).ContinueWith(i =>
+            client.PostAsync("http://localhost:5110/api/auth",
+                new StringContent(JsonUtility.ToJson(auth), Encoding.UTF8, "application/json")).ContinueWith(i =>
             {
                 var response = i.Result;
                 response.Content.ReadAsStringAsync().ContinueWith(s =>
                 {
                     var user = s.Result;
                     User = JsonUtility.FromJson<User>(user);
-                    SceneManager.LoadScene("Scenes/SelectorScene");
+                    SessionSetup.Nickname = User.username;
+                    SessionSetup.Id = User.id;
                 });
             });
         };
@@ -41,7 +45,7 @@ public class LoginUIController : MonoBehaviour
             _ui.rootVisualElement.Q<VisualElement>("AuthForm").style.visibility = Visibility.Hidden;
             _ui.rootVisualElement.Q<VisualElement>("RegForm").style.visibility = Visibility.Visible;
         };
-        
+
         _ui.rootVisualElement.Q<Button>("GoAuth").clicked += () =>
         {
             _ui.rootVisualElement.Q<VisualElement>("AuthForm").style.visibility = Visibility.Visible;
@@ -52,6 +56,10 @@ public class LoginUIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!Authed) return;
+        
+        Authed = false;
+        SceneManager.LoadScene("Scenes/SelectorScene");
     }
 }
 
