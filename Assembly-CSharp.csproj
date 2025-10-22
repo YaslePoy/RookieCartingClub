@@ -55,6 +55,7 @@
     <Compile Include="Assets/PBR_Grass_Textures/Scripts/CameraFreeflight.cs" />
     <Compile Include="Assets/Scripts/PlaneResistant.cs" />
     <Compile Include="Assets/Scripts/EngineWheel.cs" />
+    <Compile Include="Assets/Scripts/DemoReader.cs" />
     <Compile Include="Assets/Scripts/CartHandle.cs" />
     <Compile Include="Assets/Scripts/ControlRotating.cs" />
     <Compile Include="Assets/Scripts/TrackPlacement.cs" />

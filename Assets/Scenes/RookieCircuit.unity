@@ -14048,6 +14048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MapHandle
   mapTexture: {fileID: 2800000, guid: 83fbcff8cd98156feb32aacf1fa373b1, type: 3}
+  enemyPoint: {fileID: 0}
   Uivm: {fileID: 11400000, guid: 64978fc667d3870b793aeab05c35fe05, type: 2}
   TrackHeight: 106.076
   TrackWidth: 98.129
@@ -92656,6 +92657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431bb785941b3526a81d32aac62ac45b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClientSceneSetup
+  RaceControl: {fileID: 2143376630}
 --- !u!1 &1205634367
 GameObject:
   m_ObjectHideFlags: 0
@@ -162827,6 +162829,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2143376628}
+  - component: {fileID: 2143376629}
+  - component: {fileID: 2143376630}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -162855,6 +162859,87 @@ Transform:
   - {fileID: 427286514}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2143376629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143376627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2337261264
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
+--- !u!114 &2143376630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143376627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10aa07d8e262113e59e157b727d8c27f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RaceControl
+  ShowTopMostFoldoutHeaderGroup: 1
+  racers: []
+  SessionTime:
+    m_InternalValue: 0
+  PeriodEnd:
+    m_InternalValue: 0
+  PeriodName:
+    m_InternalValue:
+      utf8LengthInBytes: 0
+      bytes:
+        offset0000:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0016: 0
+        byte0017: 0
+        byte0018: 0
+        byte0019: 0
+        byte0020: 0
+        byte0021: 0
+        byte0022: 0
+        byte0023: 0
+        byte0024: 0
+        byte0025: 0
+        byte0026: 0
+        byte0027: 0
+        byte0028: 0
+        byte0029: 0
+  PeriodType:
+    m_InternalValue: 0
+  Uivm: {fileID: 11400000, guid: 64978fc667d3870b793aeab05c35fe05, type: 2}
 --- !u!43 &2143759761
 Mesh:
   m_ObjectHideFlags: 0
