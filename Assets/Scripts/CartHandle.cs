@@ -140,6 +140,7 @@ public class TrackPositions : NetworkVariableBase
     {
         reader.ReadValueSafe(out int count);
         Positions = new List<int>(count);
+        Debug.Log($"Read {count} positions");
         for (int i = 0; i < count; i++)
         {
             reader.ReadValueSafe(out count);
