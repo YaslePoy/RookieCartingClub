@@ -8,7 +8,7 @@ namespace DefaultNamespace
         public readonly double[] SegmentTimes;
         private int _lastSegmentIndex = 1;
         private bool _isValid = true;
-
+        public static readonly TrackLap Null = new(0, 0);
         public bool IsFinished => _lastSegmentIndex == SegmentTimes.Length;
         public bool IsValid => _isValid;
         public int LastSegmentIndex => _lastSegmentIndex;

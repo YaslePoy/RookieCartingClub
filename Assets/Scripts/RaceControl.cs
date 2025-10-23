@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DefaultNamespace;
 using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -138,8 +139,8 @@ public class RacePeriod : IRacePeriod
 
         CartHandle.NewCartConnected = handle =>
         {
-            handle.GetComponent<TrackPlacement>().PlaceOnTrack();
-            handle.GetComponent<UserControl>().AllowControl = false;
+            handle.GetComponent<TrackPlacement>().PlaceInPits();
+            handle.GetComponent<UserControl>().AllowControl = true;
             handle.GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             handle.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         };
@@ -148,7 +149,7 @@ public class RacePeriod : IRacePeriod
     public void Update(RaceControl raceControl)
     {
         var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
-            .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
+            .ThenBy(i => (i.CurrentLap ?? TrackLap.Null).LastSegmentIndex).ToList();
         raceControl.racers = racersOrder;
         raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId.Value).ToList();
     }
@@ -207,5 +208,57 @@ public class FinishPeriod : IRacePeriod
     public void Update(RaceControl raceControl)
     {
         
+    }
+}
+
+public class TrackPositions : NetworkVariableBase
+{
+    private List<int> _positions = new();
+
+    public List<int> Positions
+    {
+        get => _positions;
+        set
+        {
+            if (!_positions.SequenceEqual(value))
+            {
+                SetDirty(true);
+            }
+            
+            _positions = value;
+        }
+    }
+
+    public override void WriteDelta(FastBufferWriter writer)
+    {
+        WriteField(writer);
+    }
+
+    public override void WriteField(FastBufferWriter writer)
+    {
+        Debug.Log("Writing track positions");
+        writer.TryBeginWrite((Positions.Count + 1) * 4);
+        writer.WriteValue(Positions.Count);
+        foreach (var t in Positions)
+        {
+            writer.WriteValue(t);
+        }
+    }
+
+    public override void ReadField(FastBufferReader reader)
+    {
+        reader.ReadValueSafe(out int count);
+        Positions = new List<int>(count);
+        Debug.Log($"Read {count} positions");
+        for (int i = 0; i < count; i++)
+        {
+            reader.ReadValueSafe(out int p);
+            Positions.Add(p);
+        }
+    }
+
+    public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
+    {
+        ReadField(reader);
     }
 }

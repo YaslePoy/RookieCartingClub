@@ -33,9 +33,15 @@ public class ClientSceneSetup : MonoBehaviour
                 break;
             case ServerSession serverConfig:
                 transport.ConnectionData.Port = serverConfig.Port;
-                networkManager.StartServer();
-                print($"Server started on port {transport.ConnectionData.Port}");
-                RaceControl.racePeriods = ParseConfiguration(serverConfig.SessionTimetable);
+                if (networkManager.StartServer())
+                {
+                    print($"Server started on port {transport.ConnectionData.Port}");
+                    RaceControl.racePeriods = ParseConfiguration(serverConfig.SessionTimetable);
+                }
+                else
+                {
+                    print("Failed to start server");
+                }
                 break;
         }
     }

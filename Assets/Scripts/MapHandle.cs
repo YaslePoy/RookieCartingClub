@@ -23,7 +23,7 @@ public class MapHandle : MonoBehaviour
         Uivm.Map = mapTexture;
         origin = GameObject.Find("TrackOrigin").transform;
         _document = GetComponent<UIDocument>();
-        _mapVE = _document.rootVisualElement.Q<VisualElement>("Map");
+        _mapVE = _document.rootVisualElement.Q("Map");
     }
 
     // Update is called once per frame
@@ -96,6 +96,9 @@ public class MapHandle : MonoBehaviour
     private void SyncRacerCount()
     {
         print($"Racers count : {RaceControl.Singleton.racers.Count}");
+        print(_mapVE);
+        print(RaceControl.Singleton.ToString());
+        print(RaceControl.Singleton.racers.ToString());
         if (_mapVE.childCount != RaceControl.Singleton.racers.Count)
         {
             if (_mapVE.childCount > RaceControl.Singleton.racers.Count)
@@ -104,6 +107,7 @@ public class MapHandle : MonoBehaviour
                 for (int i = 0; i < remove; i++)
                 {
                     _mapVE.RemoveAt(_mapVE.childCount - 1);
+                    print("Enemy removed");
                 }
             }
             else if (_mapVE.childCount < RaceControl.Singleton.racers.Count)
@@ -112,6 +116,7 @@ public class MapHandle : MonoBehaviour
                 for (int i = 0; i < add; i++)
                 {
                     AddEnemyPoint();
+                    print("Enemy added");
                 }
             }
         }
