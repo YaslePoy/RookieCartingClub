@@ -39,6 +39,7 @@ public class UserControl : NetworkBehaviour
             var ui = go.GetComponent<UI>();
             ui.enabled = true;
             ui.Cart = GetComponent<CartHandle>();
+            go.GetComponent<MapHandle>().enabled = true;
         }
     }
 
