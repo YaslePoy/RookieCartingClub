@@ -95,10 +95,6 @@ public class MapHandle : MonoBehaviour
 
     private void SyncRacerCount()
     {
-        print($"Racers count : {RaceControl.Singleton.racers.Count}");
-        print(_mapVE);
-        print(RaceControl.Singleton.ToString());
-        print(RaceControl.Singleton.racers.ToString());
         if (_mapVE.childCount != RaceControl.Singleton.racers.Count)
         {
             if (_mapVE.childCount > RaceControl.Singleton.racers.Count)
