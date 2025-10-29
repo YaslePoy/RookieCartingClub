@@ -214,26 +214,20 @@ public class FinishPeriod : IRacePeriod
 public class TrackPositions : NetworkVariableBase
 {
     private List<int> _positions = new();
-
     public List<int> Positions
     {
         get => _positions;
         set
         {
             if (!_positions.SequenceEqual(value))
-            {
                 SetDirty(true);
-            }
-            
             _positions = value;
         }
     }
-
     public override void WriteDelta(FastBufferWriter writer)
     {
         WriteField(writer);
     }
-
     public override void WriteField(FastBufferWriter writer)
     {
         Debug.Log("Writing track positions");
@@ -244,7 +238,6 @@ public class TrackPositions : NetworkVariableBase
             writer.WriteValue(t);
         }
     }
-
     public override void ReadField(FastBufferReader reader)
     {
         reader.ReadValueSafe(out int count);
@@ -256,7 +249,6 @@ public class TrackPositions : NetworkVariableBase
             Positions.Add(p);
         }
     }
-
     public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
     {
         ReadField(reader);

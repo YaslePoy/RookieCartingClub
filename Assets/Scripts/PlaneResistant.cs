@@ -14,11 +14,10 @@ public class PlaneResistant : MonoBehaviour
     private VelocityProvider _velocity;
     public float ForcePart;
     public float K = 1;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
         _rigidbody = GetComponentInParent<Rigidbody>();
         _velocity = GetComponent<VelocityProvider>();
         if (_velocity == null)
@@ -32,35 +31,30 @@ public class PlaneResistant : MonoBehaviour
     void FixedUpdate()
     {
         var velocity = _velocity.Velocity;
-        
-        
+
+
         if (velocity.sqrMagnitude == 0)
         {
             return;
         }
-        
-        
+
+
         float energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
         float stopForce = energy / 0.1f;
-        var resistanceFactor = Vector3.Dot(velocity.normalized,  Normal);
+        var resistanceFactor = Vector3.Dot(velocity.normalized, Normal);
         var forceVector = Normal;
         if (resistanceFactor > 0)
         {
             forceVector *= -1;
         }
+
+        var finalForce = forceVector *
+                         Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K,
+                             MaxResistance, stopForce);
         
-        var finalForce = forceVector * Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K, MaxResistance, stopForce);
-        if (finalForce.magnitude > 1000)
-        {
-            print($"{name} : {resistanceFactor:F1} resistance, {finalForce} force, {velocity} [{velocity.magnitude}] velocity, {stopForce:F1} stopForce");
-        }
-        
-        
-        Debug.DrawLine(transform.position, transform.position + finalForce.normalized, Color.red, 0.1f);
-        Debug.DrawLine(transform.position, transform.position + velocity.normalized, Color.black, 0.1f);
         _rigidbody.AddForceAtPosition(finalForce, transform.position);
     }
-    
+
     private void OnTransformParentChanged()
     {
         Destroy(gameObject);
