@@ -197,17 +197,25 @@ public class PracticePeriod : IRacePeriod
 public class FinishPeriod : IRacePeriod
 {
     public double Duration;
-
+    public int CurrentLap;
+    public bool IsLeaderFinished;
     public void Start(RaceControl raceControl)
     {
         raceControl.PeriodType.Value = PeriodType.Finish;
-        raceControl.PeriodName.Value = new FixedString32Bytes("Финиш");
+        raceControl.PeriodName.Value = new FixedString32Bytes("🏁 Финиш");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+        if (raceControl.racers.FirstOrDefault() is { } racer)
+        {
+            CurrentLap = racer.Laps.Count;
+        }
     }
 
     public void Update(RaceControl raceControl)
     {
-        
+        var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
+            .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
+        raceControl.racers = racersOrder;
+        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId.Value).ToList();
     }
 }
 

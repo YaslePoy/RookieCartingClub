@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8201788978337959735}
   - component: {fileID: 6414731992456132221}
   - component: {fileID: 7503013350491378409}
-  - component: {fileID: 2004022210947186598}
+  - component: {fileID: 461927045131669452}
   m_Layer: 0
   m_Name: default
   m_TagString: Cart collider
@@ -90,7 +90,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2004022210947186598
+--- !u!64 &461927045131669452
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,7 +111,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 3596191092224140292, guid: b80870d451a88a41a9858719004d00dc, type: 3}
+  m_Mesh: {fileID: -5504893536844069275, guid: 0df5766f866bd4829926f001b3ecd35a, type: 3}
 --- !u!1 &2282996630140776879
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,13 +136,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2282996630140776879}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04100376, y: 0, z: 0, w: 0.99915904}
-  m_LocalPosition: {x: -0, y: 0.846, z: -0.201}
+  m_LocalRotation: {x: 0.026176924, y: 0, z: 0, w: 0.99965733}
+  m_LocalPosition: {x: 0, y: 0.776, z: -0.207}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8764760979260145263}
-  m_LocalEulerAnglesHint: {x: 4.7, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 3, y: 0, z: 0}
 --- !u!1 &4852569705744261549
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,7 +411,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8280289031576691925}
   serializedVersion: 5
-  m_Mass: 150
+  m_Mass: 200
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -736,7 +736,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1205391989583851163, guid: 2e69cf3b3c3e5c61097f6f8ce15847c0, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 738631500
+      value: 1491427289
       objectReference: {fileID: 0}
     - target: {fileID: 4612172444763257998, guid: 2e69cf3b3c3e5c61097f6f8ce15847c0, type: 3}
       propertyPath: m_Name
@@ -896,7 +896,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5249145429181828870, guid: de9bb0a3e4a81bc08a79771da63ca8b0, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2841437285
+      value: 2567542920
       objectReference: {fileID: 0}
     - target: {fileID: 8815668383949567620, guid: de9bb0a3e4a81bc08a79771da63ca8b0, type: 3}
       propertyPath: m_LocalScale.x
@@ -1026,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8834582273358156496, guid: 6f4e652ebc10e1b6793cf92657b9f08c, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3292657601
+      value: 1395857632
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1104,7 +1104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7616477341722206373, guid: 834062eb1bf205926bb4befb74c3ebda, type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3529869984
+      value: 3575762337
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

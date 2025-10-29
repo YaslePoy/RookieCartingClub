@@ -53,6 +53,8 @@ public class ClientSceneSetup : MonoBehaviour
         foreach (var part in parts)
         {
             var type = part.Split(':')[0];
+            
+            Debug.Log($"{type}: {part}");
 
             switch (type)
             {
@@ -64,6 +66,9 @@ public class ClientSceneSetup : MonoBehaviour
                     break;
                 case "PRACTICE":
                     queue.Enqueue(new PracticePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
+                    break;
+                case "FINISH":
+                    queue.Enqueue(new FinishPeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
                     break;
             }
         }

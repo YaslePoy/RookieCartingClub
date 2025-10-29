@@ -99,6 +99,23 @@ public class CartHandleEditor : Editor
                 go.GetComponent<MeshRenderer>().enabled = false;
             }
         }
+
+        if (GUILayout.Button("border"))
+        {
+            var limits = GameObject.Find("ground_colliders").GetComponentsInChildren<MeshCollider>();
+
+            foreach (var limitMesh in limits)
+            {
+                limitMesh.isTrigger = false;
+                // var go = limitMesh.gameObject;
+                // var mesh = limitMesh.mesh;
+                // var colider = go.AddComponent<MeshCollider>();
+                // colider.convex = true;
+                // colider.sharedMesh = mesh;
+                // colider.isTrigger = true;
+                // go.GetComponent<MeshRenderer>().enabled = false;
+            }
+        }
     }
 }
 #endif
