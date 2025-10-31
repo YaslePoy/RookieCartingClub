@@ -1,3 +1,6 @@
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class Engine : MonoBehaviour
@@ -28,4 +31,38 @@ public class Engine : MonoBehaviour
         var rate =  currentSpeed / MaxSpeed;
         _currentForce = AnimationCurve.Evaluate(rate) * _control.CurrentEngine * MaxForce;
     }
+}
+
+public class EngineBaker : Baker<Engine>
+{
+    public override void Bake(Engine authoring)
+    {
+        var entity = GetEntity(TransformUsageFlags.Dynamic);
+        var curveEntity = CreateAdditionalEntity(TransformUsageFlags.None);
+        var buffer = AddBuffer<CurvePoint>(curveEntity);
+        foreach (var keyframe in authoring.AnimationCurve.keys)
+        {
+            buffer.Add(new CurvePoint { Value = new float2(keyframe.time, keyframe.value) });
+        }
+        AddComponent(entity, new EngineData
+        {
+            MaxForce = authoring.MaxForce,
+            MaxSpeed = authoring.MaxSpeed,
+            CurveEntity = curveEntity,
+        });
+    }
+}
+
+public struct EngineData : IComponentData
+{
+    public float MaxForce;
+    public float MaxSpeed;
+    public float CurrentForce;
+    public Entity CurveEntity;
+}
+
+
+public struct CurvePoint : IBufferElementData
+{
+    public float2 Value;
 }
