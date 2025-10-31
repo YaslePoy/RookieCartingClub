@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_rebase_[Changes]" date="1761892215518" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.RookieCartingClub/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before rebase [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="design/carting/cart.blend1" />
+    <option name="AFTER_PATH" value="design/carting/cart.blend1" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.RookieCartingClub/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/cart.blend1" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="design/carting/cart.blend" />
+    <option name="AFTER_PATH" value="design/carting/cart.blend" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.RookieCartingClub/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/cart.blend" />
+  </binary>
+</changelist>
