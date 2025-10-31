@@ -1,3 +1,5 @@
+using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class VelocityProvider : MonoBehaviour
@@ -20,4 +22,18 @@ public class VelocityProvider : MonoBehaviour
         _velocity = newVel;
         _lastPosition = currentPosition;
     }
+}
+
+public class VelocityProviderBaker : Baker<VelocityProvider>
+{
+    public override void Bake(VelocityProvider authoring)
+    {
+        var entity = GetEntity(TransformUsageFlags.Dynamic);
+        AddComponent<LocalVelocity>(entity);
+    }
+}
+
+public struct LocalVelocity : IComponentData
+{
+    public float3 Velocity;
 }

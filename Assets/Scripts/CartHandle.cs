@@ -4,6 +4,7 @@ using System.Linq;
 using DefaultNamespace;
 using JetBrains.Annotations;
 using Unity.Collections;
+using Unity.Entities;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -119,3 +120,23 @@ public class CartHandleEditor : Editor
     }
 }
 #endif
+
+
+public class CartHandleBaker : Baker<CartHandle>
+{
+    public override void Bake(CartHandle authoring)
+    {
+        var entity = GetEntity(TransformUsageFlags.Dynamic);
+        AddComponent(entity, new CartData
+        {
+            Nickname = authoring.Nickname.Value,
+            PlayerId = authoring.PlayerId.Value,
+        });
+    }
+}
+
+public struct CartData : IComponentData
+{
+    public FixedString32Bytes Nickname;
+    public int PlayerId;
+}

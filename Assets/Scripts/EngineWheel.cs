@@ -1,4 +1,5 @@
 using System;
+using Unity.Entities;
 using UnityEngine;
 
 public class EngineWheel : MonoBehaviour
@@ -8,6 +9,7 @@ public class EngineWheel : MonoBehaviour
     private Engine _engine;
     private Rigidbody _rigidbody;
     public PlaneResistant EngineResistant;
+
     void Start()
     {
         _engine = GetComponentInParent<Engine>();
@@ -23,4 +25,21 @@ public class EngineWheel : MonoBehaviour
             EngineResistant.K = 1;
         }
     }
+}
+
+public class EngineWheelBaker : Baker<EngineWheel>
+{
+    public override void Bake(EngineWheel authoring)
+    {
+        var entity = GetEntity(TransformUsageFlags.Dynamic);
+        AddComponent(entity, new EngineWheelData
+        {
+            Part = authoring.Part
+        });
+    }
+}
+
+public struct EngineWheelData : IComponentData
+{
+    public float Part;
 }
