@@ -23,6 +23,8 @@ public class ForwardWheelBaker : Baker<ControlRotating>
     public override void Bake(ControlRotating authoring)
     {
         var e = GetEntity(TransformUsageFlags.Dynamic);
+        
+        
         AddComponent<CartWheel>(e);
         AddComponent<FrontWheel>(e);
     }

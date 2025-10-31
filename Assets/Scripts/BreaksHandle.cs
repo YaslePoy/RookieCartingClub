@@ -18,9 +18,9 @@ public class BreaksHandle : MonoBehaviour
     }
 }
 
-public class RearWheelBaker : Baker<ControlRotating>
+public class RearWheelBaker : Baker<BreaksHandle>
 {
-    public override void Bake(ControlRotating authoring)
+    public override void Bake(BreaksHandle authoring)
     {
         var e = GetEntity(TransformUsageFlags.Dynamic);
         AddComponent<CartWheel>(e);
