@@ -32,10 +32,10 @@
 *.DotSettings.user
 
 # Visual Studio cache directory
-.vs/
+/.vs/
 
 # Rider
-.idea/
+/.idea/
 
 # Gradle cache directory
 .gradle/
@@ -100,3 +100,5 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+.DS_Store
