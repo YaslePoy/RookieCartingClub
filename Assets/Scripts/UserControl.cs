@@ -1,3 +1,4 @@
+using Unity.Entities;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -51,4 +52,20 @@ public class UserControl : NetworkBehaviour
             var a = 5;
         }
     }
+}
+
+public class UserControlBaker : Baker<UserControl>
+{
+    public override void Bake(UserControl authoring)
+    {
+        var entity = GetEntity(TransformUsageFlags.Dynamic);
+        AddComponent<CartInputData>(entity);
+    }
+}
+
+public struct CartInputData : IComponentData
+{
+    public float CurrentAngle;
+    public float CurrentEngine;
+    public float CurrentBreaks;
 }
