@@ -1,7 +1,6 @@
 using Unity.Entities;
 using Unity.Netcode;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class UserControl : NetworkBehaviour

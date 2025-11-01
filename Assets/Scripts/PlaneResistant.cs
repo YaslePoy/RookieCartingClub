@@ -4,6 +4,7 @@ using Unity.Netcode;
 using UnityEngine;
 using Plane = System.Numerics.Plane;
 
+//todo
 public class PlaneResistant : MonoBehaviour
 {
     public Transform NormalTransform;

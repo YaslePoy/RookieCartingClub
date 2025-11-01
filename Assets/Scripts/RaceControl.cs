@@ -7,6 +7,7 @@ using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
+//todo
 public class RaceControl : NetworkBehaviour
 {
     public static RaceControl Singleton;

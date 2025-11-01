@@ -2,6 +2,7 @@ using TMPro;
 using Unity.Collections;
 using UnityEngine;
 
+//todo
 public class NickRotate : MonoBehaviour
 {
     public GameObject Camera;
