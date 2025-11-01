@@ -1,18 +1,31 @@
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 
 partial struct WheelRotatingSystem : ISystem
 {
+    private ComponentLookup<CartInputData> _inputDataLookup;
+
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        _inputDataLookup = state.GetComponentLookup<CartInputData>(true);
         state.RequireForUpdate<FrontWheel>();
     }
-    
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        _inputDataLookup.Update(ref state);
+        
+        var job = new WheelRotatingSystemJob()
+        {
+            InputLookup = _inputDataLookup,
+        };
+
+        job.Schedule();
     }
 
     [BurstCompile]
@@ -24,10 +37,14 @@ partial struct WheelRotatingSystem : ISystem
 [BurstCompile]
 public partial struct WheelRotatingSystemJob : IJobEntity
 {
-    public EntityCommandBuffer.ParallelWriter _ecb;
+    [ReadOnly]
+    public ComponentLookup<CartInputData> InputLookup;
 
-    public void Execute(Entity entity, FrontWheel _, Parent parent, LocalTransform transform)
+    private void Execute(FrontWheel _, Parent parent, ref LocalTransform transform)
     {
+        var input = InputLookup[parent.Value];
+        var angle = input.CurrentAngle * math.TORADIANS;
+        transform.Rotation = quaternion.AxisAngle(transform.Up(), angle);
         
     }
 }
