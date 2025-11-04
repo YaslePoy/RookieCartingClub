@@ -35,7 +35,8 @@ public class EngineWheelBaker : Baker<EngineWheel>
         var entity = GetEntity(TransformUsageFlags.Dynamic);
         AddComponent(entity, new EngineWheelData
         {
-            Part = authoring.Part
+            Part = authoring.Part,
+            EngineResistant = GetEntity(authoring.EngineResistant, TransformUsageFlags.Dynamic)
         });
     }
 }
@@ -43,4 +44,5 @@ public class EngineWheelBaker : Baker<EngineWheel>
 public struct EngineWheelData : IComponentData
 {
     public float Part;
+    public Entity EngineResistant;
 }
