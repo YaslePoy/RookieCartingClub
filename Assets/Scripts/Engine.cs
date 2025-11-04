@@ -13,6 +13,7 @@ public class Engine : MonoBehaviour
     public float MaxForce;
     public float MaxSpeed;
     private Rigidbody _rigidbody;
+
     void Start()
     {
         _control = GetComponent<UserControl>();
@@ -27,8 +28,8 @@ public class Engine : MonoBehaviour
         {
             return;
         }
-        
-        var rate =  currentSpeed / MaxSpeed;
+
+        var rate = currentSpeed / MaxSpeed;
         _currentForce = AnimationCurve.Evaluate(rate) * _control.CurrentEngine * MaxForce;
     }
 }
@@ -43,6 +44,7 @@ public class EngineBaker : Baker<Engine>
         {
             buffer.Add(new CurvePoint { Value = new float2(keyframe.time, keyframe.value) });
         }
+
         AddComponent(entity, new EngineData
         {
             MaxForce = authoring.MaxForce,

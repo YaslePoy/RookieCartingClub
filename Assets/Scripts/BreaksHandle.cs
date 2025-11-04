@@ -5,7 +5,9 @@ using UnityEngine;
 public class BreaksHandle : MonoBehaviour
 {
     public PlaneResistant BreakResistant;
+
     private UserControl _control;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,7 +26,7 @@ public class RearWheelBaker : Baker<BreaksHandle>
     public override void Bake(BreaksHandle authoring)
     {
         var e = GetEntity(TransformUsageFlags.Dynamic);
-        AddComponent<CartWheel>(e);
+
         AddComponent<RearWheel>(e);
     }
 }

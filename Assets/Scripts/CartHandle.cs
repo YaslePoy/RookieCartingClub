@@ -5,6 +5,7 @@ using DefaultNamespace;
 using JetBrains.Annotations;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -132,6 +133,8 @@ public class CartHandleBaker : Baker<CartHandle>
             Nickname = authoring.Nickname.Value,
             PlayerId = authoring.PlayerId.Value,
         });
+        AddComponent<ForceApplier>(entity);
+        AddBuffer<FinalForceRequest>(entity);
     }
 }
 
@@ -139,4 +142,15 @@ public struct CartData : IComponentData
 {
     public FixedString32Bytes Nickname;
     public int PlayerId;
+}
+
+public struct ForceApplier : IComponentData
+{
+    
+}
+
+public struct FinalForceRequest : IBufferElementData
+{
+    public float3 Force;
+    public float3 Position;
 }

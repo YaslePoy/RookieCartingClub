@@ -1,8 +1,6 @@
 using System;
-using Unity.Mathematics;
-using Unity.Netcode;
+using Unity.Entities;
 using UnityEngine;
-using Plane = System.Numerics.Plane;
 
 //todo
 public class PlaneResistant : MonoBehaviour
@@ -15,7 +13,7 @@ public class PlaneResistant : MonoBehaviour
     private VelocityProvider _velocity;
     public float ForcePart;
     public float K = 1;
-
+    public ForceCollector Collector;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,13 +30,11 @@ public class PlaneResistant : MonoBehaviour
     void FixedUpdate()
     {
         var velocity = _velocity.Velocity;
-
-
+        
         if (velocity.sqrMagnitude == 0)
         {
             return;
         }
-
 
         float energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
         float stopForce = energy / 0.1f;
@@ -60,4 +56,32 @@ public class PlaneResistant : MonoBehaviour
     {
         Destroy(gameObject);
     }
+}
+
+public class PlaneResistantBaker : Baker<PlaneResistant>
+{
+    public override void Bake(PlaneResistant authoring)
+    {
+        var entity = GetEntity(TransformUsageFlags.Dynamic);
+
+        var collector = new PlaneResistantCollector
+        {
+            MaxResistance = authoring.MaxResistance,
+            K = authoring.K,
+            ForcePart = authoring.ForcePart,
+            Mass = authoring.GetComponentInParent<Rigidbody>().mass,
+            Collector = GetEntity(authoring.Collector, TransformUsageFlags.Dynamic)
+        };
+        
+        AddComponent(entity, collector);
+    }
+}
+
+public struct PlaneResistantCollector : IComponentData
+{
+    public float MaxResistance;
+    public float K;
+    public float ForcePart;
+    public float Mass;
+    public Entity Collector;
 }
