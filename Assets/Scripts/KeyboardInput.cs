@@ -95,7 +95,7 @@ public class KeyboardInputBaker : Baker<KeyboardInput>
         AddComponent(entity, new InputFromKeyboard
         {
             MaxAngle = authoring.MaxAngle,
-            Sensetivity = authoring.Sensetivity,
+            Sensetivity = authoring.Sensetivity
         });
     }
 }

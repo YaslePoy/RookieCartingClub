@@ -13,7 +13,7 @@ public class PlaneResistant : MonoBehaviour
     private VelocityProvider _velocity;
     public float ForcePart;
     public float K = 1;
-    public ForceCollector Collector;
+    public CartWheelAuthoring Collector;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,7 +23,6 @@ public class PlaneResistant : MonoBehaviour
         {
             _velocity = GetComponentInParent<VelocityProvider>();
         }
-        // Debug.Log($"Plane of {name}: {Normal}");
     }
 
     // Update is called once per frame
@@ -80,8 +79,8 @@ public class PlaneResistantBaker : Baker<PlaneResistant>
 public struct PlaneResistantCollector : IComponentData
 {
     public float MaxResistance;
-    public float K;
     public float ForcePart;
     public float Mass;
+    public float K;
     public Entity Collector;
 }

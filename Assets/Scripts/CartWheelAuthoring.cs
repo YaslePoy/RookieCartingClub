@@ -1,0 +1,31 @@
+using Unity.Entities;
+using UnityEngine;
+
+public class CartWheelAuthoring : MonoBehaviour
+{
+    public float MaxResistance;
+    public float ForcePart;
+    public float Mass;
+
+    public class CartWheelBaker : Baker<CartWheelAuthoring>
+    {
+        public override void Bake(CartWheelAuthoring authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponent(entity,
+                new CartWheel
+                {
+                    MaxResistance = authoring.MaxResistance, ForcePart = authoring.ForcePart, Mass = authoring.Mass
+                });
+        }
+    }
+}
+
+public struct CartWheel : IComponentData
+{
+    public float MaxResistance;
+    public float ForcePart;
+    public float Mass;
+    public float Friction;
+}
+

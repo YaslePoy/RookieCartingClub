@@ -3,6 +3,8 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 
+[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateBefore(typeof(ForceSummarySystem))]
 partial struct EngineCalculateSystem : ISystem
 {
     [BurstCompile]

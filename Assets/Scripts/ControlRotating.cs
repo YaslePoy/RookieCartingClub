@@ -24,15 +24,10 @@ public class ForwardWheelBaker : Baker<ControlRotating>
     public override void Bake(ControlRotating authoring)
     {
         var e = GetEntity(TransformUsageFlags.Dynamic);
-        
         AddComponent<FrontWheel>(e);
     }
 }
 
-public struct CartWheel : IComponentData
-{
-    
-}
 
 public struct FrontWheel : IComponentData
 {

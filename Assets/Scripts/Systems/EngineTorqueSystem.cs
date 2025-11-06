@@ -4,7 +4,8 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Transforms;
 
-
+[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateBefore(typeof(EngineCalculateSystem))]
 public partial struct EngineTorqueSystem : ISystem
 {
     private ComponentLookup<EngineData> _engineLookup;
