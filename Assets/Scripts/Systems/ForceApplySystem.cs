@@ -53,8 +53,9 @@ public partial struct ForceApplyJob : IJobEntity
             rawForce += impulse;
             rotateForce += math.cross(request.Position - center, impulse);
         }
-
+        
         velocity.ApplyLinearImpulse(mass, rawForce);
         velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
+        requests.Clear();
     }
 }

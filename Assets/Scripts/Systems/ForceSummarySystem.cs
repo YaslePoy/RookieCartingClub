@@ -50,6 +50,9 @@ public partial struct ForceSummaryJob : IJobEntity
         sumForce *= wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
 
         var length = sumForce.Length();
+        if (length == 0)
+            return;
+        
         if (length > wheelData.MaxResistance)
         {
             sumForce *= wheelData.MaxResistance / length;
