@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,11 +15,14 @@ public class MapHandle : MonoBehaviour
     public int MapHeight;
     private UIDocument _document;
     private VisualElement _mapVE;
-    private GameObject Cart;
+    public float3 CartPosition;
     private Transform origin;
 
+    public static MapHandle Instance;
+    
     private void Start()
     {
+        Instance = this;
         Uivm.MapWidth = (int)(MapHeight * (mapTexture.width / (double)mapTexture.height));
         Uivm.MapHeight = MapHeight;
         Uivm.Map = mapTexture;
@@ -28,25 +32,25 @@ public class MapHandle : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
+    private void UpdateMap()
     {
-        if (Cart is null)
-        {
-            var carts = GameObject.FindGameObjectsWithTag("Cart");
-            if (!carts.Any()) return;
-
-            Cart = carts.First(go => go.GetComponent<TrackPlacement>().IsOwner);
-        }
-
-        if (Cart is null) return;
+        // if (Cart is null)
+        // {
+        //     var carts = GameObject.FindGameObjectsWithTag("Cart");
+        //     if (!carts.Any()) return;
+        //
+        //     Cart = carts.First(go => go.GetComponent<TrackPlacement>().IsOwner);
+        // }
+        //
+        // if (Cart is null) return;
 
         MoveSelf();
         MoveEnemyPoints();
     }
 
-    private void MoveSelf()
+    public void MoveSelf()
     {
-        var delta = Cart.transform.position - origin.position;
+        var delta = (Vector3)CartPosition - origin.position;
         delta.x /= -TrackWidth;
         delta.z /= TrackHeight;
 

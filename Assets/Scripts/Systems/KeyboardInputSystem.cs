@@ -29,7 +29,7 @@ public partial class KeyboardInputSystem : SystemBase
             else
                 userControl.ValueRW.CurrentBreaks = MathF.Round(-movement.y);
         }
-
+        
         if (movement.x != 0)
         {
             var delta = movement.x * inputSetting.Sensetivity * SystemAPI.Time.DeltaTime;

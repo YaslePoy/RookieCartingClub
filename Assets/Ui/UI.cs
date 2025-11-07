@@ -9,21 +9,22 @@ using UnityEngine.UIElements;
 public class UI : MonoBehaviour
 {
     public static UI Instance;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private NetworkVelocityProvider VelocityProvider;
+    public IVelocityProvider VelocityProvider;
     public UIVM Uivm;
     public CartHandle Cart;
     private InputAction MenuAction;
     private UIDocument Document;
 
-    private void Start()
+    public void Start()
     {
         Instance = this;
         Uivm.ShowMenu = Visibility.Hidden;
-        VelocityProvider = Cart.gameObject.GetComponent<NetworkVelocityProvider>();
         MenuAction = InputSystem.actions.FindAction("Cancel");
         Document = GetComponent<UIDocument>();
         BindButtons();
+        // VelocityProvider = Cart.gameObject.GetComponent<NetworkVelocityProvider>();
     }
 
     public void BindButtons()
@@ -42,23 +43,27 @@ public class UI : MonoBehaviour
         };
     }
 
-    void Update()
+    public void UpdateUI()
     {
         var velocity = VelocityProvider.Velocity.magnitude;
         Uivm.Speed = velocity;
         Uivm.UpdateSpeedKmh();
+
+        return;
         Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.CurrentLap.LapStart):g}";
         var fastestTime = 0.0;
         if (Cart.FastestLaps is not null)
         {
             fastestTime = Cart.FastestLaps.TotalLapTime;
         }
+
         Uivm.FastestLapTime = $"{TimeSpan.FromSeconds(fastestTime):g}";
         var lastTime = 0.0;
         if (Cart.Laps.Count > 1)
         {
             lastTime = Cart.Laps[^2].TotalLapTime;
         }
+
         Uivm.LastLapTime = $"{TimeSpan.FromSeconds(lastTime):g}";
         if (Cart.FastestLaps is not null)
         {
@@ -73,8 +78,7 @@ public class UI : MonoBehaviour
             }
         }
 
-        
-        
+
         if (Cart.CurrentLap.IsValid)
         {
             Uivm.LapIndicator = Color.white;
@@ -100,4 +104,9 @@ public class UI : MonoBehaviour
             Visibility.Hidden => Visibility.Visible
         };
     }
+}
+
+public interface IVelocityProvider
+{
+    Vector3 Velocity { get; }
 }

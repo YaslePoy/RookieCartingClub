@@ -1,4 +1,5 @@
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
@@ -15,18 +16,15 @@ public partial struct ForceApplySystem : ISystem
     {
     }
 
-    public unsafe void OnUpdate(ref SystemState state)
+    public void OnUpdate(ref SystemState state)
     {
-        var basic = float3.zero;
-        var angular = &basic;
+
         var job = new ForceApplyJob
         {
-            TimeStep = SystemAPI.Time.fixedDeltaTime,
-            AngularVelocity = angular
+            TimeStep = SystemAPI.Time.fixedDeltaTime
         };
-        job.ScheduleParallel(state.Dependency).Complete();
+        job.Schedule(state.Dependency).Complete();
         
-        Debug.Log(job.AngularVelocity->y);
     }
 
     [BurstCompile]
@@ -36,10 +34,9 @@ public partial struct ForceApplySystem : ISystem
 }
 
 [BurstCompile]
-public unsafe partial struct ForceApplyJob : IJobEntity
+public partial struct ForceApplyJob : IJobEntity
 {
     public float TimeStep;
-    public float3* AngularVelocity;
     private void Execute(ref DynamicBuffer<FinalForceRequest> requests, PhysicsMass mass, ref PhysicsVelocity velocity,
         LocalToWorld localToWorld)
     {
@@ -61,9 +58,6 @@ public unsafe partial struct ForceApplyJob : IJobEntity
 
         velocity.ApplyLinearImpulse(mass, rawForce);
         velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
-        AngularVelocity->x = rotateForce.x;
-        AngularVelocity->y = rotateForce.y;
-        AngularVelocity->z = rotateForce.z;
         requests.Clear();
     }
 }
