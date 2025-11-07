@@ -36,4 +36,5 @@ public class VelocityProviderBaker : Baker<VelocityProvider>
 public struct LocalVelocity : IComponentData
 {
     public float3 Velocity;
+    public float3 LastPosition;
 }

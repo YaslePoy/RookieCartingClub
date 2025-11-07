@@ -49,7 +49,7 @@ public partial struct ForceSummaryJob : IJobEntity
 
         sumForce *= wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
 
-        var length = sumForce.Length();
+        var length = math.length(sumForce);
         if (length == 0)
             return;
         

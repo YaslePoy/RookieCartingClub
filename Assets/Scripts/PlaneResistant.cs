@@ -7,7 +7,7 @@ public class PlaneResistant : MonoBehaviour
 {
     public Transform NormalTransform;
     public Vector3 Normal => NormalTransform.right;
-    public float MaxResistance;
+    public float MaxForce;
     public float Friction;
     private Rigidbody _rigidbody;
     private VelocityProvider _velocity;
@@ -35,8 +35,8 @@ public class PlaneResistant : MonoBehaviour
             return;
         }
 
-        float energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
-        float stopForce = energy / 0.1f;
+        var energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
+        var stopForce = energy / 0.1f;
         var resistanceFactor = Vector3.Dot(velocity.normalized, Normal);
         var forceVector = Normal;
         if (resistanceFactor > 0)
@@ -46,7 +46,7 @@ public class PlaneResistant : MonoBehaviour
 
         var finalForce = forceVector *
                          Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K,
-                             MaxResistance, stopForce);
+                             MaxForce, stopForce);
         
         _rigidbody.AddForceAtPosition(finalForce, transform.position);
     }
@@ -65,10 +65,8 @@ public class PlaneResistantBaker : Baker<PlaneResistant>
 
         var collector = new PlaneResistantCollector
         {
-            MaxResistance = authoring.MaxResistance,
+            MaxForce = authoring.MaxForce,
             K = authoring.K,
-            ForcePart = authoring.ForcePart,
-            Mass = authoring.GetComponentInParent<Rigidbody>().mass,
             Collector = GetEntity(authoring.Collector, TransformUsageFlags.Dynamic)
         };
         
@@ -78,9 +76,7 @@ public class PlaneResistantBaker : Baker<PlaneResistant>
 
 public struct PlaneResistantCollector : IComponentData
 {
-    public float MaxResistance;
-    public float ForcePart;
-    public float Mass;
+    public float MaxForce;
     public float K;
     public Entity Collector;
 }

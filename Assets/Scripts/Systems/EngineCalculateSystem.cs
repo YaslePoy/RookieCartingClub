@@ -32,7 +32,7 @@ public partial struct EngineCalculateJob : IJobEntity
     private void Execute(ref EngineData engine, CartInputData input, PhysicsVelocity velocity, DynamicBuffer<CurvePoint> curve)
     {
         
-        var currentSpeed =  velocity.Linear.Length();
+        var currentSpeed =  math.length(velocity.Linear);
         if (currentSpeed > engine.MaxSpeed)
         {
             return;
