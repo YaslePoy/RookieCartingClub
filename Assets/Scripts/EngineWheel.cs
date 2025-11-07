@@ -1,4 +1,3 @@
-using System;
 using Unity.Entities;
 using UnityEngine;
 
@@ -7,24 +6,21 @@ public class EngineWheel : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float Part;
+    public PlaneResistant EngineResistant;
     private Engine _engine;
     private Rigidbody _rigidbody;
-    public PlaneResistant EngineResistant;
 
-    void Start()
+    private void Start()
     {
         _engine = GetComponentInParent<Engine>();
         _rigidbody = GetComponentInParent<Rigidbody>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _rigidbody.AddForce(transform.forward * (Part * _engine.CurrentForce));
-        if (_engine.CurrentForce == 0)
-        {
-            EngineResistant.K = 1;
-        }
+        if (_engine.CurrentForce == 0) EngineResistant.K = 1;
     }
 }
 

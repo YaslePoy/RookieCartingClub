@@ -23,7 +23,7 @@ public class UserControl : NetworkBehaviour
     public float CurrentBreaks => AllowControl ? Breaks.Value : 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         GetComponent<Rigidbody>();
         AllowControl = true;
@@ -44,7 +44,7 @@ public class UserControl : NetworkBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Engine.Value != 0)
         {

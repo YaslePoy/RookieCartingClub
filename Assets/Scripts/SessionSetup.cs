@@ -1,6 +1,4 @@
 using System;
-using Unity.Netcode;
-using Unity.Netcode.Transports.UTP;
 
 namespace DefaultNamespace
 {
@@ -17,9 +15,8 @@ namespace DefaultNamespace
 
     public class LocalSession : ISession
     {
-        
     }
-    
+
     public class NetworkSession : ISession
     {
         public string Ip;

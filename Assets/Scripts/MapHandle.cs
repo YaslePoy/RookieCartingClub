@@ -9,15 +9,15 @@ public class MapHandle : MonoBehaviour
     public Texture2D mapTexture;
     public Texture2D enemyPoint;
     public UIVM Uivm;
-    private GameObject Cart;
-    private Transform origin;
     public float TrackHeight;
     public float TrackWidth;
     public int MapHeight;
     private UIDocument _document;
     private VisualElement _mapVE;
+    private GameObject Cart;
+    private Transform origin;
 
-    void Start()
+    private void Start()
     {
         Uivm.MapWidth = (int)(MapHeight * (mapTexture.width / (double)mapTexture.height));
         Uivm.MapHeight = MapHeight;
@@ -28,23 +28,17 @@ public class MapHandle : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Cart is null)
         {
             var carts = GameObject.FindGameObjectsWithTag("Cart");
-            if (!carts.Any())
-            {
-                return;
-            }
+            if (!carts.Any()) return;
 
             Cart = carts.First(go => go.GetComponent<TrackPlacement>().IsOwner);
         }
 
-        if (Cart is null)
-        {
-            return;
-        }
+        if (Cart is null) return;
 
         MoveSelf();
         MoveEnemyPoints();
@@ -101,7 +95,7 @@ public class MapHandle : MonoBehaviour
             if (_mapVE.childCount > RaceControl.Singleton.racers.Count)
             {
                 var remove = _mapVE.childCount - RaceControl.Singleton.racers.Count;
-                for (int i = 0; i < remove; i++)
+                for (var i = 0; i < remove; i++)
                 {
                     _mapVE.RemoveAt(_mapVE.childCount - 1);
                     print("Enemy removed");
@@ -110,7 +104,7 @@ public class MapHandle : MonoBehaviour
             else if (_mapVE.childCount < RaceControl.Singleton.racers.Count)
             {
                 var add = RaceControl.Singleton.racers.Count - _mapVE.childCount;
-                for (int i = 0; i < add; i++)
+                for (var i = 0; i < add; i++)
                 {
                     AddEnemyPoint();
                     print("Enemy added");
@@ -121,7 +115,7 @@ public class MapHandle : MonoBehaviour
 
     private void SetupPositions()
     {
-        var positions = RaceControl.Singleton.racers.Where(i => i.IsOwner == false).ToList();
+        var positions = RaceControl.Singleton.racers.Where(i => !i.IsOwner).ToList();
         for (var index = 0; index < positions.Count; index++)
         {
             var position = positions[index];

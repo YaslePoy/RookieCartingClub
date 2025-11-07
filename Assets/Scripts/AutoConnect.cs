@@ -4,7 +4,7 @@ using UnityEngine;
 public class AutoConnect : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         var requirements = GetComponents<NetworkStart>();
         var Mode = requirements.Length == 1 ? requirements[0].Mode : NetworkMode.Host;

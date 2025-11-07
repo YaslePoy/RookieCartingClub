@@ -1,7 +1,6 @@
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
 using Unity.Transforms;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
@@ -25,14 +24,13 @@ public partial struct EngineTorqueSystem : ISystem
         _engineLookup.Update(ref state);
         _planeResistantLookup.Update(ref state);
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
-        
-        
+
 
         var job = new EngineTorqueJob
         {
             EngineLookup = _engineLookup,
             PlaneResistantLookup = _planeResistantLookup,
-            CommandBuffer = ecb.AsParallelWriter(),
+            CommandBuffer = ecb.AsParallelWriter()
         };
 
 
@@ -52,11 +50,9 @@ public partial struct EngineTorqueSystem : ISystem
 [BurstCompile]
 public partial struct EngineTorqueJob : IJobEntity
 {
-    [ReadOnly]
-    public ComponentLookup<EngineData> EngineLookup;
+    [ReadOnly] public ComponentLookup<EngineData> EngineLookup;
 
-    [ReadOnly]
-    public ComponentLookup<PlaneResistantCollector> PlaneResistantLookup;
+    [ReadOnly] public ComponentLookup<PlaneResistantCollector> PlaneResistantLookup;
 
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 

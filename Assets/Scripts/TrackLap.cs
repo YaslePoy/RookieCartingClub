@@ -5,15 +5,10 @@ namespace DefaultNamespace
 {
     public class TrackLap
     {
-        public readonly double[] SegmentTimes;
-        private int _lastSegmentIndex = 1;
-        private bool _isValid = true;
         public static readonly TrackLap Null = new(0, 0);
-        public bool IsFinished => _lastSegmentIndex == SegmentTimes.Length;
-        public bool IsValid => _isValid;
-        public int LastSegmentIndex => _lastSegmentIndex;
         public readonly double LapStart;
-        public double TotalLapTime => IsFinished ? SegmentTimes[^1] : 0; 
+        public readonly double[] SegmentTimes;
+
         public TrackLap(int lastSegments, double lapStart)
         {
             Debug.Log("New lap started");
@@ -21,40 +16,37 @@ namespace DefaultNamespace
             SegmentTimes = new double[lastSegments];
         }
 
+        public bool IsFinished => LastSegmentIndex == SegmentTimes.Length;
+        public bool IsValid { get; private set; } = true;
+
+        public int LastSegmentIndex { get; private set; } = 1;
+
+        public double TotalLapTime => IsFinished ? SegmentTimes[^1] : 0;
+
         public double Delta(TrackLap other)
         {
-            return SegmentTimes[_lastSegmentIndex - 1] - other.SegmentTimes[_lastSegmentIndex - 1];
+            return SegmentTimes[LastSegmentIndex - 1] - other.SegmentTimes[LastSegmentIndex - 1];
         }
 
         public void SetupSegmentTime(double time, int segmentIndex)
         {
-            if (segmentIndex == _lastSegmentIndex)
+            if (segmentIndex == LastSegmentIndex)
             {
-                SegmentTimes[_lastSegmentIndex++] = time - LapStart;
+                SegmentTimes[LastSegmentIndex++] = time - LapStart;
 
-                if (IsFinished)
-                {
-                    Debug.Log($"Lap finished: {TimeSpan.FromSeconds(SegmentTimes[^1])}; Valid: {IsValid}");
-                }
+                if (IsFinished) Debug.Log($"Lap finished: {TimeSpan.FromSeconds(SegmentTimes[^1])}; Valid: {IsValid}");
                 return;
             }
 
-            if (_isValid)
-            {
-                Debug.LogWarning("Lap invalidated!");
-            }
-            
-            _isValid = false;
+            if (IsValid) Debug.LogWarning("Lap invalidated!");
 
-            if (segmentIndex > _lastSegmentIndex)
-            {
-                for (int i = _lastSegmentIndex; i <= segmentIndex; i++)
-                {
+            IsValid = false;
+
+            if (segmentIndex > LastSegmentIndex)
+                for (var i = LastSegmentIndex; i <= segmentIndex; i++)
                     SegmentTimes[i] = time - LapStart;
-                }
-            }
 
-            _lastSegmentIndex = segmentIndex + 1;
+            LastSegmentIndex = segmentIndex + 1;
         }
     }
 }

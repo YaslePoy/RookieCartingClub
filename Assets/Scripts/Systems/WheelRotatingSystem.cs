@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-partial struct WheelRotatingSystem : ISystem
+internal partial struct WheelRotatingSystem : ISystem
 {
     private ComponentLookup<CartInputData> _inputDataLookup;
 
@@ -20,10 +20,10 @@ partial struct WheelRotatingSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         _inputDataLookup.Update(ref state);
-        
-        var job = new WheelRotatingSystemJob()
+
+        var job = new WheelRotatingSystemJob
         {
-            InputLookup = _inputDataLookup,
+            InputLookup = _inputDataLookup
         };
 
         job.Schedule();
@@ -38,14 +38,12 @@ partial struct WheelRotatingSystem : ISystem
 [BurstCompile]
 public partial struct WheelRotatingSystemJob : IJobEntity
 {
-    [ReadOnly]
-    public ComponentLookup<CartInputData> InputLookup;
+    [ReadOnly] public ComponentLookup<CartInputData> InputLookup;
 
     private void Execute(FrontWheel _, Parent parent, ref LocalTransform transform)
     {
         var input = InputLookup[parent.Value];
         var angle = input.CurrentAngle * math.TORADIANS;
         transform.Rotation = quaternion.AxisAngle(transform.Up(), angle);
-        
     }
 }

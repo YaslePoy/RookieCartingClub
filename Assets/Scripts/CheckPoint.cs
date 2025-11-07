@@ -8,7 +8,7 @@ public class CheckPoint : MonoBehaviour
     public int Index;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         Collider = gameObject.GetComponent<Collider>();
     }

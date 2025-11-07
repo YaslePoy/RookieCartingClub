@@ -3,23 +3,21 @@ using UnityEngine;
 
 public class NetworkVelocityProvider : NetworkBehaviour
 {
-    public Vector3 Velocity => _velocity.Value;
-
-    public NetworkVariable<Vector3> _velocity = new(Vector3.zero, NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Server);
+    public NetworkVariable<Vector3> _velocity = new(Vector3.zero);
 
     private Vector3 _lastPosition;
+    public Vector3 Velocity => _velocity.Value;
 
-    void Start()
+    private void Start()
     {
         _lastPosition = transform.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (!IsServer)
             return;
-        
+
         var currentPosition = transform.position;
         var newVel = (currentPosition - _lastPosition) / Time.fixedDeltaTime;
 

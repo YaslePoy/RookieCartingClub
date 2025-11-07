@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using DefaultNamespace;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
@@ -12,7 +11,7 @@ public class ClientSceneSetup : MonoBehaviour
     public RaceControl RaceControl;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         var networkManager = GetComponent<NetworkManager>();
         var transport = GetComponent<UnityTransport>();
@@ -42,6 +41,7 @@ public class ClientSceneSetup : MonoBehaviour
                 {
                     print("Failed to start server");
                 }
+
                 break;
         }
     }
@@ -53,7 +53,7 @@ public class ClientSceneSetup : MonoBehaviour
         foreach (var part in parts)
         {
             var type = part.Split(':')[0];
-            
+
             Debug.Log($"{type}: {part}");
 
             switch (type)

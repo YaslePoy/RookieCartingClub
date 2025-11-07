@@ -5,7 +5,7 @@ using Unity.Physics;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
 [UpdateBefore(typeof(ForceSummarySystem))]
-partial struct EngineCalculateSystem : ISystem
+internal partial struct EngineCalculateSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -22,23 +22,19 @@ partial struct EngineCalculateSystem : ISystem
     [BurstCompile]
     public void OnDestroy(ref SystemState state)
     {
-        
     }
 }
 
 [BurstCompile]
 public partial struct EngineCalculateJob : IJobEntity
 {
-    private void Execute(ref EngineData engine, CartInputData input, PhysicsVelocity velocity, DynamicBuffer<CurvePoint> curve)
+    private void Execute(ref EngineData engine, CartInputData input, PhysicsVelocity velocity,
+        DynamicBuffer<CurvePoint> curve)
     {
-        
-        var currentSpeed =  math.length(velocity.Linear);
-        if (currentSpeed > engine.MaxSpeed)
-        {
-            return;
-        }
-        
-        var rate =  currentSpeed / engine.MaxSpeed;
+        var currentSpeed = math.length(velocity.Linear);
+        if (currentSpeed > engine.MaxSpeed) return;
+
+        var rate = currentSpeed / engine.MaxSpeed;
         engine.CurrentForce = EvaluateCurve(rate, curve) * input.CurrentEngine * engine.MaxForce;
     }
 
@@ -47,7 +43,7 @@ public partial struct EngineCalculateJob : IJobEntity
     {
         if (curveValue >= curve[^1].Value.x)
             return curve[^1].Value.y;
-    
+
         if (curveValue <= curve[0].Value.x)
             return curve[0].Value.y;
 
@@ -60,7 +56,7 @@ public partial struct EngineCalculateJob : IJobEntity
             var next = curve[i + 1].Value;
 
             if (!(curveValue >= current.x) || !(curveValue <= next.x)) continue;
-            
+
             pointLess = current;
             pointMore = next;
             break;

@@ -16,21 +16,34 @@ public class RaceControl : NetworkBehaviour
     public NetworkVariable<double> PeriodEnd = new();
     public NetworkVariable<FixedString32Bytes> PeriodName = new();
     public NetworkVariable<PeriodType> PeriodType = new();
-
-    public TrackPositions TrackPositions = new();
+    public UIVM Uivm;
+    public IRacePeriod CurrentRacePeriod;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Queue<IRacePeriod> racePeriods = new();
-    public IRacePeriod CurrentRacePeriod;
-    public UIVM Uivm;
+
+    public TrackPositions TrackPositions = new();
 
     public void Start()
     {
         Singleton = this;
     }
 
+    private void Update()
+    {
+        if (IsClient)
+        {
+            var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
+            var viewTime = beforeEnd.ToString(@"mm\:ss");
+            Uivm.SessionTime = viewTime;
+            Uivm.SessionName = PeriodName.Value.Value;
+
+            UpdatePositions();
+        }
+    }
+
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (IsServer)
         {
@@ -48,23 +61,10 @@ public class RaceControl : NetworkBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (IsClient)
-        {
-            var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
-            var viewTime = beforeEnd.ToString(@"mm\:ss");
-            Uivm.SessionTime = viewTime;
-            Uivm.SessionName = PeriodName.Value.Value;
-
-            UpdatePositions();
-        }
-    }
-
     private void UpdatePositions()
     {
         var sb = new StringBuilder(256);
-        for (int i = 0; i < TrackPositions.Positions.Count; i++)
+        for (var i = 0; i < TrackPositions.Positions.Count; i++)
         {
             var pos = i + 1;
             var nickname = racers.Find(c => c.PlayerId.Value == TrackPositions.Positions[i]).Nickname.Value;
@@ -129,10 +129,7 @@ public class RacePeriod : IRacePeriod
 
     public void Start(RaceControl raceControl)
     {
-        foreach (var racer in raceControl.racers)
-        {
-            racer.GetComponent<UserControl>().AllowControl = true;
-        }
+        foreach (var racer in raceControl.racers) racer.GetComponent<UserControl>().AllowControl = true;
 
         raceControl.PeriodType.Value = PeriodType.Race;
         raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
@@ -197,18 +194,16 @@ public class PracticePeriod : IRacePeriod
 
 public class FinishPeriod : IRacePeriod
 {
-    public double Duration;
     public int CurrentLap;
+    public double Duration;
     public bool IsLeaderFinished;
+
     public void Start(RaceControl raceControl)
     {
         raceControl.PeriodType.Value = PeriodType.Finish;
         raceControl.PeriodName.Value = new FixedString32Bytes("🏁 Финиш");
         raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
-        if (raceControl.racers.FirstOrDefault() is { } racer)
-        {
-            CurrentLap = racer.Laps.Count;
-        }
+        if (raceControl.racers.FirstOrDefault() is { } racer) CurrentLap = racer.Laps.Count;
     }
 
     public void Update(RaceControl raceControl)
@@ -223,6 +218,7 @@ public class FinishPeriod : IRacePeriod
 public class TrackPositions : NetworkVariableBase
 {
     private List<int> _positions = new();
+
     public List<int> Positions
     {
         get => _positions;
@@ -233,31 +229,32 @@ public class TrackPositions : NetworkVariableBase
             _positions = value;
         }
     }
+
     public override void WriteDelta(FastBufferWriter writer)
     {
         WriteField(writer);
     }
+
     public override void WriteField(FastBufferWriter writer)
     {
         Debug.Log("Writing track positions");
         writer.TryBeginWrite((Positions.Count + 1) * 4);
         writer.WriteValue(Positions.Count);
-        foreach (var t in Positions)
-        {
-            writer.WriteValue(t);
-        }
+        foreach (var t in Positions) writer.WriteValue(t);
     }
+
     public override void ReadField(FastBufferReader reader)
     {
         reader.ReadValueSafe(out int count);
         Positions = new List<int>(count);
         Debug.Log($"Read {count} positions");
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < count; i++)
         {
             reader.ReadValueSafe(out int p);
             Positions.Add(p);
         }
     }
+
     public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
     {
         ReadField(reader);

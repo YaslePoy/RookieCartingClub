@@ -1,6 +1,5 @@
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace DefaultNamespace.Systems
 {
@@ -11,7 +10,7 @@ namespace DefaultNamespace.Systems
         {
             if (!SystemAPI.TryGetSingletonEntity<CameraPoint>(out var cameraEntity))
                 return;
-            
+
             var cam = PlayerCamera.Instance;
             var globalTransform = SystemAPI.GetComponent<LocalToWorld>(cameraEntity);
             cam.transform.position = globalTransform.Position;

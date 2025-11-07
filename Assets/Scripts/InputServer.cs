@@ -8,6 +8,7 @@ using UnityEngine;
 public class InputServer : MonoBehaviour
 {
     private UserControl _control;
+
     public void Start()
     {
         _control = GetComponent<UserControl>();
@@ -29,12 +30,10 @@ public class InputServer : MonoBehaviour
             else if (msg.StartsWith("gas: "))
             {
                 var rate = int.Parse(msg[5..]);
-                if (rate == 0)
-                {
-                    print(rate);
-                }
-                _control.Engine.Value =  (float)(rate / 100.0);
-            }else if (msg.StartsWith("break: "))
+                if (rate == 0) print(rate);
+                _control.Engine.Value = (float)(rate / 100.0);
+            }
+            else if (msg.StartsWith("break: "))
             {
                 var rate = int.Parse(msg[7..]);
                 _control.Breaks.Value = (float)(rate / 100.0);

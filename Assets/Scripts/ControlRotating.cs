@@ -6,13 +6,14 @@ public class ControlRotating : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private UserControl _userControl;
-    void Start()
+
+    private void Start()
     {
-       _userControl = gameObject.GetComponentInParent<UserControl>();
+        _userControl = gameObject.GetComponentInParent<UserControl>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         transform.localRotation = Quaternion.AngleAxis(_userControl.CurrentAngle, transform.up);
     }

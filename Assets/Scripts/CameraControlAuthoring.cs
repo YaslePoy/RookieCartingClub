@@ -1,7 +1,5 @@
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
-
 
 public class CameraControlAuthoring : MonoBehaviour
 {
@@ -15,6 +13,6 @@ public class CameraControlAuthoring : MonoBehaviour
     }
 }
 
-public struct CameraPoint: IComponentData
+public struct CameraPoint : IComponentData
 {
 }

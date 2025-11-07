@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public struct ECBCommandOrder
 {
     public static readonly ECBCommandOrder CreateEntity = new(Values.CreateEntity);

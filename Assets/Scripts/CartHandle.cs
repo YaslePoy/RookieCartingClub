@@ -7,20 +7,12 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Netcode;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
 public class CartHandle : NetworkBehaviour
 {
-    public List<TrackLap> Laps = new();
     public static Action<CartHandle> NewCartConnected;
-
-    [CanBeNull]
-    public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
-
-    public TrackLap CurrentLap => Laps.LastOrDefault();
-    private int checkCount;
 
     public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""),
         NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -28,8 +20,16 @@ public class CartHandle : NetworkBehaviour
     public NetworkVariable<int> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
 
+    private int checkCount;
+    public List<TrackLap> Laps = new();
+
+    [CanBeNull]
+    public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
+
+    public TrackLap CurrentLap => Laps.LastOrDefault();
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
         print($"Segments count: {checkCount}");
@@ -46,6 +46,11 @@ public class CartHandle : NetworkBehaviour
         NewCartConnected?.Invoke(this);
     }
 
+    public void OnDestroy()
+    {
+        RaceControl.Singleton.racers.Remove(this);
+    }
+
     public void PushCheckPoint(CheckPoint checkPoint)
     {
         var now = Time.timeAsDouble;
@@ -54,13 +59,9 @@ public class CartHandle : NetworkBehaviour
 
 
         if (checkPoint.Index == 0)
-        {
             Laps.Add(new TrackLap(checkCount, Time.timeAsDouble));
-        }
         else
-        {
             currentLap.SetupSegmentTime(now, checkPoint.Index);
-        }
     }
 
     [Rpc(SendTo.Server)]
@@ -68,11 +69,6 @@ public class CartHandle : NetworkBehaviour
     {
         Debug.Log("TransferToPit");
         GetComponent<TrackPlacement>().Start();
-    }
-
-    public void OnDestroy()
-    {
-        RaceControl.Singleton.racers.Remove(this);
     }
 }
 
@@ -87,7 +83,7 @@ public class CartHandleEditor : Editor
         if (GUILayout.Button("Convert"))
         {
             var limits = GameObject.Find("track_limits").GetComponentsInChildren<MeshFilter>();
-            int index = 0;
+            var index = 0;
             foreach (var limitMesh in limits)
             {
                 var go = limitMesh.gameObject;
@@ -106,17 +102,14 @@ public class CartHandleEditor : Editor
         {
             var limits = GameObject.Find("ground_colliders").GetComponentsInChildren<MeshCollider>();
 
-            foreach (var limitMesh in limits)
-            {
-                limitMesh.isTrigger = false;
-                // var go = limitMesh.gameObject;
-                // var mesh = limitMesh.mesh;
-                // var colider = go.AddComponent<MeshCollider>();
-                // colider.convex = true;
-                // colider.sharedMesh = mesh;
-                // colider.isTrigger = true;
-                // go.GetComponent<MeshRenderer>().enabled = false;
-            }
+            foreach (var limitMesh in limits) limitMesh.isTrigger = false;
+            // var go = limitMesh.gameObject;
+            // var mesh = limitMesh.mesh;
+            // var colider = go.AddComponent<MeshCollider>();
+            // colider.convex = true;
+            // colider.sharedMesh = mesh;
+            // colider.isTrigger = true;
+            // go.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }
@@ -131,7 +124,7 @@ public class CartHandleBaker : Baker<CartHandle>
         AddComponent(entity, new CartData
         {
             Nickname = authoring.Nickname.Value,
-            PlayerId = authoring.PlayerId.Value,
+            PlayerId = authoring.PlayerId.Value
         });
         AddComponent<ForceApplier>(entity);
         AddBuffer<FinalForceRequest>(entity);
@@ -146,7 +139,6 @@ public struct CartData : IComponentData
 
 public struct ForceApplier : IComponentData
 {
-    
 }
 
 public struct FinalForceRequest : IBufferElementData

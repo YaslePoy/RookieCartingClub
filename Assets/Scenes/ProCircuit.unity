@@ -45485,7 +45485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 461741212770497699, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: MaxForce
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 461741212770497699, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Collector
@@ -45601,7 +45601,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1115782385232261571, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: MaxForce
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1115782385232261571, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Collector
@@ -45651,6 +45651,10 @@ PrefabInstance:
       propertyPath: m_ImplicitCom
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2968463312305433424, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_AngularDamping
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4143574146158204353, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Applyer
       value: 
@@ -45699,6 +45703,46 @@ PrefabInstance:
       propertyPath: Collector
       value: 
       objectReference: {fileID: 273617820}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.000000029802322
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.858
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.20700076
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9996857
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.021571038
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0059590926
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.011301706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 2.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0.655
+      objectReference: {fileID: 0}
+    - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1.281
+      objectReference: {fileID: 0}
     - target: {fileID: 7647621483966027825, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -45848,7 +45892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cb943c2e4641ed98335ed76bfa33d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartWheelAuthoring
-  MaxResistance: 600
+  MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
 --- !u!114 &273617821
@@ -45863,7 +45907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cb943c2e4641ed98335ed76bfa33d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartWheelAuthoring
-  MaxResistance: 600
+  MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
 --- !u!114 &273617822
@@ -45878,7 +45922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cb943c2e4641ed98335ed76bfa33d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartWheelAuthoring
-  MaxResistance: 600
+  MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
 --- !u!114 &273617823
@@ -45893,7 +45937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cb943c2e4641ed98335ed76bfa33d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartWheelAuthoring
-  MaxResistance: 600
+  MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
 --- !u!43 &273655357

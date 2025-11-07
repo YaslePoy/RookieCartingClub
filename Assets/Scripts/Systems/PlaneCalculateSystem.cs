@@ -37,25 +37,19 @@ public partial struct PlaneCalculateJob : IJobEntity
 
     public void Execute(Entity e, PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
     {
-        if (setup.K == 0 ||  setup.MaxForce == 0)
+        if (setup.K == 0 || setup.MaxForce == 0)
             return;
-        
+
         var speed = math.length(velocity.Velocity);
         if (speed < 0.01f) return;
         var resistanceFactor = math.dot(math.normalize(velocity.Velocity), math.normalize(localToWorld.Right));
         if (math.abs(resistanceFactor) < 0.0001f) return;
-        
-        var forceVector = localToWorld.Right;
-        if (resistanceFactor > 0)
-        {
-            forceVector *= -1;
-        }
 
-        if (speed < 0.1f)
-        {
-            setup.K *= 0.25f;
-        }
-        
+        var forceVector = localToWorld.Right;
+        if (resistanceFactor > 0) forceVector *= -1;
+
+        if (speed < 0.1f) setup.K *= 0.25f;
+
         var finalForce = forceVector * math.abs(resistanceFactor * setup.K * setup.MaxForce);
         CommandBuffer.AppendToBuffer(setup.Collector, new ForceApplyRequest
         {

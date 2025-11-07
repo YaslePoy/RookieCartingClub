@@ -9,13 +9,13 @@ public class BreaksHandle : MonoBehaviour
     private UserControl _control;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         _control = GetComponentInParent<UserControl>();
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         BreakResistant.K = _control.CurrentBreaks;
     }

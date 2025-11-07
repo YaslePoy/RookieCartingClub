@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class UI : MonoBehaviour
 {
+    public static UI Instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private NetworkVelocityProvider VelocityProvider;
     public UIVM Uivm;
@@ -17,6 +18,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         Uivm.ShowMenu = Visibility.Hidden;
         VelocityProvider = Cart.gameObject.GetComponent<NetworkVelocityProvider>();
         MenuAction = InputSystem.actions.FindAction("Cancel");
@@ -24,7 +26,7 @@ public class UI : MonoBehaviour
         BindButtons();
     }
 
-    private void BindButtons()
+    public void BindButtons()
     {
         Document.rootVisualElement.Q<Button>("back").clicked += SwitchMenu;
         Document.rootVisualElement.Q<Button>("pit").clicked += () =>

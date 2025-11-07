@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class VelocityProvider : MonoBehaviour
 {
-    public Vector3 Velocity => _velocity;
-    private Vector3 _velocity;
     private Vector3 _lastPosition;
+    public Vector3 Velocity { get; private set; }
 
-    void Start()
+    private void Start()
     {
-        _velocity = Vector3.zero;
+        Velocity = Vector3.zero;
         _lastPosition = transform.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         var currentPosition = transform.position;
         var newVel = (currentPosition - _lastPosition) / Time.fixedDeltaTime;
 
-        _velocity = newVel;
+        Velocity = newVel;
         _lastPosition = currentPosition;
     }
 }
