@@ -7,8 +7,11 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Netcode;
+using Unity.Physics;
+using Unity.Physics.Authoring;
 using UnityEditor;
 using UnityEngine;
+using MeshCollider = UnityEngine.MeshCollider;
 
 public class CartHandle : NetworkBehaviour
 {
@@ -87,14 +90,13 @@ public class CartHandleEditor : Editor
             foreach (var limitMesh in limits)
             {
                 var go = limitMesh.gameObject;
-                var mesh = limitMesh.mesh;
-                var colider = go.AddComponent<MeshCollider>();
-                colider.convex = true;
-                colider.sharedMesh = mesh;
-                colider.isTrigger = true;
-                var check = go.AddComponent<CheckPoint>();
-                check.Index = index++;
                 go.GetComponent<MeshRenderer>().enabled = false;
+                var col = go.AddComponent<MeshCollider>();
+                col.convex = true;
+                col.isTrigger = true;
+                col.sharedMesh = limitMesh.sharedMesh;
+                var data = go.AddComponent<CheckPoint>();
+                data.Index = index++;
             }
         }
 
@@ -121,6 +123,7 @@ public class CartHandleBaker : Baker<CartHandle>
     public override void Bake(CartHandle authoring)
     {
         var entity = GetEntity(TransformUsageFlags.Dynamic);
+        
         AddComponent(entity, new CartData
         {
             Nickname = authoring.Nickname.Value,

@@ -1,17 +1,14 @@
 using Unity.Entities;
+using Unity.Physics.Authoring;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    public Collider Collider;
+    public Mesh Mesh;
 
     public int Index;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
-    {
-        Collider = gameObject.GetComponent<Collider>();
-    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -29,7 +26,14 @@ public class CheckPointBaker : Baker<CheckPoint>
 {
     public override void Bake(CheckPoint authoring)
     {
+        
+        // var basicGO = new GameObject();
+        //
+        // var colider = basicGO.AddComponent<MeshCollider>();
+        // colider.sharedMesh = authoring.Mesh;
+        // colider.convex = true;
         var entity = GetEntity(TransformUsageFlags.Dynamic);
+        //
         AddComponent(entity, new CheckPointData { Index = authoring.Index });
     }
 }

@@ -157,6 +157,10 @@ MonoBehaviour:
   TrackHeight: 165.4736
   TrackWidth: 236.998
   MapHeight: 400
+  CartPosition:
+    x: 0
+    y: 0
+    z: 0
 --- !u!1652712579 &185358041
 MultiplayerRolesData:
   m_ObjectHideFlags: 2
