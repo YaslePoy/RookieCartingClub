@@ -17855,35 +17855,60 @@ PrefabInstance:
       propertyPath: InScenePlacedSourceGlobalObjectIdHash
       value: 2898089809
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7612075877904663003, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 6975240200502398900, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 5588843698955074142, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 1281667519496260121, guid: edd9940327da516a0b33fda4773d472b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4852569705744261549, guid: edd9940327da516a0b33fda4773d472b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8280289031576691925, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2135720307}
     - targetCorrespondingSourceObject: {fileID: 2282996630140776879, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 191903638}
     - targetCorrespondingSourceObject: {fileID: 7744226967987070145, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 273617823}
+    - targetCorrespondingSourceObject: {fileID: 7744226967987070145, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1376909084}
     - targetCorrespondingSourceObject: {fileID: 3010321492375839543, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 273617822}
+    - targetCorrespondingSourceObject: {fileID: 3010321492375839543, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1188352238}
     - targetCorrespondingSourceObject: {fileID: 5716488977367228228, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 273617821}
+    - targetCorrespondingSourceObject: {fileID: 5716488977367228228, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1214225978}
     - targetCorrespondingSourceObject: {fileID: 7030069301920899042, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1404366207}
+    - targetCorrespondingSourceObject: {fileID: 7030069301920899042, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1404366208}
     - targetCorrespondingSourceObject: {fileID: 1666911796714669595, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7247425}
     - targetCorrespondingSourceObject: {fileID: 8406167649143193068, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 273617820}
+    - targetCorrespondingSourceObject: {fileID: 8406167649143193068, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 273617825}
     - targetCorrespondingSourceObject: {fileID: 3634557168382203686, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1876267012}
+    - targetCorrespondingSourceObject: {fileID: 3634557168382203686, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1876267013}
     - targetCorrespondingSourceObject: {fileID: 6796403411216364919, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 937200304}
@@ -17968,6 +17993,154 @@ MonoBehaviour:
   MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
+--- !u!114 &273617825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273617816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsShapeAuthoring
+  m_ForceUniqueID: 1779729078
+  m_ShapeType: 3
+  m_PrimitiveCenter:
+    x: -0.0000038146973
+    y: 0
+    z: 0.0000038146973
+  m_PrimitiveSize:
+    x: 0.24114616
+    y: 0.24114616
+    z: 0.15
+  m_PrimitiveOrientation:
+    Value:
+      x: -0
+      y: 90
+      z: 0
+    RotationOrder: 4
+  m_Capsule:
+    Height: 0.15
+    Radius: 0.12057308
+    Axis: 2
+  m_Cylinder:
+    Height: 0.15
+    Radius: 0.12057308
+    Axis: 2
+  m_CylinderSideCount: 20
+  m_SphereRadius: 0.12057308
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 0.01
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 11400000, guid: 35c3db377aeefb6c29dc422e570f1957, type: 2}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 0
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!43 &273655357
 Mesh:
   m_ObjectHideFlags: 0
@@ -74526,6 +74699,154 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
+--- !u!114 &1188352238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273617818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsShapeAuthoring
+  m_ForceUniqueID: 686075549
+  m_ShapeType: 3
+  m_PrimitiveCenter:
+    x: -0.0000038146973
+    y: 0
+    z: 0.0000038146973
+  m_PrimitiveSize:
+    x: 0.24114612
+    y: 0.24114612
+    z: 0.15
+  m_PrimitiveOrientation:
+    Value:
+      x: 0
+      y: 90
+      z: 0
+    RotationOrder: 4
+  m_Capsule:
+    Height: 0.15
+    Radius: 0.12057306
+    Axis: 2
+  m_Cylinder:
+    Height: 0.15
+    Radius: 0.12057306
+    Axis: 2
+  m_CylinderSideCount: 20
+  m_SphereRadius: 0.12057306
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 0.01
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 11400000, guid: 35c3db377aeefb6c29dc422e570f1957, type: 2}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 0
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!43 &1191489691
 Mesh:
   m_ObjectHideFlags: 0
@@ -76319,6 +76640,154 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1528042462}
+--- !u!114 &1214225978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273617817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsShapeAuthoring
+  m_ForceUniqueID: 1859996314
+  m_ShapeType: 3
+  m_PrimitiveCenter:
+    x: 0
+    y: 0
+    z: 0.0000038146973
+  m_PrimitiveSize:
+    x: 0.24114612
+    y: 0.24114612
+    z: 0.15
+  m_PrimitiveOrientation:
+    Value:
+      x: 0
+      y: 90
+      z: 0
+    RotationOrder: 4
+  m_Capsule:
+    Height: 0.15
+    Radius: 0.12057306
+    Axis: 2
+  m_Cylinder:
+    Height: 0.15
+    Radius: 0.12057306
+    Axis: 2
+  m_CylinderSideCount: 20
+  m_SphereRadius: 0.12057306
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 0.01
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 11400000, guid: 35c3db377aeefb6c29dc422e570f1957, type: 2}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 0
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!64 &1215903685
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -95602,6 +96071,154 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1564733138}
+--- !u!114 &1376909084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273617819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsShapeAuthoring
+  m_ForceUniqueID: 1721611717
+  m_ShapeType: 3
+  m_PrimitiveCenter:
+    x: 0
+    y: 0
+    z: 0.0000038146973
+  m_PrimitiveSize:
+    x: 0.24114612
+    y: 0.24114612
+    z: 0.15
+  m_PrimitiveOrientation:
+    Value:
+      x: 0
+      y: 90
+      z: 0
+    RotationOrder: 4
+  m_Capsule:
+    Height: 0.15
+    Radius: 0.12057306
+    Axis: 2
+  m_Cylinder:
+    Height: 0.15
+    Radius: 0.12057306
+    Axis: 2
+  m_CylinderSideCount: 20
+  m_SphereRadius: 0.12057306
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 0.01
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 11400000, guid: 35c3db377aeefb6c29dc422e570f1957, type: 2}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 0
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!43 &1377136633
 Mesh:
   m_ObjectHideFlags: 0
@@ -97273,6 +97890,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
+--- !u!114 &1404366208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404366204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5129ee951a264f5a96ca69f89a9f2340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BreakingSourceAuthoring
+  Source: {fileID: 1947202632}
 --- !u!43 &1404948786
 Mesh:
   m_ObjectHideFlags: 0
@@ -129260,6 +129890,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
+--- !u!114 &1876267013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1876267009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5129ee951a264f5a96ca69f89a9f2340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BreakingSourceAuthoring
+  Source: {fileID: 1947202632}
 --- !u!43 &1881549608
 Mesh:
   m_ObjectHideFlags: 0
@@ -133450,6 +134093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1935293578}
+  - component: {fileID: 1935293579}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -133480,6 +134124,154 @@ Transform:
   - {fileID: 543450652509870708}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1935293579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935293577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsShapeAuthoring
+  m_ForceUniqueID: 1823591268
+  m_ShapeType: 4
+  m_PrimitiveCenter:
+    x: 7.7563324
+    y: 0.04
+    z: -28.929993
+  m_PrimitiveSize:
+    x: 201.16
+    y: 0
+    z: 276.94733
+  m_PrimitiveOrientation:
+    Value:
+      x: -0
+      y: 90
+      z: 0
+    RotationOrder: 4
+  m_Capsule:
+    Height: 276.94733
+    Radius: 100.58
+    Axis: 2
+  m_Cylinder:
+    Height: 0
+    Radius: 138.47366
+    Axis: 1
+  m_CylinderSideCount: 20
+  m_SphereRadius: 138.47366
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 4.1542096
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 0}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 0
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!43 &1935927548
 Mesh:
   m_ObjectHideFlags: 0
@@ -134163,6 +134955,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 774341435}
+--- !u!114 &1947202632 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3542207581712662049, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+  m_PrefabInstance: {fileID: 273617815}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135720306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ed4af4791b52c738ffcb4bca1f2406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!64 &1950432956
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -145195,6 +145998,159 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1967647673}
+--- !u!1 &2135720306 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8280289031576691925, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+  m_PrefabInstance: {fileID: 273617815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2135720307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135720306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Physics.Custom::Unity.Physics.Authoring.PhysicsShapeAuthoring
+  m_ForceUniqueID: 1748807061
+  m_ShapeType: 0
+  m_PrimitiveCenter:
+    x: 0.0074419975
+    y: 0.44350165
+    z: -0.042752028
+  m_PrimitiveSize:
+    x: 1.2928303
+    y: 1.1446817
+    z: 2.3059676
+  m_PrimitiveOrientation:
+    Value:
+      x: -0
+      y: 0
+      z: 0
+    RotationOrder: 4
+  m_Capsule:
+    Height: 2.3059676
+    Radius: 0.6464152
+    Axis: 2
+  m_Cylinder:
+    Height: 2.3059676
+    Radius: 0.6464152
+    Axis: 2
+  m_CylinderSideCount: 20
+  m_SphereRadius: 1.1529838
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 0.034589514
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 0}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 0
+    m_DetailedStaticMeshCollision:
+      m_Override: 0
+      m_Value:
+        Value: 0
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 1
+        Category02: 1
+        Category03: 1
+        Category04: 1
+        Category05: 1
+        Category06: 1
+        Category07: 1
+        Category08: 1
+        Category09: 1
+        Category10: 1
+        Category11: 1
+        Category12: 1
+        Category13: 1
+        Category14: 1
+        Category15: 1
+        Category16: 1
+        Category17: 1
+        Category18: 1
+        Category19: 1
+        Category20: 1
+        Category21: 1
+        Category22: 1
+        Category23: 1
+        Category24: 1
+        Category25: 1
+        Category26: 1
+        Category27: 1
+        Category28: 1
+        Category29: 1
+        Category30: 1
+        Category31: 1
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 2
 --- !u!43 &2137048763
 Mesh:
   m_ObjectHideFlags: 0
@@ -147176,32 +148132,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8777903028937762952, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 833293480981720650}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
---- !u!65 &833293480981720650
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8232883917694781135}
-  m_Material: {fileID: 13400000, guid: bf5c18af9f5286446a390592b4fc80c7, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 267.51, y: 1.0000017, z: 186.9}
-  m_Center: {x: 11.229248, y: 0.000000029802322, z: -31.633575}
 --- !u!1 &859903380572922264 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8363468655055889401, guid: a936367002c0f003082415c67a258fcd, type: 3}
@@ -150487,11 +151419,6 @@ GameObject:
 GameObject:
   m_CorrespondingSourceObject: {fileID: -1005371263447830632, guid: a936367002c0f003082415c67a258fcd, type: 3}
   m_PrefabInstance: {fileID: 1232305567}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8232883917694781135 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8777903028937762952, guid: 14e34345b1c560549ab58feb57be0866, type: 3}
-  m_PrefabInstance: {fileID: 833293480981720647}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8240529043960061252 stripped
 GameObject:
