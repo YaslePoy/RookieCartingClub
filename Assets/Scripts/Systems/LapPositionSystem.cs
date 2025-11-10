@@ -41,7 +41,7 @@ public partial class LapPositionSystem : SystemBase
         }
         for (int i = 0; i < cols.Length; i++)
         {
-            Debug.Log($"Player [{cols[i].PlayerId}] Segment [{cols[i].SegmentId, 4}]");
+            // Debug.Log($"Player [{cols[i].PlayerId}] Segment [{cols[i].SegmentId, 4}]");
         }
 
         cols.Dispose();

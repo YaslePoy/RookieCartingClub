@@ -29,7 +29,11 @@ public partial struct ForceSummarySystem : ISystem
         }.Schedule(state.Dependency).Complete();
 
 
-        for (var i = 0; i < list.Length; i++) Debug.DrawLine(list[i].P1, list[i].P2, Color.white, 0.5f);
+        for (var i = 0; i < list.Length; i++)
+        {
+            Debug.DrawLine(list[i].P1, list[i].P2, Color.white);
+            
+        }
 
         list.Dispose();
     }
@@ -66,14 +70,19 @@ public partial struct ForceSummaryJob : IJobEntity
             Force = sumForce,
             Position = position.Position
         });
+        
         wheelData.CurrentForce = sumForce;
         wheelData.ForceLen = math.length(sumForce);
 
         var startPos = position.Position + new float3(0, 1, 0);
-        var normalized = startPos / wheelData.MaxResistance;
+        var normalized = sumForce / wheelData.MaxResistance;
         DebugLines.Add(new DebugLine
         {
             P1 = startPos, P2 = startPos + normalized
+        });
+        DebugLines.Add(new DebugLine
+        {
+            P1 = startPos, P2 = position.Position
         });
         requests.Clear();
     }

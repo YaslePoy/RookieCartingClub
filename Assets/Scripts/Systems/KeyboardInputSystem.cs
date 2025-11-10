@@ -6,14 +6,26 @@ using UnityEngine.InputSystem;
 public partial class KeyboardInputSystem : SystemBase
 {
     private InputAction _forceAction;
-
+    private InputAction _stopRecordAction;
     protected override void OnCreate()
     {
         _forceAction = InputSystem.actions.FindAction("Move");
+        _stopRecordAction = InputSystem.actions.FindAction("Crouch");
     }
 
     protected override void OnUpdate()
     {
+
+        if (_stopRecordAction.WasPressedThisFrame())
+        {
+            EntityManager.CreateEntity(typeof(StopRecord));
+        }
+        
+        if (SystemAPI.HasSingleton<ReplayInput>())
+        {
+            return;
+        }
+        
         if (!SystemAPI.TryGetSingletonEntity<CartInputData>(out var cartEntity)) return;
 
         var movement = _forceAction.ReadValue<Vector2>();
@@ -50,4 +62,9 @@ public partial class KeyboardInputSystem : SystemBase
                     MathF.Sign(userControl.ValueRW.CurrentAngle);
         }
     }
+}
+
+public struct StopRecord : IComponentData
+{
+    
 }

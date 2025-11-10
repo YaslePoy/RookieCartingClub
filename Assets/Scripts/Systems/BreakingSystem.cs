@@ -2,6 +2,8 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 
+[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateBefore(typeof(EngineCalculateSystem))]
 public partial struct BreakingSystem : ISystem
 {
     private ComponentLookup<CartInputData> _inputLookup;

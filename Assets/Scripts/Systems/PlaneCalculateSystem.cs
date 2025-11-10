@@ -48,7 +48,7 @@ public partial struct PlaneCalculateJob : IJobEntity
         var forceVector = localToWorld.Right;
         if (resistanceFactor > 0) forceVector *= -1;
 
-        if (speed < 0.1f) setup.K *= 0.25f;
+        // if (speed < 0.1f) setup.K *= 0.25f;
 
         var finalForce = forceVector * math.abs(resistanceFactor * setup.K * setup.MaxForce);
         CommandBuffer.AppendToBuffer(setup.Collector, new ForceApplyRequest
