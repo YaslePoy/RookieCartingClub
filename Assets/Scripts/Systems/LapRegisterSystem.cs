@@ -29,6 +29,7 @@ public partial struct LapRegisterSystem : ISystem
     // [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        return;
         _cartLookup.Update(ref state);
         _checkPointLookup.Update(ref state);
         _currentContactingSegmentLookup.Update(ref state);
@@ -54,7 +55,7 @@ public partial struct LapRegisterSystem : ISystem
             new NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>>(placementBufferEntities.Length,
                 Allocator.Temp);
 
-        var currentPlacement = new NativeHashSet<EntitySegment>();
+        var currentPlacement = new NativeHashSet<EntitySegment>(4, Allocator.Temp);
         
         foreach (var entity in placementBufferEntities)
         {
@@ -83,7 +84,7 @@ public partial struct LapRegisterSystem : ISystem
         placementBufferEntities.Dispose();
         placementBuffers.Dispose();
         newBuffers.Dispose();
-        
+        currentPlacement.Dispose();
         cols.Dispose();
     }
 

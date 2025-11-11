@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateBefore(typeof(EngineCalculateSystem))]
 internal partial struct WheelRotatingSystem : ISystem
 {
     private ComponentLookup<CartInputData> _inputDataLookup;
