@@ -131,6 +131,10 @@ public class CartHandleBaker : Baker<CartHandle>
         });
         AddComponent<ForceApplier>(entity);
         AddBuffer<FinalForceRequest>(entity);
+        AddBuffer<CurrentContactingSegment>(entity);
+        AddBuffer<NewContactingSegment>(entity);
+        
+        
     }
 }
 
@@ -148,4 +152,14 @@ public struct FinalForceRequest : IBufferElementData
 {
     public float3 Force;
     public float3 Position;
+}
+
+public struct CurrentContactingSegment : IBufferElementData
+{
+    public int Index;
+}
+
+public struct NewContactingSegment : IBufferElementData
+{
+    public int Index;
 }

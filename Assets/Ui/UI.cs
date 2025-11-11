@@ -48,7 +48,11 @@ public class UI : MonoBehaviour
         var velocity = VelocityProvider.Velocity.magnitude;
         Uivm.Speed = velocity;
         Uivm.UpdateSpeedKmh();
-
+        
+        if (MenuAction.WasPressedThisFrame())
+        {
+            SwitchMenu();
+        }
         return;
         Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.CurrentLap.LapStart):g}";
         var fastestTime = 0.0;
@@ -89,11 +93,6 @@ public class UI : MonoBehaviour
         }
 
         Uivm.Lap = Cart.Laps.Count;
-
-        if (MenuAction.WasPressedThisFrame())
-        {
-            SwitchMenu();
-        }
     }
 
     private void SwitchMenu()
