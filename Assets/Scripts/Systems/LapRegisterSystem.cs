@@ -29,7 +29,6 @@ public partial struct LapRegisterSystem : ISystem
     // [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        return;
         _cartLookup.Update(ref state);
         _checkPointLookup.Update(ref state);
         _currentContactingSegmentLookup.Update(ref state);
