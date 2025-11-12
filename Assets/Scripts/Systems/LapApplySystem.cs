@@ -36,7 +36,7 @@ public partial class LapApplySystem : SystemBase
             
             foreach (var segment in buffer)
             {
-                handle.PushCheckPoint(new CheckPoint
+                handle.PushCheckPoint(new CheckPointData
                 {
                     Index = segment.Index,
                 });

@@ -54,7 +54,7 @@ public class CartHandle : NetworkBehaviour
         RaceControl.Singleton.racers.Remove(this);
     }
 
-    public void PushCheckPoint(CheckPoint checkPoint)
+    public void PushCheckPoint(CheckPointData checkPoint)
     {
         var now = Time.timeAsDouble;
 
