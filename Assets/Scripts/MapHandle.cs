@@ -17,7 +17,7 @@ public class MapHandle : MonoBehaviour
     private VisualElement _mapVE;
     public float3 CartPosition;
     private Transform origin;
-
+    public CartHandle Cart;
     public static MapHandle Instance;
     
     private void Start()
@@ -34,15 +34,9 @@ public class MapHandle : MonoBehaviour
     // Update is called once per frame
     private void UpdateMap()
     {
-        // if (Cart is null)
-        // {
-        //     var carts = GameObject.FindGameObjectsWithTag("Cart");
-        //     if (!carts.Any()) return;
-        //
-        //     Cart = carts.First(go => go.GetComponent<TrackPlacement>().IsOwner);
-        // }
-        //
-        // if (Cart is null) return;
+        Cart ??= RaceControl.Singleton.racers[0];
+        
+        if (Cart is null) return;
 
         MoveSelf();
         MoveEnemyPoints();

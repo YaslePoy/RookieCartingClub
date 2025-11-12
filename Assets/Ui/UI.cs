@@ -45,6 +45,11 @@ public class UI : MonoBehaviour
 
     public void UpdateUI()
     {
+        if (RaceControl.Singleton.racers.Count != 0)
+        {
+            Cart = RaceControl.Singleton.racers[0];
+        }
+        
         var velocity = VelocityProvider.Velocity.magnitude;
         Uivm.Speed = velocity;
         Uivm.UpdateSpeedKmh();
@@ -53,7 +58,7 @@ public class UI : MonoBehaviour
         {
             SwitchMenu();
         }
-        return;
+        // return;
         Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.CurrentLap.LapStart):g}";
         var fastestTime = 0.0;
         if (Cart.FastestLaps is not null)

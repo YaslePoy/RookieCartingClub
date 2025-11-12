@@ -63,11 +63,6 @@ public partial struct EngineTorqueJob : IJobEntity
 
         var engineBreaking = PlaneResistantLookup[wheelData.EngineResistant];
         engineBreaking.K = engine.CurrentForce == 0f ? 1 : 0;
-
-        if (engine.CurrentForce > 0f)
-        {
-            var x = 5 + 5;
-        }
         
         CommandBuffer.SetComponent(ECBCommandOrder.SetComponent, wheelData.EngineResistant, engineBreaking);
 

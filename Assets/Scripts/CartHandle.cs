@@ -23,7 +23,7 @@ public class CartHandle : NetworkBehaviour
     public NetworkVariable<int> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
         NetworkVariableWritePermission.Owner);
 
-    private int checkCount;
+    public int CheckCount;
     public List<TrackLap> Laps = new();
 
     [CanBeNull]
@@ -32,11 +32,11 @@ public class CartHandle : NetworkBehaviour
     public TrackLap CurrentLap => Laps.LastOrDefault();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void Start()
+    public void Start()
     {
-        checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
-        print($"Segments count: {checkCount}");
-        Laps.Add(new TrackLap(checkCount, Time.timeAsDouble));
+        // checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
+        print($"Segments count: {CheckCount}");
+        Laps.Add(new TrackLap(CheckCount, Time.timeAsDouble));
 
         if (IsClient && IsOwner)
         {
@@ -62,7 +62,7 @@ public class CartHandle : NetworkBehaviour
 
 
         if (checkPoint.Index == 0)
-            Laps.Add(new TrackLap(checkCount, Time.timeAsDouble));
+            Laps.Add(new TrackLap(CheckCount, Time.timeAsDouble));
         else
             currentLap.SetupSegmentTime(now, checkPoint.Index);
     }
