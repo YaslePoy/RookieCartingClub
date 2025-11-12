@@ -37,7 +37,7 @@ public class UI : MonoBehaviour
         };
         Document.rootVisualElement.Q<Button>("quit").clicked += () =>
         {
-            NetworkManager.Singleton.Shutdown();
+            NetworkManager.Singleton?.Shutdown();
             Destroy(GameObject.Find("Network"));
             SceneManager.LoadScene("SelectorScene");
         };

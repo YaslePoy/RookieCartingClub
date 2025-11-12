@@ -8,7 +8,14 @@ using UnityEngine.UIElements;
 
 public class LoginUIController : MonoBehaviour
 {
-    public static User User { get; private set; }
+    public static User User { get; private set; } = new()
+    {
+        id = 0,
+        username = "test name",
+        email = "",
+        password = ""
+    };
+
     private UIDocument _ui;
     private TextField _email;
     public bool Authed = false;
@@ -58,7 +65,7 @@ public class LoginUIController : MonoBehaviour
     void Update()
     {
         if (!Authed) return;
-        
+
         Authed = false;
         SceneManager.LoadScene("Scenes/SelectorScene");
     }

@@ -50,7 +50,7 @@ namespace DefaultNamespace
                 var networkSession = new NetworkSession { Ip = "95.105.78.72" };
                 switch (trackId)
                 {
-                    case "ProCircuit":
+                    case "ProScene":
                         networkSession.Port = 7777;
                         break;
                     case "RookieCircuit":

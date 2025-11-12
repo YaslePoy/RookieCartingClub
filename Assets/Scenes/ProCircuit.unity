@@ -12285,6 +12285,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  Cart: {fileID: 0}
 --- !u!1 &191903636 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2282996630140776879, guid: edd9940327da516a0b33fda4773d472b, type: 3}
@@ -17485,6 +17486,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 431820076659782233, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: MaxAngle
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 431820076659782233, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: Sensetivity
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 461741212770497699, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Applyer
       value: 
@@ -17623,7 +17632,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2138338661882064452, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: MaxForce
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2138338661882064452, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Collector
@@ -17687,12 +17696,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4143574146158204353, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: MaxForce
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4143574146158204353, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Collector
       value: 
       objectReference: {fileID: 273617821}
+    - target: {fileID: 4572116889010821424, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4602204794514652762, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1739306608
@@ -17759,7 +17772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6869701911958233787, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: MaxForce
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6869701911958233787, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Collector
@@ -17795,19 +17808,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10
+      value: 0.815
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.375
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalRotation.y
@@ -17819,7 +17832,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7385225801888495128, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -17855,7 +17868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8587064421813508708, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: MaxForce
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8587064421813508708, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: Collector
@@ -80427,7 +80440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2014500917696012523, guid: a936367002c0f003082415c67a258fcd, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2039287974562418429, guid: a936367002c0f003082415c67a258fcd, type: 3}
       propertyPath: m_Enabled

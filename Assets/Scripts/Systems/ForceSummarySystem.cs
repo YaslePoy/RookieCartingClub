@@ -32,7 +32,6 @@ public partial struct ForceSummarySystem : ISystem
         for (var i = 0; i < list.Length; i++)
         {
             Debug.DrawLine(list[i].P1, list[i].P2, Color.white);
-            
         }
 
         list.Dispose();
