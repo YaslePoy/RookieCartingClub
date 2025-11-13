@@ -161,6 +161,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  Cart: {fileID: 0}
 --- !u!1652712579 &185358041
 MultiplayerRolesData:
   m_ObjectHideFlags: 2
@@ -190,6 +191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Uivm: {fileID: 11400000, guid: 64978fc667d3870b793aeab05c35fe05, type: 2}
   Cart: {fileID: 0}
+  InPitRequest: 0
 --- !u!114 &185358043
 MonoBehaviour:
   m_ObjectHideFlags: 0

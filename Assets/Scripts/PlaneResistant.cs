@@ -5,17 +5,11 @@ using UnityEngine;
 //todo
 public class PlaneResistant : MonoBehaviour
 {
-    public Transform NormalTransform;
     public float MaxForce;
-    public float Friction;
-    public float ForcePart;
     public float K = 1;
     public CartWheelAuthoring Collector;
     private Rigidbody _rigidbody;
     private VelocityProvider _velocity;
-
-    public Vector3 Normal => NormalTransform.right;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -27,21 +21,21 @@ public class PlaneResistant : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        var velocity = _velocity.Velocity;
-
-        if (velocity.sqrMagnitude == 0) return;
-
-        var energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
-        var stopForce = energy / 0.1f;
-        var resistanceFactor = Vector3.Dot(velocity.normalized, Normal);
-        var forceVector = Normal;
-        if (resistanceFactor > 0) forceVector *= -1;
-
-        var finalForce = forceVector *
-                         Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K,
-                             MaxForce, stopForce);
-
-        _rigidbody.AddForceAtPosition(finalForce, transform.position);
+        // var velocity = _velocity.Velocity;
+        //
+        // if (velocity.sqrMagnitude == 0) return;
+        //
+        // var energy = velocity.sqrMagnitude * _rigidbody.mass / 2 * ForcePart;
+        // var stopForce = energy / 0.1f;
+        // var resistanceFactor = Vector3.Dot(velocity.normalized, Normal);
+        // var forceVector = Normal;
+        // if (resistanceFactor > 0) forceVector *= -1;
+        //
+        // var finalForce = forceVector *
+        //                  Helpers.Min(Math.Abs(resistanceFactor * Friction * _rigidbody.mass * 10f * ForcePart) * K,
+        //                      MaxForce, stopForce);
+        //
+        // _rigidbody.AddForceAtPosition(finalForce, transform.position);
     }
 
     private void OnTransformParentChanged()
