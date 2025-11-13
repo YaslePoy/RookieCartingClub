@@ -27,7 +27,7 @@ internal partial struct WheelRotatingSystem : ISystem
             InputLookup = _inputDataLookup
         };
 
-        job.Schedule();
+        job.ScheduleParallel(state.Dependency).Complete();
     }
 
     [BurstCompile]

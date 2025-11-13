@@ -9,32 +9,34 @@ using UnityEngine;
 [UpdateBefore(typeof(ForceApplySystem))]
 public partial struct ForceSummarySystem : ISystem
 {
-    private BufferLookup<FinalForceRequest> _finalRequestLookup;
 
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<CartWheel>();
-        _finalRequestLookup = state.GetBufferLookup<FinalForceRequest>();
     }
 
     public void OnUpdate(ref SystemState state)
     {
-        _finalRequestLookup.Update(ref state);
-        var list = new NativeList<DebugLine>(Allocator.TempJob);
+        // var list = new NativeList<DebugLine>(Allocator.TempJob);
+        
+        var ecb = new EntityCommandBuffer(Allocator.TempJob);
+        
         new ForceSummaryJob
         {
-            FinalRequestLookup = _finalRequestLookup,
-            DebugLines = list
+            CommandBuffer = ecb.AsParallelWriter()
+            // DebugLines = list
         }.Schedule(state.Dependency).Complete();
 
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
 
-        for (var i = 0; i < list.Length; i++)
-        {
-            Debug.DrawLine(list[i].P1, list[i].P2, Color.white);
-        }
+        // for (var i = 0; i < list.Length; i++)
+        // {
+        //     Debug.DrawLine(list[i].P1, list[i].P2, Color.white);
+        // }
 
-        list.Dispose();
+        // list.Dispose();
     }
 
     [BurstCompile]
@@ -46,9 +48,8 @@ public partial struct ForceSummarySystem : ISystem
 [BurstCompile]
 public partial struct ForceSummaryJob : IJobEntity
 {
-    public BufferLookup<FinalForceRequest> FinalRequestLookup;
-    public NativeList<DebugLine> DebugLines;
-
+    // public NativeList<DebugLine> DebugLines;
+    public EntityCommandBuffer.ParallelWriter CommandBuffer;
     private void Execute(ref DynamicBuffer<ForceApplyRequest> requests, ref CartWheel wheelData, Parent parent,
         LocalToWorld position)
     {
@@ -62,33 +63,32 @@ public partial struct ForceSummaryJob : IJobEntity
             return;
 
         if (length > wheelData.MaxResistance) sumForce *= wheelData.MaxResistance / length;
-
-        var finalBuffer = FinalRequestLookup[parent.Value];
-        finalBuffer.Add(new FinalForceRequest
+        
+        
+        CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, parent.Value, new FinalForceRequest
         {
             Force = sumForce,
             Position = position.Position
         });
-        
         wheelData.CurrentForce = sumForce;
         wheelData.ForceLen = math.length(sumForce);
 
-        var startPos = position.Position + new float3(0, 1, 0);
-        var normalized = sumForce / wheelData.MaxResistance;
-        DebugLines.Add(new DebugLine
-        {
-            P1 = startPos, P2 = startPos + normalized
-        });
-        DebugLines.Add(new DebugLine
-        {
-            P1 = startPos, P2 = position.Position
-        });
+        // var startPos = position.Position + new float3(0, 1, 0);
+        // var normalized = sumForce / wheelData.MaxResistance;
+        // DebugLines.Add(new DebugLine
+        // {
+        //     P1 = startPos, P2 = startPos + normalized
+        // });
+        // DebugLines.Add(new DebugLine
+        // {
+        //     P1 = startPos, P2 = position.Position
+        // });
         requests.Clear();
     }
 }
 
-public struct DebugLine
-{
-    public float3 P1;
-    public float3 P2;
-}
+// public struct DebugLine
+// {
+//     public float3 P1;
+//     public float3 P2;
+// }

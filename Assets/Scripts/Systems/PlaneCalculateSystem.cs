@@ -18,7 +18,7 @@ public partial struct PlaneCalculateSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
-        new PlaneCalculateJob { CommandBuffer = ecb }.Schedule(state.Dependency).Complete();
+        new PlaneCalculateJob { CommandBuffer = ecb.AsParallelWriter() }.ScheduleParallel(state.Dependency).Complete();
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
@@ -33,7 +33,7 @@ public partial struct PlaneCalculateSystem : ISystem
 [BurstCompile]
 public partial struct PlaneCalculateJob : IJobEntity
 {
-    public EntityCommandBuffer CommandBuffer;
+    public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
     public void Execute(Entity e, PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
     {
@@ -51,7 +51,7 @@ public partial struct PlaneCalculateJob : IJobEntity
         if (speed < 0.2f) setup.K *= speed;
 
         var finalForce = forceVector * math.abs(resistanceFactor * setup.K * setup.MaxForce);
-        CommandBuffer.AppendToBuffer(setup.Collector, new ForceApplyRequest
+        CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, setup.Collector, new ForceApplyRequest
         {
             Force = finalForce
         });
