@@ -23,7 +23,7 @@ public partial struct ForceApplySystem : ISystem
         {
             TimeStep = SystemAPI.Time.fixedDeltaTime
         };
-        job.Schedule(state.Dependency).Complete();
+        job.ScheduleParallel(state.Dependency).Complete();
         
     }
 

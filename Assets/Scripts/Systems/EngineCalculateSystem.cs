@@ -16,7 +16,7 @@ internal partial struct EngineCalculateSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        new EngineCalculateJob().Schedule(state.Dependency).Complete();
+        new EngineCalculateJob().ScheduleParallel(state.Dependency).Complete();
     }
 
     [BurstCompile]

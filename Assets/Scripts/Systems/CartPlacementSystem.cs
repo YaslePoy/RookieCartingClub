@@ -27,7 +27,7 @@ public partial struct CartPlacementSystem : ISystem
         {
             PositionsLookup =  _positionsLookup,
             CommandBuffer = ecb.AsParallelWriter()
-        }.Schedule(state.Dependency).Complete();
+        }.ScheduleParallel(state.Dependency).Complete();
         
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
