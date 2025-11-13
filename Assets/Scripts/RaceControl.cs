@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using DefaultNamespace;
 using Unity.Collections;
+using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Netcode;
+using Unity.Transforms;
 using UnityEngine;
 
 //todo
-public class RaceControl : NetworkBehaviour
+public class RaceControl : MonoBehaviour
 {
     public static RaceControl Singleton;
     public List<CartHandle> racers = new();
@@ -31,7 +34,7 @@ public class RaceControl : NetworkBehaviour
 
     private void Update()
     {
-        if (IsClient)
+        // if (IsClient)
         {
             var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
             var viewTime = beforeEnd.ToString(@"mm\:ss");
@@ -45,7 +48,7 @@ public class RaceControl : NetworkBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
-        if (IsServer)
+        // if (IsServer)
         {
             if (Time.timeAsDouble > PeriodEnd.Value)
             {
@@ -73,6 +76,66 @@ public class RaceControl : NetworkBehaviour
 
         Uivm.Positions = sb.ToString();
     }
+
+    public class RaceControlBaker : Baker<RaceControl>
+    {
+        public override void Bake(RaceControl authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddBuffer<TrackPlacementRequest>(entity);
+            var collection = AddBuffer<TrackPositionsCollection>(entity);
+
+            var trackPositions = CreateAdditionalEntity(TransformUsageFlags.None, entityName: "TrackPositions");
+            var pitPositions = CreateAdditionalEntity(TransformUsageFlags.None, entityName: "PitPositions");
+
+            collection.Add(new TrackPositionsCollection { BufferEntity = trackPositions });
+            collection.Add(new TrackPositionsCollection { BufferEntity = pitPositions });
+            var trackBuffer = AddBuffer<TrackPlacementPosition>(trackPositions);
+            var pitBuffer = AddBuffer<TrackPlacementPosition>(pitPositions);
+
+            var positions = GameObject.Find("Starts").GetComponentsInChildren<Transform>()[1..];
+
+            foreach (var transform in positions)
+            {
+                trackBuffer.Add(new TrackPlacementPosition
+                {
+                    Position = transform.position,
+                    Rotation = transform.rotation                
+                });
+                
+            }
+
+
+            positions = (GameObject.Find("Pitline starts") ?? GameObject.Find("Starts"))
+                .GetComponentsInChildren<Transform>()[1..];
+            
+            foreach (var transform in positions)
+            {
+                pitBuffer.Add(new TrackPlacementPosition
+                {
+                    Position = transform.position,
+                    Rotation = transform.rotation
+                });
+            }
+        }
+    }
+}
+
+public struct TrackPlacementRequest : IBufferElementData
+{
+    public Entity Player;
+    public int CollectionId;
+}
+
+public struct TrackPlacementPosition : IBufferElementData
+{
+    public float3 Position;
+    public quaternion Rotation;
+}
+
+public struct TrackPositionsCollection : IBufferElementData
+{
+    public Entity BufferEntity;
 }
 
 public enum PeriodType

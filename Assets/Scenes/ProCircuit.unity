@@ -12248,6 +12248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Uivm: {fileID: 11400000, guid: 64978fc667d3870b793aeab05c35fe05, type: 2}
   Cart: {fileID: 0}
+  InPitRequest: 0
 --- !u!1652712579 &188497164
 MultiplayerRolesData:
   m_ObjectHideFlags: 2
@@ -58275,7 +58276,7 @@ Transform:
   m_GameObject: {fileID: 907476374}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.242, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -133561,6 +133562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1935293578}
   - component: {fileID: 1935293579}
+  - component: {fileID: 1935293580}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -133739,6 +133741,61 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 2
+--- !u!114 &1935293580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935293577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10aa07d8e262113e59e157b727d8c27f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RaceControl
+  racers: []
+  SessionTime:
+    m_InternalValue: 0
+  PeriodEnd:
+    m_InternalValue: 0
+  PeriodName:
+    m_InternalValue:
+      utf8LengthInBytes: 0
+      bytes:
+        offset0000:
+          byte0000: 0
+          byte0001: 0
+          byte0002: 0
+          byte0003: 0
+          byte0004: 0
+          byte0005: 0
+          byte0006: 0
+          byte0007: 0
+          byte0008: 0
+          byte0009: 0
+          byte0010: 0
+          byte0011: 0
+          byte0012: 0
+          byte0013: 0
+          byte0014: 0
+          byte0015: 0
+        byte0016: 0
+        byte0017: 0
+        byte0018: 0
+        byte0019: 0
+        byte0020: 0
+        byte0021: 0
+        byte0022: 0
+        byte0023: 0
+        byte0024: 0
+        byte0025: 0
+        byte0026: 0
+        byte0027: 0
+        byte0028: 0
+        byte0029: 0
+  PeriodType:
+    m_InternalValue: 0
+  Uivm: {fileID: 0}
 --- !u!43 &1935927548
 Mesh:
   m_ObjectHideFlags: 0

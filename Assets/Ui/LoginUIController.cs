@@ -18,7 +18,7 @@ public class LoginUIController : MonoBehaviour
 
     private UIDocument _ui;
     private TextField _email;
-    public bool Authed = false;
+    public bool Authed;
     private TextField _password;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

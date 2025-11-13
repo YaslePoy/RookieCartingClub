@@ -123,7 +123,7 @@ public class CartHandleBaker : Baker<CartHandle>
     public override void Bake(CartHandle authoring)
     {
         var entity = GetEntity(TransformUsageFlags.Dynamic);
-        
+
         AddComponent(entity, new CartData
         {
             Nickname = authoring.Nickname.Value,
@@ -133,8 +133,8 @@ public class CartHandleBaker : Baker<CartHandle>
         AddBuffer<FinalForceRequest>(entity);
         AddBuffer<CurrentContactingSegment>(entity);
         AddBuffer<NewContactingSegment>(entity);
-        
-        
+        AddComponent<EnableSimulate>(entity);
+        SetComponentEnabled<EnableSimulate>(entity, false);
     }
 }
 

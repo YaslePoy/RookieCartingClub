@@ -17,9 +17,34 @@ public partial class UIUpdateSystem : SystemBase
 
         var velocity = SystemAPI.GetComponent<PhysicsVelocity>(cart);
         UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = velocity.Linear };
+
+        if (UI.Instance.InPitRequest)
+        {
+            SendInPitRequest();
+        }
+
         UI.Instance.UpdateUI();
         MapHandle.Instance.CartPosition = SystemAPI.GetComponent<LocalToWorld>(cart).Position;
         MapHandle.Instance.MoveSelf();
+    }
+
+    private void SendInPitRequest()
+    {
+        var id = UI.Instance.Cart.PlayerId.Value;
+
+        var replaceEntity = Entity.Null;
+
+        foreach (var (data, entity) in SystemAPI.Query<RefRO<CartData>>().WithEntityAccess())
+        {
+            if (data.ValueRO.PlayerId == id)
+            {
+                replaceEntity = entity;
+                break;
+            }
+        }
+
+        var requests = SystemAPI.GetSingletonBuffer<TrackPlacementRequest>();
+        requests.Add(new TrackPlacementRequest { Player = replaceEntity, CollectionId = 1 });
     }
 }
 

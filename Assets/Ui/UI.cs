@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Unity.Entities;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,7 +17,7 @@ public class UI : MonoBehaviour
     public CartHandle Cart;
     private InputAction MenuAction;
     private UIDocument Document;
-
+    public bool InPitRequest;
     public void Start()
     {
         Instance = this;
@@ -32,7 +33,8 @@ public class UI : MonoBehaviour
         Document.rootVisualElement.Q<Button>("back").clicked += SwitchMenu;
         Document.rootVisualElement.Q<Button>("pit").clicked += () =>
         {
-            Cart.TransferToPitRpc();
+            // Cart.TransferToPitRpc();
+            InPitRequest = true;
             SwitchMenu();
         };
         Document.rootVisualElement.Q<Button>("quit").clicked += () =>
@@ -98,8 +100,13 @@ public class UI : MonoBehaviour
         }
 
         Uivm.Lap = Cart.Laps.Count;
-    }
 
+        if (InPitRequest)
+        {
+            InPitRequest = false;
+        }
+    }
+    
     private void SwitchMenu()
     {
         Uivm.ShowMenu = Uivm.ShowMenu switch
