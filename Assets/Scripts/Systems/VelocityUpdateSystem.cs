@@ -3,7 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
 [UpdateBefore(typeof(PlaneCalculateSystem))]
 public partial struct VelocityUpdateSystem : ISystem
 {

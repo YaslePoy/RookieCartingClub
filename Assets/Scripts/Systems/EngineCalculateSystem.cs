@@ -3,27 +3,28 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateBefore(typeof(ForceSummarySystem))]
-internal partial struct EngineCalculateSystem : ISystem
-{
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
-    {
-        state.RequireForUpdate<EngineData>();
-    }
-
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
-    {
-        new EngineCalculateJob().ScheduleParallel(state.Dependency).Complete();
-    }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-    }
-}
+// [UpdateInGroup(typeof(InputPhysicalImplementationSystem))]
+// internal partial struct EngineCalculateSystem : ISystem
+// {
+//     [BurstCompile]
+//     public void OnCreate(ref SystemState state)
+//     {
+//         state.RequireForUpdate<EngineData>();
+//         state.RequireForUpdate<CartInputData>();
+//     }
+//
+//     [BurstCompile]
+//     public void OnUpdate(ref SystemState state)
+//     {
+//         var job = new EngineCalculateJob();
+//         job.ScheduleParallel();
+//     }
+//
+//     [BurstCompile]
+//     public void OnDestroy(ref SystemState state)
+//     {
+//     }
+// }
 
 [BurstCompile]
 public partial struct EngineCalculateJob : IJobEntity
@@ -38,7 +39,6 @@ public partial struct EngineCalculateJob : IJobEntity
         engine.CurrentForce = EvaluateCurve(rate, curve) * input.CurrentEngine * engine.MaxForce;
     }
 
-    [BurstCompile]
     private float EvaluateCurve(float curveValue, DynamicBuffer<CurvePoint> curve)
     {
         if (curveValue >= curve[^1].Value.x)

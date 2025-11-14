@@ -14,7 +14,6 @@ public partial struct LapRegisterSystem : ISystem
 {
     private ComponentLookup<CartData> _cartLookup;
     private ComponentLookup<CheckPointData> _checkPointLookup;
-    private BufferLookup<CurrentContactingSegment> _currentContactingSegmentLookup;
     private BufferLookup<NewContactingSegment> _newContactingSegmentLookup;
 
     public void OnCreate(ref SystemState state)
@@ -22,7 +21,6 @@ public partial struct LapRegisterSystem : ISystem
         state.RequireForUpdate<SimulationSingleton>();
         _cartLookup = state.GetComponentLookup<CartData>(true);
         _checkPointLookup = state.GetComponentLookup<CheckPointData>(true);
-        _currentContactingSegmentLookup = state.GetBufferLookup<CurrentContactingSegment>();
         _newContactingSegmentLookup = state.GetBufferLookup<NewContactingSegment>();
     }
 
@@ -31,7 +29,6 @@ public partial struct LapRegisterSystem : ISystem
     {
         _cartLookup.Update(ref state);
         _checkPointLookup.Update(ref state);
-        _currentContactingSegmentLookup.Update(ref state);
         _newContactingSegmentLookup.Update(ref state);
         var cols = new NativeList<CartCollision>(Allocator.TempJob);
 
@@ -43,28 +40,25 @@ public partial struct LapRegisterSystem : ISystem
         };
         checkJob.Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), state.Dependency).Complete();
 
-        
-        
-        var placementBufferEntities = SystemAPI.QueryBuilder().WithAll<CurrentContactingSegment>().Build()
-            .ToEntityArray(Allocator.Temp);
         var placementBuffers =
-            new NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>>(placementBufferEntities.Length,
-                Allocator.Temp);        
+            new NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>>(32,
+                Allocator.Temp);
         var newBuffers =
-            new NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>>(placementBufferEntities.Length,
+            new NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>>(32,
                 Allocator.Temp);
 
         var currentPlacement = new NativeHashSet<EntitySegment>(4, Allocator.Temp);
-        
-        foreach (var entity in placementBufferEntities)
+
+        foreach (var (currentContactingSegments, entity) 
+                 in SystemAPI.Query<DynamicBuffer<CurrentContactingSegment>>().WithEntityAccess())
         {
-            var currentContactingSegments = _currentContactingSegmentLookup[entity];
             placementBuffers[entity] = currentContactingSegments;
             newBuffers[entity] = _newContactingSegmentLookup[entity];
             foreach (var currentContactingSegment in currentContactingSegments)
             {
                 currentPlacement.Add(new EntitySegment(entity, currentContactingSegment.Index));
             }
+
             currentContactingSegments.Clear();
         }
 
@@ -76,11 +70,11 @@ public partial struct LapRegisterSystem : ISystem
 
             if (!currentPlacement.Contains(new EntitySegment(collision.PlayerEntity, collision.SegmentId)))
             {
-                _newContactingSegmentLookup[collision.PlayerEntity].Add(new NewContactingSegment{ Index = collision.SegmentId });
+                _newContactingSegmentLookup[collision.PlayerEntity]
+                    .Add(new NewContactingSegment { Index = collision.SegmentId });
             }
         }
 
-        placementBufferEntities.Dispose();
         placementBuffers.Dispose();
         newBuffers.Dispose();
         currentPlacement.Dispose();
@@ -113,7 +107,7 @@ public partial struct LapRegisterSystem : ISystem
             return HashCode.Combine(Entity, Index);
         }
     }
-    
+
     public struct CartPositionHandlingJob : ITriggerEventsJob
     {
         [ReadOnly] public ComponentLookup<CartData> CartLookup;
@@ -139,11 +133,7 @@ public partial struct LapRegisterSystem : ISystem
             {
                 return;
             }
-
-            if (segment.Index == -1 && cart.PlayerId == -1)
-            {
-                return;
-            }
+            
 
             if (CheckPointLookup.TryGetComponent(triggerEvent.EntityA, out var checkA))
             {

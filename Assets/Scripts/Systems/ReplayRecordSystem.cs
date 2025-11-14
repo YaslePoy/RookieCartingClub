@@ -7,8 +7,8 @@ using Unity.Entities;
 using UnityEngine;
 using UnityEngine.Windows;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateBefore(typeof(WheelRotatingSystem))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+// [UpdateBefore(typeof(WheelRotatingSystem))]
 public partial struct ReplayRecordSystem : ISystem
 {
     [BurstCompile]

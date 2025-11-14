@@ -4,7 +4,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
 [UpdateBefore(typeof(ForceSummarySystem))]
 public partial struct PlaneCalculateSystem : ISystem
 {

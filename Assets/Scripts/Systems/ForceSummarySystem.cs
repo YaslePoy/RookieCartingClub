@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
 [UpdateBefore(typeof(ForceApplySystem))]
 public partial struct ForceSummarySystem : ISystem
 {

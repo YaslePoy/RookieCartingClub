@@ -1,8 +1,8 @@
 using Unity.Burst;
 using Unity.Entities;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateBefore(typeof(WheelRotatingSystem))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+// [UpdateBefore(typeof(WheelRotatingSystem))]
 public partial struct ReplaySystem : ISystem
 {
     [BurstCompile]

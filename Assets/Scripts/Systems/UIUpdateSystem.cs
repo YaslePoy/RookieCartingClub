@@ -8,13 +8,13 @@ public partial class UIUpdateSystem : SystemBase
 {
     protected override void OnCreate()
     {
+        CheckedStateRef.RequireForUpdate<CartData>();
     }
 
     protected override void OnUpdate()
     {
-        if (!SystemAPI.TryGetSingletonEntity<CartData>(out var cart))
-            return;
 
+        var cart = SystemAPI.GetSingletonEntity<CartData>();
         var velocity = SystemAPI.GetComponent<PhysicsVelocity>(cart);
         UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = velocity.Linear };
 

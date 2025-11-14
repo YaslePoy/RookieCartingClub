@@ -28,10 +28,11 @@ public partial struct EnableCartSimulationSystem : ISystem
     }
 
     [BurstCompile]
+    [WithAll(typeof(EnableSimulate))]
     public partial struct EnableCartSimulationJob : IJobEntity
     {
         public EntityCommandBuffer.ParallelWriter CommandBuffer;
-        private void Execute(Entity cart, EnableSimulate _)
+        private void Execute(Entity cart)
         {
                 CommandBuffer.SetComponentEnabled<Simulate>(ECBCommandOrder.SetComponentEnabled, cart, true);
                 CommandBuffer.SetComponentEnabled<EnableSimulate>(ECBCommandOrder.SetComponentEnabled, cart, false);

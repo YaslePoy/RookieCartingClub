@@ -8,7 +8,7 @@ using Unity.Transforms;
 using UnityEngine;
 using ForceMode = Unity.Physics.Extensions.ForceMode;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
 public partial struct ForceApplySystem : ISystem
 {
     [BurstCompile]

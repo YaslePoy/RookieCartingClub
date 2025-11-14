@@ -3,8 +3,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 
-[UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-[UpdateBefore(typeof(EngineCalculateSystem))]
+[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
 public partial struct EngineTorqueSystem : ISystem
 {
     private ComponentLookup<EngineData> _engineLookup;
