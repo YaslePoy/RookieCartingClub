@@ -111,7 +111,7 @@ public class UI : MonoBehaviour
         Uivm.ShowMenu = Uivm.ShowMenu switch
         {
             Visibility.Visible => Visibility.Hidden,
-            Visibility.Hidden => Visibility.Visible
+            Visibility.Hidden => Visibility.Visible,
         };
     }
 }

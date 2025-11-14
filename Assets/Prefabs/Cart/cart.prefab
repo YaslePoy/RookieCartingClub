@@ -337,16 +337,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8764760979260145263}
   - component: {fileID: 2968463312305433424}
-  - component: {fileID: 2917069607818028094}
-  - component: {fileID: 4705595913853680996}
   - component: {fileID: 3542207581712662049}
   - component: {fileID: 1003007710482970868}
   - component: {fileID: 2347037255917873015}
   - component: {fileID: 3430498824963694238}
   - component: {fileID: 5347045640215740288}
   - component: {fileID: -1990817331939042178}
-  - component: {fileID: 1911891491611862517}
-  - component: {fileID: -98193382640058352}
   - component: {fileID: 2816519027716094941}
   - component: {fileID: 8382071404288949100}
   - component: {fileID: 431820076659782233}
@@ -407,77 +403,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2917069607818028094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280289031576691925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2898089809
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
---- !u!114 &4705595913853680996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280289031576691925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkTransform
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkTransformExpanded: 0
-  AutoOwnerAuthorityTickOffset: 1
-  PositionInterpolationType: 0
-  RotationInterpolationType: 0
-  ScaleInterpolationType: 0
-  PositionLerpSmoothing: 1
-  PositionMaxInterpolationTime: 0.1
-  RotationLerpSmoothing: 1
-  RotationMaxInterpolationTime: 0.1
-  ScaleLerpSmoothing: 1
-  ScaleMaxInterpolationTime: 0.1
-  AuthorityMode: 0
-  TickSyncChildren: 0
-  UseUnreliableDeltas: 0
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 1
-  SyncScaleY: 1
-  SyncScaleZ: 1
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  UseQuaternionSynchronization: 0
-  UseQuaternionCompression: 0
-  UseHalfFloatPrecision: 0
-  InLocalSpace: 0
-  SwitchTransformSpaceWhenParented: 0
-  Interpolate: 1
-  SlerpPosition: 0
 --- !u!114 &3542207581712662049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,14 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ed4af4791b52c738ffcb4bca1f2406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
   CameraPosition: {fileID: 7385225801888495128}
-  Angle:
-    m_InternalValue: 0
-  Engine:
-    m_InternalValue: 0
-  Breaks:
-    m_InternalValue: 0
   AllowControl: 1
 --- !u!114 &1003007710482970868
 MonoBehaviour:
@@ -582,44 +500,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa924f93197a54818ade8ae1cda5d2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CartHandle
-  ShowTopMostFoldoutHeaderGroup: 1
+  CheckCount: 0
   Nickname:
-    m_InternalValue:
-      utf8LengthInBytes: 0
-      bytes:
-        offset0000:
-          byte0000: 0
-          byte0001: 0
-          byte0002: 0
-          byte0003: 0
-          byte0004: 0
-          byte0005: 0
-          byte0006: 0
-          byte0007: 0
-          byte0008: 0
-          byte0009: 0
-          byte0010: 0
-          byte0011: 0
-          byte0012: 0
-          byte0013: 0
-          byte0014: 0
-          byte0015: 0
-        byte0016: 0
-        byte0017: 0
-        byte0018: 0
-        byte0019: 0
-        byte0020: 0
-        byte0021: 0
-        byte0022: 0
-        byte0023: 0
-        byte0024: 0
-        byte0025: 0
-        byte0026: 0
-        byte0027: 0
-        byte0028: 0
-        byte0029: 0
-  PlayerId:
-    m_InternalValue: 0
+    utf8LengthInBytes: 0
+    bytes:
+      offset0000:
+        byte0000: 0
+        byte0001: 0
+        byte0002: 0
+        byte0003: 0
+        byte0004: 0
+        byte0005: 0
+        byte0006: 0
+        byte0007: 0
+        byte0008: 0
+        byte0009: 0
+        byte0010: 0
+        byte0011: 0
+        byte0012: 0
+        byte0013: 0
+        byte0014: 0
+        byte0015: 0
+      byte0016: 0
+      byte0017: 0
+      byte0018: 0
+      byte0019: 0
+      byte0020: 0
+      byte0021: 0
+      byte0022: 0
+      byte0023: 0
+      byte0024: 0
+      byte0025: 0
+      byte0026: 0
+      byte0027: 0
+      byte0028: 0
+      byte0029: 0
+  PlayerId: 0
 --- !u!114 &-1990817331939042178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,39 +548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a761bdd12460488a8476bd4265d8d6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrackPlacement
-  ShowTopMostFoldoutHeaderGroup: 1
---- !u!114 &1911891491611862517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280289031576691925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6c0be61502bb534f922ebb746851216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody
-  ShowTopMostFoldoutHeaderGroup: 1
-  NetworkRigidbodyBaseExpanded: 0
-  UseRigidBodyForMotion: 1
-  AutoUpdateKinematicState: 1
-  AutoSetKinematicOnDespawn: 1
---- !u!114 &-98193382640058352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8280289031576691925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2762578d3134fc79be6ed727dd1810c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NetworkVelocityProvider
-  ShowTopMostFoldoutHeaderGroup: 1
-  _velocity:
-    m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!114 &2816519027716094941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d366a96bcc8735129020bbc2972979e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KeyboradInput
-  ShowTopMostFoldoutHeaderGroup: 1
   MaxAngle: 25
   Sensetivity: 40
 --- !u!1001 &1104708018489893834
@@ -771,7 +653,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1205391989583851163, guid: 2e69cf3b3c3e5c61097f6f8ce15847c0, type: 3}
+    - {fileID: 2471360135767735280, guid: 2e69cf3b3c3e5c61097f6f8ce15847c0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -927,7 +811,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5249145429181828870, guid: de9bb0a3e4a81bc08a79771da63ca8b0, type: 3}
+    - {fileID: 6856925275187813484, guid: de9bb0a3e4a81bc08a79771da63ca8b0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1005,7 +891,9 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 1395857632
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8834582273358156496, guid: 6f4e652ebc10e1b6793cf92657b9f08c, type: 3}
+    - {fileID: 6303350142417927479, guid: 6f4e652ebc10e1b6793cf92657b9f08c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1083,7 +971,9 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 3575762337
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7616477341722206373, guid: 834062eb1bf205926bb4befb74c3ebda, type: 3}
+    - {fileID: 5681703082805639663, guid: 834062eb1bf205926bb4befb74c3ebda, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

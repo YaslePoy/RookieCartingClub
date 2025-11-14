@@ -7,7 +7,7 @@ public class CameraControlAuthoring : MonoBehaviour
     {
         public override void Bake(CameraControlAuthoring authoring)
         {
-            var entity = GetEntity();
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent<CameraPoint>(entity);
         }
     }

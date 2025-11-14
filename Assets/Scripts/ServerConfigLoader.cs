@@ -19,7 +19,6 @@ public class ServerConfigLoader : MonoBehaviour
 
 #else
         var path = "/home/micial/projects/unity/build/server/config.json";
-
 #endif
 
 
