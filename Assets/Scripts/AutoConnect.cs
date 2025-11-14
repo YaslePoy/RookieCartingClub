@@ -1,4 +1,3 @@
-using Unity.Netcode;
 using UnityEngine;
 
 public class AutoConnect : MonoBehaviour
@@ -8,18 +7,18 @@ public class AutoConnect : MonoBehaviour
     {
         var requirements = GetComponents<NetworkStart>();
         var Mode = requirements.Length == 1 ? requirements[0].Mode : NetworkMode.Host;
-        var manager = GetComponent<NetworkManager>();
-        switch (Mode)
-        {
-            case NetworkMode.Server:
-                manager.StartServer();
-                break;
-            case NetworkMode.Client:
-                manager.StartClient();
-                break;
-            case NetworkMode.Host:
-                manager.StartHost();
-                break;
-        }
+        // var manager = GetComponent<NetworkManager>();
+        // switch (Mode)
+        // {
+        //     case NetworkMode.Server:
+        //         manager.StartServer();
+        //         break;
+        //     case NetworkMode.Client:
+        //         manager.StartClient();
+        //         break;
+        //     case NetworkMode.Host:
+        //         manager.StartHost();
+        //         break;
+        // }
     }
 }

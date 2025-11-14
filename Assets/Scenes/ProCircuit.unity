@@ -17932,6 +17932,18 @@ PrefabInstance:
     - {fileID: 6975240200502398900, guid: edd9940327da516a0b33fda4773d472b, type: 3}
     - {fileID: 5588843698955074142, guid: edd9940327da516a0b33fda4773d472b, type: 3}
     - {fileID: 1281667519496260121, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 4602204794514652762, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 7529389987619196713, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 9191214124294790211, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 3249557025711102010, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 3217400878853433418, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 2917069607818028094, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 4705595913853680996, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 1911891491611862517, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 1314227193041555901, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 2301022433293012305, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: 850298648165118208, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+    - {fileID: -98193382640058352, guid: edd9940327da516a0b33fda4773d472b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 4852569705744261549, guid: edd9940327da516a0b33fda4773d472b, type: 3}
     m_AddedGameObjects: []
@@ -76041,8 +76053,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1203735202}
-  - component: {fileID: 1203735201}
-  - component: {fileID: 1203735200}
   - component: {fileID: 1203735205}
   - component: {fileID: 1203735204}
   - component: {fileID: 1203735206}
@@ -76055,78 +76065,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1203735200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203735199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Transports.UTP.UnityTransport
-  m_ProtocolType: 0
-  m_UseWebSockets: 0
-  m_UseEncryption: 0
-  m_MaxPacketQueueSize: 128
-  m_MaxPayloadSize: 6144
-  m_HeartbeatTimeoutMS: 500
-  m_ConnectTimeoutMS: 1000
-  m_MaxConnectAttempts: 60
-  m_DisconnectTimeoutMS: 30000
-  ConnectionData:
-    Address: 95.105.78.72
-    Port: 7777
-    ServerListenAddress: 0.0.0.0
-  DebugSimulator:
-    PacketDelayMS: 0
-    PacketJitterMS: 0
-    PacketDropRate: 0
---- !u!114 &1203735201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203735199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 593a2fe42fa9d37498c96f9a383b6521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkManager
-  NetworkManagerExpanded: 0
-  NetworkConfig:
-    ProtocolVersion: 0
-    NetworkTransport: {fileID: 1203735200}
-    PlayerPrefab: {fileID: 8280289031576691925, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-    Prefabs:
-      NetworkPrefabsLists:
-      - {fileID: 11400000, guid: 6fd1ecbbfe6449b16b2c92c999e843ee, type: 2}
-    TickRate: 30
-    ClientConnectionBufferTimeout: 10
-    ConnectionApproval: 0
-    ConnectionData: 
-    EnableTimeResync: 0
-    TimeResyncInterval: 30
-    EnsureNetworkVariableLengthSafety: 0
-    EnableSceneManagement: 1
-    ForceSamePrefabs: 1
-    RecycleNetworkIds: 1
-    NetworkIdRecycleDelay: 120
-    RpcHashSize: 0
-    LoadSceneTimeOut: 120
-    SpawnTimeout: 10
-    EnableNetworkLogs: 1
-    NetworkTopology: 0
-    UseCMBService: 0
-    AutoSpawnPlayerPrefabClientSide: 1
-    NetworkMessageMetrics: 1
-    NetworkProfilingMetrics: 1
-    OldPrefabList: []
-  RunInBackground: 1
-  LogLevel: 1
 --- !u!4 &1203735202
 Transform:
   m_ObjectHideFlags: 0
@@ -76202,7 +76140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203735199}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 431bb785941b3526a81d32aac62ac45b, type: 3}
   m_Name: 
@@ -133951,47 +133889,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RaceControl
   racers: []
-  SessionTime:
-    m_InternalValue: 0
-  PeriodEnd:
-    m_InternalValue: 0
-  PeriodName:
-    m_InternalValue:
-      utf8LengthInBytes: 0
-      bytes:
-        offset0000:
-          byte0000: 0
-          byte0001: 0
-          byte0002: 0
-          byte0003: 0
-          byte0004: 0
-          byte0005: 0
-          byte0006: 0
-          byte0007: 0
-          byte0008: 0
-          byte0009: 0
-          byte0010: 0
-          byte0011: 0
-          byte0012: 0
-          byte0013: 0
-          byte0014: 0
-          byte0015: 0
-        byte0016: 0
-        byte0017: 0
-        byte0018: 0
-        byte0019: 0
-        byte0020: 0
-        byte0021: 0
-        byte0022: 0
-        byte0023: 0
-        byte0024: 0
-        byte0025: 0
-        byte0026: 0
-        byte0027: 0
-        byte0028: 0
-        byte0029: 0
-  PeriodType:
-    m_InternalValue: 0
   Uivm: {fileID: 0}
 --- !u!43 &1935927548
 Mesh:

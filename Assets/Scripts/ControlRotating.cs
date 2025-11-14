@@ -13,10 +13,10 @@ public class ControlRotating : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
-    {
-        transform.localRotation = Quaternion.AngleAxis(_userControl.CurrentAngle, transform.up);
-    }
+    // private void FixedUpdate()
+    // {
+    //     transform.localRotation = Quaternion.AngleAxis(_userControl.CurrentAngle, transform.up);
+    // }
 }
 
 

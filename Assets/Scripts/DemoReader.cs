@@ -40,7 +40,7 @@ public class DemoReader : MonoBehaviour
     {
         IsRecotring = false;
         var name = new FixedString64Bytes(SceneManager.GetActiveScene().name);
-        var playerId = Cart.PlayerId.Value;
+        var playerId = Cart.PlayerId;
         var data = new byte[cartStamps.Count * Marshal.SizeOf<CartStamp>()];
 
         Array.Copy(cartStamps.ToArray(), data, cartStamps.Count);

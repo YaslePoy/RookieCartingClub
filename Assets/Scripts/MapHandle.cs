@@ -113,7 +113,8 @@ public class MapHandle : MonoBehaviour
 
     private void SetupPositions()
     {
-        var positions = RaceControl.Singleton.racers.Where(i => !i.IsOwner).ToList();
+        // todo remake positions system
+        var positions = RaceControl.Singleton.racers.Skip(1).ToList();
         for (var index = 0; index < positions.Count; index++)
         {
             var position = positions[index];

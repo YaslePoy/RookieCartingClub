@@ -18,14 +18,14 @@ public class NickRotate : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        var angle = Quaternion.LookRotation(transform.position - Camera.transform.position);
-        rectTransform.rotation = angle;
-
-        if (!NickSetup)
-            if (!string.IsNullOrEmpty(CartHandle.Nickname.Value.Value))
-            {
-                NickSetup = true;
-                GetComponent<TMP_Text>().text = CartHandle.Nickname.Value.Value;
-            }
+        // var angle = Quaternion.LookRotation(transform.position - Camera.transform.position);
+        // rectTransform.rotation = angle;
+        //
+        // if (!NickSetup)
+        //     if (!string.IsNullOrEmpty(CartHandle.Nickname.Value.Value))
+        //     {
+        //         NickSetup = true;
+        //         GetComponent<TMP_Text>().text = CartHandle.Nickname.Value.Value;
+        //     }
     }
 }

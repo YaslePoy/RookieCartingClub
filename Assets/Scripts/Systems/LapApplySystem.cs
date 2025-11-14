@@ -29,7 +29,7 @@ public partial class LapApplySystem : SystemBase
         {
             var id = _dataLookup[cart];
             var buffer = _bufferLookup[cart];
-            var handle = RaceControl.Singleton.racers.First(i => i.PlayerId.Value == id.PlayerId);
+            var handle = RaceControl.Singleton.racers.First(i => i.PlayerId == id.PlayerId);
 
             if (buffer.IsEmpty)
                 continue;

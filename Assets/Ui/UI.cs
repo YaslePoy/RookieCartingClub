@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Unity.Entities;
-using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -39,7 +38,7 @@ public class UI : MonoBehaviour
         };
         Document.rootVisualElement.Q<Button>("quit").clicked += () =>
         {
-            NetworkManager.Singleton?.Shutdown();
+            // NetworkManager.Singleton?.Shutdown();
             Destroy(GameObject.Find("Network"));
             SceneManager.LoadScene("SelectorScene");
         };

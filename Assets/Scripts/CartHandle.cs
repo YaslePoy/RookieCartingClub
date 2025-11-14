@@ -6,23 +6,23 @@ using JetBrains.Annotations;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Netcode;
 using Unity.Physics;
 using Unity.Physics.Authoring;
 using UnityEditor;
 using UnityEngine;
 using MeshCollider = UnityEngine.MeshCollider;
 
-public class CartHandle : NetworkBehaviour
+public class CartHandle : MonoBehaviour
 {
     public static Action<CartHandle> NewCartConnected;
 
-    public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""),
-        NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    // public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""),
+    //     NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    //
+    // public NetworkVariable<int> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
+    //     NetworkVariableWritePermission.Owner);
 
-    public NetworkVariable<int> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
-        NetworkVariableWritePermission.Owner);
-
+    
     public int CheckCount;
     public List<TrackLap> Laps = new();
 
@@ -30,6 +30,8 @@ public class CartHandle : NetworkBehaviour
     public TrackLap FastestLaps => Laps.OrderBy(i => i.TotalLapTime).FirstOrDefault(i => i.IsValid && i.IsFinished);
 
     public TrackLap CurrentLap => Laps.LastOrDefault();
+    public FixedString32Bytes Nickname;
+    public int PlayerId;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
@@ -38,11 +40,11 @@ public class CartHandle : NetworkBehaviour
         print($"Segments count: {CheckCount}");
         Laps.Add(new TrackLap(CheckCount, Time.timeAsDouble));
 
-        if (IsClient && IsOwner)
-        {
-            Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
-            PlayerId.Value = SessionSetup.Id;
-        }
+        // if (IsClient && IsOwner)
+        // {
+        //     Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
+        //     PlayerId = SessionSetup.Id;
+        // }
 
         RaceControl.Singleton.racers.Add(this);
 
@@ -66,13 +68,7 @@ public class CartHandle : NetworkBehaviour
         else
             currentLap.SetupSegmentTime(now, checkPoint.Index);
     }
-
-    [Rpc(SendTo.Server)]
-    public void TransferToPitRpc()
-    {
-        Debug.Log("TransferToPit");
-        GetComponent<TrackPlacement>().Start();
-    }
+    
 }
 
 
@@ -126,8 +122,8 @@ public class CartHandleBaker : Baker<CartHandle>
 
         AddComponent(entity, new CartData
         {
-            Nickname = authoring.Nickname.Value,
-            PlayerId = authoring.PlayerId.Value
+            Nickname = authoring.Nickname,
+            PlayerId = authoring.PlayerId
         });
         AddComponent<ForceApplier>(entity);
         AddBuffer<FinalForceRequest>(entity);

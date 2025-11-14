@@ -15,21 +15,21 @@ public class Engine : MonoBehaviour
     private Rigidbody _rigidbody;
     public float CurrentForce => _currentForce;
 
-    private void Start()
-    {
-        _control = GetComponent<UserControl>();
-        _rigidbody = GetComponent<Rigidbody>();
-    }
+    // private void Start()
+    // {
+    //     _control = GetComponent<UserControl>();
+    //     _rigidbody = GetComponent<Rigidbody>();
+    // }
 
     // Update is called once per frame
-    private void FixedUpdate()
-    {
-        var currentSpeed = _rigidbody.linearVelocity.magnitude;
-        if (currentSpeed > MaxSpeed) return;
-
-        var rate = currentSpeed / MaxSpeed;
-        _currentForce = AnimationCurve.Evaluate(rate) * _control.CurrentEngine * MaxForce;
-    }
+    // private void FixedUpdate()
+    // {
+    //     var currentSpeed = _rigidbody.linearVelocity.magnitude;
+    //     if (currentSpeed > MaxSpeed) return;
+    //
+    //     var rate = currentSpeed / MaxSpeed;
+    //     _currentForce = AnimationCurve.Evaluate(rate) * _control.CurrentEngine * MaxForce;
+    // }
 }
 
 public class EngineBaker : Baker<Engine>

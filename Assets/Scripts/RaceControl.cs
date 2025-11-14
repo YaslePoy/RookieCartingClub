@@ -6,7 +6,6 @@ using DefaultNamespace;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Netcode;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -15,10 +14,10 @@ public class RaceControl : MonoBehaviour
 {
     public static RaceControl Singleton;
     public List<CartHandle> racers = new();
-    public NetworkVariable<double> SessionTime = new();
-    public NetworkVariable<double> PeriodEnd = new();
-    public NetworkVariable<FixedString32Bytes> PeriodName = new();
-    public NetworkVariable<PeriodType> PeriodType = new();
+    // public NetworkVariable<double> SessionTime = new();
+    // public NetworkVariable<double> PeriodEnd = new();
+    // public NetworkVariable<FixedString32Bytes> PeriodName = new();
+    // public NetworkVariable<PeriodType> PeriodType = new();
     public UIVM Uivm;
     public IRacePeriod CurrentRacePeriod;
 
@@ -35,33 +34,33 @@ public class RaceControl : MonoBehaviour
     private void Update()
     {
         // if (IsClient)
-        {
-            var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
-            var viewTime = beforeEnd.ToString(@"mm\:ss");
-            Uivm.SessionTime = viewTime;
-            Uivm.SessionName = PeriodName.Value.Value;
-
-            UpdatePositions();
-        }
+        // {
+        //     var beforeEnd = TimeSpan.FromSeconds(SessionTime.Value);
+        //     var viewTime = beforeEnd.ToString(@"mm\:ss");
+        //     Uivm.SessionTime = viewTime;
+        //     Uivm.SessionName = PeriodName.Value.Value;
+        //
+        //     UpdatePositions();
+        // }
     }
 
     // Update is called once per frame
     private void FixedUpdate()
     {
         // if (IsServer)
-        {
-            if (Time.timeAsDouble > PeriodEnd.Value)
-            {
-                var period = racePeriods.Dequeue();
-                racePeriods.Enqueue(period);
-
-                period.Start(this);
-                CurrentRacePeriod = period;
-            }
-
-            SessionTime.Value = PeriodEnd.Value - Time.timeAsDouble;
-            CurrentRacePeriod.Update(this);
-        }
+        // {
+        //     if (Time.timeAsDouble > PeriodEnd.Value)
+        //     {
+        //         var period = racePeriods.Dequeue();
+        //         racePeriods.Enqueue(period);
+        //
+        //         period.Start(this);
+        //         CurrentRacePeriod = period;
+        //     }
+        //
+        //     SessionTime.Value = PeriodEnd.Value - Time.timeAsDouble;
+        //     CurrentRacePeriod.Update(this);
+        // }
     }
 
     private void UpdatePositions()
@@ -70,7 +69,7 @@ public class RaceControl : MonoBehaviour
         for (var i = 0; i < TrackPositions.Positions.Count; i++)
         {
             var pos = i + 1;
-            var nickname = racers.Find(c => c.PlayerId.Value == TrackPositions.Positions[i]).Nickname.Value;
+            var nickname = racers.Find(c => c.PlayerId == TrackPositions.Positions[i]).Nickname.Value;
             sb.AppendLine($"{pos,2} | {nickname,-20}");
         }
 
@@ -169,9 +168,9 @@ public class PrePeriod : IRacePeriod
             racer.Laps.Clear();
         }
 
-        raceControl.PeriodName.Value = new FixedString32Bytes("Подготовка");
-        raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
-        raceControl.PeriodType.Value = PeriodType.PreRace;
+        // raceControl.PeriodName.Value = new FixedString32Bytes("Подготовка");
+        // raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+        // raceControl.PeriodType.Value = PeriodType.PreRace;
         CartHandle.NewCartConnected = handle =>
         {
             handle.GetComponent<TrackPlacement>().PlaceOnTrack();
@@ -194,9 +193,9 @@ public class RacePeriod : IRacePeriod
     {
         foreach (var racer in raceControl.racers) racer.GetComponent<UserControl>().AllowControl = true;
 
-        raceControl.PeriodType.Value = PeriodType.Race;
-        raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
-        raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+        // raceControl.PeriodType.Value = PeriodType.Race;
+        // raceControl.PeriodName.Value = new FixedString32Bytes("Гонка");
+        // raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
 
         CartHandle.NewCartConnected = handle =>
         {
@@ -212,7 +211,7 @@ public class RacePeriod : IRacePeriod
         var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
             .ThenBy(i => (i.CurrentLap ?? TrackLap.Null).LastSegmentIndex).ToList();
         raceControl.racers = racersOrder;
-        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId.Value).ToList();
+        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId).ToList();
     }
 }
 
@@ -232,9 +231,9 @@ public class PracticePeriod : IRacePeriod
             rigidbody.angularVelocity = Vector3.zero;
         }
 
-        raceControl.PeriodType.Value = PeriodType.Practice;
-        raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
-        raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+        // raceControl.PeriodType.Value = PeriodType.Practice;
+        // raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
+        // raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
 
         CartHandle.NewCartConnected = handle =>
         {
@@ -251,7 +250,7 @@ public class PracticePeriod : IRacePeriod
         var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
             .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
         raceControl.racers = racersOrder;
-        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId.Value).ToList();
+        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId).ToList();
     }
 }
 
@@ -263,9 +262,9 @@ public class FinishPeriod : IRacePeriod
 
     public void Start(RaceControl raceControl)
     {
-        raceControl.PeriodType.Value = PeriodType.Finish;
-        raceControl.PeriodName.Value = new FixedString32Bytes("🏁 Финиш");
-        raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+        // raceControl.PeriodType.Value = PeriodType.Finish;
+        // raceControl.PeriodName.Value = new FixedString32Bytes("🏁 Финиш");
+        // raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
         if (raceControl.racers.FirstOrDefault() is { } racer) CurrentLap = racer.Laps.Count;
     }
 
@@ -274,11 +273,11 @@ public class FinishPeriod : IRacePeriod
         var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
             .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
         raceControl.racers = racersOrder;
-        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId.Value).ToList();
+        raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId).ToList();
     }
 }
 
-public class TrackPositions : NetworkVariableBase
+public class TrackPositions
 {
     private List<int> _positions = new();
 
@@ -287,39 +286,39 @@ public class TrackPositions : NetworkVariableBase
         get => _positions;
         set
         {
-            if (!_positions.SequenceEqual(value))
-                SetDirty(true);
+            // if (!_positions.SequenceEqual(value))
+                // SetDirty(true);
             _positions = value;
         }
     }
 
-    public override void WriteDelta(FastBufferWriter writer)
-    {
-        WriteField(writer);
-    }
-
-    public override void WriteField(FastBufferWriter writer)
-    {
-        Debug.Log("Writing track positions");
-        writer.TryBeginWrite((Positions.Count + 1) * 4);
-        writer.WriteValue(Positions.Count);
-        foreach (var t in Positions) writer.WriteValue(t);
-    }
-
-    public override void ReadField(FastBufferReader reader)
-    {
-        reader.ReadValueSafe(out int count);
-        Positions = new List<int>(count);
-        Debug.Log($"Read {count} positions");
-        for (var i = 0; i < count; i++)
-        {
-            reader.ReadValueSafe(out int p);
-            Positions.Add(p);
-        }
-    }
-
-    public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
-    {
-        ReadField(reader);
-    }
+    // public override void WriteDelta(FastBufferWriter writer)
+    // {
+    //     WriteField(writer);
+    // }
+    //
+    // public override void WriteField(FastBufferWriter writer)
+    // {
+    //     Debug.Log("Writing track positions");
+    //     writer.TryBeginWrite((Positions.Count + 1) * 4);
+    //     writer.WriteValue(Positions.Count);
+    //     foreach (var t in Positions) writer.WriteValue(t);
+    // }
+    //
+    // public override void ReadField(FastBufferReader reader)
+    // {
+    //     reader.ReadValueSafe(out int count);
+    //     Positions = new List<int>(count);
+    //     Debug.Log($"Read {count} positions");
+    //     for (var i = 0; i < count; i++)
+    //     {
+    //         reader.ReadValueSafe(out int p);
+    //         Positions.Add(p);
+    //     }
+    // }
+    //
+    // public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
+    // {
+    //     ReadField(reader);
+    // }
 }

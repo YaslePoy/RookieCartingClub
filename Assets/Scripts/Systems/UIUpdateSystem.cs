@@ -30,7 +30,7 @@ public partial class UIUpdateSystem : SystemBase
 
     private void SendInPitRequest()
     {
-        var id = UI.Instance.Cart.PlayerId.Value;
+        var id = UI.Instance.Cart.PlayerId;
 
         var replaceEntity = Entity.Null;
 
