@@ -29,9 +29,10 @@ public partial struct InputPhysicalImplementationSystem : ISystem
         var engineJob = new EngineCalculateJob();
         
         var breakingHandle = breakingJob.ScheduleParallel(state.Dependency);
-        var wheelHandle = wheelJob.ScheduleParallel(breakingHandle);
-        var engineHandle = engineJob.ScheduleParallel(wheelHandle);
+        var wheelHandle = wheelJob.ScheduleParallel(state.Dependency);
+        var engineHandle = engineJob.ScheduleParallel(state.Dependency);
 
-        engineHandle.Complete();
+        var combinedHandle = JobHandle.CombineDependencies(breakingHandle, wheelHandle, engineHandle);
+        combinedHandle.Complete();
     }
 }
