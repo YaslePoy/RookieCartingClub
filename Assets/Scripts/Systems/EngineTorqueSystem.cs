@@ -48,7 +48,9 @@ public partial struct EngineTorqueJob : IJobEntity
 
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-    private void Execute(Parent parent, LocalToWorld transform, EngineWheelData wheelData,
+    private void Execute(Parent parent,
+        LocalToWorld transform,
+        EngineWheelData wheelData,
         ref DynamicBuffer<ForceApplyRequest> forceApply)
     {
         var engine = EngineLookup[parent.Value];

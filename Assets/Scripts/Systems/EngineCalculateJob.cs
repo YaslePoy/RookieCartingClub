@@ -6,7 +6,9 @@ using Unity.Physics;
 [BurstCompile]
 public partial struct EngineCalculateJob : IJobEntity
 {
-    private void Execute(ref EngineData engine, in CartInputData input, PhysicsVelocity velocity,
+    private void Execute(ref EngineData engine,
+        in CartInputData input,
+        PhysicsVelocity velocity,
         DynamicBuffer<CurvePoint> curve)
     {
         var currentSpeed = math.length(velocity.Linear);
