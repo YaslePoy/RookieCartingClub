@@ -10,7 +10,7 @@ public partial struct EngineCalculateJob : IJobEntity
         DynamicBuffer<CurvePoint> curve)
     {
         var currentSpeed = math.length(velocity.Linear);
-        if (currentSpeed > engine.MaxSpeed) 
+        if (currentSpeed > engine.MaxSpeed)
             return;
 
         var rate = currentSpeed / engine.MaxSpeed;

@@ -18,7 +18,7 @@ public partial struct PlaneCalculateSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
-        
+
         var job = new PlaneCalculateJob { CommandBuffer = ecb.AsParallelWriter() };
         job.ScheduleParallel(state.Dependency).Complete();
 
@@ -38,19 +38,19 @@ public partial struct PlaneCalculateJob : IJobEntity
             return;
 
         var speed = math.length(velocity.Velocity);
-        if (speed < 0.01f) 
+        if (speed < 0.01f)
             return;
-        
+
         var resistanceFactor = math.dot(math.normalize(velocity.Velocity), math.normalize(localToWorld.Right));
-        
-        if (math.abs(resistanceFactor) < 0.0001f) 
+
+        if (math.abs(resistanceFactor) < 0.0001f)
             return;
 
         var forceVector = localToWorld.Right;
-        if (resistanceFactor > 0) 
+        if (resistanceFactor > 0)
             forceVector *= -1;
 
-        if (speed < 0.2f) 
+        if (speed < 0.2f)
             setup.EfficiencyFactor *= speed;
 
         var finalForce = forceVector * math.abs(resistanceFactor * setup.EfficiencyFactor * setup.MaxForce);

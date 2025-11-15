@@ -50,10 +50,7 @@ public partial struct LapRegisterSystem : ISystem
         }
 
 
-        foreach (var collision in cols)
-        {
-            RegisterNewSegments(placementBuffers, collision, currentPlacement);
-        }
+        foreach (var collision in cols) RegisterNewSegments(placementBuffers, collision, currentPlacement);
 
         placementBuffers.Dispose();
         newBuffers.Dispose();
@@ -61,7 +58,8 @@ public partial struct LapRegisterSystem : ISystem
         cols.Dispose();
     }
 
-    private void RegisterNewSegments(NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>> placementBuffers, CartCollision collision,
+    private void RegisterNewSegments(NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>> placementBuffers,
+        CartCollision collision,
         NativeHashSet<EntitySegment> currentPlacement)
     {
         var entityBuffer = placementBuffers[collision.PlayerEntity];
@@ -74,15 +72,15 @@ public partial struct LapRegisterSystem : ISystem
         }
     }
 
-    private void FillMapsAndBuffer(NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>> placementBuffers, Entity entity, DynamicBuffer<CurrentContactingSegment> currentContactingSegments,
-        NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>> newBuffers, NativeHashSet<EntitySegment> currentPlacement)
+    private void FillMapsAndBuffer(NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>> placementBuffers,
+        Entity entity, DynamicBuffer<CurrentContactingSegment> currentContactingSegments,
+        NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>> newBuffers,
+        NativeHashSet<EntitySegment> currentPlacement)
     {
         placementBuffers[entity] = currentContactingSegments;
         newBuffers[entity] = _newContactingSegmentLookup[entity];
         foreach (var currentContactingSegment in currentContactingSegments)
-        {
             currentPlacement.Add(new EntitySegment(entity, currentContactingSegment.Index));
-        }
 
         currentContactingSegments.Clear();
     }
@@ -123,20 +121,16 @@ public partial struct LapRegisterSystem : ISystem
 
         public void Execute(TriggerEvent triggerEvent)
         {
-            var segment = new CheckPointData { Index = -1 };
-            var cartEntity = Entity.Null;
-            if (CartLookup.TryGetComponent(triggerEvent.EntityA, out var cartDataA))
-            {
+            CheckPointData segment;
+            Entity cartEntity;
+            
+            if (CartLookup.HasComponent(triggerEvent.EntityA))
                 cartEntity = triggerEvent.EntityA;
-            }
-            else if (CartLookup.TryGetComponent(triggerEvent.EntityB, out var cartDataB))
-            {
+            else if (CartLookup.HasComponent(triggerEvent.EntityB))
                 cartEntity = triggerEvent.EntityB;
-            }
             else
                 return;
-
-
+            
             if (CheckPointLookup.TryGetComponent(triggerEvent.EntityA, out var checkA))
                 segment = checkA;
             else if (CheckPointLookup.TryGetComponent(triggerEvent.EntityB, out var checkB))

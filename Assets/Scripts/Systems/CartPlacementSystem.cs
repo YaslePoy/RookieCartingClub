@@ -5,7 +5,6 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 
-
 public partial struct CartPlacementSystem : ISystem
 {
     private BufferLookup<TrackPlacementPosition> _positionsLookup;
@@ -46,7 +45,7 @@ public partial struct CartPlacementSystem : ISystem
         public NativeArray<TrackPositionsCollection> PositionsCollection;
 
         private void Execute(Entity entity,
-            ref LocalTransform transform, 
+            ref LocalTransform transform,
             ref PhysicsVelocity velocity,
             TrackPlacementRequest request,
             EnabledRefRW<TrackPlacementRequest> enabledRequest,
@@ -61,7 +60,7 @@ public partial struct CartPlacementSystem : ISystem
             velocity.Angular = float3.zero;
 
             CommandBuffer.SetComponentEnabled<EnableSimulate>(entity, true);
-            
+
             simulate.ValueRW = false;
             enabledRequest.ValueRW = false;
         }

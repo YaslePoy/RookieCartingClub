@@ -7,6 +7,7 @@ public partial class KeyboardInputSystem : SystemBase
 {
     private InputAction _forceAction;
     private InputAction _stopRecordAction;
+
     protected override void OnCreate()
     {
         _forceAction = InputSystem.actions.FindAction("Move");
@@ -17,40 +18,32 @@ public partial class KeyboardInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        var isStopingRecording = _stopRecordAction.WasPressedThisFrame(); 
-        if (isStopingRecording)
-        {
-            EntityManager.CreateEntity(typeof(StopRecord));
-        }
-        
+        var isStopingRecording = _stopRecordAction.WasPressedThisFrame();
+        if (isStopingRecording) EntityManager.CreateEntity(typeof(StopRecord));
+
         var isRequireReplay = SystemAPI.HasSingleton<ReplayInput>();
-        if (isRequireReplay)
-        {
-            return;
-        }
-        
+        if (isRequireReplay) return;
+
         var cartEntity = SystemAPI.GetSingletonEntity<CartInputData>();
         var userControl = SystemAPI.GetComponentRW<CartInputData>(cartEntity);
         var inputSetting = SystemAPI.GetSingleton<InputFromKeyboard>();
         userControl.ValueRW.CurrentEngine = 0;
         userControl.ValueRW.CurrentBreaks = 0;
-        
+
         var movement = _forceAction.ReadValue<Vector2>();
-        
+
         var isAcceleratingOrBreaking = movement.y != 0;
-        if (isAcceleratingOrBreaking)
-        {
-            SetupEngineAndBreaks(movement, userControl);
-        }
-        
-        var isSteering  = movement.x != 0;
+        if (isAcceleratingOrBreaking) SetupEngineAndBreaks(movement, userControl);
+
+        var isSteering = movement.x != 0;
         if (isSteering)
             SetupWheelAngleWithSteering(movement, inputSetting, userControl, SystemAPI.Time.DeltaTime);
         else
             ReturnWheelToCenter(userControl, inputSetting, SystemAPI.Time.DeltaTime);
     }
 
-    private static void ReturnWheelToCenter(RefRW<CartInputData> userControl, InputFromKeyboard inputSetting, float deltaTime)
+    private static void ReturnWheelToCenter(RefRW<CartInputData> userControl, InputFromKeyboard inputSetting,
+        float deltaTime)
     {
         if (userControl.ValueRW.CurrentAngle != 0)
             userControl.ValueRW.CurrentAngle -=
@@ -67,14 +60,15 @@ public partial class KeyboardInputSystem : SystemBase
             userControl.ValueRW.CurrentBreaks = MathF.Round(-movement.y);
     }
 
-    private static void SetupWheelAngleWithSteering(Vector2 movement, InputFromKeyboard inputSetting, RefRW<CartInputData> userControl, float deltaTime)
+    private static void SetupWheelAngleWithSteering(Vector2 movement, InputFromKeyboard inputSetting,
+        RefRW<CartInputData> userControl, float deltaTime)
     {
         const float acceleratedSteering = 3.5f;
         var angleDelta = movement.x * inputSetting.Sensetivity * deltaTime;
         if (MathF.Sign(angleDelta) != MathF.Sign(userControl.ValueRW.CurrentAngle)) angleDelta *= acceleratedSteering;
 
         var angleCandidate = userControl.ValueRW.CurrentAngle + angleDelta;
-        
+
         if (Mathf.Abs(angleCandidate) < inputSetting.MaxAngle)
             userControl.ValueRW.CurrentAngle = angleCandidate;
         else
@@ -84,5 +78,4 @@ public partial class KeyboardInputSystem : SystemBase
 
 public struct StopRecord : IComponentData
 {
-    
 }

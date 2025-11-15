@@ -8,18 +8,17 @@ using Unity.Transforms;
 [UpdateBefore(typeof(ForceApplySystem))]
 public partial struct ForceSummarySystem : ISystem
 {
-
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<CartWheel>();
     }
-    
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
-        
+
         new ForceSummaryJob
         {
             CommandBuffer = ecb.AsParallelWriter()
@@ -35,11 +34,14 @@ public partial struct ForceSummaryJob : IJobEntity
 {
     // public NativeList<DebugLine> DebugLines;
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
-    private void Execute(ref DynamicBuffer<ForceApplyRequest> requests, CartWheel wheelData, Parent parent,
+
+    private void Execute(ref DynamicBuffer<ForceApplyRequest> requests,
+        CartWheel wheelData,
+        Parent parent,
         LocalToWorld position)
     {
         var sumForce = float3.zero;
-        for (var i = 0; i < requests.Length; i++) 
+        for (var i = 0; i < requests.Length; i++)
             sumForce += requests[i].Force;
 
         var forceMultiplier = wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
@@ -49,15 +51,15 @@ public partial struct ForceSummaryJob : IJobEntity
         if (length == 0)
             return;
 
-        if (length > wheelData.MaxResistance) 
+        if (length > wheelData.MaxResistance)
             sumForce *= wheelData.MaxResistance / length;
-        
+
         CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, parent.Value, new FinalForceRequest
         {
             Force = sumForce,
             Position = position.Position
         });
-        
+
         requests.Clear();
     }
 }

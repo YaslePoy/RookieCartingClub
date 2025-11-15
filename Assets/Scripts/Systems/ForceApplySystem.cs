@@ -14,17 +14,15 @@ public partial struct ForceApplySystem : ISystem
     {
         state.RequireForUpdate<FinalForceRequest>();
     }
-    
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-
         var job = new ForceApplyJob
         {
             TimeStep = SystemAPI.Time.fixedDeltaTime
         };
         job.ScheduleParallel(state.Dependency).Complete();
-        
     }
 }
 
@@ -32,7 +30,10 @@ public partial struct ForceApplySystem : ISystem
 public partial struct ForceApplyJob : IJobEntity
 {
     public float TimeStep;
-    private void Execute(ref DynamicBuffer<FinalForceRequest> requests, PhysicsMass mass, ref PhysicsVelocity velocity,
+
+    private void Execute(ref DynamicBuffer<FinalForceRequest> requests,
+        PhysicsMass mass,
+        ref PhysicsVelocity velocity,
         LocalToWorld localToWorld)
     {
         if (requests.IsEmpty)
@@ -40,13 +41,13 @@ public partial struct ForceApplyJob : IJobEntity
 
         var rawForce = float3.zero;
         var rotateForce = float3.zero;
-        
+
         var center = mass.GetCenterOfMassWorldSpace(localToWorld.Position, localToWorld.Rotation);
 
         for (var i = 0; i < requests.Length; i++)
         {
             var request = requests[i];
-            mass.GetImpulseFromForce(request.Force, ForceMode.Force, TimeStep, out var impulse, out var imp);
+            mass.GetImpulseFromForce(request.Force, ForceMode.Force, TimeStep, out var impulse, out _);
 
             rawForce += impulse;
             rotateForce += math.cross(request.Position - center, impulse);
@@ -54,7 +55,7 @@ public partial struct ForceApplyJob : IJobEntity
 
         velocity.ApplyLinearImpulse(mass, rawForce);
         velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
-        
+
         requests.Clear();
     }
 }

@@ -2,7 +2,6 @@ using DefaultNamespace;
 using Unity.Entities;
 using Unity.Transforms;
 
-
 [UpdateInGroup(typeof(PresentationSystemGroup))]
 public partial class CameraMovementSystem : SystemBase
 {

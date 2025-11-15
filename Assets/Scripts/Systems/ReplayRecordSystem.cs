@@ -14,7 +14,7 @@ public partial struct ReplayRecordSystem : ISystem
         state.RequireForUpdate<RecordInput>();
         state.RequireForUpdate<CartInputData>();
     }
-    
+
     public void OnUpdate(ref SystemState state)
     {
         var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
@@ -40,7 +40,7 @@ public partial struct ReplayRecordSystem : ISystem
         var length = recorded.Length;
         var finalOutput = new Span<byte>(new byte[length * sizeOf]);
 
-        for (int i = 0; i < buffer.Length; i++)
+        for (var i = 0; i < buffer.Length; i++)
         {
             var input = recorded[i].Input;
             MemoryMarshal.Write(finalOutput[(sizeOf * i)..], ref input);

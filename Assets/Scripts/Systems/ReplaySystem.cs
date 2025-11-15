@@ -22,6 +22,7 @@ public partial struct ReplaySystem : ISystem
             state.EntityManager.RemoveComponent<ReplayInput>(SystemAPI.GetSingletonEntity<InputRecord>());
             return;
         }
+
         var first = buffer[0];
         buffer.RemoveAt(0);
         SystemAPI.SetSingleton(first.Input);

@@ -21,12 +21,10 @@ public partial class LapApplySystem : SystemBase
                 continue;
 
             foreach (var segment in buffer)
-            {
                 handle.PushCheckPoint(new CheckPointData
                 {
-                    Index = segment.Index,
+                    Index = segment.Index
                 });
-            }
 
             buffer.Clear();
         }
