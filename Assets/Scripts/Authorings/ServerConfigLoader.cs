@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using DefaultNamespace;
 using UnityEngine;
@@ -32,12 +31,4 @@ public class ServerConfigLoader : MonoBehaviour
 
         SceneManager.LoadScene(config.TrackId);
     }
-}
-
-[Serializable]
-public class ServerConfig
-{
-    public ushort Port;
-    public string TrackId;
-    public string SessionTimetable;
 }

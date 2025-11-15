@@ -20,10 +20,3 @@ public class KeyboardInput : MonoBehaviour
         }
     }
 }
-
-
-public struct InputFromKeyboard : IComponentData
-{
-    public float MaxAngle;
-    public float Sensetivity;
-}

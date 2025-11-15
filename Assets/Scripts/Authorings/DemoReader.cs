@@ -54,9 +54,3 @@ public class DemoReader : MonoBehaviour
         return finalData.ToArray();
     }
 }
-
-public struct CartStamp
-{
-    public Vector3 position;
-    public Quaternion rotation;
-}

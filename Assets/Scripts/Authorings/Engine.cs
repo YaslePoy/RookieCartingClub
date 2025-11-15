@@ -33,17 +33,3 @@ public class Engine : MonoBehaviour
         }
     }
 }
-
-
-public struct EngineData : IComponentData
-{
-    public float MaxForce;
-    public float MaxSpeed;
-    public float CurrentForce;
-}
-
-
-public struct CurvePoint : IBufferElementData
-{
-    public float2 Value;
-}

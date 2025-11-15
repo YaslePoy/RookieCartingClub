@@ -17,9 +17,3 @@ public class CheckPoint : MonoBehaviour
         }
     }
 }
-
-
-public struct CheckPointData : IComponentData
-{
-    public int Index;
-}

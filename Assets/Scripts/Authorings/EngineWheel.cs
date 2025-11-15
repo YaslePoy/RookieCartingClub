@@ -21,10 +21,3 @@ public class EngineWheel : MonoBehaviour
         }
     }
 }
-
-
-public struct EngineWheelData : IComponentData
-{
-    public float Part;
-    public Entity EngineResistant;
-}

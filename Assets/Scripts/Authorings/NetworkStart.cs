@@ -9,10 +9,3 @@ public class NetworkStart : MonoBehaviour
     {
     }
 }
-
-public enum NetworkMode
-{
-    Server,
-    Client,
-    Host
-}

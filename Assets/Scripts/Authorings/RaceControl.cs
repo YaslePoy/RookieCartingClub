@@ -3,7 +3,6 @@ using System.Linq;
 using System.Text;
 using DefaultNamespace;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 //todo
@@ -79,32 +78,6 @@ public class RaceControl : MonoBehaviour
             }
         }
     }
-}
-
-public struct TrackPlacementPosition : IBufferElementData
-{
-    public float3 Position;
-    public quaternion Rotation;
-}
-
-public struct TrackPositionsCollection : IBufferElementData
-{
-    public Entity BufferEntity;
-}
-
-public enum PeriodType
-{
-    Practice,
-    Race,
-    PreRace,
-    Qualification,
-    Finish
-}
-
-public interface IRacePeriod
-{
-    void Start(RaceControl raceControl);
-    void Update(RaceControl raceControl);
 }
 
 // public class PrePeriod : IRacePeriod
@@ -231,49 +204,3 @@ public interface IRacePeriod
 //         raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId).ToList();
 //     }
 // }
-
-public class TrackPositions
-{
-    private List<int> _positions = new();
-
-    public List<int> Positions
-    {
-        get => _positions;
-        set
-        {
-            // if (!_positions.SequenceEqual(value))
-                // SetDirty(true);
-            _positions = value;
-        }
-    }
-
-    // public override void WriteDelta(FastBufferWriter writer)
-    // {
-    //     WriteField(writer);
-    // }
-    //
-    // public override void WriteField(FastBufferWriter writer)
-    // {
-    //     Debug.Log("Writing track positions");
-    //     writer.TryBeginWrite((Positions.Count + 1) * 4);
-    //     writer.WriteValue(Positions.Count);
-    //     foreach (var t in Positions) writer.WriteValue(t);
-    // }
-    //
-    // public override void ReadField(FastBufferReader reader)
-    // {
-    //     reader.ReadValueSafe(out int count);
-    //     Positions = new List<int>(count);
-    //     Debug.Log($"Read {count} positions");
-    //     for (var i = 0; i < count; i++)
-    //     {
-    //         reader.ReadValueSafe(out int p);
-    //         Positions.Add(p);
-    //     }
-    // }
-    //
-    // public override void ReadDelta(FastBufferReader reader, bool keepDirtyDelta)
-    // {
-    //     ReadField(reader);
-    // }
-}

@@ -1,5 +1,4 @@
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class VelocityProvider : MonoBehaviour
@@ -30,11 +29,4 @@ public class VelocityProvider : MonoBehaviour
             AddComponent<LocalVelocity>(entity);
         }
     }
-}
-
-
-public struct LocalVelocity : IComponentData
-{
-    public float3 Velocity;
-    public float3 LastPosition;
 }

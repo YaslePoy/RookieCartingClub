@@ -5,10 +5,7 @@ using DefaultNamespace;
 using JetBrains.Annotations;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
-using MeshCollider = UnityEngine.MeshCollider;
 
 public class CartHandle : MonoBehaviour
 {
@@ -60,48 +57,7 @@ public class CartHandle : MonoBehaviour
         else
             currentLap.SetupSegmentTime(now, checkPoint.Index);
     }
-}
-
-
-#if UNITY_EDITOR
-[CustomEditor(typeof(CartHandle))]
-public class CartHandleEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        if (GUILayout.Button("Convert"))
-        {
-            var limits = GameObject.Find("track_limits").GetComponentsInChildren<MeshFilter>();
-            var index = 0;
-            foreach (var limitMesh in limits)
-            {
-                var go = limitMesh.gameObject;
-                go.GetComponent<MeshRenderer>().enabled = false;
-                var col = go.AddComponent<MeshCollider>();
-                col.convex = true;
-                col.isTrigger = true;
-                col.sharedMesh = limitMesh.sharedMesh;
-                var data = go.AddComponent<CheckPoint>();
-                data.Index = index++;
-            }
-        }
-
-        if (GUILayout.Button("border"))
-        {
-            var limits = GameObject.Find("ground_colliders").GetComponentsInChildren<MeshCollider>();
-
-            foreach (var limitMesh in limits) limitMesh.isTrigger = false;
-            // var go = limitMesh.gameObject;
-            // var mesh = limitMesh.mesh;
-            // var colider = go.AddComponent<MeshCollider>();
-            // colider.convex = true;
-            // colider.sharedMesh = mesh;
-            // colider.isTrigger = true;
-            // go.GetComponent<MeshRenderer>().enabled = false;
-        }
-    }
-
+    
     public class CartHandleBaker : Baker<CartHandle>
     {
         public override void Bake(CartHandle authoring)
@@ -124,36 +80,47 @@ public class CartHandleEditor : Editor
         }
     }
 }
-#endif
 
 
-public struct CartData : IComponentData
-{
-    public FixedString32Bytes Nickname;
-    public int PlayerId;
-}
-
-public struct ForceApplier : IComponentData
-{
-}
-
-public struct FinalForceRequest : IBufferElementData
-{
-    public float3 Force;
-    public float3 Position;
-}
-
-public struct CurrentContactingSegment : IBufferElementData
-{
-    public int Index;
-}
-
-public struct NewContactingSegment : IBufferElementData
-{
-    public int Index;
-}
-
-public struct TrackPlacementRequest : IComponentData, IEnableableComponent
-{
-    public int CollectionId;
-}
+// #if UNITY_EDITOR
+// [CustomEditor(typeof(CartHandle))]
+// public class CartHandleEditor : Editor
+// {
+//     public override void OnInspectorGUI()
+//     {
+//         DrawDefaultInspector();
+//         if (GUILayout.Button("Convert"))
+//         {
+//             var limits = GameObject.Find("track_limits").GetComponentsInChildren<MeshFilter>();
+//             var index = 0;
+//             foreach (var limitMesh in limits)
+//             {
+//                 var go = limitMesh.gameObject;
+//                 go.GetComponent<MeshRenderer>().enabled = false;
+//                 var col = go.AddComponent<MeshCollider>();
+//                 col.convex = true;
+//                 col.isTrigger = true;
+//                 col.sharedMesh = limitMesh.sharedMesh;
+//                 var data = go.AddComponent<CheckPoint>();
+//                 data.Index = index++;
+//             }
+//         }
+//
+//         if (GUILayout.Button("border"))
+//         {
+//             var limits = GameObject.Find("ground_colliders").GetComponentsInChildren<MeshCollider>();
+//
+//             foreach (var limitMesh in limits) limitMesh.isTrigger = false;
+//             // var go = limitMesh.gameObject;
+//             // var mesh = limitMesh.mesh;
+//             // var colider = go.AddComponent<MeshCollider>();
+//             // colider.convex = true;
+//             // colider.sharedMesh = mesh;
+//             // colider.isTrigger = true;
+//             // go.GetComponent<MeshRenderer>().enabled = false;
+//         }
+//     }
+//
+//
+// }
+// #endif

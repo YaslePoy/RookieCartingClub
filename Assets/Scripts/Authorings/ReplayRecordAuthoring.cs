@@ -14,16 +14,3 @@ public class ReplayRecordAuthoring : MonoBehaviour
         }
     }
 }
-
-public struct InputRecord : IBufferElementData
-{
-    public CartInputData Input;
-}
-
-public struct RecordInput : IComponentData
-{
-}
-
-public struct ReplayInput : IComponentData
-{
-}
