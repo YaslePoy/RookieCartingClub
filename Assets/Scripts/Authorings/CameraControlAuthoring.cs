@@ -12,7 +12,3 @@ public class CameraControlAuthoring : MonoBehaviour
         }
     }
 }
-
-public struct CameraPoint : IComponentData
-{
-}

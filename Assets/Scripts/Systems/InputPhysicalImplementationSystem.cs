@@ -24,14 +24,16 @@ public partial struct InputPhysicalImplementationSystem : ISystem
         {
             InputLookup = _inputLookup
         };
+        var breakingHandle = breakingJob.ScheduleParallel(state.Dependency);
+        
         var wheelJob = new WheelRotatingSystemJob
         {
             InputLookup = _inputLookup
         };
+        var wheelHandle = wheelJob.ScheduleParallel(state.Dependency);
+        
         var engineJob = new EngineCalculateJob();
 
-        var breakingHandle = breakingJob.ScheduleParallel(state.Dependency);
-        var wheelHandle = wheelJob.ScheduleParallel(state.Dependency);
         var engineHandle = engineJob.ScheduleParallel(state.Dependency);
 
         var combinedHandle = JobHandle.CombineDependencies(breakingHandle, wheelHandle, engineHandle);

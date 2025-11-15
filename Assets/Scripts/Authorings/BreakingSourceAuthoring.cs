@@ -17,8 +17,3 @@ public class BreakingSourceAuthoring : MonoBehaviour
         }
     }
 }
-
-public struct BreakingSource : IComponentData
-{
-    public Entity Source;
-}

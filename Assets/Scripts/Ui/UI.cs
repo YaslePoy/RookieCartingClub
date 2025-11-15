@@ -113,8 +113,3 @@ public class UI : MonoBehaviour
         };
     }
 }
-
-public interface IVelocityProvider
-{
-    Vector3 Velocity { get; }
-}

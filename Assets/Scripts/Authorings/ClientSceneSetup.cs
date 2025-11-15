@@ -43,33 +43,33 @@ public class ClientSceneSetup : MonoBehaviour
     //     }
     // }
 
-    public Queue<IRacePeriod> ParseConfiguration(string configuration)
-    {
-        var queue = new Queue<IRacePeriod>();
-        var parts = configuration.Split(' ');
-        foreach (var part in parts)
-        {
-            var type = part.Split(':')[0];
-
-            Debug.Log($"{type}: {part}");
-
-            switch (type)
-            {
-                case "PRE":
-                    queue.Enqueue(new PrePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
-                    break;
-                case "RACE":
-                    queue.Enqueue(new RacePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
-                    break;
-                case "PRACTICE":
-                    queue.Enqueue(new PracticePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
-                    break;
-                case "FINISH":
-                    queue.Enqueue(new FinishPeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
-                    break;
-            }
-        }
-
-        return queue;
-    }
+    // public Queue<IRacePeriod> ParseConfiguration(string configuration)
+    // {
+    //     var queue = new Queue<IRacePeriod>();
+    //     var parts = configuration.Split(' ');
+    //     foreach (var part in parts)
+    //     {
+    //         var type = part.Split(':')[0];
+    //
+    //         Debug.Log($"{type}: {part}");
+    //
+    //         switch (type)
+    //         {
+    //             case "PRE":
+    //                 queue.Enqueue(new PrePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
+    //                 break;
+    //             case "RACE":
+    //                 queue.Enqueue(new RacePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
+    //                 break;
+    //             case "PRACTICE":
+    //                 queue.Enqueue(new PracticePeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
+    //                 break;
+    //             case "FINISH":
+    //                 queue.Enqueue(new FinishPeriod { Duration = Convert.ToDouble(part.Split(':')[1]) });
+    //                 break;
+    //         }
+    //     }
+    //
+    //     return queue;
+    // }
 }

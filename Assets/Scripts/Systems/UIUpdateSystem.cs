@@ -47,3 +47,8 @@ public class ConstantVelocityProvider : IVelocityProvider
 {
     public Vector3 Velocity { get; set; }
 }
+
+public interface IVelocityProvider
+{
+    Vector3 Velocity { get; }
+}

@@ -21,16 +21,17 @@ public class VelocityProvider : MonoBehaviour
         Velocity = newVel;
         _lastPosition = currentPosition;
     }
-}
 
-public class VelocityProviderBaker : Baker<VelocityProvider>
-{
-    public override void Bake(VelocityProvider authoring)
+    public class VelocityProviderBaker : Baker<VelocityProvider>
     {
-        var entity = GetEntity(TransformUsageFlags.Dynamic);
-        AddComponent<LocalVelocity>(entity);
+        public override void Bake(VelocityProvider authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponent<LocalVelocity>(entity);
+        }
     }
 }
+
 
 public struct LocalVelocity : IComponentData
 {

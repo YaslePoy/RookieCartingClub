@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 
+[UpdateAfter(typeof(EnableCartSimulationSystem))]
 public partial struct CartPlacementSystem : ISystem
 {
     private BufferLookup<TrackPlacementPosition> _positionsLookup;

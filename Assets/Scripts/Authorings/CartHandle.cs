@@ -20,7 +20,7 @@ public class CartHandle : MonoBehaviour
     // public NetworkVariable<int> PlayerId = new(0, NetworkVariableReadPermission.Everyone,
     //     NetworkVariableWritePermission.Owner);
 
-    
+
     public int CheckCount;
     public List<TrackLap> Laps = new();
 
@@ -34,15 +34,9 @@ public class CartHandle : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void Start()
     {
-        // checkCount = GameObject.Find("track_limits").GetComponentsInChildren<MeshCollider>().Length;
         print($"Segments count: {CheckCount}");
         Laps.Add(new TrackLap(CheckCount, Time.timeAsDouble));
 
-        // if (IsClient && IsOwner)
-        // {
-        //     Nickname.Value = new FixedString32Bytes(SessionSetup.Nickname);
-        //     PlayerId = SessionSetup.Id;
-        // }
 
         RaceControl.Singleton.racers.Add(this);
 
@@ -66,7 +60,6 @@ public class CartHandle : MonoBehaviour
         else
             currentLap.SetupSegmentTime(now, checkPoint.Index);
     }
-    
 }
 
 
@@ -108,31 +101,31 @@ public class CartHandleEditor : Editor
             // go.GetComponent<MeshRenderer>().enabled = false;
         }
     }
+
+    public class CartHandleBaker : Baker<CartHandle>
+    {
+        public override void Bake(CartHandle authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+
+            AddComponent(entity, new CartData
+            {
+                Nickname = authoring.Nickname,
+                PlayerId = authoring.PlayerId
+            });
+            AddComponent<ForceApplier>(entity);
+            AddBuffer<FinalForceRequest>(entity);
+            AddBuffer<CurrentContactingSegment>(entity);
+            AddBuffer<NewContactingSegment>(entity);
+            AddComponent<EnableSimulate>(entity);
+            SetComponentEnabled<EnableSimulate>(entity, false);
+            AddComponent<TrackPlacementRequest>(entity);
+            SetComponentEnabled<TrackPlacementRequest>(entity, false);
+        }
+    }
 }
 #endif
 
-
-public class CartHandleBaker : Baker<CartHandle>
-{
-    public override void Bake(CartHandle authoring)
-    {
-        var entity = GetEntity(TransformUsageFlags.Dynamic);
-
-        AddComponent(entity, new CartData
-        {
-            Nickname = authoring.Nickname,
-            PlayerId = authoring.PlayerId
-        });
-        AddComponent<ForceApplier>(entity);
-        AddBuffer<FinalForceRequest>(entity);
-        AddBuffer<CurrentContactingSegment>(entity);
-        AddBuffer<NewContactingSegment>(entity);
-        AddComponent<EnableSimulate>(entity);
-        SetComponentEnabled<EnableSimulate>(entity, false);
-        AddComponent<TrackPlacementRequest>(entity);
-        SetComponentEnabled<TrackPlacementRequest>(entity, false);
-    }
-}
 
 public struct CartData : IComponentData
 {
