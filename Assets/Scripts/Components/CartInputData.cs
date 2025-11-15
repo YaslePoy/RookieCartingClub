@@ -1,9 +1,12 @@
 using Unity.Entities;
 
-public struct CartInputData : IComponentData
+namespace RookieCartingClub.Components
 {
-    public float CurrentAngle;
-    public float CurrentEngine;
-    public float CurrentBreaks;
-    public bool AllowControl;
+    public struct CartInputData : IComponentData
+    {
+        public float CurrentAngle;
+        public float CurrentEngine;
+        public float CurrentBreaks;
+        public bool AllowControl;
+    }
 }

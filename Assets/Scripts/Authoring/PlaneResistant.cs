@@ -1,0 +1,31 @@
+using RookieCartingClub.Components;
+using Unity.Entities;
+using UnityEngine;
+
+//todo
+namespace RookieCartingClub.Authoring
+{
+    public class PlaneResistant : MonoBehaviour
+    {
+        public float MaxForce;
+        public float EfficiencyFactor = 1;
+        public CartWheelAuthoring Collector;
+
+        public class PlaneResistantBaker : Baker<PlaneResistant>
+        {
+            public override void Bake(PlaneResistant authoring)
+            {
+                var entity = GetEntity(TransformUsageFlags.Dynamic);
+
+                var collector = new PlaneResistantCollector
+                {
+                    MaxForce = authoring.MaxForce,
+                    EfficiencyFactor = authoring.EfficiencyFactor,
+                    Collector = GetEntity(authoring.Collector, TransformUsageFlags.Dynamic)
+                };
+
+                AddComponent(entity, collector);
+            }
+        }
+    }
+}

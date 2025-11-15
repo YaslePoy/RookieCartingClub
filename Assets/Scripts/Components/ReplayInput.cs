@@ -1,5 +1,8 @@
 using Unity.Entities;
 
-public struct ReplayInput : IComponentData
+namespace RookieCartingClub.Components
 {
+    public struct ReplayInput : IComponentData
+    {
+    }
 }

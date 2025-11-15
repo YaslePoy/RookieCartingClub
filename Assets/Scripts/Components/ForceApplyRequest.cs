@@ -1,7 +1,10 @@
 using Unity.Entities;
 using Unity.Mathematics;
 
-public struct ForceApplyRequest : IBufferElementData
+namespace RookieCartingClub.Components
 {
-    public float3 Force;
+    public struct ForceApplyRequest : IBufferElementData
+    {
+        public float3 Force;
+    }
 }

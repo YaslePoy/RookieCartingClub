@@ -1,7 +1,10 @@
 using Unity.Entities;
 using Unity.Mathematics;
 
-public struct CurvePoint : IBufferElementData
+namespace RookieCartingClub.Components
 {
-    public float2 Value;
+    public struct CurvePoint : IBufferElementData
+    {
+        public float2 Value;
+    }
 }

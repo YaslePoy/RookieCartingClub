@@ -1,30 +1,33 @@
+using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Entities;
 
-[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-// [UpdateBefore(typeof(WheelRotatingSystem))]
-public partial struct ReplaySystem : ISystem
+namespace RookieCartingClub.Systems
 {
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
+    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    public partial struct ReplaySystem : ISystem
     {
-        state.RequireForUpdate<InputRecord>();
-        state.RequireForUpdate<ReplayInput>();
-        state.RequireForUpdate<CartInputData>();
-    }
-
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
-    {
-        var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
-        if (buffer.IsEmpty)
+        [BurstCompile]
+        public void OnCreate(ref SystemState state)
         {
-            state.EntityManager.RemoveComponent<ReplayInput>(SystemAPI.GetSingletonEntity<InputRecord>());
-            return;
+            state.RequireForUpdate<InputRecord>();
+            state.RequireForUpdate<ReplayInput>();
+            state.RequireForUpdate<CartInputData>();
         }
 
-        var first = buffer[0];
-        buffer.RemoveAt(0);
-        SystemAPI.SetSingleton(first.Input);
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
+        {
+            var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
+            if (buffer.IsEmpty)
+            {
+                state.EntityManager.RemoveComponent<ReplayInput>(SystemAPI.GetSingletonEntity<InputRecord>());
+                return;
+            }
+
+            var first = buffer[0];
+            buffer.RemoveAt(0);
+            SystemAPI.SetSingleton(first.Input);
+        }
     }
 }

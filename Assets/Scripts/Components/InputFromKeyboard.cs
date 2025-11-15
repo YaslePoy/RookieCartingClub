@@ -1,7 +1,10 @@
 using Unity.Entities;
 
-public struct InputFromKeyboard : IComponentData
+namespace RookieCartingClub.Components
 {
-    public float MaxAngle;
-    public float Sensetivity;
+    public struct InputFromKeyboard : IComponentData
+    {
+        public float MaxAngle;
+        public float Sensetivity;
+    }
 }

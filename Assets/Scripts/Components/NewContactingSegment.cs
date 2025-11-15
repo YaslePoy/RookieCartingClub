@@ -1,6 +1,9 @@
 using Unity.Entities;
 
-public struct NewContactingSegment : IBufferElementData
+namespace RookieCartingClub.Components
 {
-    public int Index;
+    public struct NewContactingSegment : IBufferElementData
+    {
+        public int Index;
+    }
 }

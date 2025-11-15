@@ -1,6 +1,9 @@
 using Unity.Entities;
 
-public struct BreakingSource : IComponentData
+namespace RookieCartingClub.Components
 {
-    public Entity Source;
+    public struct BreakingSource : IComponentData
+    {
+        public Entity Source;
+    }
 }

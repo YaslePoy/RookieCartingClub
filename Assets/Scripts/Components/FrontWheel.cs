@@ -1,5 +1,8 @@
 using Unity.Entities;
 
-public struct FrontWheel : IComponentData
+namespace RookieCartingClub.Components
 {
+    public struct FrontWheel : IComponentData
+    {
+    }
 }

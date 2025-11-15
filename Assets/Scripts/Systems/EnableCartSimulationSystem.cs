@@ -2,36 +2,39 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 
-public partial struct EnableCartSimulationSystem : ISystem
+namespace RookieCartingClub.Systems
 {
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
+    public partial struct EnableCartSimulationSystem : ISystem
     {
-        state.RequireForUpdate<EnableSimulate>();
-    }
-
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
-    {
-        var ecb = new EntityCommandBuffer(Allocator.TempJob);
-
-        var job = new EnableCartSimulationJob { CommandBuffer = ecb.AsParallelWriter() };
-        job.ScheduleParallel(state.Dependency).Complete();
-
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
-    }
-
-    [BurstCompile]
-    [WithAll(typeof(EnableSimulate))]
-    public partial struct EnableCartSimulationJob : IJobEntity
-    {
-        public EntityCommandBuffer.ParallelWriter CommandBuffer;
-
-        private void Execute([ChunkIndexInQuery] int chunkIndex, Entity cart)
+        [BurstCompile]
+        public void OnCreate(ref SystemState state)
         {
-            CommandBuffer.SetComponentEnabled<Simulate>(chunkIndex, cart, true);
-            CommandBuffer.SetComponentEnabled<EnableSimulate>(chunkIndex, cart, false);
+            state.RequireForUpdate<EnableSimulate>();
+        }
+
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
+        {
+            var ecb = new EntityCommandBuffer(Allocator.TempJob);
+
+            var job = new EnableCartSimulationJob { CommandBuffer = ecb.AsParallelWriter() };
+            job.ScheduleParallel(state.Dependency).Complete();
+
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
+        }
+
+        [BurstCompile]
+        [WithAll(typeof(EnableSimulate))]
+        public partial struct EnableCartSimulationJob : IJobEntity
+        {
+            public EntityCommandBuffer.ParallelWriter CommandBuffer;
+
+            private void Execute([ChunkIndexInQuery] int chunkIndex, Entity cart)
+            {
+                CommandBuffer.SetComponentEnabled<Simulate>(chunkIndex, cart, true);
+                CommandBuffer.SetComponentEnabled<EnableSimulate>(chunkIndex, cart, false);
+            }
         }
     }
 }

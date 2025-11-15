@@ -1,8 +1,11 @@
 using Unity.Entities;
 using Unity.Mathematics;
 
-public struct TrackPlacementPosition : IBufferElementData
+namespace RookieCartingClub.Components
 {
-    public float3 Position;
-    public quaternion Rotation;
+    public struct TrackPlacementPosition : IBufferElementData
+    {
+        public float3 Position;
+        public quaternion Rotation;
+    }
 }

@@ -1,6 +1,9 @@
 using Unity.Entities;
 
-public struct CheckPointData : IComponentData
+namespace RookieCartingClub.Components
 {
-    public int Index;
+    public struct CheckPointData : IComponentData
+    {
+        public int Index;
+    }
 }

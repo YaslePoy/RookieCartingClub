@@ -1,32 +1,37 @@
 using System.Linq;
+using RookieCartingClub.Authoring;
+using RookieCartingClub.Components;
 using Unity.Entities;
 
-public partial class LapApplySystem : SystemBase
+namespace RookieCartingClub.Systems
 {
-    protected override void OnCreate()
+    public partial class LapApplySystem : SystemBase
     {
-        RaceControl.Singleton = new RaceControl();
-        var cartHandle = new CartHandle { CheckCount = 939 };
-        cartHandle.Start();
-        RaceControl.Singleton.racers.Add(cartHandle);
-    }
-
-    protected override void OnUpdate()
-    {
-        foreach (var (id, buffer) in SystemAPI.Query<RefRO<CartData>, DynamicBuffer<NewContactingSegment>>())
+        protected override void OnCreate()
         {
-            var handle = RaceControl.Singleton.racers.First(i => i.PlayerId == id.ValueRO.PlayerId);
+            RaceControl.Singleton = new RaceControl();
+            var cartHandle = new CartHandle { CheckCount = 939 };
+            cartHandle.Start();
+            RaceControl.Singleton.racers.Add(cartHandle);
+        }
 
-            if (buffer.IsEmpty)
-                continue;
+        protected override void OnUpdate()
+        {
+            foreach (var (id, buffer) in SystemAPI.Query<RefRO<CartData>, DynamicBuffer<NewContactingSegment>>())
+            {
+                var handle = RaceControl.Singleton.racers.First(i => i.PlayerId == id.ValueRO.PlayerId);
 
-            foreach (var segment in buffer)
-                handle.PushCheckPoint(new CheckPointData
-                {
-                    Index = segment.Index
-                });
+                if (buffer.IsEmpty)
+                    continue;
 
-            buffer.Clear();
+                foreach (var segment in buffer)
+                    handle.PushCheckPoint(new CheckPointData
+                    {
+                        Index = segment.Index
+                    });
+
+                buffer.Clear();
+            }
         }
     }
 }

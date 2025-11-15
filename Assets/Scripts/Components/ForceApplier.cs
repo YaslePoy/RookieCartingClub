@@ -1,5 +1,8 @@
 using Unity.Entities;
 
-public struct ForceApplier : IComponentData
+namespace RookieCartingClub.Components
 {
+    public struct ForceApplier : IComponentData
+    {
+    }
 }

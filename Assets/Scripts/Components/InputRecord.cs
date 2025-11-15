@@ -1,6 +1,9 @@
 using Unity.Entities;
 
-public struct InputRecord : IBufferElementData
+namespace RookieCartingClub.Components
 {
-    public CartInputData Input;
+    public struct InputRecord : IBufferElementData
+    {
+        public CartInputData Input;
+    }
 }

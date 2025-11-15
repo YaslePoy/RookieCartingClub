@@ -1,6 +1,9 @@
 using Unity.Entities;
 
-public struct  TrackPlacementRequest : IComponentData, IEnableableComponent
-{ 
-    public int CollectionId;
+namespace RookieCartingClub.Components
+{
+    public struct  TrackPlacementRequest : IComponentData, IEnableableComponent
+    { 
+        public int CollectionId;
+    }
 }

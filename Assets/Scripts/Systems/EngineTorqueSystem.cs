@@ -1,69 +1,73 @@
+using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 
-[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-public partial struct EngineTorqueSystem : ISystem
+namespace RookieCartingClub.Systems
 {
-    private ComponentLookup<EngineData> _engineLookup;
-    private ComponentLookup<PlaneResistantCollector> _planeResistantLookup;
-
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
+    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    public partial struct EngineTorqueSystem : ISystem
     {
-        _engineLookup = state.GetComponentLookup<EngineData>(true);
-        _planeResistantLookup = state.GetComponentLookup<PlaneResistantCollector>(true);
-        state.RequireForUpdate<EngineWheelData>();
-    }
+        private ComponentLookup<EngineData> _engineLookup;
+        private ComponentLookup<PlaneResistantCollector> _planeResistantLookup;
 
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
-    {
-        _engineLookup.Update(ref state);
-        _planeResistantLookup.Update(ref state);
-        var ecb = new EntityCommandBuffer(Allocator.TempJob);
-
-
-        var job = new EngineTorqueJob
+        [BurstCompile]
+        public void OnCreate(ref SystemState state)
         {
-            EngineLookup = _engineLookup,
-            PlaneResistantLookup = _planeResistantLookup,
-            CommandBuffer = ecb.AsParallelWriter()
-        };
+            _engineLookup = state.GetComponentLookup<EngineData>(true);
+            _planeResistantLookup = state.GetComponentLookup<PlaneResistantCollector>(true);
+            state.RequireForUpdate<EngineWheelData>();
+        }
 
-        var handle = job.ScheduleParallel(state.Dependency);
-        handle.Complete();
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
+        {
+            _engineLookup.Update(ref state);
+            _planeResistantLookup.Update(ref state);
+            var ecb = new EntityCommandBuffer(Allocator.TempJob);
 
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
+
+            var job = new EngineTorqueJob
+            {
+                EngineLookup = _engineLookup,
+                PlaneResistantLookup = _planeResistantLookup,
+                CommandBuffer = ecb.AsParallelWriter()
+            };
+
+            var handle = job.ScheduleParallel(state.Dependency);
+            handle.Complete();
+
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
+        }
     }
-}
 
-[BurstCompile]
-public partial struct EngineTorqueJob : IJobEntity
-{
-    [ReadOnly] public ComponentLookup<EngineData> EngineLookup;
-    [ReadOnly] public ComponentLookup<PlaneResistantCollector> PlaneResistantLookup;
-
-    public EntityCommandBuffer.ParallelWriter CommandBuffer;
-
-    private void Execute([ChunkIndexInQuery] int chunkIndex, Parent parent,
-        LocalToWorld transform,
-        EngineWheelData wheelData,
-        ref DynamicBuffer<ForceApplyRequest> forceApply)
+    [BurstCompile]
+    public partial struct EngineTorqueJob : IJobEntity
     {
-        var engine = EngineLookup[parent.Value];
+        [ReadOnly] public ComponentLookup<EngineData> EngineLookup;
+        [ReadOnly] public ComponentLookup<PlaneResistantCollector> PlaneResistantLookup;
 
-        var engineBreaking = PlaneResistantLookup[wheelData.EngineResistant];
-        engineBreaking.EfficiencyFactor = engine.CurrentForce == 0f ? 1 : 0;
+        public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-        CommandBuffer.SetComponent(chunkIndex, wheelData.EngineResistant, engineBreaking);
+        private void Execute([ChunkIndexInQuery] int chunkIndex, Parent parent,
+            LocalToWorld transform,
+            EngineWheelData wheelData,
+            ref DynamicBuffer<ForceApplyRequest> forceApply)
+        {
+            var engine = EngineLookup[parent.Value];
 
-        if (engineBreaking.EfficiencyFactor != 0)
-            return;
+            var engineBreaking = PlaneResistantLookup[wheelData.EngineResistant];
+            engineBreaking.EfficiencyFactor = engine.CurrentForce == 0f ? 1 : 0;
 
-        var force = transform.Forward * (wheelData.Part * engine.CurrentForce);
-        forceApply.Add(new ForceApplyRequest { Force = force });
+            CommandBuffer.SetComponent(chunkIndex, wheelData.EngineResistant, engineBreaking);
+
+            if (engineBreaking.EfficiencyFactor != 0)
+                return;
+
+            var force = transform.Forward * (wheelData.Part * engine.CurrentForce);
+            forceApply.Add(new ForceApplyRequest { Force = force });
+        }
     }
 }

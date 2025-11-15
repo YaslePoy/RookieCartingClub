@@ -1,5 +1,8 @@
 using Unity.Entities;
 
-public struct RecordInput : IComponentData
+namespace RookieCartingClub.Components
 {
+    public struct RecordInput : IComponentData
+    {
+    }
 }

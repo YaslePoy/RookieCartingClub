@@ -1,15 +1,19 @@
+using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 
-[BurstCompile]
-public partial struct BreakingJob : IJobEntity
+namespace RookieCartingClub.Systems
 {
-    [ReadOnly]
-    public ComponentLookup<CartInputData> InputLookup;
-
-    private void Execute(BreakingSource source, ref PlaneResistantCollector collector)
+    [BurstCompile]
+    public partial struct BreakingJob : IJobEntity
     {
-        collector.EfficiencyFactor = InputLookup[source.Source].CurrentBreaks;
+        [ReadOnly]
+        public ComponentLookup<CartInputData> InputLookup;
+
+        private void Execute(BreakingSource source, ref PlaneResistantCollector collector)
+        {
+            collector.EfficiencyFactor = InputLookup[source.Source].CurrentBreaks;
+        }
     }
 }

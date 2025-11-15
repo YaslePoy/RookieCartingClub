@@ -1,5 +1,8 @@
 using Unity.Entities;
 
-public struct CameraPoint : IComponentData
+namespace RookieCartingClub.Components
 {
+    public struct CameraPoint : IComponentData
+    {
+    }
 }

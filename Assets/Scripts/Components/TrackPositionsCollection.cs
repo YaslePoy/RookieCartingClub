@@ -1,6 +1,9 @@
 using Unity.Entities;
 
-public struct TrackPositionsCollection : IBufferElementData
+namespace RookieCartingClub.Components
 {
-    public Entity BufferEntity;
+    public struct TrackPositionsCollection : IBufferElementData
+    {
+        public Entity BufferEntity;
+    }
 }

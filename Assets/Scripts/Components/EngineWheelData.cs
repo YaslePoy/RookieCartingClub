@@ -1,7 +1,10 @@
 using Unity.Entities;
 
-public struct EngineWheelData : IComponentData
+namespace RookieCartingClub.Components
 {
-    public float Part;
-    public Entity EngineResistant;
+    public struct EngineWheelData : IComponentData
+    {
+        public float Part;
+        public Entity EngineResistant;
+    }
 }

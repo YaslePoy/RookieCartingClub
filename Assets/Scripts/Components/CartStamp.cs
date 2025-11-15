@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public struct CartStamp
+namespace RookieCartingClub.Components
 {
-    public Vector3 position;
-    public Quaternion rotation;
+    public struct CartStamp
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+    }
 }

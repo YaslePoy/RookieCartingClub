@@ -1,21 +1,25 @@
-using DefaultNamespace;
+using RookieCartingClub.Authoring;
+using RookieCartingClub.Components;
 using Unity.Entities;
 using Unity.Transforms;
 
-[UpdateInGroup(typeof(PresentationSystemGroup))]
-public partial class CameraMovementSystem : SystemBase
+namespace RookieCartingClub.Systems
 {
-    protected override void OnCreate()
+    [UpdateInGroup(typeof(PresentationSystemGroup))]
+    public partial class CameraMovementSystem : SystemBase
     {
-        CheckedStateRef.RequireForUpdate<CameraPoint>();
-    }
+        protected override void OnCreate()
+        {
+            CheckedStateRef.RequireForUpdate<CameraPoint>();
+        }
 
-    protected override void OnUpdate()
-    {
-        var cam = PlayerCamera.Instance;
-        var cameraEntity = SystemAPI.GetSingletonEntity<CameraPoint>();
-        var globalTransform = SystemAPI.GetComponent<LocalToWorld>(cameraEntity);
-        cam.transform.position = globalTransform.Position;
-        cam.transform.rotation = globalTransform.Rotation;
+        protected override void OnUpdate()
+        {
+            var cam = PlayerCamera.Instance;
+            var cameraEntity = SystemAPI.GetSingletonEntity<CameraPoint>();
+            var globalTransform = SystemAPI.GetComponent<LocalToWorld>(cameraEntity);
+            cam.transform.position = globalTransform.Position;
+            cam.transform.rotation = globalTransform.Rotation;
+        }
     }
 }

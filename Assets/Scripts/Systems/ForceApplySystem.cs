@@ -1,3 +1,5 @@
+using RookieCartingClub.Components;
+using RookieCartingClub.Systems;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -6,56 +8,59 @@ using Unity.Physics.Extensions;
 using Unity.Transforms;
 using ForceMode = Unity.Physics.Extensions.ForceMode;
 
-[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-public partial struct ForceApplySystem : ISystem
+namespace RookieCartingClub.Systems
 {
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
+    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    public partial struct ForceApplySystem : ISystem
     {
-        state.RequireForUpdate<FinalForceRequest>();
-    }
-
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
-    {
-        var job = new ForceApplyJob
+        [BurstCompile]
+        public void OnCreate(ref SystemState state)
         {
-            TimeStep = SystemAPI.Time.fixedDeltaTime
-        };
-        job.ScheduleParallel(state.Dependency).Complete();
-    }
-}
-
-[BurstCompile]
-public partial struct ForceApplyJob : IJobEntity
-{
-    public float TimeStep;
-
-    private void Execute(ref DynamicBuffer<FinalForceRequest> requests,
-        PhysicsMass mass,
-        ref PhysicsVelocity velocity,
-        LocalToWorld localToWorld)
-    {
-        if (requests.IsEmpty)
-            return;
-
-        var rawForce = float3.zero;
-        var rotateForce = float3.zero;
-
-        var center = mass.GetCenterOfMassWorldSpace(localToWorld.Position, localToWorld.Rotation);
-
-        for (var i = 0; i < requests.Length; i++)
-        {
-            var request = requests[i];
-            mass.GetImpulseFromForce(request.Force, ForceMode.Force, TimeStep, out var impulse, out _);
-
-            rawForce += impulse;
-            rotateForce += math.cross(request.Position - center, impulse);
+            state.RequireForUpdate<FinalForceRequest>();
         }
 
-        velocity.ApplyLinearImpulse(mass, rawForce);
-        velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
+        {
+            var job = new ForceApplyJob
+            {
+                TimeStep = SystemAPI.Time.fixedDeltaTime
+            };
+            job.ScheduleParallel(state.Dependency).Complete();
+        }
+    }
 
-        requests.Clear();
+    [BurstCompile]
+    public partial struct ForceApplyJob : IJobEntity
+    {
+        public float TimeStep;
+
+        private void Execute(ref DynamicBuffer<FinalForceRequest> requests,
+            PhysicsMass mass,
+            ref PhysicsVelocity velocity,
+            LocalToWorld localToWorld)
+        {
+            if (requests.IsEmpty)
+                return;
+
+            var rawForce = float3.zero;
+            var rotateForce = float3.zero;
+
+            var center = mass.GetCenterOfMassWorldSpace(localToWorld.Position, localToWorld.Rotation);
+
+            for (var i = 0; i < requests.Length; i++)
+            {
+                var request = requests[i];
+                mass.GetImpulseFromForce(request.Force, ForceMode.Force, TimeStep, out var impulse, out _);
+
+                rawForce += impulse;
+                rotateForce += math.cross(request.Position - center, impulse);
+            }
+
+            velocity.ApplyLinearImpulse(mass, rawForce);
+            velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
+
+            requests.Clear();
+        }
     }
 }

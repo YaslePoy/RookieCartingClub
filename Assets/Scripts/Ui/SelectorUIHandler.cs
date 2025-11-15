@@ -1,9 +1,11 @@
 using System.Linq;
+using RookieCartingClub.Authoring;
+using RookieCartingClub.Ui;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace DefaultNamespace
+namespace RookieCartingClub.Ui
 {
     public class SelectorUIHandler : MonoBehaviour
     {

@@ -1,65 +1,69 @@
+using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 
-[UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-[UpdateBefore(typeof(ForceApplySystem))]
-public partial struct ForceSummarySystem : ISystem
+namespace RookieCartingClub.Systems
 {
-    [BurstCompile]
-    public void OnCreate(ref SystemState state)
+    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    [UpdateBefore(typeof(ForceApplySystem))]
+    public partial struct ForceSummarySystem : ISystem
     {
-        state.RequireForUpdate<CartWheel>();
+        [BurstCompile]
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<CartWheel>();
+        }
+
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
+        {
+            var ecb = new EntityCommandBuffer(Allocator.TempJob);
+
+            new ForceSummaryJob
+            {
+                CommandBuffer = ecb.AsParallelWriter()
+            }.Schedule(state.Dependency).Complete();
+
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
+        }
     }
 
     [BurstCompile]
-    public void OnUpdate(ref SystemState state)
+    public partial struct ForceSummaryJob : IJobEntity
     {
-        var ecb = new EntityCommandBuffer(Allocator.TempJob);
+        // public NativeList<DebugLine> DebugLines;
+        public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-        new ForceSummaryJob
+        private void Execute([ChunkIndexInQuery] int chunkIndex, ref DynamicBuffer<ForceApplyRequest> requests,
+            CartWheel wheelData,
+            Parent parent,
+            LocalToWorld position)
         {
-            CommandBuffer = ecb.AsParallelWriter()
-        }.Schedule(state.Dependency).Complete();
+            var sumForce = float3.zero;
+            for (var i = 0; i < requests.Length; i++)
+                sumForce += requests[i].Force;
 
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
-    }
-}
+            var forceMultiplier = wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
+            sumForce *= forceMultiplier;
 
-[BurstCompile]
-public partial struct ForceSummaryJob : IJobEntity
-{
-    // public NativeList<DebugLine> DebugLines;
-    public EntityCommandBuffer.ParallelWriter CommandBuffer;
+            var length = math.length(sumForce);
+            if (length == 0)
+                return;
 
-    private void Execute([ChunkIndexInQuery] int chunkIndex, ref DynamicBuffer<ForceApplyRequest> requests,
-        CartWheel wheelData,
-        Parent parent,
-        LocalToWorld position)
-    {
-        var sumForce = float3.zero;
-        for (var i = 0; i < requests.Length; i++)
-            sumForce += requests[i].Force;
+            if (length > wheelData.MaxResistance)
+                sumForce *= wheelData.MaxResistance / length;
 
-        var forceMultiplier = wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
-        sumForce *= forceMultiplier;
+            CommandBuffer.AppendToBuffer(chunkIndex, parent.Value, new FinalForceRequest
+            {
+                Force = sumForce,
+                Position = position.Position
+            });
 
-        var length = math.length(sumForce);
-        if (length == 0)
-            return;
-
-        if (length > wheelData.MaxResistance)
-            sumForce *= wheelData.MaxResistance / length;
-
-        CommandBuffer.AppendToBuffer(chunkIndex, parent.Value, new FinalForceRequest
-        {
-            Force = sumForce,
-            Position = position.Position
-        });
-
-        requests.Clear();
+            requests.Clear();
+        }
     }
 }

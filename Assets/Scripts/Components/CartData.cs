@@ -1,8 +1,11 @@
 using Unity.Collections;
 using Unity.Entities;
 
-public struct CartData : IComponentData
+namespace RookieCartingClub.Components
 {
-    public FixedString32Bytes Nickname;
-    public int PlayerId;
+    public struct CartData : IComponentData
+    {
+        public FixedString32Bytes Nickname;
+        public int PlayerId;
+    }
 }
