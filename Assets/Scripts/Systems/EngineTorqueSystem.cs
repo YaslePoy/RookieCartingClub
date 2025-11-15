@@ -31,7 +31,7 @@ public partial struct EngineTorqueSystem : ISystem
             PlaneResistantLookup = _planeResistantLookup,
             CommandBuffer = ecb.AsParallelWriter()
         };
-        
+
         var handle = job.ScheduleParallel(state.Dependency);
         handle.Complete();
 
@@ -55,12 +55,12 @@ public partial struct EngineTorqueJob : IJobEntity
 
         var engineBreaking = PlaneResistantLookup[wheelData.EngineResistant];
         engineBreaking.EfficiencyFactor = engine.CurrentForce == 0f ? 1 : 0;
-        
+
         CommandBuffer.SetComponent(ECBCommandOrder.SetComponent, wheelData.EngineResistant, engineBreaking);
 
         if (engineBreaking.EfficiencyFactor != 0)
             return;
-        
+
         var force = transform.Forward * (wheelData.Part * engine.CurrentForce);
         forceApply.Add(new ForceApplyRequest { Force = force });
     }

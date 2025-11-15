@@ -10,13 +10,15 @@ public partial struct EngineCalculateJob : IJobEntity
         DynamicBuffer<CurvePoint> curve)
     {
         var currentSpeed = math.length(velocity.Linear);
-        if (currentSpeed > engine.MaxSpeed) return;
+        if (currentSpeed > engine.MaxSpeed) 
+            return;
 
         var rate = currentSpeed / engine.MaxSpeed;
-        engine.CurrentForce = EvaluateCurve(rate, curve) * input.CurrentEngine * engine.MaxForce;
+        var curveValue = EvaluateCurve(rate, curve);
+        engine.CurrentForce = curveValue * input.CurrentEngine * engine.MaxForce;
     }
 
-    private float EvaluateCurve(float curveValue, DynamicBuffer<CurvePoint> curve)
+    private static float EvaluateCurve(float curveValue, DynamicBuffer<CurvePoint> curve)
     {
         if (curveValue >= curve[^1].Value.x)
             return curve[^1].Value.y;
