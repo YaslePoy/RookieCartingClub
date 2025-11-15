@@ -43,8 +43,9 @@ public partial class UIUpdateSystem : SystemBase
             }
         }
 
-        var requests = SystemAPI.GetSingletonBuffer<TrackPlacementRequest>();
-        requests.Add(new TrackPlacementRequest { Player = replaceEntity, CollectionId = 1 });
+        EntityManager.SetComponentEnabled<TrackPlacementRequest>(replaceEntity, true);
+        EntityManager.SetComponentData(replaceEntity, new TrackPlacementRequest { CollectionId = 1 });
+        
     }
 }
 

@@ -116650,11 +116650,6 @@ MonoBehaviour:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_Intensity: 0
-  m_Version: 13
-  m_ObsoleteShadowResolutionTier: 1
-  m_ObsoleteUseShadowQualitySettings: 0
-  m_ObsoleteCustomShadowResolution: 512
-  m_ObsoleteContactShadows: 0
   m_InnerSpotPercent: 0
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
@@ -116773,6 +116768,11 @@ MonoBehaviour:
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1
+  m_Version: 13
+  m_ObsoleteShadowResolutionTier: 1
+  m_ObsoleteUseShadowQualitySettings: 0
+  m_ObsoleteCustomShadowResolution: 512
+  m_ObsoleteContactShadows: 0
 --- !u!64 &1682781665
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -136004,6 +136004,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[3].time
+      value: 0.6895887
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[3].value
+      value: 0.2705714
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[4].value
+      value: 0.118206024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[3].inSlope
+      value: -2.3690567
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[3].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[3].outSlope
+      value: -2.3690567
+      objectReference: {fileID: 0}
+    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
+      propertyPath: AnimationCurve.m_Curve.Array.data[3].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 8280289031576691925, guid: edd9940327da516a0b33fda4773d472b, type: 3}
       propertyPath: m_Name
       value: cart

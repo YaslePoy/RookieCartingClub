@@ -22,14 +22,17 @@ public partial struct CartPlacementSystem : ISystem
     {
         _positionsLookup.Update(ref state);
 
+        var positionsCollections = SystemAPI.GetSingletonBuffer<TrackPositionsCollection>().AsNativeArray();
+
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
 
         var job = new CartPlacementJob
         {
             PositionsLookup = _positionsLookup,
-            CommandBuffer = ecb.AsParallelWriter()
+            CommandBuffer = ecb,
+            PositionsCollection = positionsCollections
         };
-        job.Schedule();
+        job.Schedule(state.Dependency).Complete();
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
@@ -38,38 +41,29 @@ public partial struct CartPlacementSystem : ISystem
     [BurstCompile]
     public partial struct CartPlacementJob : IJobEntity
     {
-        public EntityCommandBuffer.ParallelWriter CommandBuffer;
-
-        [ReadOnly]
+        public EntityCommandBuffer CommandBuffer;
         public BufferLookup<TrackPlacementPosition> PositionsLookup;
+        public NativeArray<TrackPositionsCollection> PositionsCollection;
 
-        private void Execute(ref DynamicBuffer<TrackPlacementRequest> requests,
-            DynamicBuffer<TrackPositionsCollection> positionsCollection, EnabledRefRW<Simulate> simulate)
+        private void Execute(Entity entity, ref LocalTransform transform, ref PhysicsVelocity velocity,
+            TrackPlacementRequest request, EnabledRefRW<TrackPlacementRequest> enabledRequest, EnabledRefRW<Simulate> simulate)
         {
-            foreach (var trackPlacementRequest in requests)
-            {
-                var location = PositionsLookup[positionsCollection[trackPlacementRequest.CollectionId].BufferEntity];
-                var position = location[0];
-                CommandBuffer.SetComponent(ECBCommandOrder.SetComponent, trackPlacementRequest.Player,
-                    new LocalTransform
-                    {
-                        Position = position.Position,
-                        Rotation = position.Rotation,
-                        Scale = 1f
-                    });
+            var location = PositionsLookup[PositionsCollection[request.CollectionId].BufferEntity];
+            var position = location[0];
+            transform.Position = position.Position;
+            transform.Rotation = position.Rotation;
 
-                CommandBuffer.SetComponent(ECBCommandOrder.SetComponent, trackPlacementRequest.Player,
-                    new PhysicsVelocity());
-                simulate.ValueRW = false;
+            velocity.Linear = float3.zero;
+            velocity.Angular = float3.zero;
 
-                CommandBuffer.SetComponentEnabled<EnableSimulate>(ECBCommandOrder.SetComponentEnabled,
-                    trackPlacementRequest.Player, true);
-            }
-
-            requests.Clear();
+            CommandBuffer.SetComponentEnabled<EnableSimulate>(entity, true);
+            
+            simulate.ValueRW = false;
+            enabledRequest.ValueRW = false;
         }
     }
 }
+
 
 public struct EnableSimulate : IComponentData, IEnableableComponent
 {

@@ -81,7 +81,6 @@ public class RaceControl : MonoBehaviour
         public override void Bake(RaceControl authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddBuffer<TrackPlacementRequest>(entity);
             var collection = AddBuffer<TrackPositionsCollection>(entity);
 
             var trackPositions = CreateAdditionalEntity(TransformUsageFlags.None, entityName: "TrackPositions");
@@ -118,12 +117,6 @@ public class RaceControl : MonoBehaviour
             }
         }
     }
-}
-
-public struct TrackPlacementRequest : IBufferElementData
-{
-    public Entity Player;
-    public int CollectionId;
 }
 
 public struct TrackPlacementPosition : IBufferElementData

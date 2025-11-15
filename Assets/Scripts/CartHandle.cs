@@ -131,6 +131,8 @@ public class CartHandleBaker : Baker<CartHandle>
         AddBuffer<NewContactingSegment>(entity);
         AddComponent<EnableSimulate>(entity);
         SetComponentEnabled<EnableSimulate>(entity, false);
+        AddComponent<TrackPlacementRequest>(entity);
+        SetComponentEnabled<TrackPlacementRequest>(entity, false);
     }
 }
 
@@ -158,4 +160,9 @@ public struct CurrentContactingSegment : IBufferElementData
 public struct NewContactingSegment : IBufferElementData
 {
     public int Index;
+}
+
+public struct TrackPlacementRequest : IComponentData, IEnableableComponent
+{
+    public int CollectionId;
 }
