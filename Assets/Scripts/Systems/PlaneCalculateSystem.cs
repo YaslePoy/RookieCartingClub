@@ -32,7 +32,7 @@ public partial struct PlaneCalculateJob : IJobEntity
 {
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-    private void Execute(PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
+    private void Execute([ChunkIndexInQuery] int chunkIndex, PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
     {
         if (setup.EfficiencyFactor == 0 || setup.MaxForce == 0)
             return;
@@ -54,7 +54,7 @@ public partial struct PlaneCalculateJob : IJobEntity
             setup.EfficiencyFactor *= speed;
 
         var finalForce = forceVector * math.abs(resistanceFactor * setup.EfficiencyFactor * setup.MaxForce);
-        CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, setup.Collector, new ForceApplyRequest
+        CommandBuffer.AppendToBuffer(chunkIndex, setup.Collector, new ForceApplyRequest
         {
             Force = finalForce
         });

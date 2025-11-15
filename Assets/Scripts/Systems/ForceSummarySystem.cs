@@ -35,7 +35,7 @@ public partial struct ForceSummaryJob : IJobEntity
     // public NativeList<DebugLine> DebugLines;
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-    private void Execute(ref DynamicBuffer<ForceApplyRequest> requests,
+    private void Execute([ChunkIndexInQuery] int chunkIndex, ref DynamicBuffer<ForceApplyRequest> requests,
         CartWheel wheelData,
         Parent parent,
         LocalToWorld position)
@@ -54,7 +54,7 @@ public partial struct ForceSummaryJob : IJobEntity
         if (length > wheelData.MaxResistance)
             sumForce *= wheelData.MaxResistance / length;
 
-        CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, parent.Value, new FinalForceRequest
+        CommandBuffer.AppendToBuffer(chunkIndex, parent.Value, new FinalForceRequest
         {
             Force = sumForce,
             Position = position.Position

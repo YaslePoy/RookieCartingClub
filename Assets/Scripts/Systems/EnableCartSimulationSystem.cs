@@ -28,10 +28,10 @@ public partial struct EnableCartSimulationSystem : ISystem
     {
         public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-        private void Execute(Entity cart)
+        private void Execute([ChunkIndexInQuery] int chunkIndex, Entity cart)
         {
-            CommandBuffer.SetComponentEnabled<Simulate>(ECBCommandOrder.SetComponentEnabled, cart, true);
-            CommandBuffer.SetComponentEnabled<EnableSimulate>(ECBCommandOrder.SetComponentEnabled, cart, false);
+            CommandBuffer.SetComponentEnabled<Simulate>(chunkIndex, cart, true);
+            CommandBuffer.SetComponentEnabled<EnableSimulate>(chunkIndex, cart, false);
         }
     }
 }

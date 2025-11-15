@@ -48,7 +48,7 @@ public partial struct EngineTorqueJob : IJobEntity
 
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-    private void Execute(Parent parent,
+    private void Execute([ChunkIndexInQuery] int chunkIndex, Parent parent,
         LocalToWorld transform,
         EngineWheelData wheelData,
         ref DynamicBuffer<ForceApplyRequest> forceApply)
@@ -58,7 +58,7 @@ public partial struct EngineTorqueJob : IJobEntity
         var engineBreaking = PlaneResistantLookup[wheelData.EngineResistant];
         engineBreaking.EfficiencyFactor = engine.CurrentForce == 0f ? 1 : 0;
 
-        CommandBuffer.SetComponent(ECBCommandOrder.SetComponent, wheelData.EngineResistant, engineBreaking);
+        CommandBuffer.SetComponent(chunkIndex, wheelData.EngineResistant, engineBreaking);
 
         if (engineBreaking.EfficiencyFactor != 0)
             return;
