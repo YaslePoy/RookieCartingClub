@@ -26,9 +26,4 @@ public partial struct ReplaySystem : ISystem
         buffer.RemoveAt(0);
         SystemAPI.SetSingleton(first.Input);
     }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-    }
 }

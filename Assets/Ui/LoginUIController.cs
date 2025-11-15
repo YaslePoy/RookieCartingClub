@@ -1,7 +1,6 @@
 using System.Net.Http;
 using System.Text;
 using DefaultNamespace;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;

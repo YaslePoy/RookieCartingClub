@@ -29,15 +29,13 @@ public partial class KeyboardInputSystem : SystemBase
             return;
         }
         
-
-        var movement = _forceAction.ReadValue<Vector2>();
-
-
         var cartEntity = SystemAPI.GetSingletonEntity<CartInputData>();
         var userControl = SystemAPI.GetComponentRW<CartInputData>(cartEntity);
         var inputSetting = SystemAPI.GetSingleton<InputFromKeyboard>();
         userControl.ValueRW.CurrentEngine = 0;
         userControl.ValueRW.CurrentBreaks = 0;
+        
+        var movement = _forceAction.ReadValue<Vector2>();
         
         var isAcceleratingOrBreaking = movement.y != 0;
         if (isAcceleratingOrBreaking)
@@ -45,16 +43,11 @@ public partial class KeyboardInputSystem : SystemBase
             SetupEngineAndBreaks(movement, userControl);
         }
         
-        
         var isSteering  = movement.x != 0;
         if (isSteering)
-        {
             SetupWheelAngleWithSteering(movement, inputSetting, userControl, SystemAPI.Time.DeltaTime);
-        }
         else
-        {
             ReturnWheelToCenter(userControl, inputSetting, SystemAPI.Time.DeltaTime);
-        }
     }
 
     private static void ReturnWheelToCenter(RefRW<CartInputData> userControl, InputFromKeyboard inputSetting, float deltaTime)

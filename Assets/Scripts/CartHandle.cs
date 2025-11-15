@@ -6,8 +6,6 @@ using JetBrains.Annotations;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
-using Unity.Physics;
-using Unity.Physics.Authoring;
 using UnityEditor;
 using UnityEngine;
 using MeshCollider = UnityEngine.MeshCollider;

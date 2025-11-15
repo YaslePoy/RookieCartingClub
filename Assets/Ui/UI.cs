@@ -1,6 +1,4 @@
 using System;
-using System.Linq;
-using Unity.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;

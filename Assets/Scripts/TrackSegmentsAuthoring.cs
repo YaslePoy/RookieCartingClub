@@ -1,12 +1,5 @@
-using System.Linq;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
-using Unity.Physics;
 using UnityEngine;
-using Collider = Unity.Physics.Collider;
-using Material = Unity.Physics.Material;
-using MeshCollider = Unity.Physics.MeshCollider;
 
 public class TrackSegmentsAuthoring : MonoBehaviour
 {

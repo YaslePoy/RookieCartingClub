@@ -25,11 +25,6 @@ public partial struct PlaneCalculateSystem : ISystem
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-    }
 }
 
 [BurstCompile]
@@ -37,20 +32,26 @@ public partial struct PlaneCalculateJob : IJobEntity
 {
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-    public void Execute(Entity e, PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
+    private void Execute(Entity e, PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
     {
         if (setup.EfficiencyFactor == 0 || setup.MaxForce == 0)
             return;
 
         var speed = math.length(velocity.Velocity);
-        if (speed < 0.01f) return;
+        if (speed < 0.01f) 
+            return;
+        
         var resistanceFactor = math.dot(math.normalize(velocity.Velocity), math.normalize(localToWorld.Right));
-        if (math.abs(resistanceFactor) < 0.0001f) return;
+        
+        if (math.abs(resistanceFactor) < 0.0001f) 
+            return;
 
         var forceVector = localToWorld.Right;
-        if (resistanceFactor > 0) forceVector *= -1;
+        if (resistanceFactor > 0) 
+            forceVector *= -1;
 
-        if (speed < 0.2f) setup.EfficiencyFactor *= speed;
+        if (speed < 0.2f) 
+            setup.EfficiencyFactor *= speed;
 
         var finalForce = forceVector * math.abs(resistanceFactor * setup.EfficiencyFactor * setup.MaxForce);
         CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, setup.Collector, new ForceApplyRequest

@@ -3,7 +3,6 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
 [UpdateBefore(typeof(ForceApplySystem))]
@@ -15,28 +14,19 @@ public partial struct ForceSummarySystem : ISystem
     {
         state.RequireForUpdate<CartWheel>();
     }
-
+    
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        // var list = new NativeList<DebugLine>(Allocator.TempJob);
-        
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
         
         new ForceSummaryJob
         {
             CommandBuffer = ecb.AsParallelWriter()
-            // DebugLines = list
         }.Schedule(state.Dependency).Complete();
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
-
-        // for (var i = 0; i < list.Length; i++)
-        // {
-        //     Debug.DrawLine(list[i].P1, list[i].P2, Color.white);
-        // }
-
-        // list.Dispose();
     }
 }
 
@@ -67,23 +57,7 @@ public partial struct ForceSummaryJob : IJobEntity
             Force = sumForce,
             Position = position.Position
         });
-
-        // var startPos = position.Position + new float3(0, 1, 0);
-        // var normalized = sumForce / wheelData.MaxResistance;
-        // DebugLines.Add(new DebugLine
-        // {
-        //     P1 = startPos, P2 = startPos + normalized
-        // });
-        // DebugLines.Add(new DebugLine
-        // {
-        //     P1 = startPos, P2 = position.Position
-        // });
+        
         requests.Clear();
     }
 }
-
-// public struct DebugLine
-// {
-//     public float3 P1;
-//     public float3 P2;
-// }

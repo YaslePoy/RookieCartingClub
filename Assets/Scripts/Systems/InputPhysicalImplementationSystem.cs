@@ -1,3 +1,4 @@
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Physics.Systems;
@@ -13,7 +14,8 @@ public partial struct InputPhysicalImplementationSystem : ISystem
         _inputLookup = state.GetComponentLookup<CartInputData>(true);
         state.RequireForUpdate<CartInputData>();
     }
-
+    
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         _inputLookup.Update(ref state);

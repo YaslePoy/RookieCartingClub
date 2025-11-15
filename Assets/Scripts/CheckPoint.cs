@@ -1,5 +1,4 @@
 using Unity.Entities;
-using Unity.Physics.Authoring;
 using UnityEngine;
 
 public class CheckPoint : MonoBehaviour

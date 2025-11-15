@@ -14,7 +14,8 @@ public partial struct ForceApplySystem : ISystem
     {
         state.RequireForUpdate<FinalForceRequest>();
     }
-
+    
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
 
@@ -39,6 +40,7 @@ public partial struct ForceApplyJob : IJobEntity
 
         var rawForce = float3.zero;
         var rotateForce = float3.zero;
+        
         var center = mass.GetCenterOfMassWorldSpace(localToWorld.Position, localToWorld.Rotation);
 
         for (var i = 0; i < requests.Length; i++)
@@ -52,6 +54,7 @@ public partial struct ForceApplyJob : IJobEntity
 
         velocity.ApplyLinearImpulse(mass, rawForce);
         velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
+        
         requests.Clear();
     }
 }

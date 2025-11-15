@@ -19,11 +19,6 @@ public partial struct VelocityUpdateSystem : ISystem
         var job = new VelocityUpdateJob { TimeStep = SystemAPI.Time.fixedDeltaTime };
         job.ScheduleParallel(state.Dependency).Complete();
     }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-    }
 }
 
 
@@ -34,9 +29,10 @@ public partial struct VelocityUpdateJob : IJobEntity
 
     private void Execute(LocalToWorld localToWorld, ref LocalVelocity velocity)
     {
+        const float maximumSpeedSq = 120.0f * 120.0f; // 120 meters per second
         var currentPosition = localToWorld.Position;
         velocity.Velocity = (currentPosition - velocity.LastPosition) / TimeStep;
         velocity.LastPosition = currentPosition;
-        if (math.lengthsq(velocity.Velocity) > 14400) velocity.Velocity = float3.zero;
+        if (math.lengthsq(velocity.Velocity) > maximumSpeedSq) velocity.Velocity = float3.zero;
     }
 }

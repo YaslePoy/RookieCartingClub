@@ -1,6 +1,5 @@
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class UserControl : MonoBehaviour
 {

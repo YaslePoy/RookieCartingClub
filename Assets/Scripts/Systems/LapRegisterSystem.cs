@@ -1,12 +1,9 @@
 using System;
-using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Systems;
-using UnityEngine;
 
 [UpdateAfter(typeof(PhysicsSimulationGroup))]
 [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
@@ -16,6 +13,7 @@ public partial struct LapRegisterSystem : ISystem
     private ComponentLookup<CheckPointData> _checkPointLookup;
     private BufferLookup<NewContactingSegment> _newContactingSegmentLookup;
 
+    [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<SimulationSingleton>();
@@ -24,7 +22,7 @@ public partial struct LapRegisterSystem : ISystem
         _newContactingSegmentLookup = state.GetBufferLookup<NewContactingSegment>();
     }
 
-    // [BurstCompile]
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         _cartLookup.Update(ref state);
@@ -108,6 +106,7 @@ public partial struct LapRegisterSystem : ISystem
         }
     }
 
+    [BurstCompile]
     public struct CartPositionHandlingJob : ITriggerEventsJob
     {
         [ReadOnly] public ComponentLookup<CartData> CartLookup;
@@ -117,16 +116,13 @@ public partial struct LapRegisterSystem : ISystem
         public void Execute(TriggerEvent triggerEvent)
         {
             var segment = new CheckPointData { Index = -1 };
-            var cart = new CartData { PlayerId = -1 };
             var cartEntity = Entity.Null;
             if (CartLookup.TryGetComponent(triggerEvent.EntityA, out var cartDataA))
             {
-                cart = cartDataA;
                 cartEntity = triggerEvent.EntityA;
             }
             else if (CartLookup.TryGetComponent(triggerEvent.EntityB, out var cartDataB))
             {
-                cart = cartDataB;
                 cartEntity = triggerEvent.EntityB;
             }
             else
@@ -143,7 +139,6 @@ public partial struct LapRegisterSystem : ISystem
             Collisions.Add(new CartCollision
             {
                 PlayerEntity = cartEntity,
-                PlayerId = cart.PlayerId,
                 SegmentId = segment.Index
             });
         }
@@ -152,7 +147,6 @@ public partial struct LapRegisterSystem : ISystem
     public struct CartCollision
     {
         public Entity PlayerEntity;
-        public int PlayerId;
         public int SegmentId;
     }
 }

@@ -2,13 +2,10 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
-using UnityEngine.Windows;
 
 [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-// [UpdateBefore(typeof(WheelRotatingSystem))]
 public partial struct ReplayRecordSystem : ISystem
 {
     [BurstCompile]
@@ -17,7 +14,7 @@ public partial struct ReplayRecordSystem : ISystem
         state.RequireForUpdate<RecordInput>();
         state.RequireForUpdate<CartInputData>();
     }
-
+    
     public void OnUpdate(ref SystemState state)
     {
         var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
@@ -30,7 +27,7 @@ public partial struct ReplayRecordSystem : ISystem
             var recorded = buffer.AsNativeArray();
             var length = recorded.Length;
             var finalOutput = new Span<byte>(new byte[length * sizeOf]);
-            
+
             for (int i = 0; i < buffer.Length; i++)
             {
                 var input = recorded[i].Input;
@@ -41,7 +38,7 @@ public partial struct ReplayRecordSystem : ISystem
             file.Write(finalOutput);
             file.Close();
             Debug.Log("Replay saved!");
-            
+
             state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<StopRecord>());
             state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<RecordInput>());
 
@@ -49,9 +46,5 @@ public partial struct ReplayRecordSystem : ISystem
         }
 
         buffer.Add(new InputRecord { Input = SystemAPI.GetSingleton<CartInputData>() });
-    }
-
-    public void OnDestroy(ref SystemState state)
-    {
     }
 }
