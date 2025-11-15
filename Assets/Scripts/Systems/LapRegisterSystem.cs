@@ -38,45 +38,53 @@ public partial struct LapRegisterSystem : ISystem
         };
         checkJob.Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), state.Dependency).Complete();
 
-        var placementBuffers =
-            new NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>>(32,
-                Allocator.Temp);
-        var newBuffers =
-            new NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>>(32,
-                Allocator.Temp);
+        var placementBuffers = new NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>>(32, Allocator.Temp);
+        var newBuffers = new NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>>(32, Allocator.Temp);
 
         var currentPlacement = new NativeHashSet<EntitySegment>(4, Allocator.Temp);
 
-        foreach (var (currentContactingSegments, entity) 
+        foreach (var (currentContactingSegments, entity)
                  in SystemAPI.Query<DynamicBuffer<CurrentContactingSegment>>().WithEntityAccess())
         {
-            placementBuffers[entity] = currentContactingSegments;
-            newBuffers[entity] = _newContactingSegmentLookup[entity];
-            foreach (var currentContactingSegment in currentContactingSegments)
-            {
-                currentPlacement.Add(new EntitySegment(entity, currentContactingSegment.Index));
-            }
-
-            currentContactingSegments.Clear();
+            FillMapsAndBuffer(placementBuffers, entity, currentContactingSegments, newBuffers, currentPlacement);
         }
 
 
         foreach (var collision in cols)
         {
-            var entityBuffer = placementBuffers[collision.PlayerEntity];
-            entityBuffer.Add(new CurrentContactingSegment { Index = collision.SegmentId });
-
-            if (!currentPlacement.Contains(new EntitySegment(collision.PlayerEntity, collision.SegmentId)))
-            {
-                _newContactingSegmentLookup[collision.PlayerEntity]
-                    .Add(new NewContactingSegment { Index = collision.SegmentId });
-            }
+            RegisterNewSegments(placementBuffers, collision, currentPlacement);
         }
 
         placementBuffers.Dispose();
         newBuffers.Dispose();
         currentPlacement.Dispose();
         cols.Dispose();
+    }
+
+    private void RegisterNewSegments(NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>> placementBuffers, CartCollision collision,
+        NativeHashSet<EntitySegment> currentPlacement)
+    {
+        var entityBuffer = placementBuffers[collision.PlayerEntity];
+        entityBuffer.Add(new CurrentContactingSegment { Index = collision.SegmentId });
+
+        if (!currentPlacement.Contains(new EntitySegment(collision.PlayerEntity, collision.SegmentId)))
+        {
+            _newContactingSegmentLookup[collision.PlayerEntity]
+                .Add(new NewContactingSegment { Index = collision.SegmentId });
+        }
+    }
+
+    private void FillMapsAndBuffer(NativeHashMap<Entity, DynamicBuffer<CurrentContactingSegment>> placementBuffers, Entity entity, DynamicBuffer<CurrentContactingSegment> currentContactingSegments,
+        NativeHashMap<Entity, DynamicBuffer<NewContactingSegment>> newBuffers, NativeHashSet<EntitySegment> currentPlacement)
+    {
+        placementBuffers[entity] = currentContactingSegments;
+        newBuffers[entity] = _newContactingSegmentLookup[entity];
+        foreach (var currentContactingSegment in currentContactingSegments)
+        {
+            currentPlacement.Add(new EntitySegment(entity, currentContactingSegment.Index));
+        }
+
+        currentContactingSegments.Clear();
     }
 
     public struct EntitySegment : IEquatable<EntitySegment>

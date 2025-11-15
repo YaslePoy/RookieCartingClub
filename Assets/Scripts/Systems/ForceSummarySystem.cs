@@ -42,7 +42,8 @@ public partial struct ForceSummaryJob : IJobEntity
         for (var i = 0; i < requests.Length; i++) 
             sumForce += requests[i].Force;
 
-        sumForce *= wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
+        var forceMultiplier = wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
+        sumForce *= forceMultiplier;
 
         var length = math.length(sumForce);
         if (length == 0)
@@ -50,7 +51,6 @@ public partial struct ForceSummaryJob : IJobEntity
 
         if (length > wheelData.MaxResistance) 
             sumForce *= wheelData.MaxResistance / length;
-        
         
         CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, parent.Value, new FinalForceRequest
         {

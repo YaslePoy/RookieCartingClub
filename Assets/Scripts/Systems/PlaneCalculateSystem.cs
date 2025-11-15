@@ -32,7 +32,7 @@ public partial struct PlaneCalculateJob : IJobEntity
 {
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
 
-    private void Execute(Entity e, PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
+    private void Execute(PlaneResistantCollector setup, LocalVelocity velocity, LocalToWorld localToWorld)
     {
         if (setup.EfficiencyFactor == 0 || setup.MaxForce == 0)
             return;

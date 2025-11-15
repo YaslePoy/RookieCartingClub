@@ -29,7 +29,7 @@ public partial struct VelocityUpdateJob : IJobEntity
 
     private void Execute(LocalToWorld localToWorld, ref LocalVelocity velocity)
     {
-        const float maximumSpeedSq = 120.0f * 120.0f; // 120 meters per second
+        const float maximumSpeedSq = 120.0f * 120.0f; // 120 meters per second is TOO fast
         var currentPosition = localToWorld.Position;
         velocity.Velocity = (currentPosition - velocity.LastPosition) / TimeStep;
         velocity.LastPosition = currentPosition;

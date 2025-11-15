@@ -45,8 +45,12 @@ public partial struct CartPlacementSystem : ISystem
         public BufferLookup<TrackPlacementPosition> PositionsLookup;
         public NativeArray<TrackPositionsCollection> PositionsCollection;
 
-        private void Execute(Entity entity, ref LocalTransform transform, ref PhysicsVelocity velocity,
-            TrackPlacementRequest request, EnabledRefRW<TrackPlacementRequest> enabledRequest, EnabledRefRW<Simulate> simulate)
+        private void Execute(Entity entity,
+            ref LocalTransform transform, 
+            ref PhysicsVelocity velocity,
+            TrackPlacementRequest request,
+            EnabledRefRW<TrackPlacementRequest> enabledRequest,
+            EnabledRefRW<Simulate> simulate)
         {
             var location = PositionsLookup[PositionsCollection[request.CollectionId].BufferEntity];
             var position = location[0];
