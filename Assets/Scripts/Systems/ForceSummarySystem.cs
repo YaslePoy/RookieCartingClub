@@ -38,11 +38,6 @@ public partial struct ForceSummarySystem : ISystem
 
         // list.Dispose();
     }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
-    }
 }
 
 [BurstCompile]
@@ -50,11 +45,12 @@ public partial struct ForceSummaryJob : IJobEntity
 {
     // public NativeList<DebugLine> DebugLines;
     public EntityCommandBuffer.ParallelWriter CommandBuffer;
-    private void Execute(ref DynamicBuffer<ForceApplyRequest> requests, ref CartWheel wheelData, Parent parent,
+    private void Execute(ref DynamicBuffer<ForceApplyRequest> requests, CartWheel wheelData, Parent parent,
         LocalToWorld position)
     {
         var sumForce = float3.zero;
-        for (var i = 0; i < requests.Length; i++) sumForce += requests[i].Force;
+        for (var i = 0; i < requests.Length; i++) 
+            sumForce += requests[i].Force;
 
         sumForce *= wheelData.ForcePart * wheelData.Friction * wheelData.Mass;
 
@@ -62,7 +58,8 @@ public partial struct ForceSummaryJob : IJobEntity
         if (length == 0)
             return;
 
-        if (length > wheelData.MaxResistance) sumForce *= wheelData.MaxResistance / length;
+        if (length > wheelData.MaxResistance) 
+            sumForce *= wheelData.MaxResistance / length;
         
         
         CommandBuffer.AppendToBuffer(ECBCommandOrder.AppendToBuffer, parent.Value, new FinalForceRequest
@@ -70,8 +67,6 @@ public partial struct ForceSummaryJob : IJobEntity
             Force = sumForce,
             Position = position.Position
         });
-        wheelData.CurrentForce = sumForce;
-        wheelData.ForceLen = math.length(sumForce);
 
         // var startPos = position.Position + new float3(0, 1, 0);
         // var normalized = sumForce / wheelData.MaxResistance;

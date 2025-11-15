@@ -20,7 +20,7 @@ public class EngineWheel : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody.AddForce(transform.forward * (Part * _engine.CurrentForce));
-        if (_engine.CurrentForce == 0) EngineResistant.K = 1;
+        if (_engine.CurrentForce == 0) EngineResistant.EfficiencyFactor = 1;
     }
 }
 

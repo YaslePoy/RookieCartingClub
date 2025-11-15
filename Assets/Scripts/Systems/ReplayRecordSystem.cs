@@ -22,13 +22,15 @@ public partial struct ReplayRecordSystem : ISystem
     {
         var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
 
-        if (SystemAPI.HasSingleton<StopRecord>())
+        var stopRequest = SystemAPI.HasSingleton<StopRecord>();
+        if (stopRequest)
         {
             var sizeOf = Marshal.SizeOf(typeof(InputRecord));
 
-            using var recorded = buffer.ToNativeArray(Allocator.Temp);
+            var recorded = buffer.AsNativeArray();
             var length = recorded.Length;
             var finalOutput = new Span<byte>(new byte[length * sizeOf]);
+            
             for (int i = 0; i < buffer.Length; i++)
             {
                 var input = recorded[i].Input;
@@ -39,6 +41,7 @@ public partial struct ReplayRecordSystem : ISystem
             file.Write(finalOutput);
             file.Close();
             Debug.Log("Replay saved!");
+            
             state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<StopRecord>());
             state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<RecordInput>());
 

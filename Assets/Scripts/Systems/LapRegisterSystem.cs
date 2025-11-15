@@ -130,23 +130,15 @@ public partial struct LapRegisterSystem : ISystem
                 cartEntity = triggerEvent.EntityB;
             }
             else
-            {
                 return;
-            }
-            
+
 
             if (CheckPointLookup.TryGetComponent(triggerEvent.EntityA, out var checkA))
-            {
                 segment = checkA;
-            }
             else if (CheckPointLookup.TryGetComponent(triggerEvent.EntityB, out var checkB))
-            {
                 segment = checkB;
-            }
             else
-            {
                 return;
-            }
 
             Collisions.Add(new CartCollision
             {

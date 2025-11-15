@@ -15,16 +15,12 @@ public partial struct EnableCartSimulationSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(Allocator.TempJob);
-        
-        new EnableCartSimulationJob{ CommandBuffer = ecb.AsParallelWriter()}.ScheduleParallel(state.Dependency).Complete();
+
+        var job = new EnableCartSimulationJob{ CommandBuffer = ecb.AsParallelWriter()};
+        job.ScheduleParallel(state.Dependency).Complete();
         
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
-    }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
     }
 
     [BurstCompile]

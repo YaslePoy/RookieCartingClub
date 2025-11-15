@@ -30,6 +30,4 @@ public struct CartWheel : IComponentData
     public float ForcePart;
     public float Mass;
     public float Friction;
-    public float3 CurrentForce;
-    public float ForceLen;
 }

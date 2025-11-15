@@ -1,11 +1,9 @@
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Extensions;
 using Unity.Transforms;
-using UnityEngine;
 using ForceMode = Unity.Physics.Extensions.ForceMode;
 
 [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
@@ -14,6 +12,7 @@ public partial struct ForceApplySystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<FinalForceRequest>();
     }
 
     public void OnUpdate(ref SystemState state)
@@ -25,11 +24,6 @@ public partial struct ForceApplySystem : ISystem
         };
         job.ScheduleParallel(state.Dependency).Complete();
         
-    }
-
-    [BurstCompile]
-    public void OnDestroy(ref SystemState state)
-    {
     }
 }
 

@@ -3,29 +3,6 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 
-// [UpdateInGroup(typeof(InputPhysicalImplementationSystem))]
-// internal partial struct EngineCalculateSystem : ISystem
-// {
-//     [BurstCompile]
-//     public void OnCreate(ref SystemState state)
-//     {
-//         state.RequireForUpdate<EngineData>();
-//         state.RequireForUpdate<CartInputData>();
-//     }
-//
-//     [BurstCompile]
-//     public void OnUpdate(ref SystemState state)
-//     {
-//         var job = new EngineCalculateJob();
-//         job.ScheduleParallel();
-//     }
-//
-//     [BurstCompile]
-//     public void OnDestroy(ref SystemState state)
-//     {
-//     }
-// }
-
 [BurstCompile]
 public partial struct EngineCalculateJob : IJobEntity
 {

@@ -16,8 +16,8 @@ public partial struct VelocityUpdateSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        new VelocityUpdateJob { TimeStep = SystemAPI.Time.fixedDeltaTime }.ScheduleParallel(state.Dependency)
-            .Complete();
+        var job = new VelocityUpdateJob { TimeStep = SystemAPI.Time.fixedDeltaTime };
+        job.ScheduleParallel(state.Dependency).Complete();
     }
 
     [BurstCompile]
