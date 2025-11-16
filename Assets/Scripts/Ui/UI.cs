@@ -1,5 +1,6 @@
 using System;
 using RookieCartingClub.Authoring;
+using RookieCartingClub.Components;
 using RookieCartingClub.Systems;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -48,11 +49,6 @@ namespace RookieCartingClub.Ui
 
         public void UpdateUI()
         {
-            if (RaceControl.Singleton.racers.Count != 0)
-            {
-                Cart = RaceControl.Singleton.racers[0];
-            }
-        
             var velocity = VelocityProvider.Velocity.magnitude;
             Uivm.Speed = velocity;
             Uivm.UpdateSpeedKmh();

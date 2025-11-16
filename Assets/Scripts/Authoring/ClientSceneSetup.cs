@@ -4,7 +4,7 @@ namespace RookieCartingClub.Authoring
 {
     public class ClientSceneSetup : MonoBehaviour
     {
-        public RaceControl RaceControl;
+        public RaceControlAuthoring raceControlAuthoring;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         // private void Start()

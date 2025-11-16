@@ -22,9 +22,9 @@ namespace RookieCartingClub.Systems.Netcode.Server
                 .WithAll<ReceiveRpcCommandRequest>();
             state.RequireForUpdate(state.GetEntityQuery(builder));
             _networkIdFromEntity = state.GetComponentLookup<NetworkId>(true);
+            state.RequireForUpdate<TrackPositionsCollection>();
         }
 
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             _networkIdFromEntity.Update(ref state);
@@ -45,11 +45,23 @@ namespace RookieCartingClub.Systems.Netcode.Server
 
                 commandBuffer.AppendToBuffer(reqSrc.ValueRO.SourceConnection,
                     new LinkedEntityGroup { Value = newPlayerCart });
-                commandBuffer.SetComponent(newPlayerCart, new CartData { PlayerId = rpc.ValueRO.PlayerData.PlayerId });
+                commandBuffer.SetComponent(newPlayerCart, rpc.ValueRO.PlayerData);
                 commandBuffer.DestroyEntity(reqEntity);
+
+                RegisterCartHandle(state, rpc);
             }
 
             commandBuffer.Playback(state.EntityManager);
+        }
+
+        private void RegisterCartHandle(SystemState state, RefRO<SpawnRequestRpc> rpc)
+        {
+            var cartHandle = new CartHandle() { PlayerId = rpc.ValueRO.PlayerData.PlayerId, CheckCount = 939 };
+            cartHandle.Init();
+            
+            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceControl = state.EntityManager.GetComponentData<RaceControl>(rcEntity);
+            raceControl.Racers.Add(cartHandle);
         }
 
         [BurstCompile]

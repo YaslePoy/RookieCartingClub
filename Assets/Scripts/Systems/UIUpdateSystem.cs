@@ -2,6 +2,7 @@ using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using RookieCartingClub.Ui;
 using Unity.Entities;
+using Unity.NetCode;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
@@ -18,16 +19,25 @@ namespace RookieCartingClub.Systems
 
         protected override void OnUpdate()
         {
-            var cart = SystemAPI.GetSingletonEntity<CartData>();
-            var velocity = SystemAPI.GetComponent<PhysicsVelocity>(cart);
-            UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = velocity.Linear };
+            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceControl = CheckedStateRef.EntityManager.GetComponentData<RaceControl>(rcEntity);
 
-            if (UI.Instance.InPitRequest) 
-                SendInPitRequest();
 
-            UI.Instance.UpdateUI();
-            MapHandle.Instance.CartPosition = SystemAPI.GetComponent<LocalToWorld>(cart).Position;
-            MapHandle.Instance.MoveSelf();
+            foreach (var (velocityRO, positionRo, cartData) in SystemAPI
+                         .Query<RefRO<LocalVelocity>, RefRO<LocalToWorld>, RefRO<CartData>>()
+                         .WithAll<GhostOwnerIsLocal>())
+            {
+                UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = velocityRO.ValueRO.Velocity };
+
+                if (UI.Instance.InPitRequest)
+                    SendInPitRequest();
+
+                UI.Instance.Cart = raceControl.Racers.Find(i => i.PlayerId == cartData.ValueRO.PlayerId);
+
+                UI.Instance.UpdateUI();
+                MapHandle.Instance.CartPosition = positionRo.ValueRO.Position;
+                MapHandle.Instance.MoveSelf();
+            }
         }
 
         private void SendInPitRequest()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
 using RookieCartingClub.Components;
@@ -6,23 +7,18 @@ using UnityEngine;
 
 namespace RookieCartingClub.Authoring
 {
-    public class RaceControl : MonoBehaviour
+    public class RaceControlAuthoring : MonoBehaviour
     {
-        public static RaceControl Singleton;
-        public List<CartHandle> racers = new();
+        [Obsolete]
+        // public static RaceControlAuthoring Singleton;
+        public List<CartHandleAuthoring> racers = new();
 
         public UIVM Uivm;
         public IRacePeriod CurrentRacePeriod;
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
         public Queue<IRacePeriod> racePeriods = new();
 
         public TrackPositions TrackPositions = new();
 
-        public void Start()
-        {
-            Singleton = this;
-        }
 
         private void UpdatePositions()
         {
@@ -37,9 +33,9 @@ namespace RookieCartingClub.Authoring
             Uivm.Positions = sb.ToString();
         }
 
-        public class RaceControlBaker : Baker<RaceControl>
+        public class RaceControlBaker : Baker<RaceControlAuthoring>
         {
-            public override void Bake(RaceControl authoring)
+            public override void Bake(RaceControlAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 var collection = AddBuffer<TrackPositionsCollection>(entity);
@@ -59,15 +55,14 @@ namespace RookieCartingClub.Authoring
                     trackBuffer.Add(new TrackPlacementPosition
                     {
                         Position = transform.position,
-                        Rotation = transform.rotation                
+                        Rotation = transform.rotation
                     });
-                
                 }
 
 
                 positions = (GameObject.Find("Pitline starts") ?? GameObject.Find("Starts"))
                     .GetComponentsInChildren<Transform>()[1..];
-            
+
                 foreach (var transform in positions)
                 {
                     pitBuffer.Add(new TrackPlacementPosition
@@ -76,6 +71,8 @@ namespace RookieCartingClub.Authoring
                         Rotation = transform.rotation
                     });
                 }
+
+                AddComponentObject(entity, new RaceControl());
             }
         }
     }

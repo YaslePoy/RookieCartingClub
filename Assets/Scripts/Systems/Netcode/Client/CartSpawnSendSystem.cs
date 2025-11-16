@@ -14,33 +14,47 @@ namespace RookieCartingClub.Systems.Netcode.Client
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<CartSpawner>();
-            var builder = new EntityQueryBuilder(Allocator.Temp).WithNone<CartOnTrack>().WithNone<NetworkStreamInGame>();
+            var builder = new EntityQueryBuilder(Allocator.Temp).WithNone<CartOnTrack>()
+                .WithNone<NetworkStreamInGame>();
             state.RequireForUpdate(state.GetEntityQuery(builder));
+            
+            state.RequireForUpdate<TrackPositionsCollection>();
         }
 
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var userData = new ConnectRequest
             {
                 PlayerData = new CartData
                 {
-                    PlayerId = 123
+                    PlayerId = (int)(SystemAPI.Time.ElapsedTime * 100000)
                 }
             };
+            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceControl = state.EntityManager.GetComponentData<RaceControl>(rcEntity);
             
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
-            
-            foreach (var (id, entity) in SystemAPI.Query<RefRO<NetworkId>>().WithEntityAccess().WithNone<NetworkStreamInGame>())
+
+            foreach (var (_, entity) 
+                     in SystemAPI.Query<RefRO<NetworkId>>().WithEntityAccess().WithNone<NetworkStreamInGame>())
             {
                 commandBuffer.AddComponent<NetworkStreamInGame>(entity);
                 var req = commandBuffer.CreateEntity();
                 commandBuffer.AddComponent(req, new SpawnRequestRpc
                 {
-                    PlayerData = userData.PlayerData 
+                    PlayerData = userData.PlayerData
                 });
                 commandBuffer.AddComponent(req, new SendRpcCommandRequest { TargetConnection = entity });
+
+                var cartHandle = new CartHandle
+                {
+                    PlayerId = userData.PlayerData.PlayerId,
+                    CheckCount = 939
+                };
+                cartHandle.Init();
+                raceControl.Racers.Add(cartHandle);
             }
+
             commandBuffer.Playback(state.EntityManager);
         }
     }

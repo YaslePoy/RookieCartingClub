@@ -10,9 +10,9 @@ using UnityEngine;
 
 namespace RookieCartingClub.Authoring
 {
-    public class CartHandle : MonoBehaviour
+    public class CartHandleAuthoring : MonoBehaviour
     {
-        public static Action<CartHandle> NewCartConnected;
+        public static Action<CartHandleAuthoring> NewCartConnected;
 
         // public NetworkVariable<FixedString32Bytes> Nickname = new(new FixedString32Bytes(""),
         //     NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
@@ -31,22 +31,17 @@ namespace RookieCartingClub.Authoring
         public FixedString32Bytes Nickname;
         public int PlayerId;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        public void Start()
-        {
-            print($"Segments count: {CheckCount}");
-            Laps.Add(new TrackLap(CheckCount, Time.timeAsDouble));
-
-
-            RaceControl.Singleton.racers.Add(this);
-
-            NewCartConnected?.Invoke(this);
-        }
-
-        public void OnDestroy()
-        {
-            RaceControl.Singleton.racers.Remove(this);
-        }
+        // // Start is called once before the first execution of Update after the MonoBehaviour is created
+        // public void Start()
+        // {
+        //     print($"Segments count: {CheckCount}");
+        //     Laps.Add(new TrackLap(CheckCount, Time.timeAsDouble));
+        //
+        //
+        //     RaceControlAuthoring.Singleton.racers.Add(this);
+        //
+        //     NewCartConnected?.Invoke(this);
+        // }
 
         public void PushCheckPoint(CheckPointData checkPoint)
         {
@@ -61,9 +56,9 @@ namespace RookieCartingClub.Authoring
                 currentLap.SetupSegmentTime(now, checkPoint.Index);
         }
     
-        public class CartHandleBaker : Baker<CartHandle>
+        public class CartHandleBaker : Baker<CartHandleAuthoring>
         {
-            public override void Bake(CartHandle authoring)
+            public override void Bake(CartHandleAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
 

@@ -6,7 +6,7 @@ namespace RookieCartingClub.Authoring
     public class NickRotate : MonoBehaviour
     {
         public GameObject Camera;
-        public CartHandle CartHandle;
+        public CartHandleAuthoring cartHandleAuthoring;
         public bool NickSetup;
         private RectTransform rectTransform;
 

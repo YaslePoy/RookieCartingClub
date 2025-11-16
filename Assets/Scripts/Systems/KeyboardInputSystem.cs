@@ -1,5 +1,6 @@
 using System;
 using RookieCartingClub.Components;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.NetCode;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace RookieCartingClub.Systems
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation|WorldSystemFilterFlags.ThinClientSimulation)]
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     [UpdateInGroup(typeof(GhostInputSystemGroup))]
     public partial class KeyboardInputSystem : SystemBase
     {
@@ -18,8 +19,10 @@ namespace RookieCartingClub.Systems
         {
             _forceAction = InputSystem.actions.FindAction("Move");
             _stopRecordAction = InputSystem.actions.FindAction("Crouch");
-            CheckedStateRef.RequireForUpdate<CartInputData>();
-            CheckedStateRef.RequireForUpdate<InputFromKeyboard>();
+
+            var query = new EntityQueryBuilder(Allocator.Temp).WithAll<CartInputData>().WithAll<InputFromKeyboard>()
+                .WithAll<GhostOwnerIsLocal>();
+            CheckedStateRef.RequireForUpdate(CheckedStateRef.GetEntityQuery(query));
         }
 
         protected override void OnUpdate()
@@ -30,9 +33,16 @@ namespace RookieCartingClub.Systems
             var isRequireReplay = SystemAPI.HasSingleton<ReplayInput>();
             if (isRequireReplay) return;
 
-            var cartEntity = SystemAPI.GetSingletonEntity<CartInputData>();
-            var userControl = SystemAPI.GetComponentRW<CartInputData>(cartEntity);
-            var inputSetting = SystemAPI.GetSingleton<InputFromKeyboard>();
+
+            var userControl = new RefRW<CartInputData>();
+            var inputSetting = new InputFromKeyboard();
+
+            foreach (var (_, inputData, keyboardSettings) in SystemAPI.Query<EnabledRefRO<GhostOwnerIsLocal>, RefRW<CartInputData>, RefRO<InputFromKeyboard>>())
+            {
+                userControl = inputData;
+                inputSetting = keyboardSettings.ValueRO;
+            }
+
             userControl.ValueRW.CurrentEngine = 0;
             userControl.ValueRW.CurrentBreaks = 0;
 
@@ -71,7 +81,8 @@ namespace RookieCartingClub.Systems
         {
             const float acceleratedSteering = 3.5f;
             var angleDelta = movement.x * inputSetting.Sensetivity * deltaTime;
-            if (MathF.Sign(angleDelta) != MathF.Sign(userControl.ValueRW.CurrentAngle)) angleDelta *= acceleratedSteering;
+            if (MathF.Sign(angleDelta) != MathF.Sign(userControl.ValueRW.CurrentAngle))
+                angleDelta *= acceleratedSteering;
 
             var angleCandidate = userControl.ValueRW.CurrentAngle + angleDelta;
 

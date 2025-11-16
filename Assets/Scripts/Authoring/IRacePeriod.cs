@@ -2,7 +2,7 @@ namespace RookieCartingClub.Authoring
 {
     public interface IRacePeriod
     {
-        void Start(RaceControl raceControl);
-        void Update(RaceControl raceControl);
+        void Start(RaceControlAuthoring raceControlAuthoring);
+        void Update(RaceControlAuthoring raceControlAuthoring);
     }
 }

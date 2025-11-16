@@ -10,7 +10,7 @@ namespace RookieCartingClub.Authoring
 {
     public class DemoReader : MonoBehaviour
     {
-        public CartHandle Cart;
+        public CartHandleAuthoring Cart;
         public bool IsRecotring;
 
         public List<CartStamp> cartStamps = new();
