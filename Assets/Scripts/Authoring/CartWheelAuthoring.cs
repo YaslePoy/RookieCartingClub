@@ -9,7 +9,7 @@ namespace RookieCartingClub.Authoring
         public float MaxResistance;
         public float ForcePart;
         public float Friction;
-
+        public Rigidbody MassBody;
         public class CartWheelBaker : Baker<CartWheelAuthoring>
         {
             public override void Bake(CartWheelAuthoring authoring)
@@ -19,7 +19,7 @@ namespace RookieCartingClub.Authoring
                     new CartWheel
                     {
                         MaxResistance = authoring.MaxResistance, ForcePart = authoring.ForcePart,
-                        Mass = authoring.GetComponentInParent<Rigidbody>().mass, Friction = authoring.Friction
+                        Mass = authoring.MassBody.mass, Friction = authoring.Friction
                     });
                 AddBuffer<ForceApplyRequest>(entity);
             }

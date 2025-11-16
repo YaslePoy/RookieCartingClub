@@ -313,7 +313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 0.2
-  K: 0
+  EfficiencyFactor: 1
   Collector: {fileID: 1366000592143645543}
 --- !u!114 &8809803332665182717
 MonoBehaviour:
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 4
-  K: 1
+  EfficiencyFactor: 1
   Collector: {fileID: 7045818820414724760}
 --- !u!114 &6310163582882432241
 MonoBehaviour:
@@ -550,6 +550,7 @@ MonoBehaviour:
   MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
+  MassBody: {fileID: 2968463312305433424}
 --- !u!1 &3634557168382203686
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 1.5
-  K: 0
+  EfficiencyFactor: 1
   Collector: {fileID: 3226323925051985510}
 --- !u!114 &8401378678847774315
 MonoBehaviour:
@@ -765,7 +766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 4
-  K: 1
+  EfficiencyFactor: 1
   Collector: {fileID: 1366000592143645543}
 --- !u!114 &8419154592835790127
 MonoBehaviour:
@@ -820,6 +821,7 @@ MonoBehaviour:
   MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
+  MassBody: {fileID: 2968463312305433424}
 --- !u!1 &6617167030119384605
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,7 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 0.2
-  K: 0
+  EfficiencyFactor: 1
   Collector: {fileID: 3226323925051985510}
 --- !u!114 &2673712289744559527
 MonoBehaviour:
@@ -1016,7 +1018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 1.5
-  K: 0
+  EfficiencyFactor: 1
   Collector: {fileID: 1366000592143645543}
 --- !u!114 &5052711595176526893
 MonoBehaviour:
@@ -1092,7 +1094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 4
-  K: 1
+  EfficiencyFactor: 1
   Collector: {fileID: 6023843409384027328}
 --- !u!114 &5835206526241152682
 MonoBehaviour:
@@ -1133,6 +1135,7 @@ MonoBehaviour:
   MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
+  MassBody: {fileID: 2968463312305433424}
 --- !u!1 &8280289031576691925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,8 +1154,8 @@ GameObject:
   - component: {fileID: 8382071404288949100}
   - component: {fileID: 431820076659782233}
   - component: {fileID: 8219009458237982638}
-  - component: {fileID: 7881366497209829876}
-  - component: {fileID: 8538973976518658981}
+  - component: {fileID: 6284996644357950043}
+  - component: {fileID: 2803957832407162226}
   m_Layer: 0
   m_Name: cart
   m_TagString: Cart
@@ -1221,8 +1224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ed4af4791b52c738ffcb4bca1f2406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraPosition: {fileID: 7385225801888495128}
-  AllowControl: 1
 --- !u!114 &1003007710482970868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1524,7 +1525,7 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 2
---- !u!114 &7881366497209829876
+--- !u!114 &6284996644357950043
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1536,7 +1537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c16549610bfe4458aa9389201d072bb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Entities.Hybrid::Unity.Entities.Hybrid.Baking.LinkedEntityGroupAuthoring
---- !u!114 &8538973976518658981
+--- !u!114 &2803957832407162226
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1554,7 +1555,7 @@ MonoBehaviour:
   Importance: 1
   MaxSendRate: 0
   prefabId: edd9940327da516a0b33fda4773d472b
-  HasOwner: 0
+  HasOwner: 1
   SupportAutoCommandTarget: 1
   TrackInterpolationDelay: 0
   GhostGroup: 0
@@ -1614,7 +1615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxForce: 4
-  K: 1
+  EfficiencyFactor: 1
   Collector: {fileID: 3226323925051985510}
 --- !u!114 &4011543894156894916
 MonoBehaviour:
@@ -1669,3 +1670,4 @@ MonoBehaviour:
   MaxResistance: 750
   ForcePart: 0.25
   Friction: 10
+  MassBody: {fileID: 2968463312305433424}

@@ -6,6 +6,7 @@ using Unity.Physics;
 
 namespace RookieCartingClub.Systems
 {
+    [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [BurstCompile]
     public partial struct EngineCalculateJob : IJobEntity
     {

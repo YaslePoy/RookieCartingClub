@@ -2,12 +2,13 @@ using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.NetCode;
 using Unity.Physics.Systems;
 
 namespace RookieCartingClub.Systems
 {
-    [UpdateBefore(typeof(CartPhysicsSimulationGroup))]
-    [UpdateInGroup(typeof(PhysicsInitializeGroup))]
+    [UpdateBefore(typeof(EngineTorqueJob))]
+    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
     public partial struct InputPhysicalImplementationSystem : ISystem
     {
         private ComponentLookup<CartInputData> _inputLookup;
@@ -23,7 +24,7 @@ namespace RookieCartingClub.Systems
         {
             _inputLookup.Update(ref state);
 
-            var breakingJob = new RookieCartingClub.Systems.BreakingJob
+            var breakingJob = new BreakingJob
             {
                 InputLookup = _inputLookup
             };
@@ -35,7 +36,7 @@ namespace RookieCartingClub.Systems
             };
             var wheelHandle = wheelJob.ScheduleParallel(state.Dependency);
         
-            var engineJob = new RookieCartingClub.Systems.EngineCalculateJob();
+            var engineJob = new EngineCalculateJob();
 
             var engineHandle = engineJob.ScheduleParallel(state.Dependency);
 

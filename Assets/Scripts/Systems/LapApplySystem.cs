@@ -5,6 +5,7 @@ using Unity.Entities;
 
 namespace RookieCartingClub.Systems
 {
+    [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial class LapApplySystem : SystemBase
     {
         protected override void OnCreate()

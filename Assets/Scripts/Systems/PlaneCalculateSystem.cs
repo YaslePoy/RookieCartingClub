@@ -8,7 +8,7 @@ using Unity.Transforms;
 namespace RookieCartingClub.Systems
 {
     [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-    [UpdateBefore(typeof(RookieCartingClub.Systems.ForceSummarySystem))]
+    [UpdateBefore(typeof(ForceSummarySystem))]
     public partial struct PlaneCalculateSystem : ISystem
     {
         [BurstCompile]

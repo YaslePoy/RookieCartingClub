@@ -4,6 +4,7 @@ using Unity.Entities;
 
 namespace RookieCartingClub.Systems
 {
+    [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct EnableCartSimulationSystem : ISystem
     {
         [BurstCompile]

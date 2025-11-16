@@ -1,11 +1,14 @@
 using System;
 using RookieCartingClub.Components;
 using Unity.Entities;
+using Unity.NetCode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace RookieCartingClub.Systems
 {
+    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation|WorldSystemFilterFlags.ThinClientSimulation)]
+    [UpdateInGroup(typeof(GhostInputSystemGroup))]
     public partial class KeyboardInputSystem : SystemBase
     {
         private InputAction _forceAction;

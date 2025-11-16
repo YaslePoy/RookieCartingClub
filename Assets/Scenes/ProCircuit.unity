@@ -132555,6 +132555,7 @@ GameObject:
   - component: {fileID: 1935293578}
   - component: {fileID: 1935293579}
   - component: {fileID: 1935293580}
+  - component: {fileID: 1935293581}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -132747,6 +132748,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RaceControl
   racers: []
   Uivm: {fileID: 0}
+--- !u!114 &1935293581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935293577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0aac4b76ebf463b98e97db7638caf85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RookieCartingClub::RookieCartingClub.Authoring.CartSpawnerAuthoring
+  Prefab: {fileID: 8280289031576691925, guid: edd9940327da516a0b33fda4773d472b, type: 3}
 --- !u!43 &1935927548
 Mesh:
   m_ObjectHideFlags: 0
@@ -135996,101 +136010,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 316064908}
---- !u!1001 &1990041878
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[3].time
-      value: 0.6895887
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[4].time
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[3].value
-      value: 0.2705714
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[4].value
-      value: 0.118206024
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[3].inSlope
-      value: -2.3690567
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[3].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[3].outSlope
-      value: -2.3690567
-      objectReference: {fileID: 0}
-    - target: {fileID: 1003007710482970868, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: AnimationCurve.m_Curve.Array.data[3].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 8280289031576691925, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_Name
-      value: cart
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 60.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.32
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -48.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 270
-      objectReference: {fileID: 0}
-    - target: {fileID: 8764760979260145263, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8538973976518658981, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-    - {fileID: 7881366497209829876, guid: edd9940327da516a0b33fda4773d472b, type: 3}
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: edd9940327da516a0b33fda4773d472b, type: 3}
 --- !u!64 &1991230824
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -150194,5 +150113,4 @@ SceneRoots:
   - {fileID: 1935293578}
   - {fileID: 1283672234}
   - {fileID: 998616473}
-  - {fileID: 1990041878}
   - {fileID: 220642481}

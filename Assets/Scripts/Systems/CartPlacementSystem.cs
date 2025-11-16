@@ -8,6 +8,7 @@ using Unity.Transforms;
 
 namespace RookieCartingClub.Systems
 {
+    [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(EnableCartSimulationSystem))]
     public partial struct CartPlacementSystem : ISystem
     {
