@@ -45,7 +45,7 @@ namespace RookieCartingClub.Systems.Netcode.Server
 
                 commandBuffer.AppendToBuffer(reqSrc.ValueRO.SourceConnection,
                     new LinkedEntityGroup { Value = newPlayerCart });
-                // commandBuffer.SetComponent(newPlayerCart, new CartData { PlayerId = rpc.ValueRO.PlayerData.PlayerId });
+                commandBuffer.SetComponent(newPlayerCart, new CartData { PlayerId = rpc.ValueRO.PlayerData.PlayerId });
                 commandBuffer.DestroyEntity(reqEntity);
             }
 

@@ -7,7 +7,9 @@ namespace RookieCartingClub.Components
     [GhostComponent]
     public struct CartData : IComponentData
     {
+        [GhostField]
         public FixedString32Bytes Nickname;
+        [GhostField]
         public int PlayerId;
     }
 }
