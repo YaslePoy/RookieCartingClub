@@ -24,7 +24,6 @@ namespace RookieCartingClub.Systems
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            // Debug.Log("EngineTorqueSystem Update");
             _engineLookup.Update(ref state);
             _planeResistantLookup.Update(ref state);
             var ecb = new EntityCommandBuffer(Allocator.TempJob);

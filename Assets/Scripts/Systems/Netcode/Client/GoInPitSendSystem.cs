@@ -33,15 +33,20 @@ namespace RookieCartingClub.Systems.Netcode.Client
             {
                 localRequest.ValueRW = false;
 
-                var req = commandBuffer.CreateEntity();
-                commandBuffer.AddComponent(req, new GoInPitRequest
-                {
-                    PlayerId = cartData.ValueRO.PlayerId
-                });
-                commandBuffer.AddComponent(req, new SendRpcCommandRequest { TargetConnection = connectionEntity });
+                CreatePittingRequest(commandBuffer, cartData, connectionEntity);
             }
 
             commandBuffer.Playback(state.EntityManager);
+        }
+
+        private static void CreatePittingRequest(EntityCommandBuffer commandBuffer, RefRO<CartData> cartData, Entity connectionEntity)
+        {
+            var req = commandBuffer.CreateEntity();
+            commandBuffer.AddComponent(req, new GoInPitRequest
+            {
+                PlayerId = cartData.ValueRO.PlayerId
+            });
+            commandBuffer.AddComponent(req, new SendRpcCommandRequest { TargetConnection = connectionEntity });
         }
 
         [BurstCompile]

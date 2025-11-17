@@ -36,8 +36,6 @@ namespace RookieCartingClub.Systems.Netcode.Server
 
                     commandBuffer.SetComponentEnabled<TrackPlacementRequest>(cartEntity, true);
                     commandBuffer.SetComponent(cartEntity, new TrackPlacementRequest() { CollectionId = 1 });
-                    Debug.Log($"GoInPit Request: {id}");
-
                     break;
                 }
 

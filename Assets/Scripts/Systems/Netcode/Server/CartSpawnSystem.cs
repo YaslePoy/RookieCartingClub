@@ -40,26 +40,31 @@ namespace RookieCartingClub.Systems.Netcode.Server
 
                 var networkId = _networkIdFromEntity[reqSrc.ValueRO.SourceConnection];
 
-                var newPlayerCart = commandBuffer.Instantiate(cartPrefab);
-                commandBuffer.SetComponent(newPlayerCart, new GhostOwner { NetworkId = networkId.Value });
-
-                commandBuffer.AppendToBuffer(reqSrc.ValueRO.SourceConnection,
-                    new LinkedEntityGroup { Value = newPlayerCart });
-                commandBuffer.SetComponent(newPlayerCart, rpc.ValueRO.PlayerData);
-
-                commandBuffer.SetComponentEnabled<TrackPlacementRequest>(newPlayerCart, true);
-                commandBuffer.SetComponent(newPlayerCart, new TrackPlacementRequest() { CollectionId = 1 });
-
-                commandBuffer.DestroyEntity(reqEntity);
-
-
-                RegisterCartHandle(state, rpc);
+                SpawnPlayerOnTrack(ref state, commandBuffer, cartPrefab, networkId, reqSrc, rpc, reqEntity);
             }
 
             commandBuffer.Playback(state.EntityManager);
         }
 
-        private void RegisterCartHandle(SystemState state, RefRO<SpawnRequestRpc> rpc)
+        private void SpawnPlayerOnTrack(ref SystemState state, EntityCommandBuffer commandBuffer, Entity cartPrefab,
+            NetworkId networkId, RefRO<ReceiveRpcCommandRequest> reqSrc, RefRO<SpawnRequestRpc> rpc, Entity reqEntity)
+        {
+            var newPlayerCart = commandBuffer.Instantiate(cartPrefab);
+            commandBuffer.SetComponent(newPlayerCart, new GhostOwner { NetworkId = networkId.Value });
+
+            commandBuffer.AppendToBuffer(reqSrc.ValueRO.SourceConnection, new LinkedEntityGroup { Value = newPlayerCart });
+            commandBuffer.SetComponent(newPlayerCart, rpc.ValueRO.PlayerData);
+
+            commandBuffer.SetComponentEnabled<TrackPlacementRequest>(newPlayerCart, true);
+            commandBuffer.SetComponent(newPlayerCart, new TrackPlacementRequest { CollectionId = 1 });
+
+            commandBuffer.DestroyEntity(reqEntity);
+
+
+            RegisterCartHandle(ref state, rpc);
+        }
+
+        private void RegisterCartHandle(ref SystemState state, RefRO<SpawnRequestRpc> rpc)
         {
             var cartHandle = new CartHandle() { PlayerId = rpc.ValueRO.PlayerData.PlayerId, CheckCount = 939 };
             cartHandle.Init();
