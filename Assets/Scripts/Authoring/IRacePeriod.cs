@@ -4,5 +4,6 @@ namespace RookieCartingClub.Authoring
     {
         void Start(RaceControlAuthoring raceControlAuthoring);
         void Update(RaceControlAuthoring raceControlAuthoring);
+        int GetPlayerPosition(int playerId);
     }
 }

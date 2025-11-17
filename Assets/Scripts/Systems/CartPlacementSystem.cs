@@ -1,3 +1,4 @@
+using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
@@ -10,23 +11,25 @@ namespace RookieCartingClub.Systems
 {
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     [UpdateAfter(typeof(EnableCartSimulationSystem))]
-    public partial struct CartPlacementSystem : ISystem
+    public partial class CartPlacementSystem : SystemBase
     {
         private BufferLookup<TrackPlacementPosition> _positionsLookup;
 
-        [BurstCompile]
-        public void OnCreate(ref SystemState state)
+        protected override void OnCreate()
         {
-            state.RequireForUpdate<TrackPlacementRequest>();
-            _positionsLookup = state.GetBufferLookup<TrackPlacementPosition>();
+            CheckedStateRef.RequireForUpdate<TrackPositionsCollection>();
+            CheckedStateRef.RequireForUpdate<TrackPlacementRequest>();
+            _positionsLookup = CheckedStateRef.GetBufferLookup<TrackPlacementPosition>();
         }
 
-        [BurstCompile]
-        public void OnUpdate(ref SystemState state)
+        protected override void OnUpdate()
         {
-            _positionsLookup.Update(ref state);
+            _positionsLookup.Update(ref CheckedStateRef);
 
             var positionsCollections = SystemAPI.GetSingletonBuffer<TrackPositionsCollection>().AsNativeArray();
+
+            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceControl = CheckedStateRef.EntityManager.GetComponentData<RaceControl>(rcEntity);
 
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
 
@@ -34,30 +37,42 @@ namespace RookieCartingClub.Systems
             {
                 PositionsLookup = _positionsLookup,
                 CommandBuffer = ecb,
-                PositionsCollection = positionsCollections
+                PositionsCollection = positionsCollections,
+                CurrentRacePeriod = raceControl.CurrentRacePeriod,
             };
-            job.Schedule(state.Dependency).Complete();
 
-            ecb.Playback(state.EntityManager);
+            foreach (var (transform, velocity, request, enabledRequest, simulate, cartData, entity) in SystemAPI
+                         .Query<RefRW<LocalTransform>, RefRW<PhysicsVelocity>, RefRO<TrackPlacementRequest>,
+                             EnabledRefRW<TrackPlacementRequest>, EnabledRefRW<Simulate>, RefRO<CartData>>()
+                         .WithEntityAccess())
+            {
+                job.Execute(entity, ref transform.ValueRW, ref velocity.ValueRW, request.ValueRO, enabledRequest, simulate, cartData.ValueRO);
+            }
+            
+            ecb.Playback(CheckedStateRef.EntityManager);
             ecb.Dispose();
         }
 
-        [BurstCompile]
         public partial struct CartPlacementJob : IJobEntity
         {
+            public IRacePeriod CurrentRacePeriod;
             public EntityCommandBuffer CommandBuffer;
             public BufferLookup<TrackPlacementPosition> PositionsLookup;
             public NativeArray<TrackPositionsCollection> PositionsCollection;
 
-            private void Execute(Entity entity,
+            public void Execute(Entity entity,
                 ref LocalTransform transform,
                 ref PhysicsVelocity velocity,
                 TrackPlacementRequest request,
                 EnabledRefRW<TrackPlacementRequest> enabledRequest,
-                EnabledRefRW<Simulate> simulate)
+                EnabledRefRW<Simulate> simulate,
+                in CartData cartData)
             {
                 var location = PositionsLookup[PositionsCollection[request.CollectionId].BufferEntity];
-                var position = location[0];
+
+                var playerPositionIndex = CurrentRacePeriod.GetPlayerPosition(cartData.PlayerId);
+
+                var position = location[playerPositionIndex];
                 transform.Position = position.Position;
                 transform.Rotation = position.Rotation;
 

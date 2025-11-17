@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using Unity.Entities;
 using UnityEngine;
@@ -141,44 +142,62 @@ namespace RookieCartingClub.Authoring
 //     }
 // }
 //
-// public class PracticePeriod : IRacePeriod
-// {
-//     public double Duration;
-//
-//     public void Start(RaceControl raceControl)
-//     {
-//         TrackPlacement.CurrentSpawn = 0;
-//         foreach (var racer in raceControl.racers)
-//         {
-//             racer.GetComponent<TrackPlacement>().PlaceInPits();
-//             racer.GetComponent<UserControl>().AllowControl = true;
-//             var rigidbody = racer.GetComponent<Rigidbody>();
-//             rigidbody.linearVelocity = Vector3.zero;
-//             rigidbody.angularVelocity = Vector3.zero;
-//         }
-//
-//         // raceControl.PeriodType.Value = PeriodType.Practice;
-//         // raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
-//         // raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
-//
-//         CartHandle.NewCartConnected = handle =>
-//         {
-//             handle.GetComponent<TrackPlacement>().PlaceInPits();
-//             handle.GetComponent<UserControl>().AllowControl = true;
-//             var rigidbody = handle.GetComponent<Rigidbody>();
-//             rigidbody.linearVelocity = Vector3.zero;
-//             rigidbody.angularVelocity = Vector3.zero;
-//         };
-//     }
-//
-//     public void Update(RaceControl raceControl)
-//     {
-//         var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
-//             .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
-//         raceControl.racers = racersOrder;
-//         raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId).ToList();
-//     }
-// }
+public class PracticePeriod : IRacePeriod
+{
+    public double Duration;
+    public const int PositionsOnTrack = 12;
+    private int _currentIndex = 0;
+    
+    // public void Start(RaceControl raceControl)
+    // {
+    //     // TrackPlacement.CurrentSpawn = 0;
+    //     // foreach (var racer in raceControl.racers)
+    //     // {
+    //     //     racer.GetComponent<TrackPlacement>().PlaceInPits();
+    //     //     racer.GetComponent<UserControl>().AllowControl = true;
+    //     //     var rigidbody = racer.GetComponent<Rigidbody>();
+    //     //     rigidbody.linearVelocity = Vector3.zero;
+    //     //     rigidbody.angularVelocity = Vector3.zero;
+    //     // }
+    //     //
+    //     // // raceControl.PeriodType.Value = PeriodType.Practice;
+    //     // // raceControl.PeriodName.Value = new FixedString32Bytes("Практика");
+    //     // // raceControl.PeriodEnd.Value = Duration + Time.timeAsDouble;
+    //     //
+    //     // CartHandle.NewCartConnected = handle =>
+    //     // {
+    //     //     handle.GetComponent<TrackPlacement>().PlaceInPits();
+    //     //     handle.GetComponent<UserControl>().AllowControl = true;
+    //     //     var rigidbody = handle.GetComponent<Rigidbody>();
+    //     //     rigidbody.linearVelocity = Vector3.zero;
+    //     //     rigidbody.angularVelocity = Vector3.zero;
+    //     // };
+    // }
+    //
+    // public void Update(RaceControl raceControl)
+    // {
+    //     // var racersOrder = raceControl.racers.OrderByDescending(i => i.Laps.Count)
+    //     //     .ThenBy(i => i.CurrentLap.LastSegmentIndex).ToList();
+    //     // raceControl.racers = racersOrder;
+    //     // raceControl.TrackPositions.Positions = racersOrder.Select(i => i.PlayerId).ToList();
+    // }
+
+
+    public void Start(RaceControlAuthoring raceControlAuthoring)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Update(RaceControlAuthoring raceControlAuthoring)
+    {
+        throw new NotImplementedException();
+    }
+
+    public int GetPlayerPosition(int playerId)
+    {
+        return  _currentIndex++ % PositionsOnTrack;
+    }
+}
 //
 // public class FinishPeriod : IRacePeriod
 // {

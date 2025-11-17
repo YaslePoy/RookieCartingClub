@@ -6,7 +6,7 @@ namespace RookieCartingClub.Components
 {
     public class RaceControl : IComponentData
     {
-        public IRacePeriod CurrentRacePeriod;
+        public IRacePeriod CurrentRacePeriod = new PracticePeriod();
         public Queue<IRacePeriod> RacePeriods = new();
 
         public TrackPositions TrackPositions = new();

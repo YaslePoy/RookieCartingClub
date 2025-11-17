@@ -46,7 +46,12 @@ namespace RookieCartingClub.Systems.Netcode.Server
                 commandBuffer.AppendToBuffer(reqSrc.ValueRO.SourceConnection,
                     new LinkedEntityGroup { Value = newPlayerCart });
                 commandBuffer.SetComponent(newPlayerCart, rpc.ValueRO.PlayerData);
+
+                commandBuffer.SetComponentEnabled<TrackPlacementRequest>(newPlayerCart, true);
+                commandBuffer.SetComponent(newPlayerCart, new TrackPlacementRequest() { CollectionId = 1 });
+
                 commandBuffer.DestroyEntity(reqEntity);
+
 
                 RegisterCartHandle(state, rpc);
             }
@@ -58,7 +63,7 @@ namespace RookieCartingClub.Systems.Netcode.Server
         {
             var cartHandle = new CartHandle() { PlayerId = rpc.ValueRO.PlayerData.PlayerId, CheckCount = 939 };
             cartHandle.Init();
-            
+
             var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
             var raceControl = state.EntityManager.GetComponentData<RaceControl>(rcEntity);
             raceControl.Racers.Add(cartHandle);
