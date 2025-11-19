@@ -70,7 +70,7 @@ namespace RookieCartingClub.Systems.Netcode.Server
             cartHandle.Init();
 
             var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = state.EntityManager.GetComponentData<RaceControl>(rcEntity);
+            var raceControl = state.EntityManager.GetComponentObject<RaceControl>(rcEntity);
             raceControl.Racers.Add(cartHandle);
         }
 

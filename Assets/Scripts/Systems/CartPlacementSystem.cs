@@ -29,7 +29,7 @@ namespace RookieCartingClub.Systems
             var positionsCollections = SystemAPI.GetSingletonBuffer<TrackPositionsCollection>().AsNativeArray();
 
             var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = CheckedStateRef.EntityManager.GetComponentData<RaceControl>(rcEntity);
+            var raceControl = CheckedStateRef.EntityManager.GetComponentObject<RaceControl>(rcEntity);
 
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
 

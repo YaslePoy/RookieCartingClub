@@ -31,10 +31,9 @@ namespace RookieCartingClub.Systems.Netcode.Client
                 }
             };
             var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = state.EntityManager.GetComponentData<RaceControl>(rcEntity);
-
+            var raceControl = state.EntityManager.GetComponentObject<RaceControl>(rcEntity);
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
-
+            
             foreach (var (_, entity)
                      in SystemAPI.Query<RefRO<NetworkId>>().WithEntityAccess().WithNone<NetworkStreamInGame>())
             {

@@ -20,7 +20,7 @@ namespace RookieCartingClub.Systems
         protected override void OnUpdate()
         {
             var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = CheckedStateRef.EntityManager.GetComponentData<RaceControl>(rcEntity);
+            var raceControl = CheckedStateRef.EntityManager.GetComponentObject<RaceControl>(rcEntity);
 
 
             foreach (var (velocityRO, positionRo, cartData) in SystemAPI
