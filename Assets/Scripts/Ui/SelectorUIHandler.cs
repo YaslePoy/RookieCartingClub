@@ -1,6 +1,7 @@
 using System.Linq;
 using RookieCartingClub.Authoring;
 using RookieCartingClub.Ui;
+using Unity.NetCode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -60,12 +61,18 @@ namespace RookieCartingClub.Ui
                 }
 
                 SessionSetup.RequestedSession = networkSession;
+                ClientServerBootstrap.AutoConnectPort = networkSession.Port;
+                var bootstrap = new AutoBootstrap();
+                bootstrap.Initialize("");
                 SceneManager.LoadScene($"Scenes/{trackId}");
             };
 
             _document.rootVisualElement.Q<Button>("SPButton").clicked += () =>
             {
                 SessionSetup.RequestedSession = new LocalSession();
+                ClientServerBootstrap.AutoConnectPort = 7772;
+                var bootstrap = new AutoBootstrap();
+                bootstrap.Initialize("");
                 SceneManager.LoadScene($"Scenes/{trackId}");
             };
         }

@@ -2,6 +2,7 @@ using System;
 using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using RookieCartingClub.Systems;
+using Unity.NetCode;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -42,7 +43,8 @@ namespace RookieCartingClub.Ui
             Document.rootVisualElement.Q<Button>("quit").clicked += () =>
             {
                 // NetworkManager.Singleton?.Shutdown();
-                Destroy(GameObject.Find("Network"));
+                var bootstrap = new AutoBootstrap();
+                bootstrap.StopGameSession();
                 SceneManager.LoadScene("SelectorScene");
             };
         }

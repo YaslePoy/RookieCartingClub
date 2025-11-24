@@ -41,7 +41,11 @@ namespace RookieCartingClub.Systems
                 CurrentRacePeriod = raceControl.CurrentRacePeriod,
             };
 
-            job.Schedule(CheckedStateRef.Dependency).Complete();
+            foreach (var (transform, velocity, request, enabledRequest, simulate, cartData, entity) in
+                     SystemAPI.Query<RefRW<LocalTransform>, RefRW<PhysicsVelocity>, RefRO<TrackPlacementRequest>, EnabledRefRW<TrackPlacementRequest>, EnabledRefRW<Simulate>, RefRO<CartData>>().WithEntityAccess())
+            {
+                job.Execute(entity, ref transform.ValueRW, ref velocity.ValueRW, request.ValueRO, enabledRequest, simulate, cartData.ValueRO);
+            }
             
             ecb.Playback(CheckedStateRef.EntityManager);
             ecb.Dispose();
