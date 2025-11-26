@@ -18,7 +18,7 @@ namespace RookieCartingClub.Authoring
         var path = "config.json";
 
 #else
-            var path = "/home/micial/projects/unity/build/server/config.json";
+            var path = @"C:\Users\Mimm\projects\unity\build\rcc_server\config.json";
 #endif
 
 
@@ -30,6 +30,8 @@ namespace RookieCartingClub.Authoring
                 SessionTimetable = config.SessionTimetable
             };
 
+            var bootstrap = new AutoBootstrap();
+            bootstrap.Initialize("");
             SceneManager.LoadScene(config.TrackId);
         }
     }

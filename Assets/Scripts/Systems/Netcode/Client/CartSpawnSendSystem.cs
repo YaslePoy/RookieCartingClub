@@ -17,6 +17,7 @@ namespace RookieCartingClub.Systems.Netcode.Client
             var builder = new EntityQueryBuilder(Allocator.Temp).WithNone<CartOnTrack>()
                 .WithNone<NetworkStreamInGame>();
             state.RequireForUpdate(state.GetEntityQuery(builder));
+            state.RequireForUpdate<NetworkId>();
 
             state.RequireForUpdate<TrackPositionsCollection>();
         }
@@ -33,7 +34,7 @@ namespace RookieCartingClub.Systems.Netcode.Client
             var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
             var raceControl = state.EntityManager.GetComponentObject<RaceControl>(rcEntity);
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
-            
+
             foreach (var (_, entity)
                      in SystemAPI.Query<RefRO<NetworkId>>().WithEntityAccess().WithNone<NetworkStreamInGame>())
             {
@@ -43,7 +44,8 @@ namespace RookieCartingClub.Systems.Netcode.Client
             commandBuffer.Playback(state.EntityManager);
         }
 
-        private static void CreateRequestEntity(EntityCommandBuffer commandBuffer, Entity entity, ConnectRequest userData,
+        private static void CreateRequestEntity(EntityCommandBuffer commandBuffer, Entity entity,
+            ConnectRequest userData,
             RaceControl raceControl)
         {
             commandBuffer.AddComponent<NetworkStreamInGame>(entity);
