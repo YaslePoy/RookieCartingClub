@@ -28,12 +28,13 @@ public class AutoBootstrap : ClientServerBootstrap
                 break;
             case NetworkSession networkSession:
                 DefaultConnectAddress = NetworkEndpoint.Parse(networkSession.Ip, networkSession.Port, NetworkFamily.Ipv4);
-
+                AutoConnectPort = networkSession.Port;
                 CreateClientWorld("Player world");
                 Debug.Log("Connection initiated for port: " + networkSession.Port);
                 break;
             case ServerSession serverConfig:
                 DefaultListenAddress = NetworkEndpoint.AnyIpv4.WithPort(serverConfig.Port);
+                AutoConnectPort = serverConfig.Port;
                 CreateServerWorld("Server world");
                 Debug.Log("Server started on port " + serverConfig.Port);
                 break;

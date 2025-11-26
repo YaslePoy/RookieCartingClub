@@ -49,7 +49,7 @@ namespace RookieCartingClub.Ui
             
             _document.rootVisualElement.Q<Button>("MPButton").clicked += () =>
             {
-                var networkSession = new NetworkSession { Ip = "192.168.1.101" };
+                var networkSession = new NetworkSession { Ip = "95.105.78.72" };
                 switch (trackId)
                 {
                     case "ProScene":
