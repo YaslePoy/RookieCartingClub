@@ -9,9 +9,6 @@ public class AutoBootstrap : ClientServerBootstrap
 {
     public override bool Initialize(string defaultWorldName)
     {
-        // AutoConnectPort = 7778;
-        // CreateDefaultClientServerWorlds();
-        // return true;
         Debug.Log("Initializing AutoBootstrap");
         if (SessionSetup.RequestedSession is null)
         {

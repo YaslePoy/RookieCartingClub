@@ -28,8 +28,8 @@ namespace RookieCartingClub.Systems
 
             var positionsCollections = SystemAPI.GetSingletonBuffer<TrackPositionsCollection>().AsNativeArray();
 
-            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = CheckedStateRef.EntityManager.GetComponentObject<RaceControl>(rcEntity);
+            var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceState = CheckedStateRef.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
 
             var ecb = new EntityCommandBuffer(Allocator.TempJob);
 
@@ -38,7 +38,7 @@ namespace RookieCartingClub.Systems
                 PositionsLookup = _positionsLookup,
                 CommandBuffer = ecb,
                 PositionsCollection = positionsCollections,
-                CurrentRacePeriod = raceControl.CurrentRacePeriod,
+                CurrentRacePeriod = raceState.CurrentRacePeriod,
             };
 
             foreach (var (transform, velocity, request, enabledRequest, simulate, cartData, entity) in

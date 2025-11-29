@@ -16,4 +16,17 @@ MonoBehaviour:
   SpeedKmh: 0
   SpeedKmhString: 
   LapTime: 00:00:00.00
+  LastLapTime: 
+  FastestLapTime: 
   Delta: 0.00
+  Lap: 0
+  SessionTime: 
+  SessionName: 
+  Map: {fileID: 0}
+  MapWidth: 0
+  MapHeight: 0
+  PlayerX: 0
+  PlayerY: 0
+  LapIndicator: {r: 1, g: 1, b: 1, a: 1}
+  ShowMenu: 0
+  Positions: 

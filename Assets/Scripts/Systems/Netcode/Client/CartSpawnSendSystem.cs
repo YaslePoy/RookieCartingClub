@@ -31,14 +31,14 @@ namespace RookieCartingClub.Systems.Netcode.Client
                     PlayerId = (int)(SystemAPI.Time.ElapsedTime * 100000)
                 }
             };
-            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = state.EntityManager.GetComponentObject<RaceControl>(rcEntity);
+            var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceState = state.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);
 
             foreach (var (_, entity)
                      in SystemAPI.Query<RefRO<NetworkId>>().WithEntityAccess().WithNone<NetworkStreamInGame>())
             {
-                CreateRequestEntity(commandBuffer, entity, userData, raceControl);
+                CreateRequestEntity(commandBuffer, entity, userData, raceState);
             }
 
             commandBuffer.Playback(state.EntityManager);
@@ -46,7 +46,7 @@ namespace RookieCartingClub.Systems.Netcode.Client
 
         private static void CreateRequestEntity(EntityCommandBuffer commandBuffer, Entity entity,
             ConnectRequest userData,
-            RaceControl raceControl)
+            RaceState raceState)
         {
             commandBuffer.AddComponent<NetworkStreamInGame>(entity);
             var req = commandBuffer.CreateEntity();
@@ -59,7 +59,7 @@ namespace RookieCartingClub.Systems.Netcode.Client
                 CheckCount = 939
             };
             cartHandle.Init();
-            raceControl.Racers.Add(cartHandle);
+            raceState.Racers.Add(cartHandle);
         }
     }
 }

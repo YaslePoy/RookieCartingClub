@@ -12,6 +12,13 @@ namespace RookieCartingClub.Ui
 {
     public class UI : MonoBehaviour
     {
+        public class ButtonsState
+        {
+            public bool InPitRequest;
+            public bool IsRecordSwitchRequest;
+            public bool IsReplayRequest;
+        }
+
         public static UI Instance;
 
         // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +27,8 @@ namespace RookieCartingClub.Ui
         public CartHandle Cart;
         private InputAction MenuAction;
         private UIDocument Document;
-        public bool InPitRequest;
+        public ButtonsState Buttons = new();
+        public bool Recording;
         public void Start()
         {
             Instance = this;
@@ -29,6 +37,7 @@ namespace RookieCartingClub.Ui
             Document = GetComponent<UIDocument>();
             BindButtons();
             // VelocityProvider = Cart.gameObject.GetComponent<NetworkVelocityProvider>();
+            // iajdsklajwoidjalskjdwiojdsklawjiodjwaklsjdiowajd
         }
 
         public void BindButtons()
@@ -37,7 +46,7 @@ namespace RookieCartingClub.Ui
             Document.rootVisualElement.Q<Button>("pit").clicked += () =>
             {
                 // Cart.TransferToPitRpc();
-                InPitRequest = true;
+                Buttons.InPitRequest = true;
                 SwitchMenu();
             };
             Document.rootVisualElement.Q<Button>("quit").clicked += () =>
@@ -47,6 +56,25 @@ namespace RookieCartingClub.Ui
                 bootstrap.StopGameSession();
                 SceneManager.LoadScene("SelectorScene");
             };
+            var record = Document.rootVisualElement.Q<Button>("record");
+            record.clicked += () =>
+            {
+                Buttons.IsRecordSwitchRequest = true;
+
+                record.text = Recording switch
+                {
+                    true =>  "Конец записи",
+                    false => "Начать запись"
+                };
+                
+                Recording = !Recording;
+                SwitchMenu();
+            };
+            Document.rootVisualElement.Q<Button>("replay").clicked += () =>
+            {
+                Buttons.IsReplayRequest = true;
+                SwitchMenu();
+            };
         }
 
         public void UpdateUI()
@@ -54,11 +82,12 @@ namespace RookieCartingClub.Ui
             var velocity = VelocityProvider.Velocity.magnitude;
             Uivm.Speed = velocity;
             Uivm.UpdateSpeedKmh();
-        
+
             if (MenuAction.WasPressedThisFrame())
             {
                 SwitchMenu();
             }
+
             // return;
             Uivm.LapTime = $"{TimeSpan.FromSeconds(Time.timeAsDouble - Cart.CurrentLap.LapStart):g}";
             var fastestTime = 0.0;
@@ -100,12 +129,9 @@ namespace RookieCartingClub.Ui
 
             Uivm.Lap = Cart.Laps.Count;
 
-            if (InPitRequest)
-            {
-                InPitRequest = false;
-            }
+            Buttons = new ButtonsState();
         }
-    
+
         private void SwitchMenu()
         {
             Uivm.ShowMenu = Uivm.ShowMenu switch

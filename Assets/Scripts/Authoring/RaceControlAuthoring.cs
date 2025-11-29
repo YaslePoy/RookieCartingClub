@@ -73,7 +73,7 @@ namespace RookieCartingClub.Authoring
                     });
                 }
 
-                AddComponentObject(entity, new RaceControl());
+                AddComponentObject(entity, new RaceState());
             }
         }
     }

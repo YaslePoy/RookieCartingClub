@@ -69,9 +69,9 @@ namespace RookieCartingClub.Systems.Netcode.Server
             var cartHandle = new CartHandle() { PlayerId = rpc.ValueRO.PlayerData.PlayerId, CheckCount = 939 };
             cartHandle.Init();
 
-            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = state.EntityManager.GetComponentObject<RaceControl>(rcEntity);
-            raceControl.Racers.Add(cartHandle);
+            var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceState = state.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
+            raceState.Racers.Add(cartHandle);
         }
 
         [BurstCompile]

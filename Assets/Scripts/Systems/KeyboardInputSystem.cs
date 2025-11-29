@@ -1,5 +1,7 @@
 using System;
+using Codice.CM.Common;
 using RookieCartingClub.Components;
+using RookieCartingClub.Components.Replay;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.NetCode;
@@ -13,31 +15,26 @@ namespace RookieCartingClub.Systems
     public partial class KeyboardInputSystem : SystemBase
     {
         private InputAction _forceAction;
-        private InputAction _stopRecordAction;
 
         protected override void OnCreate()
         {
             _forceAction = InputSystem.actions.FindAction("Move");
-            _stopRecordAction = InputSystem.actions.FindAction("Crouch");
 
-            var query = new EntityQueryBuilder(Allocator.Temp).WithAll<CartInputData>().WithAll<InputFromKeyboard>()
+            var keyboardFilter = new EntityQueryBuilder(Allocator.Temp).WithAll<CartInputData>()
+                .WithAll<InputFromKeyboard>()
                 .WithAll<GhostOwnerIsLocal>();
-            CheckedStateRef.RequireForUpdate(CheckedStateRef.GetEntityQuery(query));
+            var playbackFilter = new EntityQueryBuilder(Allocator.Temp).WithNone<ReplayPlayback>();
+            CheckedStateRef.RequireForUpdate(CheckedStateRef.GetEntityQuery(keyboardFilter));
+            CheckedStateRef.RequireForUpdate(CheckedStateRef.GetEntityQuery(playbackFilter));
         }
 
         protected override void OnUpdate()
         {
-            var isStopingRecording = _stopRecordAction.WasPressedThisFrame();
-            if (isStopingRecording) EntityManager.CreateEntity(typeof(StopRecord));
-
-            var isRequireReplay = SystemAPI.HasSingleton<ReplayInput>();
-            if (isRequireReplay) return;
-
-
             var userControl = new RefRW<CartInputData>();
             var inputSetting = new InputFromKeyboard();
 
-            foreach (var (_, inputData, keyboardSettings) in SystemAPI.Query<EnabledRefRO<GhostOwnerIsLocal>, RefRW<CartInputData>, RefRO<InputFromKeyboard>>())
+            foreach (var (_, inputData, keyboardSettings) in SystemAPI
+                         .Query<EnabledRefRO<GhostOwnerIsLocal>, RefRW<CartInputData>, RefRO<InputFromKeyboard>>())
             {
                 userControl = inputData;
                 inputSetting = keyboardSettings.ValueRO;

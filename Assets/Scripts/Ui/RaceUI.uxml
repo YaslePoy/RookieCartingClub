@@ -89,9 +89,13 @@
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement enabled="true" name="Menu" data-source="project://database/Assets/Scripts/UIVM.asset?fileID=11400000&amp;guid=64978fc667d3870b793aeab05c35fe05&amp;type=2#UIVM" style="flex-grow: 1; position: absolute; left: 0; top: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.61); opacity: 1; display: flex; visibility: visible; -unity-font-definition: url(&quot;project://database/Assets/Import/Manrope-Medium.ttf?fileID=12800000&amp;guid=c824965482ba0440d95df186b7151eb9&amp;type=3#Manrope-Medium&quot;);">
-        <ui:VisualElement tabindex="0" enabled="true" name="VisualElement" style="flex-grow: 1; position: absolute; bottom: 0; right: 40%; left: 40%; top: 0; align-self: center; justify-content: center; background-color: rgba(0, 0, 0, 0);">
+        <ui:VisualElement tabindex="0" enabled="true" name="VisualElement" style="flex-grow: 1; position: absolute; bottom: 0; right: 39%; left: 39%; top: 0; align-self: center; justify-content: center; background-color: rgba(0, 0, 0, 0);">
             <ui:Button text="Назад" name="back" style="margin-bottom: 9px;" />
             <ui:Button text="В питы" name="pit" style="margin-bottom: 9px;" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: auto; justify-content: space-between; align-self: auto; max-height: 6%; top: auto; bottom: auto; flex-wrap: nowrap; align-content: auto;">
+                <ui:Button text="Начать запись" name="record" style="margin-bottom: 9px;" />
+                <ui:Button text="Воспроизвести запись" name="replay" style="margin-bottom: 9px;" />
+            </ui:VisualElement>
             <ui:Button text="Покинуть сессию" name="quit" style="margin-bottom: 9px;" />
         </ui:VisualElement>
         <Bindings>

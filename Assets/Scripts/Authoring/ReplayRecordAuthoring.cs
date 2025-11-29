@@ -1,4 +1,5 @@
 using RookieCartingClub.Components;
+using RookieCartingClub.Components.Replay;
 using Unity.Entities;
 using UnityEngine;
 
@@ -11,8 +12,8 @@ namespace RookieCartingClub.Authoring
             public override void Bake(ReplayRecordAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddBuffer<InputRecord>(entity);
-                AddComponent<RecordInput>(entity);
+                AddBuffer<RecordedInput>(entity);
+                AddComponent<ReplayRecording>(entity);
             }
         }
     }

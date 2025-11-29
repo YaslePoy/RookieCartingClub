@@ -1,4 +1,5 @@
 using RookieCartingClub.Components;
+using RookieCartingClub.Components.Replay;
 using Unity.Burst;
 using Unity.Entities;
 
@@ -10,18 +11,18 @@ namespace RookieCartingClub.Systems
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<InputRecord>();
-            state.RequireForUpdate<ReplayInput>();
+            state.RequireForUpdate<RecordedInput>();
+            state.RequireForUpdate<ReplayPlayback>();
             state.RequireForUpdate<CartInputData>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
+            var buffer = SystemAPI.GetSingletonBuffer<RecordedInput>();
             if (buffer.IsEmpty)
             {
-                state.EntityManager.RemoveComponent<ReplayInput>(SystemAPI.GetSingletonEntity<InputRecord>());
+                state.EntityManager.RemoveComponent<ReplayPlayback>(SystemAPI.GetSingletonEntity<RecordedInput>());
                 return;
             }
 

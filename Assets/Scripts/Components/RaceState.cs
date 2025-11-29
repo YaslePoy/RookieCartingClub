@@ -4,7 +4,7 @@ using Unity.Entities;
 
 namespace RookieCartingClub.Components
 {
-    public class RaceControl : IComponentData
+    public class RaceState : IComponentData
     {
         public IRacePeriod CurrentRacePeriod = new PracticePeriod();
         public Queue<IRacePeriod> RacePeriods = new();

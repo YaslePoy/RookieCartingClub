@@ -19,25 +19,33 @@ namespace RookieCartingClub.Systems
 
         protected override void OnUpdate()
         {
-            var rcEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
-            var raceControl = CheckedStateRef.EntityManager.GetComponentObject<RaceControl>(rcEntity);
+            var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
+            var raceState = CheckedStateRef.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
 
 
             foreach (var (velocityRO, positionRo, cartData) in SystemAPI
                          .Query<RefRO<LocalVelocity>, RefRO<LocalToWorld>, RefRO<CartData>>()
                          .WithAll<GhostOwnerIsLocal>())
             {
+                if (UI.Instance.Buttons.IsRecordSwitchRequest)
+                    StartRecord();
+                
                 UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = velocityRO.ValueRO.Velocity };
 
-                if (UI.Instance.InPitRequest)
+                if (UI.Instance.Buttons.InPitRequest)
                     SendInPitRequest();
 
-                UI.Instance.Cart = raceControl.Racers.Find(i => i.PlayerId == cartData.ValueRO.PlayerId);
+                UI.Instance.Cart = raceState.Racers.Find(i => i.PlayerId == cartData.ValueRO.PlayerId);
 
                 UI.Instance.UpdateUI();
                 MapHandle.Instance.CartPosition = positionRo.ValueRO.Position;
                 MapHandle.Instance.MoveSelf();
             }
+        }
+
+        private void StartRecord()
+        {
+            
         }
 
         private void SendInPitRequest()

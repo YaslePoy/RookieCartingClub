@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using RookieCartingClub.Components;
+using RookieCartingClub.Components.Replay;
 using Unity.Burst;
 using Unity.Entities;
 using UnityEngine;
@@ -14,13 +15,13 @@ namespace RookieCartingClub.Systems
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<RecordInput>();
+            state.RequireForUpdate<ReplayRecording>();
             state.RequireForUpdate<CartInputData>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
-            var buffer = SystemAPI.GetSingletonBuffer<InputRecord>();
+            var buffer = SystemAPI.GetSingletonBuffer<RecordedInput>();
 
             var stopRequest = SystemAPI.HasSingleton<StopRecord>();
             if (stopRequest)
@@ -28,16 +29,16 @@ namespace RookieCartingClub.Systems
                 WriteCurrentReplay(buffer);
 
                 state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<StopRecord>());
-                state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<RecordInput>());
+                state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<ReplayRecording>());
                 return;
             }
 
-            buffer.Add(new InputRecord { Input = SystemAPI.GetSingleton<CartInputData>() });
+            buffer.Add(new RecordedInput { Input = SystemAPI.GetSingleton<CartInputData>() });
         }
 
-        private static void WriteCurrentReplay(DynamicBuffer<InputRecord> buffer)
+        private static void WriteCurrentReplay(DynamicBuffer<RecordedInput> buffer)
         {
-            var sizeOf = Marshal.SizeOf(typeof(InputRecord));
+            var sizeOf = Marshal.SizeOf(typeof(RecordedInput));
 
             var recorded = buffer.AsNativeArray();
             var length = recorded.Length;
