@@ -14,6 +14,7 @@ public class AutoBootstrap : ClientServerBootstrap
         {
             return false;
         }
+        
         switch (SessionSetup.RequestedSession)
         {
             case LocalSession:
@@ -34,6 +35,13 @@ public class AutoBootstrap : ClientServerBootstrap
                 AutoConnectPort = serverConfig.Port;
                 CreateServerWorld("Server world");
                 Debug.Log("Server started on port " + serverConfig.Port);
+                break;
+            case ReplaySession:
+                DefaultConnectAddress =  NetworkEndpoint.LoopbackIpv4;
+                DefaultListenAddress =  NetworkEndpoint.AnyIpv4;
+                CreateServerWorld("Server world");
+                CreateClientWorld("Player world");
+                Debug.Log("Replay stated");
                 break;
         }
         return true;

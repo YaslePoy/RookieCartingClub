@@ -2,13 +2,11 @@ using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
-using Unity.NetCode;
-using Unity.Physics.Systems;
 
 namespace RookieCartingClub.Systems
 {
-    [UpdateBefore(typeof(EngineTorqueJob))]
     [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    [UpdateBefore(typeof(EngineTorqueSystem))]
     public partial struct InputPhysicalImplementationSystem : ISystem
     {
         private ComponentLookup<CartInputData> _inputLookup;

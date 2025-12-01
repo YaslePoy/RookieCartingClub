@@ -90,7 +90,7 @@ namespace RookieCartingClub.Systems
         }
     }
 
-    public struct StopRecord : IComponentData
+    public struct StopRecording : IComponentData
     {
     }
 }

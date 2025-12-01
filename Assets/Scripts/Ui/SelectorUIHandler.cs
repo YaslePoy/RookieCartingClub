@@ -60,6 +60,7 @@ namespace RookieCartingClub.Ui
                         break;
                 }
 
+                SessionSetup.SceneName = trackId;
                 SessionSetup.RequestedSession = networkSession;
                 ClientServerBootstrap.AutoConnectPort = networkSession.Port;
                 var bootstrap = new AutoBootstrap();
@@ -69,6 +70,7 @@ namespace RookieCartingClub.Ui
 
             _document.rootVisualElement.Q<Button>("SPButton").clicked += () =>
             {
+                SessionSetup.SceneName = trackId;
                 SessionSetup.RequestedSession = new LocalSession();
                 ClientServerBootstrap.AutoConnectPort = 7772;
                 var bootstrap = new AutoBootstrap();

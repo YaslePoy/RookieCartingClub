@@ -1,5 +1,6 @@
 using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
+using RookieCartingClub.Components.Replay;
 using RookieCartingClub.Ui;
 using Unity.Entities;
 using Unity.NetCode;
@@ -22,30 +23,50 @@ namespace RookieCartingClub.Systems
             var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
             var raceState = CheckedStateRef.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
 
-
-            foreach (var (velocityRO, positionRo, cartData) in SystemAPI
+            (RefRO<LocalVelocity> velocity, RefRO<LocalToWorld> position, RefRO<CartData> data) playerData = (default, default, default);
+            
+            foreach (var data in SystemAPI
                          .Query<RefRO<LocalVelocity>, RefRO<LocalToWorld>, RefRO<CartData>>()
                          .WithAll<GhostOwnerIsLocal>())
             {
-                if (UI.Instance.Buttons.IsRecordSwitchRequest)
-                    StartRecord();
-                
-                UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = velocityRO.ValueRO.Velocity };
-
-                if (UI.Instance.Buttons.InPitRequest)
-                    SendInPitRequest();
-
-                UI.Instance.Cart = raceState.Racers.Find(i => i.PlayerId == cartData.ValueRO.PlayerId);
-
-                UI.Instance.UpdateUI();
-                MapHandle.Instance.CartPosition = positionRo.ValueRO.Position;
-                MapHandle.Instance.MoveSelf();
+                playerData = data;
             }
+            
+            
+            UI.Instance.Cart = raceState.Racers.Find(i => i.PlayerId == playerData.data.ValueRO.PlayerId);
+            UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = playerData.velocity.ValueRO.Velocity };
+            MapHandle.Instance.CartPosition = playerData.position.ValueRO.Position;
+            MapHandle.Instance.MoveSelf();
+            
+            if (UI.Instance.Buttons.IsRecordSwitchRequest)
+                SwitchRecord(UI.Instance.Recording);
+            
+            if (UI.Instance.Buttons.InPitRequest)
+                SendInPitRequest();
+
+
+            UI.Instance.UpdateUI();
+
         }
 
-        private void StartRecord()
+        private void SwitchRecord(bool instanceRecording)
         {
-            
+            if (instanceRecording)
+                StartRecording();
+            else
+                FinishRecording();
+        }
+
+        private void FinishRecording()
+        {
+            CheckedStateRef.EntityManager.CreateEntity(typeof(StopRecording));
+        }
+
+        private void StartRecording()
+        {
+            CheckedStateRef.EntityManager.CreateEntity(typeof(ReplayRecording));
+            var cartEntity = SystemAPI.GetSingletonEntity<CartInputData>();
+            CheckedStateRef.EntityManager.AddBuffer<RecordedInput>(cartEntity);
         }
 
         private void SendInPitRequest()

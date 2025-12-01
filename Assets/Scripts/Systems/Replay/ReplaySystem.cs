@@ -3,9 +3,9 @@ using RookieCartingClub.Components.Replay;
 using Unity.Burst;
 using Unity.Entities;
 
-namespace RookieCartingClub.Systems
+namespace RookieCartingClub.Systems.Replay
 {
-    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    [UpdateInGroup(typeof(ReplaySystemGroup))]
     public partial struct ReplaySystem : ISystem
     {
         [BurstCompile]
