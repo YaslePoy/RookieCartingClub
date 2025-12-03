@@ -20,8 +20,8 @@ namespace RookieCartingClub.Systems.Netcode.Client
         public void OnUpdate(ref SystemState state)
         {
             var driver = SystemAPI.GetSingletonRW<NetworkStreamDriver>();
-
-
+            
+            
             var events = driver.ValueRO.ConnectionEventsForTick;
 
             var requireReconnection = false;

@@ -9,6 +9,7 @@ namespace RookieCartingClub.Authoring
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         private void Start()
         {
+            return;
 #if !UNITY_EDITOR
         if (!File.Exists("config.json"))
         {

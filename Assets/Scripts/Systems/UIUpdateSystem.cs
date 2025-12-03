@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace RookieCartingClub.Systems
 {
-    [UpdateInGroup(typeof(PresentationSystemGroup))]
+    [UpdateInGroup(typeof(GhostInputSystemGroup))]
     public partial class UIUpdateSystem : SystemBase
     {
         protected override void OnCreate()
@@ -59,14 +59,18 @@ namespace RookieCartingClub.Systems
 
         private void FinishRecording()
         {
-            CheckedStateRef.EntityManager.CreateEntity(typeof(StopRecording));
+            SystemAPI.SetSingleton(new ReplayRecording
+            {
+                State = RecordingState.Stopping
+            });        
         }
 
         private void StartRecording()
         {
-            CheckedStateRef.EntityManager.CreateEntity(typeof(ReplayRecording));
-            var cartEntity = SystemAPI.GetSingletonEntity<CartInputData>();
-            CheckedStateRef.EntityManager.AddBuffer<RecordedInput>(cartEntity);
+            SystemAPI.SetSingleton(new ReplayRecording
+            {
+                State = RecordingState.Starting
+            });
         }
 
         private void SendInPitRequest()

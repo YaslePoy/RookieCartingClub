@@ -12,8 +12,11 @@ public class AutoBootstrap : ClientServerBootstrap
         Debug.Log("Initializing AutoBootstrap");
         if (SessionSetup.RequestedSession is null)
         {
-            return false;
+            CreateServerWorld("Basic world");
+            return true;
         }
+        
+        ServerWorld?.Dispose();
         
         switch (SessionSetup.RequestedSession)
         {

@@ -7,6 +7,7 @@ using RookieCartingClub.Components.Replay;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.NetCode;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
@@ -17,63 +18,76 @@ namespace RookieCartingClub.Systems.Replay
     public partial struct ReplayRecordSystem : ISystem
     {
         private NativeList<RecordedInput> buffer;
+        private EntityQuery playerQuery;
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            buffer =  new NativeList<RecordedInput>(1024, Allocator.Persistent);
+            state.RequireForUpdate<ReplayRecording>();
+            buffer = new NativeList<RecordedInput>(1024, Allocator.Persistent);
+            state.EntityManager.CreateSingleton<ReplayRecording>();
+            var builder = new EntityQueryBuilder(Allocator.Temp).WithAll<CartInputData>().WithNone<Prefab>();
+            playerQuery = state.GetEntityQuery(builder);
         }
 
         public void OnUpdate(ref SystemState state)
         {
-            if (!SystemAPI.HasSingleton<ReplayRecording>())
-                return;
-            
-            
-            var stopRequest = SystemAPI.HasSingleton<StopRecording>();
+            var replayState = SystemAPI.GetSingleton<ReplayRecording>();
 
-            if (stopRequest)
+            switch (replayState.State)
             {
-                WriteCurrentReplay(buffer);
-                buffer.Clear();
+                case RecordingState.None:
+                    return;
                 
-                state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<StopRecording>());
-                state.EntityManager.DestroyEntity(SystemAPI.GetSingletonEntity<ReplayRecording>());
-                return;
-            }
-
-            if (buffer.Length == 0)
-            {
-                Debug.Log("Starting recording...");
-                
-                var cart = SystemAPI.GetSingletonEntity<CartInputData>();
-                var velocity = state.EntityManager.GetComponentData<PhysicsVelocity>(cart);
-                var id = state.EntityManager.GetComponentData<CartData>(cart);
-                var transform = state.EntityManager.GetComponentData<LocalTransform>(cart);
-                
-                SystemAPI.SetSingleton(new InitialRecordingConditions
+                case RecordingState.Starting:
                 {
-                    Velocity = velocity,
-                    PlayerId = id.PlayerId,
-                    Position = transform
-                });
-                Debug.Log("Initial conditions written");
-            }
+                    replayState.State = RecordingState.Recording;
+                    Debug.Log("Starting recording...");
+                
+                    var cart = playerQuery.GetSingletonEntity();
+                    var velocity = state.EntityManager.GetComponentData<PhysicsVelocity>(cart);
+                    var id = state.EntityManager.GetComponentData<CartData>(cart);
+                    var transform = state.EntityManager.GetComponentData<LocalTransform>(cart);
 
-            buffer.Add(new RecordedInput { Input = SystemAPI.GetSingleton<CartInputData>() });
+                    if (SystemAPI.HasSingleton<InitialRecordingConditions>() == false)
+                    {
+                        state.EntityManager.CreateSingleton<InitialRecordingConditions>();
+                    }
+                    
+                    SystemAPI.SetSingleton(new InitialRecordingConditions
+                    {
+                        Velocity = velocity,
+                        PlayerId = id.PlayerId,
+                        Position = transform
+                    });
+                    Debug.Log("Initial conditions written");
+                    break;
+                }
+                case RecordingState.Stopping:
+                    replayState.State = RecordingState.None;
+                    WriteCurrentReplay(buffer);
+                    buffer.Clear();
+
+                    break;
+                case RecordingState.Recording:
+                    buffer.Add(new RecordedInput { Input = SystemAPI.GetSingleton<CartInputData>() });
+                    break;
+            }
+            
+            SystemAPI.SetSingleton(replayState);
         }
 
         private void WriteCurrentReplay(NativeList<RecordedInput> buffer)
         {
             var inputBufferSize = Marshal.SizeOf(typeof(RecordedInput));
             var headerSize = Marshal.SizeOf(typeof(ReplayHeader));
-            
+
             var recorded = buffer;
             var length = recorded.Length;
             var finalOutput = new Span<byte>(new byte[length * inputBufferSize + headerSize]);
-            
+
             var header = GetReplayHeader();
             MemoryMarshal.Write(finalOutput, ref header);
-            
+
             for (var i = 0; i < buffer.Length; i++)
             {
                 var input = recorded[i].Input;
@@ -81,7 +95,7 @@ namespace RookieCartingClub.Systems.Replay
             }
 
             var file = new FileStream(DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss") + ".rir", FileMode.CreateNew);
-            
+
             file.Write(finalOutput);
             file.Close();
             Debug.Log($"Replay {file.Name} saved!");
