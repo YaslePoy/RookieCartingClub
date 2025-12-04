@@ -4,12 +4,13 @@ using RookieCartingClub.Components.Replay;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Physics.Systems;
 using UnityEngine;
 
 namespace RookieCartingClub.Systems.Replay
 {
-    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
-    [UpdateBefore(typeof(CartPhysicsSimulationGroup))]
+    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    [UpdateBefore(typeof(InputPhysicalImplementationSystem))]
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ReplaySystem : ISystem
     {

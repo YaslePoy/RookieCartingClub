@@ -9,6 +9,7 @@ using UnityEngine;
 namespace RookieCartingClub.Systems.Replay
 {
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
+    [UpdateBefore(typeof(ReplaySystem))]
     public partial struct ReplayCartSpawnSystem : ISystem
     {
         private Components.Replay.Replay _replay;
@@ -38,7 +39,7 @@ namespace RookieCartingClub.Systems.Replay
 
             Debug.Log("Initializing players");
             var spawner = SystemAPI.GetSingleton<CartSpawner>();
-            var cartPrefab = spawner.CartPrefab;
+            var cartPrefab = spawner.ReplayCartPrefab;
 
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
@@ -50,7 +51,6 @@ namespace RookieCartingClub.Systems.Replay
 
                 ecb.SetComponent(cartInstance, initialRecordingCondition.Position);
                 ecb.SetComponent(cartInstance, initialRecordingCondition.Velocity);
-                ecb.SetComponent(cartInstance, new GhostOwner { NetworkId = 1 });
                 ecb.AppendToBuffer(observerConnection, new LinkedEntityGroup { Value = cartInstance });
             }
 
