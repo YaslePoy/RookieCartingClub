@@ -7,6 +7,7 @@ namespace RookieCartingClub.Authoring
     public class CartSpawnerAuthoring : MonoBehaviour
     {
         public GameObject Prefab;
+        public GameObject ReplayPrefab;
         private class CartSpawnerAuthoringBaker : Baker<CartSpawnerAuthoring>
         {
             public override void Bake(CartSpawnerAuthoring authoring)
@@ -14,7 +15,8 @@ namespace RookieCartingClub.Authoring
                 var entity = GetEntity(TransformUsageFlags.None);
                 AddComponent(entity, new CartSpawner
                 {
-                    CartPrefab = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic)
+                    CartPrefab = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic),
+                    ReplayCartPrefab =  GetEntity(authoring.ReplayPrefab, TransformUsageFlags.Dynamic),
                 });
                 AddComponent(entity, new ConnectRequest
                 {

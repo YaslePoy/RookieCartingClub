@@ -21,7 +21,9 @@ public class AutoBootstrap : ClientServerBootstrap
         
         switch (SessionSetup.RequestedSession)
         {
+            case ReplaySession:
             case LocalSession:
+                AutoConnectPort = 7772;
                 DefaultConnectAddress =  NetworkEndpoint.LoopbackIpv4;
                 DefaultListenAddress =  NetworkEndpoint.AnyIpv4;
                 CreateServerWorld("Server world");
@@ -39,16 +41,6 @@ public class AutoBootstrap : ClientServerBootstrap
                 AutoConnectPort = serverConfig.Port;
                 CreateServerWorld("Server world");
                 Debug.Log("Server started on port " + serverConfig.Port);
-                break;
-            case ReplaySession:
-                DefaultConnectAddress =  NetworkEndpoint.LoopbackIpv4;
-                DefaultListenAddress =  NetworkEndpoint.AnyIpv4;
-                CreateServerWorld("Server world");
-                CreateClientWorld("Player world");
-                
-                ServerWorld.EntityManager.CreateSingleton<ReplayPlayback>();
-                
-                Debug.Log("Replay stated");
                 break;
         }
         return true;

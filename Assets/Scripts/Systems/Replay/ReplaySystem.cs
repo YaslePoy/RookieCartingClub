@@ -4,16 +4,18 @@ using RookieCartingClub.Components.Replay;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using UnityEngine;
 
 namespace RookieCartingClub.Systems.Replay
 {
-    [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-    [UpdateBefore(typeof(InputPhysicalImplementationSystem))]
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+    [UpdateBefore(typeof(CartPhysicsSimulationGroup))]
+    [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ReplaySystem : ISystem
     {
-        private NativeReference<Components.Replay.Replay> _replay;
-        private NativeReference<bool> _initialized;
         private EntityQuery _playersQuery;
+        private Components.Replay.Replay _replay;
+
         public void OnCreate(ref SystemState state)
         {
             if (SessionSetup.RequestedSession is not ReplaySession replaySession)
@@ -21,44 +23,27 @@ namespace RookieCartingClub.Systems.Replay
                 state.Enabled = false;
                 return;
             }
-            
-            _replay = new NativeReference<Components.Replay.Replay>(replaySession.ReplayData, Allocator.Persistent);
-            _initialized = new NativeReference<bool>(false, Allocator.Persistent);
-            
-            state.RequireForUpdate<RecordedInput>();
+
+            _replay = replaySession.ReplayData;
+
+            state.EntityManager.CreateSingleton<ReplayPlayback>();
             state.RequireForUpdate<ReplayPlayback>();
-            state.RequireForUpdate<CartInputData>();
-            state.RequireForUpdate<CartSpawner>();
             var builder = new EntityQueryBuilder(Allocator.Temp).WithNone<Prefab>().WithAll<CartInputData>();
             _playersQuery = state.GetEntityQuery(builder);
+            state.RequireForUpdate<CartInputData>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var requireSpawn = _initialized.Value == false;
-            
             var entityManager = state.EntityManager;
-            
-            if (requireSpawn)
-            {
-                var spawner = SystemAPI.GetSingleton<CartSpawner>();
-                var cartPrefab = spawner.CartPrefab;
-                
-                foreach (var initialRecordingCondition in _replay.Value.InitialRecordingConditions)
-                {
-                    var cartInstance = entityManager.Instantiate(cartPrefab);
-                    entityManager.SetComponentData(cartInstance, initialRecordingCondition.Position);
-                    entityManager.SetComponentData(cartInstance, initialRecordingCondition.Velocity);
-                }
-                
-                return;
-            }
+
 
             var carts = _playersQuery.ToEntityArray(Allocator.Temp);
-            for (var index = 0; index < _replay.Value.Inputs.Length; index++)
+            for (var index = 0; index < _replay.Inputs.Length; index++)
             {
-                var inputBuffer = _replay.Value.Inputs[index];
+                Debug.Log("Applying input");
+                var inputBuffer = _replay.Inputs[index];
                 var cart = carts[index];
 
                 if (inputBuffer.IsEmpty)
@@ -66,7 +51,7 @@ namespace RookieCartingClub.Systems.Replay
                     entityManager.DestroyEntity(cart);
                     return;
                 }
-                
+
                 entityManager.SetComponentData(cart, inputBuffer[0].Input);
                 inputBuffer.RemoveAt(0);
             }

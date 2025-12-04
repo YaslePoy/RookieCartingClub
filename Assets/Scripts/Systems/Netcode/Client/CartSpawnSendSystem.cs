@@ -1,3 +1,4 @@
+using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using RookieCartingClub.Components.RPC;
 using Unity.Burst;
@@ -10,9 +11,14 @@ namespace RookieCartingClub.Systems.Netcode.Client
     // [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     public partial struct CartSpawnSendSystem : ISystem
     {
-        [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            if (SessionSetup.RequestedSession is ReplaySession)
+            {
+                state.Enabled = false;
+                return;
+            }
+            
             state.RequireForUpdate<CartSpawner>();
             var builder = new EntityQueryBuilder(Allocator.Temp)
                 .WithNone<NetworkStreamInGame>();
@@ -31,6 +37,7 @@ namespace RookieCartingClub.Systems.Netcode.Client
                     PlayerId = (int)(SystemAPI.Time.ElapsedTime * 100000)
                 }
             };
+            
             var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
             var raceState = state.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
             var commandBuffer = new EntityCommandBuffer(Allocator.Temp);

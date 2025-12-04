@@ -7,6 +7,7 @@ using Unity.Transforms;
 namespace RookieCartingClub.Systems
 {
     [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
+    [UpdateBefore(typeof(PlaneCalculateSystem))]
     public partial struct EngineTorqueSystem : ISystem
     {
         private ComponentLookup<EngineData> _engineLookup;

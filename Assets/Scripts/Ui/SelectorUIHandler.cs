@@ -72,7 +72,6 @@ namespace RookieCartingClub.Ui
             {
                 SessionSetup.SceneName = trackId;
                 SessionSetup.RequestedSession = new LocalSession();
-                ClientServerBootstrap.AutoConnectPort = 7772;
                 var bootstrap = new AutoBootstrap();
                 bootstrap.Initialize("");
                 SceneManager.LoadScene($"Scenes/{trackId}");

@@ -54,7 +54,7 @@ namespace RookieCartingClub.Ui
             var file = File.ReadAllBytes(replayVm.FileName);
             var replay = Replay.Decode(file);
 
-            SessionSetup.RequestedSession = new ReplaySession()
+            SessionSetup.RequestedSession = new ReplaySession
             {
                 ReplayData = replay,
             };
