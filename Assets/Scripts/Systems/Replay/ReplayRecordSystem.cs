@@ -113,10 +113,11 @@ namespace RookieCartingClub.Systems.Replay
             return header;
         }
 
-        private struct ReplayHeader
+        public struct ReplayHeader
         {
             public FixedString32Bytes TrackName;
             public InitialRecordingConditions InitialRecordingConditions;
+            public static readonly int Size = Marshal.SizeOf<ReplayHeader>();
         }
     }
 }

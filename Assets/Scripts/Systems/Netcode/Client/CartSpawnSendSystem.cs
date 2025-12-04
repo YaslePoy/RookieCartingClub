@@ -14,7 +14,7 @@ namespace RookieCartingClub.Systems.Netcode.Client
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<CartSpawner>();
-            var builder = new EntityQueryBuilder(Allocator.Temp).WithNone<CartOnTrack>()
+            var builder = new EntityQueryBuilder(Allocator.Temp)
                 .WithNone<NetworkStreamInGame>();
             state.RequireForUpdate(state.GetEntityQuery(builder));
             state.RequireForUpdate<NetworkId>();

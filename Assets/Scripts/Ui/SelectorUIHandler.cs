@@ -77,6 +77,11 @@ namespace RookieCartingClub.Ui
                 bootstrap.Initialize("");
                 SceneManager.LoadScene($"Scenes/{trackId}");
             };
+
+            _document.rootVisualElement.Q<Button>("Playbacks").clicked += () =>
+            {
+                SceneManager.LoadScene("Scenes/ReplaySelector");
+            };
         }
 
         private void UpdateGoingGame()

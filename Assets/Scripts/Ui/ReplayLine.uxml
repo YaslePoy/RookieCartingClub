@@ -1,0 +1,30 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" data-source-type="RookieCartingClub.ReplayViewModel, RookieCartingClub" style="flex-grow: 1; flex-direction: row; color: rgb(255, 255, 255); font-size: 20px;">
+        <ui:VisualElement style="flex-grow: 1; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; max-width: 15%;">
+            <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Resources/pro_scheme.png?fileID=2800000&amp;guid=3430010f95b78f3ba87df68e8b67f80f&amp;type=3#pro_scheme&quot;); width: 100%; height: 100%; max-width: 100%; -unity-background-scale-mode: scale-to-fit;">
+                <Bindings>
+                    <ui:DataBinding property="style.backgroundImage" data-source-path="TrackImage" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; align-self: center;">
+            <ui:Label text="pro_track">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="TrackName" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="1234_12_12_12_00_00.rir">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="FileName" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; max-width: 10%; align-self: center;">
+            <ui:Label text="01:15" style="white-space: nowrap; -unity-text-align: upper-right; margin-top: 11px; margin-right: 11px; margin-bottom: 11px; margin-left: 11px;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="Duration" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

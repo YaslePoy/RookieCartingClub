@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Import/morphogenesis-d.png?fileID=2800000&amp;guid=8fee966f293a38b9e8257d52c839e212&amp;type=3#morphogenesis-d&quot;);">
+        <ui:VisualElement style="flex-grow: 1; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;">
+            <ui:ListView show-border="false" name="ListView" item-template="project://database/Assets/Scripts/Ui/ReplayLine.uxml?fileID=9197481963319205126&amp;guid=9258ccf1f3f7ff70c95c1a1cf98d59e8&amp;type=3#ReplayLine" binding-source-selection-mode="Manual" fixed-item-height="85" style="height: 87%; margin-bottom: 15px; -unity-font-definition: url(&quot;project://database/Assets/Import/Manrope-VariableFont_wght.ttf?fileID=12800000&amp;guid=5730d9a5f780f4909bae2433944d9547&amp;type=3#Manrope-VariableFont_wght&quot;);" />
+            <ui:VisualElement style="flex-grow: 1;" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 50px; height: 81px; max-height: 50px;">
+                <ui:Button text="Назад" name="Back" />
+                <ui:Button text="Начать проигрывание" name="Play" enabled="false" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

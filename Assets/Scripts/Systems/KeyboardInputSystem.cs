@@ -21,8 +21,7 @@ namespace RookieCartingClub.Systems
             _forceAction = InputSystem.actions.FindAction("Move");
 
             var keyboardFilter = new EntityQueryBuilder(Allocator.Temp).WithAll<CartInputData>()
-                .WithAll<InputFromKeyboard>()
-                .WithAll<GhostOwnerIsLocal>();
+                .WithAll<InputFromKeyboard, GhostOwnerIsLocal>();
             var playbackFilter = new EntityQueryBuilder(Allocator.Temp).WithNone<ReplayPlayback>();
             CheckedStateRef.RequireForUpdate(CheckedStateRef.GetEntityQuery(keyboardFilter));
             CheckedStateRef.RequireForUpdate(CheckedStateRef.GetEntityQuery(playbackFilter));

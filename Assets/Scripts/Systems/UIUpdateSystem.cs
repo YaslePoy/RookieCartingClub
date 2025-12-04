@@ -2,6 +2,7 @@ using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using RookieCartingClub.Components.Replay;
 using RookieCartingClub.Ui;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.NetCode;
 using Unity.Physics;
@@ -10,12 +11,13 @@ using UnityEngine;
 
 namespace RookieCartingClub.Systems
 {
-    [UpdateInGroup(typeof(GhostInputSystemGroup))]
+    [UpdateInGroup(typeof(PresentationSystemGroup))]
     public partial class UIUpdateSystem : SystemBase
     {
         protected override void OnCreate()
         {
-            CheckedStateRef.RequireForUpdate<CartData>();
+            RequireForUpdate<CartData>();
+            RequireForUpdate<CameraData>();
         }
 
         protected override void OnUpdate()
@@ -23,19 +25,11 @@ namespace RookieCartingClub.Systems
             var raceStateEntity = SystemAPI.GetSingletonEntity<TrackPositionsCollection>(); //rc is Race Control
             var raceState = CheckedStateRef.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
 
-            (RefRO<LocalVelocity> velocity, RefRO<LocalToWorld> position, RefRO<CartData> data) playerData = (default, default, default);
+            (LocalVelocity velocity, LocalToWorld position, CartData data) playerData = GetCurrentPlayerData();
             
-            foreach (var data in SystemAPI
-                         .Query<RefRO<LocalVelocity>, RefRO<LocalToWorld>, RefRO<CartData>>()
-                         .WithAll<GhostOwnerIsLocal>())
-            {
-                playerData = data;
-            }
-            
-            
-            UI.Instance.Cart = raceState.Racers.Find(i => i.PlayerId == playerData.data.ValueRO.PlayerId);
-            UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = playerData.velocity.ValueRO.Velocity };
-            MapHandle.Instance.CartPosition = playerData.position.ValueRO.Position;
+            UI.Instance.Cart = raceState.Racers.Find(i => i.PlayerId == playerData.data.PlayerId);
+            UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = playerData.velocity.Velocity };
+            MapHandle.Instance.CartPosition = playerData.position.Position;
             MapHandle.Instance.MoveSelf();
             
             if (UI.Instance.Buttons.IsRecordSwitchRequest)
@@ -49,6 +43,14 @@ namespace RookieCartingClub.Systems
 
         }
 
+        private (LocalVelocity velocity, LocalToWorld position, CartData data)
+            GetCurrentPlayerData()
+        {
+            var camera = SystemAPI.GetSingleton<CameraData>();
+            var playerEntity = camera.PlayerEntity;
+            return (EntityManager.GetComponentData<LocalVelocity>(playerEntity), EntityManager.GetComponentData<LocalToWorld>(playerEntity), EntityManager.GetComponentData<CartData>(playerEntity));
+        }
+        
         private void SwitchRecord(bool instanceRecording)
         {
             if (instanceRecording)

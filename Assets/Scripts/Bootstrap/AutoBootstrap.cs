@@ -1,6 +1,7 @@
 using System;
 using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
+using RookieCartingClub.Components.Replay;
 using Unity.NetCode;
 using Unity.Networking.Transport;
 using UnityEngine;
@@ -44,6 +45,9 @@ public class AutoBootstrap : ClientServerBootstrap
                 DefaultListenAddress =  NetworkEndpoint.AnyIpv4;
                 CreateServerWorld("Server world");
                 CreateClientWorld("Player world");
+                
+                ServerWorld.EntityManager.CreateSingleton<ReplayPlayback>();
+                
                 Debug.Log("Replay stated");
                 break;
         }

@@ -4,6 +4,5 @@ namespace RookieCartingClub.Components
 {
     public struct CartOnTrack : IComponentData
     {
-        
     }
 }
