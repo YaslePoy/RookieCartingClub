@@ -7,17 +7,12 @@ using Unity.Transforms;
 
 namespace RookieCartingClub.Systems
 {
-    [WorldSystemFilter(WorldSystemFilterFlags.ClientSimulation | WorldSystemFilterFlags.ThinClientSimulation)]
     [UpdateInGroup(typeof(PresentationSystemGroup))]
     public partial class CameraMovementSystem : SystemBase
     {
-
         protected override void OnCreate()
         {
-
-            CheckedStateRef.RequireForUpdate<CameraPoint>();
-            var query = new EntityQueryBuilder(Allocator.Temp).WithAll<CartData, GhostOwnerIsLocal>();
-            CheckedStateRef.RequireAnyForUpdate(CheckedStateRef.GetEntityQuery(query));
+            RequireForUpdate<CameraPoint>();
             RequireForUpdate<CameraData>();
         }
 
@@ -31,20 +26,19 @@ namespace RookieCartingClub.Systems
             }
             
             var cam = PlayerCamera.Instance;
-            var cameraEntity = Entity.Null;
+            var cameraPositionEntity = Entity.Null;
             var children = EntityManager.GetBuffer<Child>(cameraComponent.PlayerEntity);
             
             foreach (var child in children)
             {
-                
                 if (EntityManager.HasComponent<CameraPoint>(child.Value))
                 {
-                    cameraEntity = child.Value;
+                    cameraPositionEntity = child.Value;
                     break;
                 }
             }
 
-            var globalTransform = SystemAPI.GetComponent<LocalToWorld>(cameraEntity);
+            var globalTransform = SystemAPI.GetComponent<LocalToWorld>(cameraPositionEntity);
             cam.transform.position = globalTransform.Position;
             cam.transform.rotation = globalTransform.Rotation;
         }

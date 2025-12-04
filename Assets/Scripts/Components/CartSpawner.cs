@@ -4,6 +4,6 @@ namespace RookieCartingClub.Components
 {
     public struct CartSpawner :  IComponentData
     {
-        public Entity  CartPrefab;
+        public Entity CartPrefab;
     }
 }

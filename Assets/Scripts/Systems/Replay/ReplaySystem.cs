@@ -13,7 +13,7 @@ namespace RookieCartingClub.Systems.Replay
     {
         private NativeReference<Components.Replay.Replay> _replay;
         private NativeReference<bool> _initialized;
-        private EntityQuery PlayersQuery;
+        private EntityQuery _playersQuery;
         public void OnCreate(ref SystemState state)
         {
             if (SessionSetup.RequestedSession is not ReplaySession replaySession)
@@ -30,7 +30,7 @@ namespace RookieCartingClub.Systems.Replay
             state.RequireForUpdate<CartInputData>();
             state.RequireForUpdate<CartSpawner>();
             var builder = new EntityQueryBuilder(Allocator.Temp).WithNone<Prefab>().WithAll<CartInputData>();
-            PlayersQuery = state.GetEntityQuery(builder);
+            _playersQuery = state.GetEntityQuery(builder);
         }
 
         [BurstCompile]
@@ -55,7 +55,7 @@ namespace RookieCartingClub.Systems.Replay
                 return;
             }
 
-            var carts = PlayersQuery.ToEntityArray(Allocator.Temp);
+            var carts = _playersQuery.ToEntityArray(Allocator.Temp);
             for (var index = 0; index < _replay.Value.Inputs.Length; index++)
             {
                 var inputBuffer = _replay.Value.Inputs[index];
