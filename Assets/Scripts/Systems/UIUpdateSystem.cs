@@ -1,3 +1,4 @@
+using System;
 using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using RookieCartingClub.Components.Replay;
@@ -23,21 +24,26 @@ namespace RookieCartingClub.Systems
             var raceState = CheckedStateRef.EntityManager.GetComponentObject<RaceState>(raceStateEntity);
 
             (LocalVelocity velocity, LocalToWorld position, CartData data) playerData = GetCurrentPlayerData();
-            
+
             UI.Instance.Cart = raceState.Racers.Find(i => i.PlayerId == playerData.data.PlayerId);
             UI.Instance.VelocityProvider = new ConstantVelocityProvider { Velocity = playerData.velocity.Velocity };
             MapHandle.Instance.CartPosition = playerData.position.Position;
             MapHandle.Instance.MoveSelf();
-            
+
             if (UI.Instance.Buttons.IsRecordSwitchRequest)
                 SwitchRecord(UI.Instance.Recording);
-            
+
             if (UI.Instance.Buttons.InPitRequest)
                 SendInPitRequest();
 
 
-            UI.Instance.UpdateUI();
-
+            try
+            {
+                UI.Instance.UpdateUI();
+            }
+            catch (Exception e)
+            {
+            }
         }
 
         private (LocalVelocity velocity, LocalToWorld position, CartData data)
@@ -45,9 +51,11 @@ namespace RookieCartingClub.Systems
         {
             var camera = SystemAPI.GetSingleton<CameraData>();
             var playerEntity = camera.PlayerEntity;
-            return (EntityManager.GetComponentData<LocalVelocity>(playerEntity), EntityManager.GetComponentData<LocalToWorld>(playerEntity), EntityManager.GetComponentData<CartData>(playerEntity));
+            return (EntityManager.GetComponentData<LocalVelocity>(playerEntity),
+                EntityManager.GetComponentData<LocalToWorld>(playerEntity),
+                EntityManager.GetComponentData<CartData>(playerEntity));
         }
-        
+
         private void SwitchRecord(bool instanceRecording)
         {
             if (instanceRecording)
@@ -61,7 +69,7 @@ namespace RookieCartingClub.Systems
             SystemAPI.SetSingleton(new ReplayRecording
             {
                 State = RecordingState.Stopping
-            });        
+            });
         }
 
         private void StartRecording()
