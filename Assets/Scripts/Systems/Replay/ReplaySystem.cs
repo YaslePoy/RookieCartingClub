@@ -16,7 +16,7 @@ namespace RookieCartingClub.Systems.Replay
     {
         private EntityQuery _playersQuery;
         private Components.Replay.Replay _replay;
-
+        private bool _initialized;
         public void OnCreate(ref SystemState state)
         {
             if (SessionSetup.RequestedSession is not ReplaySession replaySession)
@@ -54,8 +54,17 @@ namespace RookieCartingClub.Systems.Replay
                 }
 
                 entityManager.SetComponentData(cart, inputBuffer[0].Input);
+
+                if (_initialized == false)
+                {
+                    entityManager.SetComponentData(cart, _replay.InitialRecordingConditions[index].Position);
+                    entityManager.SetComponentData(cart, _replay.InitialRecordingConditions[index].Velocity);
+                }
+                
                 inputBuffer.RemoveAt(0);
             }
+            
+            _initialized = true;
         }
     }
 }
