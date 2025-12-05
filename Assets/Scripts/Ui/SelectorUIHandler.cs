@@ -17,6 +17,8 @@ namespace RookieCartingClub.Ui
         {
             _document = gameObject.GetComponent<UIDocument>();
             _document.rootVisualElement.Q<Label>("NickName").text = SessionSetup.Nickname;
+            
+            
             var tracks = _document.rootVisualElement.Q<VisualElement>("CardsHolder").Children().ToList();
             foreach (var track in tracks)
             {

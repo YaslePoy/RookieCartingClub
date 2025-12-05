@@ -33,8 +33,9 @@ namespace RookieCartingClub.Ui
 
             listView.selectedIndicesChanged += ids =>
             {
-                foreach (var replay in replays)
+                foreach (var replayIndex in ids)
                 {
+                    var replay = replays[replayIndex];
                     play.SetEnabled(true);
                     play.clicked += () =>
                     {

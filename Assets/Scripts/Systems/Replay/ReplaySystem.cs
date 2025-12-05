@@ -5,6 +5,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Physics.Systems;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace RookieCartingClub.Systems.Replay
@@ -14,6 +15,7 @@ namespace RookieCartingClub.Systems.Replay
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ReplaySystem : ISystem
     {
+        public static double LastTime;
         private EntityQuery _playersQuery;
         private Components.Replay.Replay _replay;
         private bool _initialized;
@@ -34,7 +36,6 @@ namespace RookieCartingClub.Systems.Replay
             state.RequireForUpdate<CartInputData>();
         }
 
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var entityManager = state.EntityManager;
@@ -54,7 +55,8 @@ namespace RookieCartingClub.Systems.Replay
                 }
 
                 entityManager.SetComponentData(cart, inputBuffer[0].Input);
-
+                var position = entityManager.GetComponentData<LocalTransform>(cart);
+                Debug.Log($"{position}");
                 if (_initialized == false)
                 {
                     entityManager.SetComponentData(cart, _replay.InitialRecordingConditions[index].Position);
@@ -64,6 +66,10 @@ namespace RookieCartingClub.Systems.Replay
                 inputBuffer.RemoveAt(0);
             }
             
+            var now = SystemAPI.Time.ElapsedTime;
+
+            Debug.Log($"Tick rate: {1f / (now - LastTime)}");
+            LastTime = now;
             _initialized = true;
         }
     }

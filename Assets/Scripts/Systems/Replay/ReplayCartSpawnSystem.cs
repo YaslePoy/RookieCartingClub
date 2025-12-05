@@ -41,20 +41,14 @@ namespace RookieCartingClub.Systems.Replay
             var spawner = SystemAPI.GetSingleton<CartSpawner>();
             var cartPrefab = spawner.ReplayCartPrefab;
 
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
 
-            ecb.AddComponent<NetworkStreamInGame>(observerConnection);
+            entityManager.AddComponent<NetworkStreamInGame>(observerConnection);
 
             foreach (var initialRecordingCondition in _replay.InitialRecordingConditions)
             {
-                var cartInstance = ecb.Instantiate(cartPrefab);
-
-                ecb.SetComponent(cartInstance, initialRecordingCondition.Position);
-                ecb.SetComponent(cartInstance, initialRecordingCondition.Velocity);
-                ecb.AppendToBuffer(observerConnection, new LinkedEntityGroup { Value = cartInstance });
+                var cartInstance = entityManager.Instantiate(cartPrefab);
+                entityManager.GetBuffer<LinkedEntityGroup>(observerConnection).Add(new LinkedEntityGroup { Value = cartInstance });
             }
-
-            ecb.Playback(entityManager);
 
             state.Enabled = false;
             Debug.Log("Players initialized");

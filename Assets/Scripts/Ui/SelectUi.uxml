@@ -1,22 +1,29 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; align-self: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgb(255, 255, 255); -unity-font-definition: url(&quot;project://database/Assets/Import/Manrope-Medium.ttf?fileID=12800000&amp;guid=c824965482ba0440d95df186b7151eb9&amp;type=3#Manrope-Medium&quot;); -unity-font-style: normal; font-size: 26px; background-image: url(&quot;project://database/Assets/Import/morphogenesis-d.png?fileID=2800000&amp;guid=8fee966f293a38b9e8257d52c839e212&amp;type=3#morphogenesis-d&quot;); color: rgb(255, 255, 255);">
-        <ui:VisualElement name="CentralColumn" style="flex-grow: 1; position: absolute; left: 20%; right: 20%; top: 0; bottom: 0; background-color: rgba(255, 255, 255, 0); justify-content: center;">
+        <ui:VisualElement name="CentralColumn" style="flex-grow: 1; position: absolute; left: 15%; right: 15%; top: 0; bottom: 0; background-color: rgba(255, 255, 255, 0); justify-content: center;">
             <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-self: center; align-items: flex-end; justify-content: flex-start; height: 50px; max-height: 43px; margin-bottom: 20px;">
                 <ui:Label text="Добро пожаловать, " />
                 <ui:Label text="Label" name="NickName" />
             </ui:VisualElement>
-            <ui:VisualElement name="CardsHolder" style="flex-grow: 1; height: auto; max-height: 50%; flex-direction: row; justify-content: space-around;">
-                <ui:VisualElement name="RookieCircuit" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; background-color: rgba(255, 255, 255, 0);">
-                    <ui:Label text="Rookie track" />
-                    <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: url(&quot;project://database/Assets/Import/rookie_sheme.png?fileID=2800000&amp;guid=83fbcff8cd98156feb32aacf1fa373b1&amp;type=3#rookie_sheme&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
-                    <ui:Label text="13 поворотов 512 метров" />
+            <ui:ScrollView mode="Horizontal" vertical-scroller-visibility="Hidden" name="CardsScroll" style="height: 50%; max-height: 50%;">
+                <ui:VisualElement name="CardsHolder" style="flex-grow: 1; flex-direction: row;">
+                    <ui:VisualElement name="RookieCircuit" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; background-color: rgba(255, 255, 255, 0); width: 33%; min-width: 33%; max-width: 33%;">
+                        <ui:Label text="Rookie track" />
+                        <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: url(&quot;project://database/Assets/Resources/rookie_scheme.png?fileID=2800000&amp;guid=83fbcff8cd98156feb32aacf1fa373b1&amp;type=3#rookie_scheme&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0;" />
+                        <ui:Label text="13 поворотов 512 метров" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="ProScene" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; width: 33%; min-width: 33%; max-width: 33%;">
+                        <ui:Label text="Pro track" />
+                        <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: url(&quot;project://database/Assets/Resources/pro_scheme.png?fileID=2800000&amp;guid=3430010f95b78f3ba87df68e8b67f80f&amp;type=3#pro_scheme&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;" />
+                        <ui:Label text="16 поворотов 938 метров" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="DetermScene" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; width: 33%; min-width: 33%; max-width: 33%;">
+                        <ui:Label text="Determ scene" />
+                        <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: resource(&apos;defaultIcon&apos;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;" />
+                        <ui:Label text="16 поворотов 938 метров" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="ProScene" style="flex-grow: 1; justify-content: flex-start; align-items: center; border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px;">
-                    <ui:Label text="Pro track" />
-                    <ui:VisualElement style="flex-grow: 1; left: auto; right: auto; min-width: 90%; background-image: url(&quot;project://database/Assets/Import/pro_sheme.png?fileID=2800000&amp;guid=3430010f95b78f3ba87df68e8b67f80f&amp;type=3#pro_sheme&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 15px; margin-right: 15px; margin-bottom: 15px; margin-left: 15px;" />
-                    <ui:Label text="16 поворотов 938 метров" />
-                </ui:VisualElement>
-            </ui:VisualElement>
+            </ui:ScrollView>
             <ui:VisualElement name="Mods" style="flex-grow: 1; max-height: 4%; flex-direction: row; justify-content: center; margin-top: 33px; margin-right: 33px; margin-bottom: 33px; margin-left: 33px; visibility: hidden;">
                 <ui:Button text="Одиночная игра" name="SPButton" />
                 <ui:Button text="Мультиплеер" name="MPButton" />

@@ -32,7 +32,7 @@ namespace RookieCartingClub.Systems
             {
                 InputLookup = _inputLookup
             };
-            var wheelHandle = wheelJob.ScheduleParallel(state.Dependency);
+            var wheelHandle = wheelJob.Schedule(state.Dependency);
         
             var engineJob = new EngineCalculateJob();
 

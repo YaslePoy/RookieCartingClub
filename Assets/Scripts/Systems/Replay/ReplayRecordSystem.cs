@@ -17,8 +17,11 @@ namespace RookieCartingClub.Systems.Replay
     [UpdateInGroup(typeof(ReplaySystemGroup))]
     public partial struct ReplayRecordSystem : ISystem
     {
+        public static double LastTime;
+
         private NativeList<RecordedInput> buffer;
         private EntityQuery playerQuery;
+
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
@@ -37,12 +40,12 @@ namespace RookieCartingClub.Systems.Replay
             {
                 case RecordingState.None:
                     return;
-                
+
                 case RecordingState.Starting:
                 {
                     replayState.State = RecordingState.Recording;
                     Debug.Log("Starting recording...");
-                
+
                     var cart = playerQuery.GetSingletonEntity();
                     var velocity = state.EntityManager.GetComponentData<PhysicsVelocity>(cart);
                     var id = state.EntityManager.GetComponentData<CartData>(cart);
@@ -52,13 +55,15 @@ namespace RookieCartingClub.Systems.Replay
                     {
                         state.EntityManager.CreateSingleton<InitialRecordingConditions>();
                     }
-                    
+
                     SystemAPI.SetSingleton(new InitialRecordingConditions
                     {
                         Velocity = velocity,
                         PlayerId = id.PlayerId,
                         Position = transform
                     });
+
+
                     Debug.Log("Initial conditions written");
                     break;
                 }
@@ -70,9 +75,13 @@ namespace RookieCartingClub.Systems.Replay
                     break;
                 case RecordingState.Recording:
                     buffer.Add(new RecordedInput { Input = SystemAPI.GetSingleton<CartInputData>() });
+                    var now = SystemAPI.Time.ElapsedTime;
+
+                    Debug.Log($"Tick rate: {1f / (now - LastTime)}");
+                    LastTime = now;
                     break;
             }
-            
+
             SystemAPI.SetSingleton(replayState);
         }
 
@@ -87,12 +96,14 @@ namespace RookieCartingClub.Systems.Replay
 
             var header = GetReplayHeader();
             MemoryMarshal.Write(finalOutput, ref header);
-
+            var headerx = MemoryMarshal.Read<ReplayHeader>(finalOutput);
             for (var i = 0; i < buffer.Length; i++)
             {
-                var input = recorded[i].Input;
+                var input = recorded[i];
                 MemoryMarshal.Write(finalOutput[(inputBufferSize * i + headerSize)..], ref input);
             }
+
+            header = MemoryMarshal.Read<ReplayHeader>(finalOutput);
 
             var file = new FileStream(DateTime.Now.ToString("yyyy_MM_dd HH_mm_ss") + ".rir", FileMode.CreateNew);
 

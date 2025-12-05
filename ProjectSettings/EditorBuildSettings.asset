@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/AuthScene.unity
-    guid: d58b22e0be7074333a0b12db2b9bf6f6
-  - enabled: 1
     path: Assets/Scenes/SelectorScene.unity
     guid: 5195c7de1d791447691ba06d08dfc58a
+  - enabled: 1
+    path: Assets/Scenes/AuthScene.unity
+    guid: d58b22e0be7074333a0b12db2b9bf6f6
   - enabled: 1
     path: Assets/Scenes/ProCircuit.unity
     guid: 20f021ac6f41ae56c817ef8017f1a550
@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ReplaySelector.unity
     guid: e695769c22dc20394bcdd02804202b8b
+  - enabled: 1
+    path: Assets/Scenes/DetermScene.unity
+    guid: 49b8e7129e73f3fd6aefccb3564eaf94
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 35845fe01580c41289b024647b1d1c53, type: 3}
   m_UseUCBPForAssetBundles: 0
