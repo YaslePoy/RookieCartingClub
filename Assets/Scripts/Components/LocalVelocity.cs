@@ -7,6 +7,7 @@ namespace RookieCartingClub.Components
     [GhostComponent]
     public struct LocalVelocity : IComponentData
     {
+        public Entity Root;
         [GhostField]
         public float3 Velocity;
         public float3 LastPosition;

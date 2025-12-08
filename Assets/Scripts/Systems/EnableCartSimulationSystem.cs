@@ -1,3 +1,4 @@
+using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -35,6 +36,7 @@ namespace RookieCartingClub.Systems
             {
                 CommandBuffer.SetComponentEnabled<Simulate>(chunkIndex, cart, true);
                 CommandBuffer.SetComponentEnabled<EnableSimulate>(chunkIndex, cart, false);
+                CommandBuffer.SetComponentEnabled<WasTeleported>(chunkIndex, cart, true);
             }
         }
     }

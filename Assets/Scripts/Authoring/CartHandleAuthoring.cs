@@ -75,6 +75,8 @@ namespace RookieCartingClub.Authoring
                 SetComponentEnabled<EnableSimulate>(entity, false);
                 AddComponent<TrackPlacementRequest>(entity);
                 SetComponentEnabled<TrackPlacementRequest>(entity, false);
+                AddComponent<WasTeleported>(entity);
+                SetComponentEnabled<WasTeleported>(entity, true);
             }
         }
     }

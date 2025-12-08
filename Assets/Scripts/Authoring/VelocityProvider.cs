@@ -7,12 +7,13 @@ namespace RookieCartingClub.Authoring
     public class VelocityProvider : MonoBehaviour
     {
         public int Index;
+        public GameObject Root;
         public class VelocityProviderBaker : Baker<VelocityProvider>
         {
             public override void Bake(VelocityProvider authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new LocalVelocity { Index = authoring.Index });
+                AddComponent(entity, new LocalVelocity { Index = authoring.Index, Root = GetEntity(authoring.Root, TransformUsageFlags.Dynamic) });
             }
         }
     }

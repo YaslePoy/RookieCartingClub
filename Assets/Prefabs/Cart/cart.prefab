@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
+  Root: {fileID: 0}
 --- !u!1 &2282996630140776879
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 1
+  Root: {fileID: 8280289031576691925}
 --- !u!114 &9206015677224333634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
+  Root: {fileID: 0}
 --- !u!114 &9024198752156481356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,6 +792,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 2
+  Root: {fileID: 8280289031576691925}
 --- !u!114 &5785745654530476761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -982,6 +986,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
+  Root: {fileID: 0}
 --- !u!1 &7030069301920899042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
+  Root: {fileID: 0}
 --- !u!114 &6675203080660695013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1121,6 +1127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 0
+  Root: {fileID: 8280289031576691925}
 --- !u!114 &6299833947012869398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1306,6 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 0
+  Root: {fileID: 8280289031576691925}
 --- !u!114 &5347045640215740288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1644,6 +1652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Index: 3
+  Root: {fileID: 8280289031576691925}
 --- !u!114 &4616323200589946594
 MonoBehaviour:
   m_ObjectHideFlags: 0

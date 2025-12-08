@@ -58,6 +58,7 @@ namespace RookieCartingClub.Systems.Replay
                 {
                     entityManager.SetComponentData(cart, _replay.InitialRecordingConditions[index].Position);
                     entityManager.SetComponentData(cart, _replay.InitialRecordingConditions[index].Velocity);
+                    entityManager.SetComponentEnabled<WasTeleported>(cart, true);
                 }
                 
                 inputBuffer.RemoveAt(0);
