@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -23,29 +22,7 @@ namespace RookieCartingClub.Authoring
         private Transform origin;
         public CartHandleAuthoring Cart;
         public static MapHandle Instance;
-    
-        private void Start()
-        {
-            Instance = this;
-            Uivm.MapWidth = (int)(MapHeight * (mapTexture.width / (double)mapTexture.height));
-            Uivm.MapHeight = MapHeight;
-            Uivm.Map = mapTexture;
-            origin = GameObject.Find("TrackOrigin").transform;
-            _document = GetComponent<UIDocument>();
-            _mapVE = _document.rootVisualElement.Q("Map");
-        }
-
-        // // Update is called once per frame
-        // private void UpdateMap()
-        // {
-        //     Cart ??= racers[0];
-        //
-        //     if (Cart is null) return;
-        //
-        //     MoveSelf();
-        //     MoveEnemyPoints();
-        // }
-
+        
         public void MoveSelf()
         {
             var delta = (Vector3)CartPosition - origin.position;

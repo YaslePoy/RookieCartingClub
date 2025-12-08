@@ -88,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1109210284910861324
 GameObject:
@@ -177,6 +178,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1654174037120506904
 GameObject:
@@ -266,6 +268,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &1666911796714669595
 GameObject:
@@ -327,6 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
+  Index: 0
 --- !u!1 &2282996630140776879
 GameObject:
   m_ObjectHideFlags: 0
@@ -459,6 +463,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3010321492375839543
 GameObject:
@@ -523,6 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 1
 --- !u!114 &9206015677224333634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -612,6 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
+  Index: 0
 --- !u!114 &9024198752156481356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +720,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5716488977367228228
 GameObject:
@@ -780,6 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 2
 --- !u!114 &5785745654530476761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,6 +919,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6796403411216364919
 GameObject:
@@ -971,6 +981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
+  Index: 0
 --- !u!1 &7030069301920899042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,6 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
+  Index: 0
 --- !u!114 &6675203080660695013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,6 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 0
 --- !u!114 &6299833947012869398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,6 +1305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 0
 --- !u!114 &5347045640215740288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1629,6 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c3cb3f469ddc10b99aadced7764951, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Index: 3
 --- !u!114 &4616323200589946594
 MonoBehaviour:
   m_ObjectHideFlags: 0

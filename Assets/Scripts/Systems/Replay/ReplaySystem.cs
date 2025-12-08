@@ -15,7 +15,6 @@ namespace RookieCartingClub.Systems.Replay
     [WorldSystemFilter(WorldSystemFilterFlags.ServerSimulation)]
     public partial struct ReplaySystem : ISystem
     {
-        public static double LastTime;
         private EntityQuery _playersQuery;
         private Components.Replay.Replay _replay;
         private bool _initialized;
@@ -40,11 +39,9 @@ namespace RookieCartingClub.Systems.Replay
         {
             var entityManager = state.EntityManager;
 
-
             var carts = _playersQuery.ToEntityArray(Allocator.Temp);
             for (var index = 0; index < _replay.Inputs.Length; index++)
             {
-                Debug.Log("Applying input");
                 var inputBuffer = _replay.Inputs[index];
                 var cart = carts[index];
 
@@ -66,10 +63,6 @@ namespace RookieCartingClub.Systems.Replay
                 inputBuffer.RemoveAt(0);
             }
             
-            var now = SystemAPI.Time.ElapsedTime;
-
-            Debug.Log($"Tick rate: {1f / (now - LastTime)}");
-            LastTime = now;
             _initialized = true;
         }
     }

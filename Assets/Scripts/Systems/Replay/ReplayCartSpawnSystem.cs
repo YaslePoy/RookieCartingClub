@@ -24,30 +24,24 @@ namespace RookieCartingClub.Systems.Replay
 
             _replay = replaySession.ReplayData;
             state.RequireForUpdate<CartSpawner>();
-            state.RequireForUpdate<NetworkStreamConnection>();
+            // state.RequireForUpdate<NetworkStreamConnection>();
         }
 
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            Entity observerConnection = SystemAPI.GetSingletonEntity<NetworkStreamConnection>();
-            var driver = SystemAPI.GetSingleton<NetworkStreamDriver>();
-            var conn = driver.GetConnectionState(
-                state.EntityManager.GetComponentData<NetworkStreamConnection>(observerConnection));
-            Debug.Log($"{conn}");
             var entityManager = state.EntityManager;
-
+            
             Debug.Log("Initializing players");
             var spawner = SystemAPI.GetSingleton<CartSpawner>();
             var cartPrefab = spawner.ReplayCartPrefab;
 
 
-            entityManager.AddComponent<NetworkStreamInGame>(observerConnection);
 
             foreach (var initialRecordingCondition in _replay.InitialRecordingConditions)
             {
                 var cartInstance = entityManager.Instantiate(cartPrefab);
-                entityManager.GetBuffer<LinkedEntityGroup>(observerConnection).Add(new LinkedEntityGroup { Value = cartInstance });
+                // entityManager.GetBuffer<LinkedEntityGroup>(observerConnection).Add(new LinkedEntityGroup { Value = cartInstance });
             }
 
             state.Enabled = false;

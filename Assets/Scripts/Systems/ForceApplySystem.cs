@@ -39,7 +39,7 @@ namespace RookieCartingClub.Systems
         private void Execute(ref DynamicBuffer<FinalForceRequest> requests,
             PhysicsMass mass,
             ref PhysicsVelocity velocity,
-            LocalToWorld localToWorld)
+            LocalToWorld localToWorld, ref ForceApplier log)
         {
             if (requests.IsEmpty)
                 return;
@@ -57,7 +57,10 @@ namespace RookieCartingClub.Systems
                 rawForce += impulse;
                 rotateForce += math.cross(request.Position - center, impulse);
             }
-
+            
+            log.LogForce = rawForce;
+            log.LogRotation = rotateForce;
+            
             velocity.ApplyLinearImpulse(mass, rawForce);
             velocity.ApplyAngularImpulseWorldSpace(mass, localToWorld.Position, localToWorld.Rotation, rotateForce);
 
