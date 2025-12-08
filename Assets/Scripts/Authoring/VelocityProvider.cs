@@ -8,12 +8,19 @@ namespace RookieCartingClub.Authoring
     {
         public int Index;
         public GameObject Root;
+        public bool Initialized;
         public class VelocityProviderBaker : Baker<VelocityProvider>
         {
             public override void Bake(VelocityProvider authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new LocalVelocity { Index = authoring.Index, Root = GetEntity(authoring.Root, TransformUsageFlags.Dynamic) });
+                AddComponent(entity,
+                    new LocalVelocity
+                    {
+                        Index = authoring.Index,
+                        Root = GetEntity(authoring.Root, TransformUsageFlags.Dynamic),
+                        Initialized = authoring.Initialized
+                    });
             }
         }
     }

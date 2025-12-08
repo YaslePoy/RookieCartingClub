@@ -2,14 +2,14 @@ using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 
 namespace RookieCartingClub.Systems
 {
     [UpdateInGroup(typeof(CartPhysicsSimulationGroup))]
-    [UpdateBefore(typeof(PlaneCalculateSystem))]
+    [UpdateBefore(typeof(EngineTorqueSystem))]
+    [UpdateAfter(typeof(InputPhysicalImplementationSystem))]
     public partial struct VelocityUpdateSystem : ISystem
     {
         private EntityQuery _teleportedQuery;
@@ -54,14 +54,30 @@ namespace RookieCartingClub.Systems
             const float maximumSpeedSq = 120.0f * 120.0f; // 120 meters per second is TOO fast
             var currentPosition = localToWorld.Position;
 
-            var wasThisTeleported = Teleported.Contains(velocity.Root);
-            if (wasThisTeleported)
-                velocity.Velocity = float3.zero;
-            else
-                velocity.Velocity = (currentPosition - velocity.LastPosition) / TimeStep;
+            switch (velocity.Initialized)
+            {
+                case false:
+                {
+                    if (currentPosition.x != 0 && currentPosition.y != 0 && currentPosition.z != 0)
+                    {
+                        velocity.LastPosition = currentPosition;
+                        velocity.Initialized = true;
+                    }
+                    return;
+                }
+                case true:
+                {
+                    var wasThisTeleported = Teleported.Contains(velocity.Root);
+                    if (wasThisTeleported)
+                        velocity.Velocity = float3.zero;
+                    else
+                        velocity.Velocity = (currentPosition - velocity.LastPosition) / TimeStep;
 
-            velocity.LastPosition = currentPosition;
-            if (math.lengthsq(velocity.Velocity) > maximumSpeedSq) velocity.Velocity = float3.zero;
+                    velocity.LastPosition = currentPosition;
+                    if (math.lengthsq(velocity.Velocity) > maximumSpeedSq) velocity.Velocity = float3.zero;
+                    break;
+                }
+            }
         }
     }
 

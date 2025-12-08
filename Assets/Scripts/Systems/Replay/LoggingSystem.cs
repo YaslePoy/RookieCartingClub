@@ -14,6 +14,7 @@ namespace RookieCartingClub.Systems.Replay
     [UpdateBefore(typeof(InputPhysicalImplementationSystem))]
     public partial class LoggingSystem : SystemBase
     {
+        public static int LogFrame;
         private NativeList<SessionStamp> _stamps;
         private EntityQuery _cartQuery;
 
@@ -54,6 +55,7 @@ namespace RookieCartingClub.Systems.Replay
 
         private void WriteStamp()
         {
+            LogFrame++;
             var player = _cartQuery.ToEntityArray(Allocator.Temp)[0];
             var stamp = new SessionStamp
             {
@@ -63,8 +65,8 @@ namespace RookieCartingClub.Systems.Replay
             var forceComponent = EntityManager.GetComponentData<ForceApplier>(player);
 
             stamp.Force = math.length(forceComponent.LogForce);
-            stamp.Rotation = math.length(forceComponent.LogRotation) * math.TODEGREES;
-            stamp.ForceVector = math.atan2(forceComponent.LogForce.x, forceComponent.LogForce.z);
+            stamp.Rotation = math.length(forceComponent.LogRotation);
+            stamp.ForceVector = math.atan2(forceComponent.LogForce.x, forceComponent.LogForce.z) * math.TODEGREES;
             stamp.EngineForce = EntityManager.GetComponentData<EngineData>(player).CurrentForce;
             stamp.Speed = math.length(EntityManager.GetComponentData<PhysicsVelocity>(player).Linear);
 
