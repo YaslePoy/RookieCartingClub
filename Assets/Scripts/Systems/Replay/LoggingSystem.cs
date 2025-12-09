@@ -45,11 +45,11 @@ namespace RookieCartingClub.Systems.Replay
         {
             using var file = File.OpenWrite($"{DateTime.Now.ToFileTimeUtc()}.csv");
             using var writer = new StreamWriter(file);
-            writer.WriteLine("Time;SteerAngle;EngineForce;Speed;Force;Rotation;ForceVector;Wheel0;Wheel1;Wheel2;Wheel3");
+            writer.WriteLine("Time;SteerAngle;EngineForce;Speed;Force;Rotation;ForceVector;Wheel0;Wheel1;Wheel2;Wheel3;TransformHash");
             foreach (var stamp in _stamps)
             {
                 writer.WriteLine(
-                    $"{stamp.Time};{stamp.SteerAngle};{stamp.EngineForce};{stamp.Speed};{stamp.Force};{stamp.Rotation};{stamp.ForceVector};{stamp.LocalSpeed0};{stamp.LocalSpeed1};{stamp.LocalSpeed2};{stamp.LocalSpeed3}");
+                    $"{stamp.Time};{stamp.SteerAngle};{stamp.EngineForce};{stamp.Speed};{stamp.Force};{stamp.Rotation};{stamp.ForceVector};{stamp.LocalSpeed0};{stamp.LocalSpeed1};{stamp.LocalSpeed2};{stamp.LocalSpeed3};{stamp.TransformHash}");
             }
         }
 
@@ -98,6 +98,9 @@ namespace RookieCartingClub.Systems.Replay
                 }
             }
 
+            var transform = EntityManager.GetComponentData<LocalToWorld>(player);
+            stamp.TransformHash = transform.Value.GetHashCode();
+            
             _stamps.Add(stamp);
         }
     }
@@ -110,6 +113,7 @@ namespace RookieCartingClub.Systems.Replay
         public float Force;
         public float ForceVector;
         public float Rotation;
+        public int TransformHash;
         public float EngineForce;
         public float LocalSpeed0;
         public float LocalSpeed1;
