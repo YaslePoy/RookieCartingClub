@@ -1,3 +1,4 @@
+using RookieCartingClub.Authoring;
 using RookieCartingClub.Components;
 using Unity.Burst;
 using Unity.Collections;
@@ -10,9 +11,13 @@ namespace RookieCartingClub.Systems.Replay
     public partial struct ReplayClientAcceptSystem : ISystem
     {
         private EntityQuery _cartQuery;
-        [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            if (SessionSetup.RequestedSession is not ReplaySession)
+            {
+                state.Enabled = false;
+                return;
+            }
             state.RequireForUpdate<NetworkStreamDriver>();
             state.RequireForUpdate<NetworkStreamConnection>();
             _cartQuery = SystemAPI.QueryBuilder().WithAll<CartInputData>().Build();

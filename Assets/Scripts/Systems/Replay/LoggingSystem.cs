@@ -20,6 +20,8 @@ namespace RookieCartingClub.Systems.Replay
 
         protected override void OnCreate()
         {
+            Enabled = false;
+            
             _stamps = new NativeList<SessionStamp>(1024, Allocator.Persistent);
             _cartQuery = SystemAPI.QueryBuilder().WithAll<CartInputData>().WithNone<Prefab>().Build();
         }

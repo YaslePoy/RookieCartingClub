@@ -5,6 +5,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.NetCode;
+using UnityEngine;
 
 namespace RookieCartingClub.Systems.Netcode.Client
 {
@@ -67,6 +68,8 @@ namespace RookieCartingClub.Systems.Netcode.Client
             };
             cartHandle.Init();
             raceState.Racers.Add(cartHandle);
+            
+            Debug.Log("First initial request sent");
         }
     }
 }

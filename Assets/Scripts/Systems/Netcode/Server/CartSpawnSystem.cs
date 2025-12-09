@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.NetCode;
+using UnityEngine;
 
 namespace RookieCartingClub.Systems.Netcode.Server
 {
@@ -62,6 +63,8 @@ namespace RookieCartingClub.Systems.Netcode.Server
 
 
             RegisterCartHandle(ref state, rpc);
+            
+            Debug.Log("Cart spawned");
         }
 
         private void RegisterCartHandle(ref SystemState state, RefRO<SpawnRequestRpc> rpc)
