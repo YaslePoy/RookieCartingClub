@@ -332,6 +332,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
   Root: {fileID: 0}
+  Initialized: 0
 --- !u!1 &2282996630140776879
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,6 +532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 1
   Root: {fileID: 8280289031576691925}
+  Initialized: 0
 --- !u!114 &9206015677224333634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
   Root: {fileID: 0}
+  Initialized: 0
 --- !u!114 &9024198752156481356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 2
   Root: {fileID: 8280289031576691925}
+  Initialized: 0
 --- !u!114 &5785745654530476761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,6 +991,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
   Root: {fileID: 0}
+  Initialized: 0
 --- !u!1 &7030069301920899042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::VelocityProvider
   Index: 0
   Root: {fileID: 0}
+  Initialized: 0
 --- !u!114 &6675203080660695013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1128,6 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   Root: {fileID: 8280289031576691925}
+  Initialized: 0
 --- !u!114 &6299833947012869398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1176,6 +1183,7 @@ GameObject:
   - component: {fileID: 8219009458237982638}
   - component: {fileID: 6284996644357950043}
   - component: {fileID: 2803957832407162226}
+  - component: {fileID: 6734216059561273947}
   m_Layer: 0
   m_Name: cart
   m_TagString: Cart
@@ -1314,6 +1322,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 0
   Root: {fileID: 8280289031576691925}
+  Initialized: 0
 --- !u!114 &5347045640215740288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,7 +1401,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8280289031576691925}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d366a96bcc8735129020bbc2972979e, type: 3}
   m_Name: 
@@ -1440,7 +1449,7 @@ MonoBehaviour:
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.034589514
-    m_BevelRadius: 0.05
+    m_BevelRadius: 0.29
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
   m_ForceUnique: 0
@@ -1585,6 +1594,20 @@ MonoBehaviour:
   UseSingleBaseline: 0
   RollbackPredictedSpawnedGhostState: 0
   RollbackPredictionOnStructuralChanges: 1
+--- !u!114 &6734216059561273947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8280289031576691925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aff06cac4454a6f8ad69e23d3deccd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: RookieCartingClub::RookieCartingClub.Authoring.WheelInput
+  WheelDegrees: 900
+  SteerMultiplier: 0.3
 --- !u!1 &8406167649143193068
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,6 +1676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Index: 3
   Root: {fileID: 8280289031576691925}
+  Initialized: 0
 --- !u!114 &4616323200589946594
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ namespace RookieCartingClub.Components
         public float3 Velocity;
         public float3 LastPosition;
         public int Index;
+        [GhostField]
         public bool Initialized;
     }
 }
